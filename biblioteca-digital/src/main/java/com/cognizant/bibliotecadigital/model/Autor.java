@@ -1,11 +1,15 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +25,9 @@ public class Autor implements Serializable {
 	
 	@Column(name="nome")
 	private String nome;
+	
+	@ManyToMany(mappedBy="autores", fetch = FetchType.EAGER)
+	Set<Livro> livros = new HashSet<Livro>();
 
 	@Override
 	public int hashCode() {
@@ -67,6 +74,15 @@ public class Autor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+
+	public Set<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(Set<Livro> livros) {
+		this.livros = livros;
 	}
 
 	@Override
