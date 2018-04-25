@@ -22,13 +22,13 @@ public class Usuario implements Serializable{
 	@Column(name="id_cgz", nullable=false, updatable=false)
 	private long id_cgz;
 	
-	@Column(name="nome")
+	@Column(name="nome", nullable=false)
 	private String name;
 	
-	@Column(name="email")
+	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@Column(name="grade")
+	@Column(name="grade", nullable=false)
 	private String grade;
 	
 	@Column(name="horizontal")
@@ -37,7 +37,7 @@ public class Usuario implements Serializable{
 	@Column(name="vertical")
 	private String vertical;
 	
-	@Column(name="senha")
+	@Column(name="senha", nullable=false)
 	private String senha;
 	
 	public long getId() {
