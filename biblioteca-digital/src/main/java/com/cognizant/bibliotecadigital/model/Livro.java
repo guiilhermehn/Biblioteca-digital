@@ -58,8 +58,8 @@ public class Livro implements Serializable {
 			   inverseJoinColumns= {@JoinColumn(name="categoriaLivro_id")})
 	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 	
-	 @OneToMany(mappedBy = "livro", targetEntity = Livro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<Livro> livros;
+	 @OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<Reserva> reserva;
 	
 	@Override
 	public int hashCode() {
@@ -191,12 +191,12 @@ public class Livro implements Serializable {
 	
 	
 
-	public List<Livro> getLivros() {
-		return livros;
+	public List<Reserva> getReserva() {
+		return reserva;
 	}
 
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
 	}
 
 	@Override
