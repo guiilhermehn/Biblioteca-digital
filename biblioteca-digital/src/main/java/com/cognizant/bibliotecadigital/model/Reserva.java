@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,11 @@ public class Reserva implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name="status")
 	private Status status;
+	
+	
+	@ManyToOne
+	 @JoinColumn(name="livro_id")
+	 private Livro livro;
 
 	public Long getId() {
 		return id;
@@ -57,6 +64,24 @@ public class Reserva implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	
+	
+
+	public Date getData_reserva() {
+		return data_reserva;
+	}
+
+	public void setData_reserva(Date data_reserva) {
+		this.data_reserva = data_reserva;
+	}
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -56,7 +58,8 @@ public class Livro implements Serializable {
 			   inverseJoinColumns= {@JoinColumn(name="categoriaLivro_id")})
 	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 	
-	
+	 @OneToMany(mappedBy = "livro", targetEntity = Livro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<Livro> livros;
 	
 	@Override
 	public int hashCode() {
@@ -184,6 +187,16 @@ public class Livro implements Serializable {
 
 	public void setCategoriaLivros(Set<CategoriaLivro> categoriaLivros) {
 		this.categoriaLivros = categoriaLivros;
+	}
+	
+	
+
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
 	}
 
 	@Override
