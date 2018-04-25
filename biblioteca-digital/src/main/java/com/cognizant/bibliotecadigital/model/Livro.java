@@ -1,12 +1,19 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +43,13 @@ public class Livro implements Serializable {
 	
 	@Column(name="foto")
 	private String foto;
+	
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name="livro_autor", 
+			   joinColumns= {@JoinColumn(name="livroId")},
+			   inverseJoinColumns= {@JoinColumn(name="autorId")})
+	Set <Autor> autores = new HashSet<Autor>();
+	
 	
 	@Override
 	public int hashCode() {
@@ -146,6 +160,15 @@ public class Livro implements Serializable {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+	
+
+	public Set<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(Set<Autor> autores) {
+		this.autores = autores;
 	}
 
 	@Override
