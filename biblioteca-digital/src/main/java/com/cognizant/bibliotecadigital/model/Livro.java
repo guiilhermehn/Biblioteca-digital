@@ -50,6 +50,13 @@ public class Livro implements Serializable {
 			   inverseJoinColumns= {@JoinColumn(name="autor_id")})
 	Set <Autor> autores = new HashSet<Autor>();
 	
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name="livro_categoriaLivro", 
+			   joinColumns= {@JoinColumn(name="livro_id")},
+			   inverseJoinColumns= {@JoinColumn(name="categoriaLivro_id")})
+	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
+	
+	
 	
 	@Override
 	public int hashCode() {
@@ -169,6 +176,14 @@ public class Livro implements Serializable {
 
 	public void setAutores(Set<Autor> autores) {
 		this.autores = autores;
+	}
+	
+	public Set<CategoriaLivro> getCategoriaLivros() {
+		return categoriaLivros;
+	}
+
+	public void setCategoriaLivros(Set<CategoriaLivro> categoriaLivros) {
+		this.categoriaLivros = categoriaLivros;
 	}
 
 	@Override

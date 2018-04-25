@@ -1,12 +1,16 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +25,10 @@ private static final long serialVersionUID = 1L;
 	private long idCat;
 	@Column(name="nomeCat")
 	private String nomeCat;
+	
+	@ManyToMany(mappedBy="categoriaLivros", fetch = FetchType.EAGER)
+	Set<Livro> livros = new HashSet<Livro>();
+
 		
 	@Override
 	public int hashCode() {
@@ -64,6 +72,18 @@ public String getNomeCat() {
 
 public void setNomeCat(String nomeCat) {
 	this.nomeCat = nomeCat;
+}
+
+public Set<Livro> getLivros() {
+	return livros;
+}
+
+public void setLivros(Set<Livro> livros) {
+	this.livros = livros;
+}
+
+public void setIdCat(long idCat) {
+	this.idCat = idCat;
 }
 
 @Override
