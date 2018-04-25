@@ -34,8 +34,8 @@ public class Reserva implements Serializable {
 	
 	
 	@ManyToOne
-	 @JoinColumn(name="livro_id")
-	 private Livro livro;
+	@JoinColumn(name="livro_id")
+	private Livro livro;
 
 	public Long getId() {
 		return id;
