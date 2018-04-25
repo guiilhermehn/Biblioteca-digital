@@ -59,19 +59,27 @@ public class Livro implements Serializable {
 	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 	
 	 @OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<Reserva> reserva;
+	 private List<Reserva> reservas;
+	 
+	 @OneToMany(mappedBy = "unidadeLivro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<UnidadeLivro> unidadeLivros;
 	
+	 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + anoPublicacao;
+		result = prime * result + ((autores == null) ? 0 : autores.hashCode());
+		result = prime * result + ((categoriaLivros == null) ? 0 : categoriaLivros.hashCode());
 		result = prime * result + edicao;
 		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isbn13 == null) ? 0 : isbn13.hashCode());
+		result = prime * result + ((reservas == null) ? 0 : reservas.hashCode());
 		result = prime * result + ((sinopse == null) ? 0 : sinopse.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		result = prime * result + ((unidadeLivros == null) ? 0 : unidadeLivros.hashCode());
 		return result;
 	}
 
@@ -85,6 +93,16 @@ public class Livro implements Serializable {
 			return false;
 		Livro other = (Livro) obj;
 		if (anoPublicacao != other.anoPublicacao)
+			return false;
+		if (autores == null) {
+			if (other.autores != null)
+				return false;
+		} else if (!autores.equals(other.autores))
+			return false;
+		if (categoriaLivros == null) {
+			if (other.categoriaLivros != null)
+				return false;
+		} else if (!categoriaLivros.equals(other.categoriaLivros))
 			return false;
 		if (edicao != other.edicao)
 			return false;
@@ -103,6 +121,11 @@ public class Livro implements Serializable {
 				return false;
 		} else if (!isbn13.equals(other.isbn13))
 			return false;
+		if (reservas == null) {
+			if (other.reservas != null)
+				return false;
+		} else if (!reservas.equals(other.reservas))
+			return false;
 		if (sinopse == null) {
 			if (other.sinopse != null)
 				return false;
@@ -112,6 +135,11 @@ public class Livro implements Serializable {
 			if (other.titulo != null)
 				return false;
 		} else if (!titulo.equals(other.titulo))
+			return false;
+		if (unidadeLivros == null) {
+			if (other.unidadeLivros != null)
+				return false;
+		} else if (!unidadeLivros.equals(other.unidadeLivros))
 			return false;
 		return true;
 	}
@@ -190,13 +218,20 @@ public class Livro implements Serializable {
 	}
 	
 	
-
-	public List<Reserva> getReserva() {
-		return reserva;
+	public List<Reserva> getReservas() {
+		return reservas;
 	}
 
-	public void setReserva(List<Reserva> reserva) {
-		this.reserva = reserva;
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	public List<UnidadeLivro> getUnidadeLivros() {
+		return unidadeLivros;
+	}
+
+	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
+		this.unidadeLivros = unidadeLivros;
 	}
 
 	@Override
