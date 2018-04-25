@@ -1,14 +1,20 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="usuario")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 902783495L;
@@ -39,6 +45,9 @@ public class Usuario implements Serializable{
 	
 	@Column(name="senha", nullable=false)
 	private String senha;
+	
+	 @OneToMany(mappedBy = "usuario", targetEntity = Emprestimo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<Emprestimo> emprestimos;
 	
 	public long getId() {
 		return id;
