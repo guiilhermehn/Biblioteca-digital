@@ -22,6 +22,11 @@ public class Reserva implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
+	
 	@Column(name="id")
 	private Long id;
 	

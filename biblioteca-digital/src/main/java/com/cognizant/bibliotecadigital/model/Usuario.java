@@ -48,6 +48,9 @@ public class Usuario implements Serializable{
 	
 	 @OneToMany(mappedBy = "usuario", targetEntity = Emprestimo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	 private List<Emprestimo> emprestimos;
+	 
+	 @OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<Reserva> reservas;
 	
 	public long getId() {
 		return id;
