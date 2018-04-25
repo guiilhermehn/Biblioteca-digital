@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,17 +17,17 @@ public class Emprestimo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id",nullable=false,updatable=false)
 	private Long id;
 	
-	@Column(name="data_entrega")
+	@Column(name="data_entrega", nullable=false)
 	private Date dataEntrega;
 	
-	@Column(name="data_devolucao")
+	@Column(name="data_devolucao", nullable=false)
 	private Date dataDevolucao;
 	
-	@Column(name="prazo_devolucao")
+	@Column(name="prazo_devolucao", nullable=false)
 	private Date prazoDevolucao;
 
 	@Override
@@ -49,6 +50,8 @@ public class Emprestimo implements Serializable {
 				+ ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
