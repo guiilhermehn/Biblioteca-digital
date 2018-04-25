@@ -46,8 +46,8 @@ public class Livro implements Serializable {
 	
 	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(name="livro_autor", 
-			   joinColumns= {@JoinColumn(name="livroId")},
-			   inverseJoinColumns= {@JoinColumn(name="autorId")})
+			   joinColumns= {@JoinColumn(name="livro_id")},
+			   inverseJoinColumns= {@JoinColumn(name="autor_id")})
 	Set <Autor> autores = new HashSet<Autor>();
 	
 	
