@@ -20,13 +20,13 @@ public class Emprestimo implements Serializable {
 	@Column(name="id",nullable=false,updatable=false)
 	private Long id;
 	
-	@Column(name="data_entrega")
+	@Column(name="data_entrega", nullable=false)
 	private Date dataEntrega;
 	
-	@Column(name="data_devolucao")
+	@Column(name="data_devolucao", nullable=false)
 	private Date dataDevolucao;
 	
-	@Column(name="prazo_devolucao")
+	@Column(name="prazo_devolucao", nullable=false)
 	private Date prazoDevolucao;
 
 	@Override
@@ -49,6 +49,8 @@ public class Emprestimo implements Serializable {
 				+ ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
