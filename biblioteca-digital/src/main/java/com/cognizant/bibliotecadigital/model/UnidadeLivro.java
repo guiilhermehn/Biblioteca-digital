@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,13 +23,19 @@ public class UnidadeLivro implements Serializable{
 	
 	@Column(name="avarias")
 	private String avarias;
-
+	
+	@ManyToOne
+	@JoinColumn(name="livro_id")
+	private Livro livro;
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((avarias == null) ? 0 : avarias.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
 		return result;
 	}
 
@@ -47,8 +55,14 @@ public class UnidadeLivro implements Serializable{
 			return false;
 		if (id != other.id)
 			return false;
+		if (livro == null) {
+			if (other.livro != null)
+				return false;
+		} else if (!livro.equals(other.livro))
+			return false;
 		return true;
 	}
+	
 
 	public long getId() {
 		return id;
@@ -60,6 +74,20 @@ public class UnidadeLivro implements Serializable{
 
 	public String getAvarias() {
 		return avarias;
+	}
+	
+	
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
+
+	public void setAvarias(String avarias) {
+		this.avarias = avarias;
 	}
 
 	@Override
