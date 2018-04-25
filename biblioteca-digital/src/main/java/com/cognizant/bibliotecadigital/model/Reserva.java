@@ -24,7 +24,7 @@ public class Reserva implements Serializable {
 	private Long id;
 	
 	@Column(name="data_reserva")
-	private Date data_rserva;
+	private Date data_reserva;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="status")
@@ -40,15 +40,15 @@ public class Reserva implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Reserva [id=" + id + ", data_rserva=" + data_rserva + ", status=" + status + "]";
+		return "Reserva [id=" + id + ", data_rserva=" + data_reserva + ", status=" + status + "]";
 	}
 
 	public Date getData_rserva() {
-		return data_rserva;
+		return data_reserva;
 	}
 
 	public void setData_rserva(Date data_rserva) {
-		this.data_rserva = data_rserva;
+		this.data_reserva = data_rserva;
 	}
 
 	public Status getStatus() {
@@ -63,7 +63,7 @@ public class Reserva implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((data_rserva == null) ? 0 : data_rserva.hashCode());
+		result = prime * result + ((data_reserva == null) ? 0 : data_reserva.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -78,10 +78,10 @@ public class Reserva implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Reserva other = (Reserva) obj;
-		if (data_rserva == null) {
-			if (other.data_rserva != null)
+		if (data_reserva == null) {
+			if (other.data_reserva != null)
 				return false;
-		} else if (!data_rserva.equals(other.data_rserva))
+		} else if (!data_reserva.equals(other.data_reserva))
 			return false;
 		if (id == null) {
 			if (other.id != null)
