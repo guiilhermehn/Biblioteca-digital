@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Table(name="unidadeLivro")
 public class UnidadeLivro implements Serializable{
 
-	private static final long serialversionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private long id;
