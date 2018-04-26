@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,15 +20,14 @@ public class Autor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name="autor_seq", sequenceName="autor_seq")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="autor_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long idAutor;
 	
 	@Column(name="nome_autor")
 	private String nome;
 	
-	@ManyToMany(mappedBy="autores", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy="autores", fetch = FetchType.LAZY)
 	Set<Livro> livros = new HashSet<Livro>();
 
 	@Override

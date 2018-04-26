@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +18,7 @@ public class UnidadeLivro implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="unidadeLivro_seq", sequenceName="unidadeLivro_seq")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="unidadeLivro_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
 	
