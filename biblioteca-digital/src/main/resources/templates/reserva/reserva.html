@@ -39,89 +39,48 @@
             <h1 class="h3">Reservas</h1>
 
             <div class="accordion border shadow-sm rounded" id="accordion">
-                <a data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                    <div class="row py-2 mx-0 border-bottom">
-                        <div class="col-12 col-lg-4">
-                            <strong>Nome:</strong> Nome do Livro
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Autor:</strong> Nome do autor
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Disponibilidade:</strong> Na prateleira XPTO
-                        </div>
-                    </div>
-                </a>
-                <div id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
-                    <div class="p-3">
-                        <p>
-                            <strong>Descrição:</strong>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </p>
-                        <p><strong>Data da reserva:</strong> DD/MMM/YYYY</p>
-                        <div class="text-right">
-                            <a href="#" class="btn btn-secondary">Apagar reserva</a>
-                            <a href="#" class="btn btn-secondary">Efetuar empréstimo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- cut from here -->
-                <a data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                    <div class="row py-2 mx-0 border-bottom">
-                        <div class="col-12 col-lg-4">
-                            <strong>Nome:</strong> Nome do Livro
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Autor:</strong> Nome do autor
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Disponibilidade:</strong> Na prateleira XPTO
-                        </div>
-                    </div>
-                </a>
-                <div id="collapse2" class="collapse bg-light border-bottom" aria-labelledby="heading2" data-parent="#accordion">
-                    <div class="p-3">
-                        <p>
-                            <strong>Descrição:</strong>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </p>
-                        <p><strong>Data da reserva:</strong> DD/MMM/YYYY</p>
-                        <div class="text-right">
-                            <a href="#" class="btn btn-secondary">Apagar reserva</a>
-                            <a href="#" class="btn btn-secondary">Efetuar empréstimo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <a data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                    <div class="row py-2 mx-0 border-bottom">
-                        <div class="col-12 col-lg-4">
-                            <strong>Nome:</strong> Nome do Livro
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Autor:</strong> Nome do autor
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <strong>Disponibilidade:</strong> Na prateleira XPTO
-                        </div>
-                    </div>
-                </a>
-                <div id="collapse3" class="collapse bg-light border-bottom" aria-labelledby="heading3" data-parent="#accordion">
-                    <div class="p-3">
-                        <p>
-                            <strong>Descrição:</strong>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </p>
-                        <p><strong>Data da reserva:</strong> DD/MMM/YYYY</p>
-                        <div class="text-right">
-                            <a href="#" class="btn btn-secondary">Apagar reserva</a>
-                            <a href="#" class="btn btn-secondary">Efetuar empréstimo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- cut until here -->
+            	<div th:each="reserva : ${reservas}">
+	                <a data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+	                    <div class="row py-2 mx-0 border-bottom">
+	                        <div class="col-12 col-lg-4">
+	                            <strong>Nome:</strong> <span th:text="${reserva.livro.titulo}"></span>
+	                        </div>
+	                        <div class="col-12 col-md-6 col-lg-4">
+	                            <strong>Autor:</strong> <span th:text="${reserva.livro.autores[0]}"></span>
+	                        </div>
+	                        <div class="col-12 col-md-6 col-lg-4">
+	                            <strong>Disponibilidade:</strong> Na prateleira XPTO
+	                        </div>
+	                    </div>
+	                </a>
+	                <div id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
+	                    <div class="p-3">
+	                        <p>
+	                            <strong>Descrição:</strong>
+	                            <span th:text="${reserva.livro.sinopse}"></span>
+	                         </p>
+	                         <p>   
+	                            <strong>ISBN 13:</strong>
+	                            <span th:text="${reserva.livro.isbn13}"></span>
+	                            
+	                            <strong>Ano de Publicação:</strong>
+	                            <span th:text="${reserva.livro.anoPublicacao}"></span>
+	                            
+	                            <strong>Edição:</strong>
+	                            <span th:text="${reserva.livro.edicao}"></span>
+	                            
+	                            <strong>Foto:</strong>
+	                            <span th:text="${reserva.livro.foto}"></span>
+	                        </p>
+	                        <p><strong>Data da reserva:</strong> DD/MMM/YYYY</p>
+	                        <div class="text-right">
+	                            <a href="#" class="btn btn-secondary">Apagar reserva</a>
+	                            <a href="#" class="btn btn-secondary">Efetuar empréstimo</a>
+	                        </div>
+	                    </div>
+	                </div>
+				</div>
+                
             </div>
         </main>
 
