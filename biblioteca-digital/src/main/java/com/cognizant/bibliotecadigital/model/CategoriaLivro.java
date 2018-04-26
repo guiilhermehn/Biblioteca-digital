@@ -11,20 +11,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categoriaLivro")
-
+@Table(name="categoria_livro")
 public class CategoriaLivro implements Serializable{
 private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idCat",unique=true)
-	private long idCat;
-	@Column(name="nomeCat")
-	private String nomeCat;
+	@SequenceGenerator(name="categoriaLivro_seq", sequenceName="categoriaLivro_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="categoriaLivro_seq")
+	@Column(name="id")
+	private Long idCategoria;
+	
+	@Column(name="nome_categoria")
+	private String nomeCategoria;
 	
 	@ManyToMany(mappedBy="categoriaLivros", fetch = FetchType.EAGER)
 	Set<Livro> livros = new HashSet<Livro>();
@@ -34,8 +36,8 @@ private static final long serialVersionUID = 1L;
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (idCat ^ (idCat >>> 32));
-		result = prime * result + ((nomeCat == null) ? 0 : nomeCat.hashCode());
+		result = prime * result + (int) (idCategoria ^ (idCategoria >>> 32));
+		result = prime * result + ((nomeCategoria == null) ? 0 : nomeCategoria.hashCode());
 		return result;
 	}
 
@@ -48,30 +50,31 @@ private static final long serialVersionUID = 1L;
 		if (getClass() != obj.getClass())
 			return false;
 		CategoriaLivro other = (CategoriaLivro) obj;
-		if (idCat != other.idCat)
+		if (idCategoria != other.idCategoria)
 			return false;
-		if (nomeCat == null) {
-			if (other.nomeCat != null)
+		if (nomeCategoria == null) {
+			if (other.nomeCategoria != null)
 				return false;
-		} else if (!nomeCat.equals(other.nomeCat))
+		} else if (!nomeCategoria.equals(other.nomeCategoria))
 			return false;
 		return true;
 	}
 
-public long getIdCat() {
-	return idCat;
-}
 
-public void setIdCat(int idCat) {
-	this.idCat = idCat;
-}
+public Long getIdCat() {
+		return idCategoria;
+	}
+
+	public void setIdCat(Long idCat) {
+		this.idCategoria = idCat;
+	}
 
 public String getNomeCat() {
-	return nomeCat;
+	return nomeCategoria;
 }
 
 public void setNomeCat(String nomeCat) {
-	this.nomeCat = nomeCat;
+	this.nomeCategoria = nomeCat;
 }
 
 public Set<Livro> getLivros() {
@@ -83,12 +86,12 @@ public void setLivros(Set<Livro> livros) {
 }
 
 public void setIdCat(long idCat) {
-	this.idCat = idCat;
+	this.idCategoria = idCat;
 }
 
 @Override
 public String toString() {
-	return "categoriaLivro [idCat=" + idCat + ", nomeCat=" + nomeCat + "]";
+	return "categoriaLivro [idCat=" + idCategoria + ", nomeCat=" + nomeCategoria + "]";
 }
 
 

@@ -13,8 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="emprestimo")
@@ -23,17 +28,27 @@ public class Emprestimo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id",nullable=false,updatable=false)
+	@SequenceGenerator(name="emprestimo_sq", sequenceName="emprestimo_sq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="emprestimo_sq")
+	@Column(name="id")
 	private Long id;
 	
-	@Column(name="data_entrega", nullable=false)
+	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name="data_entrega")
+	@NotNull
 	private Date dataEntrega;
 	
-	@Column(name="data_devolucao", nullable=false)
+	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name="data_devolucao")
+	@NotNull
 	private Date dataDevolucao;
 	
-	@Column(name="prazo_devolucao", nullable=false)
+	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name="prazo_devolucao")
+	@NotNull
 	private Date prazoDevolucao;
 	
 	 
@@ -45,13 +60,7 @@ public class Emprestimo implements Serializable {
 	 @JoinColumn(name="usuario_id")
 	 private Usuario usuario;
 
-	@Override
-	public String toString() {
-		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega
-				+ ", dataDevolucao=" + dataDevolucao + ", prazoDevolucao="
-				+ prazoDevolucao + "]";
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -132,5 +141,10 @@ public class Emprestimo implements Serializable {
 		this.prazoDevolucao = prazoDevolucao;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega
+				+ ", dataDevolucao=" + dataDevolucao + ", prazoDevolucao="
+				+ prazoDevolucao + "]";
+	}
 }

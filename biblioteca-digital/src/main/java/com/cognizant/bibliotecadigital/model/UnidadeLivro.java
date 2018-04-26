@@ -1,18 +1,15 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +19,10 @@ public class UnidadeLivro implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	@SequenceGenerator(name="unidadeLivro_seq", sequenceName="unidadeLivro_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="unidadeLivro_seq")
+	@Column(name="id")
+	private Long id;
 	
 	@Column(name="avarias")
 	private String avarias;
@@ -68,11 +67,11 @@ public class UnidadeLivro implements Serializable{
 	}
 	
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

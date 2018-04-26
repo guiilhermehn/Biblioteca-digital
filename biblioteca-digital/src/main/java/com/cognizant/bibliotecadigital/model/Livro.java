@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +26,9 @@ public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name="livro_sq", sequenceName="livro_sq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="livro_sq")
+	@Column(name="id")
 	private Long id;
 	
 	@Column(name="isbn13",unique=true)
@@ -45,6 +48,9 @@ public class Livro implements Serializable {
 	
 	@Column(name="foto")
 	private String foto;
+	
+	
+	//Joins com autor,categoriaLivro,reserva e unidadeLivro
 	
 	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(name="livro_autor", 
