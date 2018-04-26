@@ -13,7 +13,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/")
+	@GetMapping("/usuarios")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/usuario/usuario");
 		mv.addObject("usuarios",usuarioService.findAll());
