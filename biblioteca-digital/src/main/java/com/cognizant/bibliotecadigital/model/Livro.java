@@ -1,11 +1,21 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +25,7 @@ public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="isbn13",unique=true)
@@ -36,17 +46,40 @@ public class Livro implements Serializable {
 	@Column(name="foto")
 	private String foto;
 	
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name="livro_autor", 
+			   joinColumns= {@JoinColumn(name="livro_id")},
+			   inverseJoinColumns= {@JoinColumn(name="autor_id")})
+	Set <Autor> autores = new HashSet<Autor>();
+	
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name="livro_categoriaLivro", 
+			   joinColumns= {@JoinColumn(name="livro_id")},
+			   inverseJoinColumns= {@JoinColumn(name="categoriaLivro_id")})
+	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
+	
+	 @OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<Reserva> reservas;
+	 
+	 @OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 private List<UnidadeLivro> unidadeLivros;
+	
+	 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + anoPublicacao;
+		result = prime * result + ((autores == null) ? 0 : autores.hashCode());
+		result = prime * result + ((categoriaLivros == null) ? 0 : categoriaLivros.hashCode());
 		result = prime * result + edicao;
 		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isbn13 == null) ? 0 : isbn13.hashCode());
+		result = prime * result + ((reservas == null) ? 0 : reservas.hashCode());
 		result = prime * result + ((sinopse == null) ? 0 : sinopse.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		result = prime * result + ((unidadeLivros == null) ? 0 : unidadeLivros.hashCode());
 		return result;
 	}
 
@@ -60,6 +93,16 @@ public class Livro implements Serializable {
 			return false;
 		Livro other = (Livro) obj;
 		if (anoPublicacao != other.anoPublicacao)
+			return false;
+		if (autores == null) {
+			if (other.autores != null)
+				return false;
+		} else if (!autores.equals(other.autores))
+			return false;
+		if (categoriaLivros == null) {
+			if (other.categoriaLivros != null)
+				return false;
+		} else if (!categoriaLivros.equals(other.categoriaLivros))
 			return false;
 		if (edicao != other.edicao)
 			return false;
@@ -78,6 +121,11 @@ public class Livro implements Serializable {
 				return false;
 		} else if (!isbn13.equals(other.isbn13))
 			return false;
+		if (reservas == null) {
+			if (other.reservas != null)
+				return false;
+		} else if (!reservas.equals(other.reservas))
+			return false;
 		if (sinopse == null) {
 			if (other.sinopse != null)
 				return false;
@@ -87,6 +135,11 @@ public class Livro implements Serializable {
 			if (other.titulo != null)
 				return false;
 		} else if (!titulo.equals(other.titulo))
+			return false;
+		if (unidadeLivros == null) {
+			if (other.unidadeLivros != null)
+				return false;
+		} else if (!unidadeLivros.equals(other.unidadeLivros))
 			return false;
 		return true;
 	}
@@ -145,6 +198,40 @@ public class Livro implements Serializable {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+	
+
+	public Set<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(Set<Autor> autores) {
+		this.autores = autores;
+	}
+	
+	public Set<CategoriaLivro> getCategoriaLivros() {
+		return categoriaLivros;
+	}
+
+	public void setCategoriaLivros(Set<CategoriaLivro> categoriaLivros) {
+		this.categoriaLivros = categoriaLivros;
+	}
+	
+	
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	public List<UnidadeLivro> getUnidadeLivros() {
+		return unidadeLivros;
+	}
+
+	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
+		this.unidadeLivros = unidadeLivros;
 	}
 
 	@Override
