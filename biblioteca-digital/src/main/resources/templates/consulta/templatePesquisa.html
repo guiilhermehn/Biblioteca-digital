@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Digital Library Solution Development - Consult</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
+      <a class="navbar-brand text-white" href="#">Digital Library Solution</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link " href="#"> <i class="fas fa-book fa-lg"></i> Empréstimo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="container centerSearch">
+      <div class="row d-flex justify-content-center">
+    		<div class="col-md-12 pt-md-5">
+          <div class="input-group">
+              <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+            </div>
+            </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-end">
+              <a class="nav-link" href="#" id="busca"> Busca Avançada</a>
+          </div>
+
+          <div id="resultado" style="display:none;">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="form-control">
+                  <form>
+                  <div class="form-group">
+                    <label for="filtre">Filtro:</label>
+                    <select class="form-control" id="filtre">
+                      <option>Um</option>
+                      <option>Dois</option>
+                      <option>Tres</option>
+                      <option>Quatro</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Author</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Contains the words</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                  <div class="d-flex justify-content-end"><button type="submit" class="btn btn-primary "><i class="fas fa-search"></i></button></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <footer class="text-muted">
+          <div class="container centerSearch">
+
+          </div>
+        </footer>
+
+
+    <script src="assets/js/jquery.min.js" ></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js" ></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#busca").click(function(){
+            $("#resultado").toggle();
+        });
+    });
+    </script>
+
+  </body>
+
+</html>

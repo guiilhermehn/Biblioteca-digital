@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Digital Library Solution Development - Consult</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
+      <a class="navbar-brand text-white" href="#">Digital Library Solution</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link " href="#"> <i class="fas fa-book fa-lg"></i> Empréstimo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+      <div class="container space">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card space">
+              <div class="media">
+                <img class="align-self-end mr-3" src="assets/img/livro.jpg" alt="Generic placeholder image">
+                <div class="media-body">
+                  <h3 class="text-justify">Titulo: A A A</h3>
+                  <h5 class="text-justify">Autor: AAAA</h5>
+                  <h5 class="text-justify">ISBN:</h5>
+                  <p class="text-justify">Descrição: Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+
+                  <div class="col-md-12">
+                    <button type="button" class="btn btn-outline-success">Emprestimo</button>
+                    <button type="button" class="btn btn-outline-primary">Reserva</button>
+                  </div>
+                  <div class="row d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Relatar Avaria</button>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="text-muted">
+        <div class="container centerSearch">
+
+        </div>
+      </footer>
+      <script src="assets/js/jquery.min.js" ></script>
+      <script src="assets/js/popper.js"></script>
+      <script src="assets/js/bootstrap.min.js" ></script>
+      <script type="text/javascript">
+      $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+      </script>
+  </body>
+
+</html>
