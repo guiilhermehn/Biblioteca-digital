@@ -12,24 +12,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="unidadeLivro")
-public class UnidadeLivro implements Serializable{
+@Table(name = "unidadeLivro")
+public class UnidadeLivro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-	
-	@Column(name="avarias")
+
+	@Column(name = "avarias")
 	private String avarias;
-	
+
 	@ManyToOne
-	@JoinColumn(name="livro_id")
+	@JoinColumn(name = "livro_id")
 	private Livro livro;
-	
-	
+
+	// Construtor
+	public UnidadeLivro() {
+
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,7 +67,6 @@ public class UnidadeLivro implements Serializable{
 			return false;
 		return true;
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -76,8 +79,6 @@ public class UnidadeLivro implements Serializable{
 	public String getAvarias() {
 		return avarias;
 	}
-	
-	
 
 	public Livro getLivro() {
 		return livro;
@@ -95,5 +96,5 @@ public class UnidadeLivro implements Serializable{
 	public String toString() {
 		return "UnidadeLivro [id=" + id + ", avarias=" + avarias + "]";
 	}
-	
+
 }

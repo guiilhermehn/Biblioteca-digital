@@ -17,58 +17,63 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
+@Transactional
 @Entity
-@Table(name="livro")
+@Table(name = "livro")
 public class Livro implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-	
-	@Column(name="isbn13",unique=true)
+
+	@Column(name = "isbn13", unique = true)
 	private String isbn13;
-	
-	@Column(name="titulo")
+
+	@Column(name = "titulo")
 	private String titulo;
-	
-	@Column(name="ano_publicacao")
+
+	@Column(name = "ano_publicacao")
 	private int anoPublicacao;
-	
-	@Column(name="edicao")
+
+	@Column(name = "edicao")
 	private int edicao;
-	
-	@Column(name="sinopse")
+
+	@Column(name = "sinopse")
 	private String sinopse;
-	
-	@Column(name="foto")
+
+	@Column(name = "foto")
 	private String foto;
-	
-	
-	//Joins com autor,categoriaLivro,reserva e unidadeLivro
-	
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinTable(name="livro_autor", 
-			   joinColumns= {@JoinColumn(name="livro_id")},
-			   inverseJoinColumns= {@JoinColumn(name="autor_id")})
-	Set <Autor> autores = new HashSet<Autor>();
-	
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinTable(name="livro_categoriaLivro", 
-			   joinColumns= {@JoinColumn(name="livro_id")},
-			   inverseJoinColumns= {@JoinColumn(name="categoriaLivro_id")})
-	Set <CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
-	
-	 @OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<Reserva> reservas;
-	 
-	 @OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<UnidadeLivro> unidadeLivros;
-	
-	 
+
+	// Construtor
+	public Livro() {
+
+	}
+
+	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "autor_id") })
+	Set<Autor> autores = new HashSet<Autor>();
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "categoriaLivro_id") })
+	Set<CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
+
+	@Transient
+	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Reserva> reservas;
+
+	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<UnidadeLivro> unidadeLivros;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -203,7 +208,6 @@ public class Livro implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
 
 	public Set<Autor> getAutores() {
 		return autores;
@@ -212,7 +216,7 @@ public class Livro implements Serializable {
 	public void setAutores(Set<Autor> autores) {
 		this.autores = autores;
 	}
-	
+
 	public Set<CategoriaLivro> getCategoriaLivros() {
 		return categoriaLivros;
 	}
@@ -220,8 +224,7 @@ public class Livro implements Serializable {
 	public void setCategoriaLivros(Set<CategoriaLivro> categoriaLivros) {
 		this.categoriaLivros = categoriaLivros;
 	}
-	
-	
+
 	public List<Reserva> getReservas() {
 		return reservas;
 	}
@@ -243,13 +246,5 @@ public class Livro implements Serializable {
 		return "Livro [id=" + id + ", isbn13=" + isbn13 + ", titulo=" + titulo + ", anoPublicacao=" + anoPublicacao
 				+ ", edicao=" + edicao + ", sinopse=" + sinopse + ", foto=" + foto + "]";
 	}
-	
-	
-	
-	
-	
-	
-
-	
 
 }

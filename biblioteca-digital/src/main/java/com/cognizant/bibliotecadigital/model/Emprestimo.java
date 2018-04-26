@@ -21,59 +21,57 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="emprestimo")
+@Table(name = "emprestimo")
 public class Emprestimo implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-	
+
 	@Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name="data_entrega")
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name = "data_entrega")
 	@NotNull
 	private Date dataEntrega;
-	
+
 	@Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name="data_devolucao")
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name = "data_devolucao")
 	@NotNull
 	private Date dataDevolucao;
-	
+
 	@Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name="prazo_devolucao")
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name = "prazo_devolucao")
 	@NotNull
 	private Date prazoDevolucao;
-	
-	 
+
 	@ManyToOne(targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="unidade_livro_id")
+	@JoinColumn(name = "unidade_livro_id")
 	private List<UnidadeLivro> unidadeLivros;
 
-	 @ManyToOne
-	 @JoinColumn(name="usuario_id")
-	 private Usuario usuario;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
-	
+	// construtor
+	public Emprestimo() {
+
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
-		result = prime * result
-				+ ((dataEntrega == null) ? 0 : dataEntrega.hashCode());
+		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
+		result = prime * result + ((dataEntrega == null) ? 0 : dataEntrega.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
+		result = prime * result + ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -141,8 +139,7 @@ public class Emprestimo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega
-				+ ", dataDevolucao=" + dataDevolucao + ", prazoDevolucao="
-				+ prazoDevolucao + "]";
+		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega + ", dataDevolucao=" + dataDevolucao
+				+ ", prazoDevolucao=" + prazoDevolucao + "]";
 	}
 }

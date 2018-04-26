@@ -14,22 +14,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categoria_livro")
-public class CategoriaLivro implements Serializable{
-private static final long serialVersionUID = 1L;
-	
+@Table(name = "categoria_livro")
+public class CategoriaLivro implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long idCategoria;
-	
-	@Column(name="nome_categoria")
+
+	@Column(name = "nome_categoria")
 	private String nomeCategoria;
-	
-	@ManyToMany(mappedBy="categoriaLivros", fetch = FetchType.LAZY)
+
+	@ManyToMany(mappedBy = "categoriaLivros", fetch = FetchType.LAZY)
 	Set<Livro> livros = new HashSet<Livro>();
 
-		
+	// Construtor
+	public CategoriaLivro() {
+
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,8 +62,7 @@ private static final long serialVersionUID = 1L;
 		return true;
 	}
 
-
-public Long getIdCat() {
+	public Long getIdCat() {
 		return idCategoria;
 	}
 
@@ -67,30 +70,29 @@ public Long getIdCat() {
 		this.idCategoria = idCat;
 	}
 
-public String getNomeCat() {
-	return nomeCategoria;
-}
+	public String getNomeCat() {
+		return nomeCategoria;
+	}
 
-public void setNomeCat(String nomeCat) {
-	this.nomeCategoria = nomeCat;
-}
+	public void setNomeCat(String nomeCat) {
+		this.nomeCategoria = nomeCat;
+	}
 
-public Set<Livro> getLivros() {
-	return livros;
-}
+	public Set<Livro> getLivros() {
+		return livros;
+	}
 
-public void setLivros(Set<Livro> livros) {
-	this.livros = livros;
-}
+	public void setLivros(Set<Livro> livros) {
+		this.livros = livros;
+	}
 
-public void setIdCat(long idCat) {
-	this.idCategoria = idCat;
-}
+	public void setIdCat(long idCat) {
+		this.idCategoria = idCat;
+	}
 
-@Override
-public String toString() {
-	return "categoriaLivro [idCat=" + idCategoria + ", nomeCat=" + nomeCategoria + "]";
-}
-
+	@Override
+	public String toString() {
+		return "categoriaLivro [idCat=" + idCategoria + ", nomeCat=" + nomeCategoria + "]";
+	}
 
 }

@@ -15,51 +15,56 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="usuario")
-public class Usuario implements Serializable{
+@Table(name = "usuario")
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 902783495L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-		
-	@Column(name="id_cgz")
+
+	@Column(name = "id_cgz")
 	@NotNull
 	private Long idCgz;
-	
-	@Column(name="nome")
+
+	@Column(name = "nome")
 	@NotNull
 	private String name;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	@NotNull
 	private String email;
-	
-	@Column(name="grade", nullable=false)
+
+	@Column(name = "grade", nullable = false)
 	@NotNull
 	private String grade;
-	
-	@Column(name="horizontal")
+
+	@Column(name = "horizontal")
 	private String horizontal;
-	
-	@Column(name="vertical")
+
+	@Column(name = "vertical")
 	private String vertical;
-	
-	@Column(name="senha")
+
+	@Column(name = "senha")
 	@NotNull
 	private String senha;
-	
-	//Joins com emprestimo e reserva
-	
-	 @OneToMany(mappedBy = "usuario", targetEntity = Emprestimo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<Emprestimo> emprestimos;
-	 
-	 @OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	 private List<Reserva> reservas;
-	
-	 @Override
+
+	// Joins com emprestimo e reserva
+
+	@OneToMany(mappedBy = "usuario", targetEntity = Emprestimo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Emprestimo> emprestimos;
+
+	@OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Reserva> reservas;
+
+	// Construtor
+	public Usuario() {
+
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -206,7 +211,5 @@ public class Usuario implements Serializable{
 				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", emprestimos="
 				+ emprestimos + ", reservas=" + reservas + "]";
 	}
-	
-	
-	
+
 }

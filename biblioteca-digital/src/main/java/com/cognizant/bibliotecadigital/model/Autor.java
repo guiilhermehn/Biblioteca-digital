@@ -14,21 +14,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="autor")
+@Table(name = "autor")
 public class Autor implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long idAutor;
-	
-	@Column(name="nome_autor")
+
+	@Column(name = "nome_autor")
 	private String nome;
-	
-	@ManyToMany(mappedBy="autores", fetch = FetchType.LAZY)
+
+	@ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
 	Set<Livro> livros = new HashSet<Livro>();
+
+	// Construtor
+	public Autor() {
+		super();
+	}
 
 	@Override
 	public int hashCode() {
@@ -82,7 +87,6 @@ public class Autor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 
 	public Set<Livro> getLivros() {
 		return livros;
@@ -96,7 +100,5 @@ public class Autor implements Serializable {
 	public String toString() {
 		return "Autor [id=" + idAutor + ", nome=" + nome + "]";
 	}
-	
-	
 
 }

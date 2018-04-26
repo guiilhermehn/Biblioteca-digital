@@ -19,32 +19,31 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="Reserva")
+@Table(name = "Reserva")
 public class Reserva implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	@Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name="data_reserva")
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+	@Column(name = "data_reserva")
 	private Date dataReserva;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="status")
+	@Column(name = "status")
 	private Status status;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="livro_id")
+	@JoinColumn(name = "livro_id")
 	private Livro livro;
 
 	public Long getId() {
@@ -53,6 +52,10 @@ public class Reserva implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Reserva() {
+
 	}
 
 	@Override
@@ -139,7 +142,4 @@ public class Reserva implements Serializable {
 				+ ", livro=" + livro + "]";
 	}
 
-
-		
-	
 }
