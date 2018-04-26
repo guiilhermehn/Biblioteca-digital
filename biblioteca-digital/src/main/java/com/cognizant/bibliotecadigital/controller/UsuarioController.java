@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cognizant.bibliotecadigital.service.UsuarioService;
+
 @Controller
 public class UsuarioController {
 	
@@ -12,7 +14,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping("/")
-	public ModelAndView findAll {
+	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/usuario/usuario");
 		mv.addObject("usuarios",usuarioService.findAll());
 		
