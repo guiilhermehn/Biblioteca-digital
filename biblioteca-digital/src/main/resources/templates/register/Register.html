@@ -1,67 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!--TODO  adicionar favicon
-    <link rel="icon" href="./favicon.ico">
-    -->
-
-    <title>Digital Library Solution - Register</title>
-
-    <!-- /TODO Customizar CSS
-    <link href="./TemplateLogin/bootstrap.min.css" rel="stylesheet">
-    -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
     <!-- /TODO Customizar o CSS para esse template    -->
     <link href="./assets/css/register.css" rel="stylesheet">
-
+    <!--TODO  adicionar favicon
+    <link rel="icon" href="./favicon.ico">-->
+    <title>Digital Library Solution - Register</title>
   </head>
-
   <body class="text-center">
     <form class="form-signin">
-
       <!-- /TODO Inserir logo em .svg do projeto-->
       <img class="mb-4" th:src="@{/assets/svg/book.svg}" src="./assets/svg/book.svg" alt="" width="72" height="72">
-
       <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
-
-      <!-- /TODO Adicionar mensagens personalizadas de erros
-      -->
-
+      <!-- /TODO Adicionar mensagens personalizadas de erros-->
       <label for="inputName" class="sr-only">Nome</label>
-      <input type="text" id="inputName" class="form-control" placeholder="Nome" required="" autofocus="">
-
+        <input type="text" id="inputName" class="form-control" placeholder="Nome" required="" autofocus="">
       <label for="inputID" class="sr-only">ID Cognizant</label>
-      <input type="number" id="inputID" class="form-control" placeholder="ID Cognizant" required="">
-
+        <input type="number" id="inputID" class="form-control" placeholder="ID Cognizant" required="">
       <label for="horizontalVertical" class="sr-only">Horizontal/Vertical</label>
-      <input list="listHorizontalVertical" id="horizontalVertical" class="form-control" placeholder="Horizontal/Vertical"name="horizontalVertical" />
-        <datalist id="listHorizontalVertical">
-        <option value="RH/Exemplo1">
-          <option value="TI/Exemplo2">
-          <option value="Vendas/Exemplo3">
-          <option value="Externo/Exemplo4">
-        </datalist>
-
+        <input list="listHorizontalVertical" id="horizontalVertical" class="form-control" placeholder="Horizontal/Vertical"name="horizontalVertical" />
+          <datalist id="listHorizontalVertical">
+          <option value="RH/Exemplo1">
+            <option value="TI/Exemplo2">
+            <option value="Vendas/Exemplo3">
+            <option value="Externo/Exemplo4">
+          </datalist>
       <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="">
-
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="">
       <label for="inputPassword" class="sr-only">Senha</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required=""
-              oninvalid="this.setCustomValidity('Insira uma senha válida')"
-              oninput="setCustomValidity('')">
-
+        <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required=""
+            oninvalid="this.setCustomValidity('Insira uma senha válida')"
+            oninput="setCustomValidity('')">
       <label for="inputPassword" class="sr-only">Confirmar Senha</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Confirmar Senha" required=""
-              oninvalid="this.setCustomValidity('Insira uma senha válida')"
-              oninput="setCustomValidity('')">
-
+        <input type="password" id="inputPassword" class="form-control" placeholder="Confirmar Senha" required=""
+            oninvalid="this.setCustomValidity('Insira uma senha válida')"
+            oninput="setCustomValidity('')">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Lembrar-me
