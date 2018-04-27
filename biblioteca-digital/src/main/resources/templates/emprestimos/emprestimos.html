@@ -1,19 +1,12 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-  <!-- TODO Customizar o CSS para esse template    -->
-  <link href="./assets/css/emprestimos" rel="stylesheet">
-  <!--TODO  Adicionar favicon
-  <link rel="icon" href="./favicon.ico">-->
-  <title>Digital Library Solution - Empréstimos</title>
+  <title>Digital Library Solution Development - Empréstimos</title>
 </head>
-
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
     <a class="navbar-brand text-white" href="#">Digital Library Solution</a>
@@ -42,5 +35,74 @@
     <div style="height: 64px">
       <!-- Espaçamento para manter o conteudo abaixo da navbar (fixed-top) -->
     </div>
-  </body>
+
+    <h1 class="h3">Meus Empréstimos</h1>
+
+    <!-- <div class="accordion border shadow-sm rounded" id=accordion"> -->
+    <div class="table-responsive-md">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">Nome Livro</th>
+            <th scope="col">Data Empr.</th>
+            <th scope="col">Prazo</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>9788525056009</td>
+            <td>Admirável Mundo Novo</td>
+            <td>2018/09/17</td>
+            <td>2018/09/24</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>9788535914849</td>
+            <td>1984</td>
+            <td>2018/04/27</td>
+            <td>2018/05/01</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>9781119055808</td>
+            <td>R for Dummies</td>
+            <td>2018/04/27</td>
+            <td>2018/05/17</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <button type="button" class="btn btn-outline-success">Renovar</button>
+      <button type="button" class="btn btn-outline-danger">Entregar</button> -->
+
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
 </html>
