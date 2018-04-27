@@ -7,5 +7,7 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+	
+	Usuario findByEmail(String email);
 
 }

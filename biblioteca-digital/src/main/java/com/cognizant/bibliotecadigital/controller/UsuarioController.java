@@ -1,13 +1,18 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cognizant.bibliotecadigital.model.CadastraUsuarioDTO;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
@@ -16,6 +21,15 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@ModelAttribute("user")
+    public CadastraUsuarioDTO cadastrausuarioDTO() {
+        return new CadastraUsuarioDTO();
+    }
+	@GetMapping
+    public String showRegistrationForm(Model model) {
+        return "usuarios";
+    }
 	
 	@GetMapping("/usuarios")
 	public ModelAndView findAll() {
@@ -32,11 +46,28 @@ public class UsuarioController {
 	        return modelAndView;
 	}
 	
-	@PostMapping(path = "/usuarios/salvar")
+	/*@PostMapping(path = "/usuarios/salvar")
 	public ModelAndView create(@ModelAttribute Usuario usuario) {
 		usuarioService.save(usuario);
 		return new ModelAndView("redirect:/usuarios");		
-	}
+	}*/
+	
+	 @PostMapping(path = "/register/Register")
+	    public String cadastraConta(@ModelAttribute("usuario") @Valid CadastraUsuarioDTO cadastraUsuarioDTO, 
+	                                      BindingResult result){
+
+	        Usuario existe = usuarioService.findByEmail(cadastraUsuarioDTO.getEmail());
+	        if (existe != null){
+	            result.rejectValue("email", null, "Já existe uma conta registrada com esse email");
+	        }
+
+	        if (result.hasErrors()){
+	            return "usuarios";
+	        }
+
+	        usuarioService.save(cadastraUsuarioDTO);
+	        return "redirect:/usuarios?success";
+	    }
 	
 	
 	@GetMapping("/usuarios/{id}")

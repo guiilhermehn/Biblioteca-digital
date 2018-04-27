@@ -13,7 +13,7 @@
     <title>Digital Library Solution - Register</title>
   </head>
   <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" th:action="@{/cadastro}" th:object="${usuario}" method="post">
       <!-- TODO Inserir logo em .svg do projeto-->
       <img class="mb-4" th:src="@{/assets/svg/book.svg}" src="./assets/svg/book.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
@@ -21,14 +21,14 @@
       <label for="inputName" class="sr-only">Nome</label>
         <input type="text" id="inputName" class="form-control" placeholder="Nome" required="" autofocus="">
 
-      <label for="inputID" class="sr-only">ID Cognizant</label>
-        <input type="number" id="inputID" class="form-control" placeholder="ID Cognizant" required="" onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+      <!--<label for="inputID" class="sr-only">ID Cognizant</label>
+        <input type="number" id="inputID" class="form-control" placeholder="ID Cognizant" required="" onkeydown="javascript: return event.keyCode == 69 ? false : true" />-->
         
-      <label for="inputGrade" class="sr-only">Nome</label>
+      <label for="inputGrade" class="sr-only">Grade</label>
         <input type="text" id="inputGrade" class="form-control" placeholder="Grade" required="">
 
-      <label for="inputHorVer" class="sr-only">Horizontal/Vertical</label>
-        <input type="text" id="inputHorVer" class="form-control" placeholder="Horizontal/Vertical" required="">
+      <!--<label for="inputHorVer" class="sr-only">Horizontal/Vertical</label>
+        <input type="text" id="inputHorVer" class="form-control" placeholder="Horizontal/Vertical" required="">  -->
 
 
       <!-- TODO Não temos a lista das horizontais verticais no momento

@@ -1,6 +1,7 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,7 +35,7 @@ public class Usuario implements Serializable {
 
 	@Column(name = "nome")
 	@NotNull
-	private String name;
+	private String nome;
 
 	@Column(name = "email")
 	@NotNull
@@ -59,6 +63,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	private Collection<Role> roles;
+
 	// Construtor
 	public Usuario() {
 
@@ -73,7 +81,7 @@ public class Usuario implements Serializable {
 		result = prime * result + ((horizontal == null) ? 0 : horizontal.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (int) (idCgz ^ (idCgz >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((vertical == null) ? 0 : vertical.hashCode());
 		return result;
@@ -107,10 +115,10 @@ public class Usuario implements Serializable {
 			return false;
 		if (idCgz != other.idCgz)
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (senha == null) {
 			if (other.senha != null)
@@ -141,12 +149,12 @@ public class Usuario implements Serializable {
 		this.idCgz = idCgz;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -205,11 +213,19 @@ public class Usuario implements Serializable {
 		this.reservas = reservas;
 	}
 
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", name=" + name + ", email=" + email + ", grade=" + grade
+		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", name=" + nome + ", email=" + email + ", grade=" + grade
 				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", emprestimos="
-				+ emprestimos + ", reservas=" + reservas + "]";
+				+ emprestimos + ", reservas=" + reservas + ", roles=" + roles + "]";
 	}
 
 }
