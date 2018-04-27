@@ -37,12 +37,12 @@
           <div class="col-md-12">
             <div class="card space">
               <div class="media">
-                <img class="align-self-end mr-3" src="assets/img/livro.jpg" alt="Generic placeholder image">
+                <img class="align-self-end mr-3" th:src = "@{/assets/img/livro.jpg}" src="assets/img/livro.jpg" alt="Generic placeholder image">
                 <div class="media-body">
-                  <h3 class="text-justify">Titulo: A A A</h3>
-                  <h5 class="text-justify">Autor: AAAA</h5>
-                  <h5 class="text-justify">ISBN:</h5>
-                  <p class="text-justify">Descrição: Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                  <h3  class="text-justify">Titulo: <span>th:text="${livro.titulo}"</span> </h3>
+                  <h5 class="text-justify">Autor: <span>th:text="${livro.autor}"</span> </h5>
+                  <h5 class="text-justify">ISBN: <span>th:text="${livro.isbn13}"</span> </h5>
+                  <p class="text-justify">Descrição:<span>th:text="${livro.descricao}"</span> </p>
 
                   <div class="col-md-12">
                     <button type="button" class="btn btn-outline-success">Emprestimo</button>
