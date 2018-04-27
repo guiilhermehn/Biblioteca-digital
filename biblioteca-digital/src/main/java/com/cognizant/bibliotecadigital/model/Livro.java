@@ -51,8 +51,8 @@ public class Livro implements Serializable {
 	private String foto;
 
 	// Construtor
-	public Livro() {
-
+	public Livro( ) {
+		 autores = new HashSet<Autor>();
 	}
 
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
@@ -60,7 +60,7 @@ public class Livro implements Serializable {
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
-	Set<Autor> autores = new HashSet<Autor>();
+	Set<Autor> autores;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
