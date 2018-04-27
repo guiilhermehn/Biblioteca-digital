@@ -1,4 +1,4 @@
-package com.cognizant.bibliotecadigital.controller;
+/*package com.cognizant.bibliotecadigital.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +14,12 @@ import com.cognizant.bibliotecadigital.model.Autor;
 import com.cognizant.bibliotecadigital.service.AutorService;
 
 @Controller
-@RequestMapping("/autores")
 public class AutorController {
 	
 	@Autowired
 	private AutorService autorService;
 	//Busca todos os autores
-	@GetMapping("/")
+	@GetMapping("/autores")
 	public ModelAndView findAll() {
 
 		ModelAndView mv = new ModelAndView("/autores/autor");
@@ -48,3 +47,4 @@ public class AutorController {
 	
 
 }
+*/
