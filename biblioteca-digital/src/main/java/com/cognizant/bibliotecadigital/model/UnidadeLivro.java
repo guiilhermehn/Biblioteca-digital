@@ -31,7 +31,7 @@ public class UnidadeLivro implements Serializable {
 
 	// Construtor
 	public UnidadeLivro() {
-
+		this.id = 0L;
 	}
 
 	@Override
