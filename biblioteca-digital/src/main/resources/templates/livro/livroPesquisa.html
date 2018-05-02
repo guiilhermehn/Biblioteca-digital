@@ -83,16 +83,20 @@
 											<span data-th-text="${autor.nome}"></span>
 										</span></td>
 										<td data-th-text="${livro.anoPublicacao}">2018</td>
-										<td><a href="#"
+										<td>
+										
+										<a href="#"
 											data-th-href="@{/livros/edit/{id}(id=${livro.id})}"
 											class="btn btn-outline-warning"> <i class="far fa-edit"></i>
 										</a>
-										<form data-th-action="@{/livros/deletarLivro}" method="POST">
+										<form class="d-inline-block" data-th-action="@{/livros/deletarLivro}" method="POST">
 											<button type="submit" class="btn btn-outline-danger">
 												<i class="far fa-trash-alt"></i>
 											</button>
 											<input type="hidden" data-th-value="${livro.id}" name="id">
-										</form></td>
+										</form>
+										
+										</td>
 									</tr>
 								</tbody>
 							</table>
