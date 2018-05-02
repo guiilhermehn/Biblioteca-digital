@@ -51,16 +51,35 @@ public class Livro implements Serializable {
 	private String foto;
 
 	// Construtor
-	public Livro() {
-
+	public Livro( ) {
+		 autores = new HashSet<Autor>();
 	}
 
+	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
+	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
+			int edicao, String sinopse, String foto, Set<Autor> autores,
+			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+			List<UnidadeLivro> unidadeLivros) {
+		this.id = id;
+		this.isbn13 = isbn13;
+		this.titulo = titulo;
+		this.anoPublicacao = anoPublicacao;
+		this.edicao = edicao;
+		this.sinopse = sinopse;
+		this.foto = foto;
+		this.autores = autores;
+		this.categoriaLivros = categoriaLivros;
+		this.reservas = reservas;
+		this.unidadeLivros = unidadeLivros;
+	}
+
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
-	Set<Autor> autores = new HashSet<Autor>();
+	Set<Autor> autores;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {

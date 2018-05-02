@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- /TODO Customizar o CSS para esse template    -->
-    <link href="./assets/css/login.css" rel="stylesheet">
-    <!--TODO  adicionar favicon
-    <link rel="icon" href="./favicon.ico">-->
-    <title>Digital Library Solution - Login</title>
-  </head>
-  <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" th:src="@{/assets/svg/book.svg}" src="./assets/svg/book.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
-      <!-- /TODO Adicionar mensagens personalizadas de erros
-      -->
-      <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Digital Library Solution - Login</title>
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/login.css" data-th-href="@{/assets/css/login.css}">
+        <!--TODO  adicionar favicon
+        <link rel="icon" href="./favicon.ico">-->
+    </head>
+    <body class="text-center">
+        <form class="form-signin">
+            <img class="mb-4" data-th-src="@{/assets/svg/book.svg}" src="../../static/assets/svg/book.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
+            <!-- /TODO Adicionar mensagens personalizadas de erros -->
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
 
-      <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required=""
-          oninvalid="this.setCustomValidity('Insira uma senha válida')"
-          oninput="setCustomValidity('')">
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')">
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Lembrar-me
-        </label>
-      </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Lembrar-me
+                </label>
+            </div>
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
-      <div class="login-register">
-                  <a href="../register/Register.html">Registrar</a>
-      </div>
+            <div class="login-register">
+                <a href="../register/Register.html">Registrar</a>
+            </div>
 
-    </form>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  </body>
+        </form>
+        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
+        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
+        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+    </body>
 </html>
