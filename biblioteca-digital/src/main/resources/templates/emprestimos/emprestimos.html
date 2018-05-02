@@ -39,66 +39,107 @@
 
             <h1 class="h3">Meus Empréstimos</h1>
 
-            <!-- <div class="accordion border shadow-sm rounded" id=accordion"> -->
-            <div class="table-responsive-md">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Nome Livro</th>
-                            <th scope="col">Data Empr.</th>
-                            <th scope="col">Prazo</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>9788525056009</td>
-                            <td>Admirável Mundo Novo</td>
-                            <td>2018/09/17</td>
-                            <td>2018/09/24</td>
-                            <td>
-                                <span>
-                                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
-                                </span>
-                                <span>
-                                    <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>9788535914849</td>
-                            <td>1984</td>
-                            <td>2018/04/27</td>
-                            <td>2018/05/01</td>
-                            <td>
-                                <span>
-                                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
-                                </span>
-                                <span>
-                                    <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>9781119055808</td>
-                            <td>R for Dummies</td>
-                            <td>2018/04/27</td>
-                            <td>2018/05/17</td>
-                            <td>
-                                <span>
-                                    <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
-                                </span>
-                                <span>
-                                    <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- <button type="button" class="btn btn-outline-success">Renovar</button>
-                <button type="button" class="btn btn-outline-danger">Entregar</button> -->
+    <!-- <div class="accordion border shadow-sm rounded" id=accordion"> -->
+    <div class="table-responsive-md">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">Nome Livro</th>
+            <th scope="col">Data Empr.</th>
+            <th scope="col">Prazo</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>9788525056009</td>
+            <td>Admirável Mundo Novo</td>
+            <td>2018/09/17</td>
+            <td>2018/09/24</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#renovarModal"><i class="fas fa-undo"></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#entregarModal"><i class="far fa-check-square"></i></button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="renovarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Renovar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Deseja realmente renovar o empréstimo do livro XPTO?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="button" class="btn btn-primary">Sim</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="entregarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Entregar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Deseja realizar a entrega do livro XPTO?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="button" class="btn btn-primary">Sim</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>9788535914849</td>
+            <td>1984</td>
+            <td>2018/04/27</td>
+            <td>2018/05/01</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>9781119055808</td>
+            <td>R for Dummies</td>
+            <td>2018/04/27</td>
+            <td>2018/05/17</td>
+            <td>
+              <span>
+                <button type="button" class="btn btn-outline-warning"><i class="fas fa-undo"></i></i></button>
+              </span>
+              <span>
+                <button type="button" class="btn btn-outline-success"><i class="far fa-check-square"></i></button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <button type="button" class="btn btn-outline-success">Renovar</button>
+      <button type="button" class="btn btn-outline-danger">Entregar</button> -->
             </div>
         </main>
 

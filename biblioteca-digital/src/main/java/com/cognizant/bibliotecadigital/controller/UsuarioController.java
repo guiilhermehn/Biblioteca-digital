@@ -3,9 +3,7 @@ package com.cognizant.bibliotecadigital.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cognizant.bibliotecadigital.model.Usuario;
@@ -16,6 +14,7 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
 	
 	@GetMapping("/usuarios")
 	public ModelAndView findAll() {
@@ -32,11 +31,13 @@ public class UsuarioController {
 	        return modelAndView;
 	}
 	
-	@PostMapping(path = "/usuarios/salvar")
+	/*@PostMapping(path = "/usuarios/salvar")
 	public ModelAndView create(@ModelAttribute Usuario usuario) {
 		usuarioService.save(usuario);
 		return new ModelAndView("redirect:/usuarios");		
-	}
+	}*/
+	
+	
 	
 	
 	@GetMapping("/usuarios/{id}")
