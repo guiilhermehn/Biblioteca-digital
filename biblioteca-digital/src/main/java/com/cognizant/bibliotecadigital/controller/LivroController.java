@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cognizant.bibliotecadigital.model.Livro;
@@ -37,6 +38,7 @@ public class LivroController {
 	@GetMapping("/livros/new")
     public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+		mv.addObject("livro", new Livro());
         return mv;
     }
 	
@@ -45,12 +47,12 @@ public class LivroController {
 		Livro l1;
 		l1 = livroService.save(livro);
 		
-		ModelAndView mv = new ModelAndView("redirect:" + l1.getId());
+		ModelAndView mv = new ModelAndView("redirect:/livros");
 		return mv;
 	}
 	
-	@PostMapping(path = {"/livros/{id}/destroy", "/livros/destroy/{id}"})
-    public ModelAndView destroy(@PathVariable("id") long id) {
+	@PostMapping("/livros/deletarLivro")
+    public ModelAndView deletar(@RequestParam("id") long id) {
         livroService.deleteById(id);
         ModelAndView redirect = new ModelAndView("redirect:/livros");
         return redirect;

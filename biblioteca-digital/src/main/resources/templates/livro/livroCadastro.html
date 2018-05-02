@@ -31,7 +31,7 @@
             </div>
         </header>
 
-        <div class="container centerSearch" data-th-text="${action} == 'create'">
+        <div class="container centerSearch">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
@@ -39,7 +39,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Livros</h5>
                         </div>
                         <div class="card-body">
-                            <form data-th-action="@{/livros/{act}(act = ${action})}" method="post" data-th-object="${livro}">
+                            <form data-th-action="@{/livros/create}" method="post" data-th-object="${livro}">
                                 <div class="media">
                                     <!--<img class="align-self-end mr-3" th:src = "@{/assets/img/livro.pg}" src="assets/img/livro.jg" alt="Generic placeholder image">-->
 
@@ -75,11 +75,12 @@
                                         <input type="file" class="form-control-file" id="exampleFormControlFile1">
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="card-footer d-flex justify-content-center">
+                                <div class="card-footer d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary ">Cadastrar</button>
                         </div>
+                            </form>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
