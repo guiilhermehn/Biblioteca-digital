@@ -1,11 +1,6 @@
 package com.cognizant.bibliotecadigital.controller;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-=======
 import javax.validation.Valid;
->>>>>>> master
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.cognizant.bibliotecadigital.model.Autor;
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.service.LivroService;
 

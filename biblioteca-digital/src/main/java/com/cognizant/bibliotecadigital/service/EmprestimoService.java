@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
-import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 
 @Service
