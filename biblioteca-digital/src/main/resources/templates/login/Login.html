@@ -14,26 +14,23 @@
         <link rel="icon" href="./favicon.ico">-->
     </head>
     <body class="text-center">
-        <form class="form-signin">
+        <form class="form-signin" data-th-action="@{/login}" method="post">
             <img class="mb-4" data-th-src="@{/assets/svg/book.svg}" src="../../static/assets/svg/book.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
             <!-- /TODO Adicionar mensagens personalizadas de erros -->
             <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+            <input type="text" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="" name="email">
 
             <label for="inputPassword" class="sr-only">Senha</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" 
+            oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')" name="senha">
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Lembrar-me
-                </label>
-            </div>
+          
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 
             <div class="login-register">
-                <a href="../register/Register.html">Registrar</a>
+                <a data-th-href="@{/register}" >Registrar</a>
             </div>
 
         </form>
