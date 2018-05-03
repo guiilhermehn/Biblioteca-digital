@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <title>Digital Library Solution Development - Reserved</title>
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
     </head>
     <body>
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
@@ -25,7 +26,7 @@
                 <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
+                <a class="nav-link" data-th-href="@{/logout}"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
               </li>
             </ul>
           </div>
@@ -39,51 +40,65 @@
             <h1 class="h3">Reservas</h1>
 
             <div class="accordion border shadow-sm rounded" id="accordion">
-            	<div th:each="reserva : ${reservas}">
-	                <a data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+            	<div data-th-each="reserva, stat : ${reservas}">
+	                <a data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
 	                    <div class="row py-2 mx-0 border-bottom">
 	                        <div class="col-12 col-lg-4">
-	                            <strong>Nome:</strong> <span th:text="${reserva.livro.titulo}"></span>
+	                            <strong>Título:</strong> <span data-th-text="${reserva.livro.titulo}">Título</span>
 	                        </div>
 	                        
+                            <div class="col-12 col-md-6 col-lg-4">
+	                            <strong>Autor(es):</strong> <span data-th-text="${reserva.livro.autores}">Autores</span>
+	                        </div>
+                            
 	                        <div class="col-12 col-md-6 col-lg-4">
-	                            <strong>Disponibilidade:</strong> Na prateleira XPTO
+	                            <strong>Disponibilidade:</strong> <span data-th-text="${reserva.status}">Na prateleira XPTO</span>
 	                        </div>
 	                    </div>
 	                </a>
-	                <div id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
-	                    <div class="p-3">
-	                        <p>
-	                            <strong>Descrição:</strong>
-	                            <span th:text="${reserva.livro.sinopse}"></span>
-	                         </p>
-	                         <p>   
-	                            <strong>ISBN 13:</strong>
-	                            <span th:text="${reserva.livro.isbn13}"></span>
-	                            
-	                            <strong>Ano de Publicação:</strong>
-	                            <span th:text="${reserva.livro.anoPublicacao}"></span>
-	                            
-	                            <strong>Edição:</strong>
-	                            <span th:text="${reserva.livro.edicao}"></span>
-	                            
-	                            <strong>Foto:</strong>
-	                            <span th:text="${reserva.livro.foto}"></span>
-	                        </p>
-	                        <p><strong>Data da reserva:</strong> DD/MMM/YYYY</p>
-	                        <div class="text-right">
-	                            <a href="#" class="btn btn-secondary">Apagar reserva</a>
-	                            <a href="#" class="btn btn-secondary">Efetuar empréstimo</a>
-	                        </div>
-	                    </div>
+	                <div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
+                        <div class="row pt-2 px-3">
+                            <div class="d-none d-lg-block col-lg-4 col-xl-3">
+                                <img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
+                            </div>
+                            <dl class="col">
+                                <dt>Descrição:</dt>
+                                <dd data-th-text="${reserva.livro.sinopse}">Sinopse</dd>
+
+                                <dt>ISBN 13:</dt>
+                                <dd data-th-text="${reserva.livro.isbn13}">XXXXXXXXXXXXXX</dd>
+
+                                <dt>Ano de Publicação:</dt>
+                                <dd data-th-text="${reserva.livro.anoPublicacao}">YYYY</dd>
+
+                                <dt>Edição:</dt>
+                                <dd data-th-text="${reserva.livro.edicao}">ZZ</dd>
+
+                                <dt>Foto:</dt>
+                                <dd data-th-text="${reserva.livro.foto}">filename.jpg</dd>
+
+                                <dt>Data da reserva:</dt> 
+                                <dd data-th-text="${reserva.dataReserva}">DD/MMM/YYYY</dd>
+                            </dl>
+                        </div>
+                            
+                        <div class="text-right mx-3 mb-3">
+                        	<form th:action="@{/reservas/deletarReserva}" method="POST">
+                        		<button class="btn btn-secondary mb-1">Apagar Reserva</button>
+                        		<input type="hidden" th:value="${reserva.id}" name="id">
+                        	</form>
+                        	<form>
+                        		<a href="#" class="btn btn-secondary mb-1">Efetuar empréstimo</a>
+                        	</form>
+                        </div>
 	                </div>
 				</div>
                 
             </div>
         </main>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
+        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
+        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
     </body>
 </html>

@@ -33,15 +33,15 @@ public class Emprestimo implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name = "data_entrega")
+	@Column(name = "data_retirada")
 	@NotNull
-	private Date dataEntrega;
+	private Date dataRetirada;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "data_devolucao")
-	@NotNull
 	private Date dataDevolucao;
+
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
@@ -67,7 +67,7 @@ public class Emprestimo implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
-		result = prime * result + ((dataEntrega == null) ? 0 : dataEntrega.hashCode());
+		result = prime * result + ((dataRetirada == null) ? 0 : dataRetirada.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
 		return result;
@@ -87,10 +87,10 @@ public class Emprestimo implements Serializable {
 				return false;
 		} else if (!dataDevolucao.equals(other.dataDevolucao))
 			return false;
-		if (dataEntrega == null) {
-			if (other.dataEntrega != null)
+		if (dataRetirada == null) {
+			if (other.dataRetirada != null)
 				return false;
-		} else if (!dataEntrega.equals(other.dataEntrega))
+		} else if (!dataRetirada.equals(other.dataRetirada))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -113,12 +113,12 @@ public class Emprestimo implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataEntrega() {
-		return dataEntrega;
+	public Date getdataRetirada() {
+		return dataRetirada;
 	}
 
-	public void setDataEntrega(Date dataEntrega) {
-		this.dataEntrega = dataEntrega;
+	public void setdataRetirada(Date dataRetirada) {
+		this.dataRetirada = dataRetirada;
 	}
 
 	public Date getDataDevolucao() {
@@ -139,7 +139,7 @@ public class Emprestimo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega + ", dataDevolucao=" + dataDevolucao
+		return "Emprestimo [id=" + id + ", dataRetirada=" + dataRetirada + ", dataDevolucao=" + dataDevolucao
 				+ ", prazoDevolucao=" + prazoDevolucao + "]";
 	}
 }

@@ -1,4 +1,4 @@
-package com.cognizant.bibliotecadigital.controller;
+/*package com.cognizant.bibliotecadigital.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class LoginController {
 		mv.addObject("usuarios",usuarioService.findAll());
 		
 		return mv;
-	}*/
+	}
 	
 	
 	@PostMapping(path = "/usuarios/salvar")
@@ -34,4 +34,4 @@ public class LoginController {
 		
 	}
 
-}
+}*/

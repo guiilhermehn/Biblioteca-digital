@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Transactional
 @Entity
@@ -33,17 +35,23 @@ public class Livro implements Serializable {
 	private Long id;
 
 	@Column(name = "isbn13", unique = true)
+	@Size(min=8, max=13)
 	private String isbn13;
 
+	@NotNull
+	@Size(min=4, max=255)
 	@Column(name = "titulo")
 	private String titulo;
 
+	@Size(min=2, max=4)
 	@Column(name = "ano_publicacao")
 	private int anoPublicacao;
 
+	@Size(min=1, max=3)
 	@Column(name = "edicao")
 	private int edicao;
 
+	@Size(min=4, max=255)
 	@Column(name = "sinopse")
 	private String sinopse;
 
@@ -51,16 +59,35 @@ public class Livro implements Serializable {
 	private String foto;
 
 	// Construtor
-	public Livro() {
-
+	public Livro( ) {
+		 autores = new HashSet<Autor>();
 	}
 
+	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
+	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
+			int edicao, String sinopse, String foto, Set<Autor> autores,
+			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+			List<UnidadeLivro> unidadeLivros) {
+		this.id = id;
+		this.isbn13 = isbn13;
+		this.titulo = titulo;
+		this.anoPublicacao = anoPublicacao;
+		this.edicao = edicao;
+		this.sinopse = sinopse;
+		this.foto = foto;
+		this.autores = autores;
+		this.categoriaLivros = categoriaLivros;
+		this.reservas = reservas;
+		this.unidadeLivros = unidadeLivros;
+	}
+
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
-	Set<Autor> autores = new HashSet<Autor>();
+	Set<Autor> autores;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {

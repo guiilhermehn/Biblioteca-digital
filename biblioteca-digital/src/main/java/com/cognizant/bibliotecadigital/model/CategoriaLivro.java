@@ -27,12 +27,22 @@ public class CategoriaLivro implements Serializable {
 	private String nomeCategoria;
 
 	@ManyToMany(mappedBy = "categoriaLivros", fetch = FetchType.LAZY)
-	Set<Livro> livros = new HashSet<Livro>();
+	Set<Livro> livros;
 
 	// Construtor
 	public CategoriaLivro() {
-
+		this.idCategoria = 0L;
+		this.livros = new HashSet<Livro>();
 	}
+
+	
+	
+	public CategoriaLivro(Long idCategoria, String nomeCategoria) {
+		this.idCategoria = idCategoria;
+		this.nomeCategoria = nomeCategoria;
+	}
+
+
 
 	@Override
 	public int hashCode() {
