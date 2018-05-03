@@ -7,5 +7,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 
 @Repository
 public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
-		
+	
+	
+	
 }
