@@ -21,7 +21,12 @@ public class LivroService {
 	public Optional<Livro> findById(long id) {
 		return livroRepository.findById(id);
 	}
+<<<<<<< HEAD
+	
+	
+=======
 
+>>>>>>> master
 	public Livro findByIsbn13(String isbn13) {
 		return livroRepository.findByIsbn13(isbn13);
 	}
@@ -33,4 +38,5 @@ public class LivroService {
 	public Livro deleteById(long id) {
 		return livroRepository.deleteById(id);
 	}
+	
 }
