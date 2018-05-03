@@ -1,12 +1,8 @@
 package com.cognizant.bibliotecadigital.controller;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
 import javax.validation.Valid;
->>>>>>> master
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -47,7 +43,7 @@ public class LivroController {
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-
+		
 		mv.addObject("livro", new Livro());
 		return mv;
 	}
@@ -74,7 +70,9 @@ public class LivroController {
 
 		livroService.findByIsbn13(livro.getIsbn13());
 
-		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
+		livroService.save(livro);
+
+		ModelAndView mv = new ModelAndView("redirect:/livros");
 
 		return mv;
 
