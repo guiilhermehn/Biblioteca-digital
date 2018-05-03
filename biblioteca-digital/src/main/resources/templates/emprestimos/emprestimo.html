@@ -60,7 +60,7 @@
                             <dl class="col">
 
                                 <dt>Data de Recebimento:</dt>
-                                <dd data-th-text="${reserva.livro.anoPublicacao}">DD/MMM/YYYY</dd>
+                                <dd data-th-text="${#dates.format(emprestimo.releaseDate, 'dd-MMM-yyyy')}">DD/MMM/YYYY</dd>
 
                                 <dt>Data de Devolução:</dt>
                                 <dd data-th-text="${reserva.livro.edicao}">DD/MMM/YYYY</dd>
