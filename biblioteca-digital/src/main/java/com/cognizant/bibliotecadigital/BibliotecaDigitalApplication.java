@@ -22,11 +22,11 @@ public class BibliotecaDigitalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
-	
+	/*
 	@Bean
 	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo) {
 		return (String[] args) -> {
-			/*
+			
 			catRepo.save(new CategoriaLivro(0L, "categoria1"));
 			catRepo.save(new CategoriaLivro(0L, "categoria2"));
 			
@@ -49,7 +49,7 @@ public class BibliotecaDigitalApplication {
 			livro.getUnidadeLivros().add(new UnidadeLivro());
 			
 			livRepo.save(livro);
-			*/
+			
 		};
-	}
+	}*/
 }
