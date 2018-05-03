@@ -14,10 +14,12 @@
         <link rel="icon" href="./favicon.ico">-->
     </head>
     <body class="text-center">
+    	
+    
         <form class="form-signin" data-th-action="@{/login}" method="post">
             <img class="mb-4" data-th-src="@{/assets/svg/book.svg}" src="../../static/assets/svg/book.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
-            <!-- /TODO Adicionar mensagens personalizadas de erros -->
+            <div class="alert alert-danger" data-th-if="${msgErro} != null" data-th-text="${msgErro}"></div>
             <label for="inputEmail" class="sr-only">Email</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="" name="email">
 

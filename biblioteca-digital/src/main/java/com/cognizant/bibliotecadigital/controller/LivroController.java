@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,6 +46,7 @@ public class LivroController {
     }
 
 	@PostMapping("/livros/create")
+<<<<<<< HEAD
 	public ModelAndView create(@Valid @ModelAttribute Livro livro, BindingResult bindingRes, RedirectAttributes redAttributes) {
 		
 		if (bindingRes.hasErrors()){
@@ -55,6 +55,11 @@ public class LivroController {
 		
 		Livro l1;
 		l1 = livroService.save(livro);
+=======
+	public ModelAndView create(@ModelAttribute Livro livro) {
+		
+		 livroService.save(livro);
+>>>>>>> philipe
 		
 		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 
@@ -64,10 +69,17 @@ public class LivroController {
 
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
+<<<<<<< HEAD
 		Livro l1;
 		l1 = livroService.findByIsbn13(livro.getIsbn13());
 
 
+=======
+		
+		livroService.findByIsbn13(livro.getIsbn13());
+		
+		
+>>>>>>> philipe
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
 
 		return mv;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,8 +25,13 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 
 	@GetMapping("/login")
-	public ModelAndView login() {
-		return new ModelAndView("login/Login");
+	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
+		ModelAndView login = new ModelAndView("login/Login");
+		if (erro.equals("erroLogin")) {
+			login.addObject("msgErro", "Email ou Senha incorreta");
+		}
+
+		return login;
 	}
 
 	@GetMapping("/register")
@@ -42,8 +48,15 @@ public class UsuarioController {
 
 		return mv;
 	}
-	
-	
+
+	@PostMapping("/register")
+	public ModelAndView create(@ModelAttribute Usuario usuario) {
+
+		usuarioService.save(usuario);
+
+		ModelAndView mv = new ModelAndView("redirect:/login");
+		return mv;
+	}
 
 	// @GetMapping("/usuarios/novo")
 	// public ModelAndView novo() {

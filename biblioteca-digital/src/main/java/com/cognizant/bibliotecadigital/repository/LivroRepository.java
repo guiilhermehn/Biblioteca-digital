@@ -12,6 +12,7 @@ public interface LivroRepository extends CrudRepository<Livro, Long>{
 
 	Optional<Livro> findById(long id);
 	
+	@SuppressWarnings("unchecked")
 	Livro save(Livro livro);
 	
 	Livro deleteById(long id);

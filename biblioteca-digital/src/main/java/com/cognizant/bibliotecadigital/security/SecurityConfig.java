@@ -1,5 +1,7 @@
 package com.cognizant.bibliotecadigital.security;
 
+import javax.mail.AuthenticationFailedException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	@Configuration
 	@EnableWebSecurity
 	public class SecurityConfig extends WebSecurityConfigurerAdapter {
+		
+		
 	  
 	  
 	  private static PasswordEncoder basicPasswordEncoder() {
@@ -41,13 +45,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	    http.csrf().disable()
 	        .authorizeRequests()
 	        .antMatchers("/assets/**","/register/**").permitAll()
-	          .antMatchers("/xpto/**").hasRole("ADMIN")
+	          //.antMatchers("/xpto/**").hasRole("ADMIN")
 	          .antMatchers("/**").authenticated()
 	        .and()
 	          .formLogin()
 	            .loginPage("/login")
 	            .usernameParameter("email")
 	            .passwordParameter("senha")
+	            .failureUrl("/login?error=erroLogin")
 	            .defaultSuccessUrl("/").permitAll()
 	        .and()
 	          .logout()

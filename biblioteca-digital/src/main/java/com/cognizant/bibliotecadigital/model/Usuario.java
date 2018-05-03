@@ -15,8 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+<<<<<<< HEAD
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+=======
+import javax.persistence.Transient;
+>>>>>>> philipe
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -67,6 +71,10 @@ public class Usuario implements Serializable, UserDetails {
 	@NotEmpty
 	private String senha;
 	
+	@Transient
+	@NotNull
+	private String confirmaSenha;
+	
 	@ManyToMany(mappedBy="usuarios")
 	private Set<Papel> papeis;
 
@@ -91,6 +99,14 @@ public class Usuario implements Serializable, UserDetails {
 		this.grade = grade;
 		this.senha = senha;
 		this.papeis = papeis;
+	}
+	
+	public boolean verificaSenha() {
+		if(senha.equals(confirmaSenha)) {
+		return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
