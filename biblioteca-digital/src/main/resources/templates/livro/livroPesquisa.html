@@ -79,9 +79,9 @@
 								<tbody>
 									<tr data-th-each="livro : ${livros}">
 										<td data-th-text="${livro.titulo}">Culinaria</td>
-										<td><span data-th-each="autor: ${livro.autores}">
-											<span data-th-text="${autor.nome}"></span>
-										</span></td>
+										<td>
+										<span data-th-text="${livro.autor}"></span>
+										</td>
 										<td data-th-text="${livro.anoPublicacao}">2018</td>
 										<td>
 										
