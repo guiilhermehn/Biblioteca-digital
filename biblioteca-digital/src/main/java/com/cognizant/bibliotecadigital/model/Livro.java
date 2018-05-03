@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Transactional
 @Entity
@@ -33,17 +35,23 @@ public class Livro implements Serializable {
 	private Long id;
 
 	@Column(name = "isbn13", unique = true)
+	@Size(min=8, max=13)
 	private String isbn13;
 
+	@NotNull
+	@Size(min=4, max=255)
 	@Column(name = "titulo")
 	private String titulo;
 
+	@Size(min=2, max=4)
 	@Column(name = "ano_publicacao")
 	private int anoPublicacao;
 
+	@Size(min=1, max=3)
 	@Column(name = "edicao")
 	private int edicao;
 
+	@Size(min=4, max=255)
 	@Column(name = "sinopse")
 	private String sinopse;
 

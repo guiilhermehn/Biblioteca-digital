@@ -1,7 +1,9 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,13 +12,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 902783495L;
 
@@ -26,15 +36,20 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@Column(name = "id_cgz")
+	@Size(min=6, max= 6)
 	@NotNull
 	private Long idCgz;
 
 	@Column(name = "nome")
+	@Size(min=4,  max=80)
 	@NotNull
+	@NotEmpty
 	private String nome;
 
 	@Column(name = "email")
+	@Email
 	@NotNull
+	@NotEmpty
 	private String email;
 
 	@Column(name = "grade", nullable = false)
@@ -48,8 +63,17 @@ public class Usuario implements Serializable {
 	private String vertical;
 
 	@Column(name = "senha")
+	@Size(min=4, max=16)
 	@NotNull
+	@NotEmpty
 	private String senha;
+	
+	@Transient
+	@NotNull
+	private String confirmaSenha;
+	
+	@ManyToMany(mappedBy="usuarios")
+	private Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
 
@@ -59,14 +83,68 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
-	
-	
-// Construtor
+	// Construtor
 	public Usuario() {
 
 	}
 
+	public Usuario(@NotNull String nome, @NotNull String email, @NotNull String grade, @NotNull String senha,
+			Set<Papel> papeis) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.grade = grade;
+		this.senha = senha;
+		this.papeis = papeis;
+	}
+	
+	public boolean verificaSenha() {
+		if(senha.equals(confirmaSenha)) {
+		return true;
+		}else {
+			return false;
+		}
+	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return papeis;
+	}
+
+	@Override
+	public String getPassword() {
+
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return nome;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -79,13 +157,12 @@ public class Usuario implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idCgz == null) ? 0 : idCgz.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((papeis == null) ? 0 : papeis.hashCode());
 		result = prime * result + ((reservas == null) ? 0 : reservas.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((vertical == null) ? 0 : vertical.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -131,6 +208,11 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (papeis == null) {
+			if (other.papeis != null)
+				return false;
+		} else if (!papeis.equals(other.papeis))
+			return false;
 		if (reservas == null) {
 			if (other.reservas != null)
 				return false;
@@ -149,137 +231,100 @@ public class Usuario implements Serializable {
 		return true;
 	}
 
-
-
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public Long getIdCgz() {
 		return idCgz;
 	}
-
-
 
 	public void setIdCgz(Long idCgz) {
 		this.idCgz = idCgz;
 	}
 
-
-
 	public String getNome() {
 		return nome;
 	}
-
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
-
 	public String getGrade() {
 		return grade;
 	}
-
-
 
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 
-
-
 	public String getHorizontal() {
 		return horizontal;
 	}
-
-
 
 	public void setHorizontal(String horizontal) {
 		this.horizontal = horizontal;
 	}
 
-
-
 	public String getVertical() {
 		return vertical;
 	}
-
-
 
 	public void setVertical(String vertical) {
 		this.vertical = vertical;
 	}
 
-
-
 	public String getSenha() {
 		return senha;
 	}
-
-
 
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
+	public Set<Papel> getPapeis() {
+		return papeis;
+	}
 
+	public void setPapeis(Set<Papel> papeis) {
+		this.papeis = papeis;
+	}
 
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
 
-
-
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
-
-
 
 	public List<Reserva> getReservas() {
 		return reservas;
 	}
 
-
-
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
-				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", emprestimos="
-				+ emprestimos + ", reservas=" + reservas + "]";
+				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
+				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
 	}
-	
-	
-
-
+ 
 	
 }
