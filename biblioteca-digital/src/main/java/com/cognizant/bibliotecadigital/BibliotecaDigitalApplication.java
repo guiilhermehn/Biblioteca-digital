@@ -22,6 +22,8 @@ public class BibliotecaDigitalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
+	
+	//Bloco somente deve ser executado para popular o banco numa primeira execução
 	/*
 	@Bean
 	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo) {
