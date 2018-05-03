@@ -61,7 +61,7 @@ public class EmprestimoController {
 		prazo.add(Calendar.DAY_OF_MONTH, 7);
 		List<UnidadeLivro> unidades = new ArrayList<>();
 		unidades.add(unidadeLivro);
-		Emprestimo emprestimo = new Emprestimo(0L, now.getTime(), null, prazo.getTime(),unidades) ;
+		Emprestimo emprestimo = new Emprestimo(0L, now.getTime(), null, prazo.getTime(), unidades) ;
 		
 		emprestimoService.save(emprestimo);
 		
