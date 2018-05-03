@@ -1,5 +1,8 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cognizant.bibliotecadigital.model.Autor;
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.service.LivroService;
 
@@ -38,12 +42,17 @@ public class LivroController {
 	@GetMapping("/livros/new")
     public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-		mv.addObject("livro", new Livro());
+		Livro l1= new Livro();
+		//l1.getAutores().add(new Autor());
+//		List<Autor> autores = new ArrayList<Autor>();
+//		autores.add(new Autor());
+//		mv.addObject("autores",autores);
+		mv.addObject("livro",l1 );
         return mv;
     }
 	
 	@PostMapping("/livros/create")
-	public ModelAndView create(@ModelAttribute Livro livro) {
+	public ModelAndView save(@ModelAttribute("livro") Livro livro, @ModelAttribute("autores") List<Autor> autores ) {
 		Livro l1;
 		l1 = livroService.save(livro);
 		
@@ -52,12 +61,12 @@ public class LivroController {
 	}
 	
 	@PostMapping("/livros/update")
-	public ModelAndView update(@ModelAttribute Livro livro) {
+	public ModelAndView update(@ModelAttribute Livro livro){
 		Livro l1;
-		l1 = livroService.findByIsbn13(livro.getIsbn13());
+		l1 = livroService.save(livro);
+
 		
-		
-		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
+		ModelAndView mv = new ModelAndView("redirect:/livros");
 		
 		return mv;
 		

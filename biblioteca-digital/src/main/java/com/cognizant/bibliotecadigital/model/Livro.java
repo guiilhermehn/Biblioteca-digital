@@ -76,7 +76,7 @@ public class Livro implements Serializable {
 	}
 
 
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "autor_id") })
 	Set<Autor> autores;
