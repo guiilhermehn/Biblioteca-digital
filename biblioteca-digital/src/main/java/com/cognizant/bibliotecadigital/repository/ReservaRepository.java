@@ -3,15 +3,9 @@ package com.cognizant.bibliotecadigital.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cognizant.bibliotecadigital.model.Emprestimo;
+import com.cognizant.bibliotecadigital.model.Reserva;
 
 @Repository
-public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
-<<<<<<< HEAD
-	
-	
-	
-=======
+public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 		
->>>>>>> master
 }
