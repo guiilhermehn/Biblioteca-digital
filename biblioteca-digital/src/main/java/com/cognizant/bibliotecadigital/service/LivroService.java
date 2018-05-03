@@ -22,6 +22,10 @@ public class LivroService {
 		return livroRepository.findById(id);
 	}
 	
+	public Livro findByIsbn13(String isbn13) {
+		return livroRepository.findByIsbn13(isbn13);
+	}
+	
 	public Livro save(Livro livro) {
 		return livroRepository.save(livro);
 	}

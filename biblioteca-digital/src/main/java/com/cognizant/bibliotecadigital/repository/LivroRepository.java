@@ -16,4 +16,5 @@ public interface LivroRepository extends CrudRepository<Livro, Long>{
 	
 	Livro deleteById(long id);
 	
+	Livro findByIsbn13(String isbn13);
 }

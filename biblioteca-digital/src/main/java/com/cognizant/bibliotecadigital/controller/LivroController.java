@@ -51,6 +51,18 @@ public class LivroController {
 		return mv;
 	}
 	
+	@PostMapping("/livros/update")
+	public ModelAndView update(@ModelAttribute Livro livro) {
+		Livro l1;
+		l1 = livroService.findByIsbn13(livro.getIsbn13());
+		
+		
+		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
+		
+		return mv;
+		
+	}
+	
 	@PostMapping("/livros/deletarLivro")
     public ModelAndView deletar(@RequestParam("id") long id) {
         livroService.deleteById(id);
