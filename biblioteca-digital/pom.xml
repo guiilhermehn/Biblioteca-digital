@@ -9,7 +9,6 @@
 	<packaging>jar</packaging>
 
 	<name>biblioteca-digital</name>
-	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -81,4 +80,13 @@
 	</build>
 
 
+	<url>https://github.com/guiilhermehn/Biblioteca-digital</url>
+	<description>Web application about a Library System.
+Tools used: Eclipse, MySql, Hibernate, Spring, Node.js, Apache Tomcat, Thymeleaf and Bootstrap</description>
+	<organization>
+		<name>https://cognizant.com</name>
+	</organization>
+	<issueManagement>
+		<url>https://github.com/guiilhermehn/Biblioteca-digital/issues</url>
+	</issueManagement>
 </project>

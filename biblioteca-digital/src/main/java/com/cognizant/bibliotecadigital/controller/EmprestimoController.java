@@ -31,14 +31,14 @@ public class EmprestimoController {
 		
 		return mv;
 	}
-	
+	/* TODO Adicionar melhoria realizada pela Raquel/Francisco
 	@PostMapping("/emprestimos/deletarEmprestimo")
 	public ModelAndView save(@RequestParam("id") Long id) {
 		emprestimoService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/emprestimos");		
 		
 		return mv;
-	}
+	}*/
 }
 
 
