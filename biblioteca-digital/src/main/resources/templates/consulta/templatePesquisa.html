@@ -25,7 +25,7 @@
                         <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
+                        <a class="nav-link" data-th-href="@{/logout}"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
                     </li>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="form-control">
-                            <form>
+                            <form data-th-action="@{/consulta}" method="post">
                                 <div class="form-group">
                                     <label for="filtre">Filtro:</label>
                                     <select class="form-control" id="filtre">
