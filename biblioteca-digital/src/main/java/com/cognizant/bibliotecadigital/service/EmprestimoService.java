@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
+import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 
 @Service
@@ -15,9 +16,10 @@ public class EmprestimoService {
 	public Iterable<Emprestimo> findAll() {
 		return emprestimoRepository.findAll();
 	}
+	
 
-	public Object findById(Long id) {
-		return emprestimoRepository.findById(id);
+	public Emprestimo save(Emprestimo emprestimo) {
+		return emprestimoRepository.save(emprestimo);
 	}
 
 	public Long deleteById(Long id) {
