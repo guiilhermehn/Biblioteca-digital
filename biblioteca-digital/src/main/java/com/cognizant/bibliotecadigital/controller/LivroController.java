@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,8 +43,8 @@ public class LivroController {
 	
 	@PostMapping("/livros/create")
 	public ModelAndView create(@ModelAttribute Livro livro) {
-		Livro l1;
-		l1 = livroService.save(livro);
+		
+		 livroService.save(livro);
 		
 		ModelAndView mv = new ModelAndView("redirect:/livros");
 		return mv;
@@ -53,8 +52,8 @@ public class LivroController {
 	
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
-		Livro l1;
-		l1 = livroService.findByIsbn13(livro.getIsbn13());
+		
+		livroService.findByIsbn13(livro.getIsbn13());
 		
 		
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");

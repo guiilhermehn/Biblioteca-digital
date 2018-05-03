@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -57,6 +58,10 @@ public class Usuario implements Serializable, UserDetails {
 	@NotNull
 	private String senha;
 	
+	@Transient
+	@NotNull
+	private String confirmaSenha;
+	
 	@ManyToMany(mappedBy="usuarios")
 	private Set<Papel> papeis;
 
@@ -81,6 +86,14 @@ public class Usuario implements Serializable, UserDetails {
 		this.grade = grade;
 		this.senha = senha;
 		this.papeis = papeis;
+	}
+	
+	public boolean verificaSenha() {
+		if(senha.equals(confirmaSenha)) {
+		return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
