@@ -47,21 +47,7 @@ public class LivroController {
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-<<<<<<< HEAD
-		Livro l1= new Livro();
-		//l1.getAutores().add(new Autor());
-//		List<Autor> autores = new ArrayList<Autor>();
-//		autores.add(new Autor());
-//		mv.addObject("autores",autores);
-		mv.addObject("livro",l1 );
-        return mv;
-    }
-	
-	@PostMapping("/livros/create")
-	public ModelAndView save(@ModelAttribute("livro") Livro livro, @ModelAttribute("autores") List<Autor> autores ) {
-		Livro l1;
-		l1 = livroService.save(livro);
-=======
+
 		mv.addObject("livro", new Livro());
 		return mv;
 	}
@@ -74,7 +60,6 @@ public class LivroController {
 			return new ModelAndView("/livro/livroCadastro");
 		}
 
->>>>>>> master
 		
 		livroService.save(livro);
 
@@ -85,22 +70,12 @@ public class LivroController {
 	}
 
 	@PostMapping("/livros/update")
-<<<<<<< HEAD
-	public ModelAndView update(@ModelAttribute Livro livro){
-		Livro l1;
-		l1 = livroService.save(livro);
-
-		
-		ModelAndView mv = new ModelAndView("redirect:/livros");
-		
-=======
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
 		livroService.findByIsbn13(livro.getIsbn13());
 
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
 
->>>>>>> master
 		return mv;
 
 	}
