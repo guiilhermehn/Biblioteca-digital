@@ -46,7 +46,7 @@ public class LivroController {
 	}
 
 	@PostMapping("/livros/create")
-	public ModelAndView create(@Valid @ModelAttribute Livro livro, BindingResult bindingRes,
+	public ModelAndView save(@Valid @ModelAttribute Livro livro, BindingResult bindingRes,
 			RedirectAttributes redAttributes) {
 
 		if (bindingRes.hasErrors()) {
