@@ -1,7 +1,10 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.service.LivroService;
@@ -43,9 +47,16 @@ public class LivroController {
     }
 
 	@PostMapping("/livros/create")
-	public ModelAndView create(@ModelAttribute Livro livro) {
+	public ModelAndView create(@Valid @ModelAttribute Livro livro, BindingResult bindingRes, RedirectAttributes redAttributes) {
+		
+		if (bindingRes.hasErrors()){
+			return new ModelAndView("/livro/livroCadastro");
+		}
+		
 		Livro l1;
 		l1 = livroService.save(livro);
+		
+		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
 		return mv;
