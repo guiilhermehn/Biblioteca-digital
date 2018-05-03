@@ -25,42 +25,37 @@ public class LivroController {
 	@GetMapping("/livros")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
-		mv.addObject("livros",livroService.findAll());
+		mv.addObject("livros", livroService.findAll());
 
 		return mv;
 	}
 
 	@GetMapping("/livros/edit/{id}")
-	public ModelAndView edit(@PathVariable("id")  long id){
+	public ModelAndView edit(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("/livro/livroEditar");
-		mv.addObject("livro",livroService.findById(id).get());
+		mv.addObject("livro", livroService.findById(id).get());
 
 		return mv;
 	}
 
 	@GetMapping("/livros/new")
-    public ModelAndView create() {
+	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 		mv.addObject("livro", new Livro());
-        return mv;
-    }
+		return mv;
+	}
 
 	@PostMapping("/livros/create")
-<<<<<<< HEAD
-	public ModelAndView create(@Valid @ModelAttribute Livro livro, BindingResult bindingRes, RedirectAttributes redAttributes) {
-		
-		if (bindingRes.hasErrors()){
+	public ModelAndView create(@Valid @ModelAttribute Livro livro, BindingResult bindingRes,
+			RedirectAttributes redAttributes) {
+
+		if (bindingRes.hasErrors()) {
 			return new ModelAndView("/livro/livroCadastro");
 		}
+
 		
-		Livro l1;
-		l1 = livroService.save(livro);
-=======
-	public ModelAndView create(@ModelAttribute Livro livro) {
-		
-		 livroService.save(livro);
->>>>>>> philipe
-		
+		livroService.save(livro);
+
 		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
@@ -69,17 +64,9 @@ public class LivroController {
 
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
-<<<<<<< HEAD
-		Livro l1;
-		l1 = livroService.findByIsbn13(livro.getIsbn13());
 
-
-=======
-		
 		livroService.findByIsbn13(livro.getIsbn13());
-		
-		
->>>>>>> philipe
+
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
 
 		return mv;
@@ -87,10 +74,10 @@ public class LivroController {
 	}
 
 	@PostMapping("/livros/deletarLivro")
-    public ModelAndView deletar(@RequestParam("id") long id) {
-        livroService.deleteById(id);
-        ModelAndView redirect = new ModelAndView("redirect:/livros");
-        return redirect;
-    }
+	public ModelAndView deletar(@RequestParam("id") long id) {
+		livroService.deleteById(id);
+		ModelAndView redirect = new ModelAndView("redirect:/livros");
+		return redirect;
+	}
 
 }

@@ -7,18 +7,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import com.cognizant.bibliotecadigital.model.Autor;
-=======
 import com.cognizant.bibliotecadigital.model.Papel;
->>>>>>> aa6887729be9552d8dd8fbb96ab71c6255b43848
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.repository.UsuarioRepository;
 import com.cognizant.bibliotecadigital.security.SecurityConfig;
@@ -28,24 +22,12 @@ public class UsuarioService implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-<<<<<<< HEAD
-	
-<<<<<<< HEAD
-	//Iury - Cadastrar usuário
-	public Usuario save(Usuario usuario){
-		return usuarioRepository.save(usuario);
-	}
-=======
->>>>>>> aa6887729be9552d8dd8fbb96ab71c6255b43848
-	
-=======
 
 	public Usuario save(Usuario usuario) {
 		return usuarioRepository.save(usuario);
 
 	}
 
->>>>>>> philipe
 	public Iterable<Usuario> findAll() {
 		return usuarioRepository.findAll();
 	}

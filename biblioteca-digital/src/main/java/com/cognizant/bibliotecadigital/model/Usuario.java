@@ -15,12 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-<<<<<<< HEAD
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-=======
 import javax.persistence.Transient;
->>>>>>> philipe
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
