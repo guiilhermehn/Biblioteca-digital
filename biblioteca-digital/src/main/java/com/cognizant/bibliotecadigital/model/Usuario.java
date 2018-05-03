@@ -12,7 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuario")
@@ -26,15 +29,20 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@Column(name = "id_cgz")
+	@Size(min=6, max= 6)
 	@NotNull
 	private Long idCgz;
 
 	@Column(name = "nome")
+	@Size(min=4,  max=80)
 	@NotNull
+	@NotEmpty
 	private String nome;
 
 	@Column(name = "email")
+	@Email
 	@NotNull
+	@NotEmpty
 	private String email;
 
 	@Column(name = "grade", nullable = false)
@@ -48,7 +56,9 @@ public class Usuario implements Serializable {
 	private String vertical;
 
 	@Column(name = "senha")
+	@Size(min=4, max=16)
 	@NotNull
+	@NotEmpty
 	private String senha;
 
 	// Joins com emprestimo e reserva

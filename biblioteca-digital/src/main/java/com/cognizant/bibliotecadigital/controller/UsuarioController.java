@@ -1,10 +1,16 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
@@ -32,12 +38,17 @@ public class UsuarioController {
 	}
 	
 	/*@PostMapping(path = "/usuarios/salvar")
-	public ModelAndView create(@ModelAttribute Usuario usuario) {
+	public ModelAndView create(@Valid @ModelAttribute Usuario usuario, BindingResult bindingRes, RedirectAttributes redAttributes) {
+		if (bindingRes.hasErrors()){
+			
+			return new ModelAndView("/pessoa/pessoa_form");
+		}
 		usuarioService.save(usuario);
+		
+		redAttributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+		
 		return new ModelAndView("redirect:/usuarios");		
 	}*/
-	
-	
 	
 	
 	@GetMapping("/usuarios/{id}")
