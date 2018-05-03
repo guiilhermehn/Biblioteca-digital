@@ -29,8 +29,8 @@ public class Autor implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
-	@Transient
-	private List<String> nomeAutores;
+	//@Transient
+	//private List<String> nomeAutores;
 
 	/*@ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
 	Set<Livro> livros = new HashSet<Livro>();
