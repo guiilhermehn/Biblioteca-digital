@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Papel;
 import com.cognizant.bibliotecadigital.model.Usuario;
@@ -57,16 +56,15 @@ public class UsuarioController {
 	
 
 	@PostMapping("/register/create")
-	public ModelAndView create(@Valid @ModelAttribute Usuario usuario, BindingResult bindingRes,
-			RedirectAttributes redAttributes) {
+	public ModelAndView create( @ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 
 		if (bindingRes.hasErrors()) {
-			return register();
+			return register() ;
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_COMUM"))));
-		redAttributes.addFlashAttribute("mensagem", "Usuario Cadastrado com sucesso!!");
+		
 		usuarioService.save(usuario);
 
 		ModelAndView mv = new ModelAndView("redirect:/login");
