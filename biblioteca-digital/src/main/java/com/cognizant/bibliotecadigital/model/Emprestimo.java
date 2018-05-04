@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -76,9 +75,7 @@ public class Emprestimo implements Serializable {
 		this.unidadeLivros = unidadeLivros;
 	}
 
-<<<<<<< HEAD
 
-=======
 	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
 			UnidadeLivro unidadeLivro, Usuario usuario) {
 		this.id = id;
@@ -88,7 +85,7 @@ public class Emprestimo implements Serializable {
 		this.unidadeLivro = unidadeLivro;
 		this.usuario = usuario;
 	}
->>>>>>> master
+
 
 	@Override
 	public int hashCode() {

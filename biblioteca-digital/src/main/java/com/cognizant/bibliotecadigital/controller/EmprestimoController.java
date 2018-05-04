@@ -14,36 +14,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
-<<<<<<< HEAD
+import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.repository.UnidadadeLivroRepository;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
-=======
-import com.cognizant.bibliotecadigital.model.Usuario;
-import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
->>>>>>> master
+
 
 @Controller
 public class EmprestimoController {
 
 	@Autowired
 	private EmprestimoService emprestimoService;
-<<<<<<< HEAD
+
 	
 	@Autowired
 	private LivroService livroService;
-=======
+
 	@Autowired
 	private UnidadeLivroService unidadeService;
->>>>>>> master
+
 
 	
 	@Autowired
@@ -52,7 +48,7 @@ public class EmprestimoController {
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/emprestimos/emprestimo");
-<<<<<<< HEAD
+
 		mv.addObject("emprestimos", emprestimoService.findAll());
 
 		return mv;
@@ -83,7 +79,7 @@ public class EmprestimoController {
 		emprestimoService.save(emprestimo);
 		
 		ModelAndView mv = new ModelAndView("redirect:/emprestimos/emprestimo");		
-=======
+
 		
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -137,9 +133,7 @@ public class EmprestimoController {
  		return new ModelAndView("redirect:/emprestimos");
  	}
 	
-<<<<<<< HEAD
 
-=======
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, 
 			RedirectAttributes redirectAttributes) {
@@ -154,7 +148,7 @@ public class EmprestimoController {
 		
 		return new ModelAndView("redirect:/emprestimos");
 	}
->>>>>>> master
+
 
 }
 
