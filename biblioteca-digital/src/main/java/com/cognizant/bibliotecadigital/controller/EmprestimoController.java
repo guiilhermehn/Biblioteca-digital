@@ -1,10 +1,8 @@
 package com.cognizant.bibliotecadigital.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -12,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -88,7 +84,7 @@ public class EmprestimoController {
  		return new ModelAndView("redirect:/emprestimos");
  	}
 	
-<<<<<<< HEAD
+
 
 //	@PostMapping("/emprestimos/deletarEmprestimo")
 //	public ModelAndView save(@RequestParam("id") Long id) {
@@ -97,7 +93,7 @@ public class EmprestimoController {
 //		
 //		return mv;
 //	}
-=======
+
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, 
 			RedirectAttributes redirectAttributes) {
@@ -112,7 +108,7 @@ public class EmprestimoController {
 		
 		return new ModelAndView("redirect:/emprestimos");
 	}
->>>>>>> master
+
 
 }
 
