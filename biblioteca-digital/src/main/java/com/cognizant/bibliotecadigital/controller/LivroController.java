@@ -15,20 +15,39 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Livro;
+import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
 public class LivroController {
 
 	@Autowired
 	private LivroService livroService;
+	@Autowired
+	private UnidadeLivroService unidadeLivroService;
 
+	/*
 	@GetMapping("/livros")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
 		mv.addObject("livros", livroService.findAll());
 
 		return mv;
+	}
+	*/
+	
+	@GetMapping("/livros")
+	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
+		ModelAndView mav = new ModelAndView("/livro/livroPesquisa");
+		
+		if (query.equals("")) {
+			mav.addObject("livros", livroService.findAll());
+		} else {
+			mav.addObject("livros", livroService.search(query));
+		}
+		
+		return mav;
 	}
 
 	@GetMapping("/livros/edit/{id}")
@@ -54,9 +73,9 @@ public class LivroController {
 		if (bindingRes.hasErrors()) {
 			return new ModelAndView("/livro/livroCadastro");
 		}
-
 		
-		livroService.save(livro);
+		Livro salvo = livroService.save(livro);
+		unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
 
 		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 

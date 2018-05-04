@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cognizant.bibliotecadigital.service.ReservaService;
 
-@Controller
+// @Controller
 public class ReservaController {
 
 	@Autowired
 	private ReservaService reservaService;
 
-	@GetMapping("/reservas")
+	// @GetMapping("/reservas")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 		mv.addObject("reservas", reservaService.findAll());
@@ -23,7 +23,7 @@ public class ReservaController {
 		return mv;
 	}
 	
-	@PostMapping("/reservas/deletarReserva")
+	// @PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
 		reservaService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/reservas");		
