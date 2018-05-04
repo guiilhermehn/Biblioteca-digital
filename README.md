@@ -5,7 +5,7 @@
 
 
 ## Documentation
-The [Wiki](https://github.com/guiilhermehn/Biblioteca-digital/wiki) contains all the information about the project (in progress). You can contribute to the Wiki directly here on GitHub! :+1:
+The [Wiki](https://github.com/guiilhermehn/Biblioteca-digital/wiki) contains all the information about the project (in progress). You can contribute to the Wiki directly here on GitHub! :+1: See how in [Markdown](https://guides.github.com/features/mastering-markdown/).
 
 
 ![Logo da Cognizant](https://raw.githubusercontent.com/guiilhermehn/Biblioteca-digital/9aa74df204d0ecb8126cf191a9409230caed15eb/biblioteca-digital/src/main/resources/static/assets/img/logo_cognizant.png.png?token=AVPL5KmAk7jBDuF145lbCo_qskNeMHpiks5a9amzwA%3D%3D)
