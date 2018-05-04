@@ -26,8 +26,7 @@ public class BibliotecaDigitalApplication {
 	
 	
 	//Bloco somente deve ser executado para popular o banco numa primeira execução 
-	//INICIO DO BLOCO
-	
+	/*
 	@Bean
 	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo) {
 		return (String[] args) -> {
@@ -52,6 +51,5 @@ public class BibliotecaDigitalApplication {
 			unidadeRepo.save(new UnidadeLivro(0L, null, livRepo.findById(salvo.getId()).get()));
 		};
 	}
-	
-	//FIM DO BLOCO	
+	/**/
 }

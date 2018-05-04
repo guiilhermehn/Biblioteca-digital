@@ -94,39 +94,37 @@
 									<textarea class="form-control" data-th-field="*{sinopse}"></textarea>
 								</div>
 								<div class="table-responsive-md">
-									<div data-spy="scroll" data-target="#navbar-example2"
-									data-offset="0">
-									<table class="table table-striped">
-										<thead>
-											<tr class="bg-success text-white">
-												<th scope="col"></th>
-												<th scope="col">Cod. Unidade</th>
-												<!-- <th scope="col">Livro</th> -->
-												<th scope="col">Avarias</th>
-												<th scope="col">Ações</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr data-th-each="unidade: ${livro.unidadeLivros}">
-												<td></td>
-
-												
-														<td data-th-text="${unidade.id}"></td>
-
-														<!-- <td th:text="${livro.titulo}"></td>  -->
-														<td><span data-th-text="${unidade.avarias}"></span></td>
-														<td><span>
-															<button type="button" data-toggle="modal"
-															data-target="#exampleModal" data-whatever="Teste"
-															class="btn btn-outline-success">
-
-															<i class="far fa-save"></i>
-														</button>
-													</span> <span>
-														<button type="button" class="btn btn-outline-danger">
-															<i class="far fa-trash-alt"></i>
-														</button>
-													</span></td>
+									<div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+										<table class="table table-striped">
+											<thead>
+												<tr class="bg-success text-white">
+													<th scope="col"></th>
+													<th scope="col">Cod. Unidade</th>
+													<!-- <th scope="col">Livro</th> -->
+													<th scope="col">Avarias</th>
+													<th scope="col">Ações</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr data-th-each="unidade: ${livro.unidadeLivros}">
+													<td></td>
+													<td data-th-text="${unidade.id}"></td>
+													<!-- <td th:text="${livro.titulo}"></td>  -->
+													<td><span data-th-text="${unidade.avarias}"></span></td>
+													<td>
+														<span>
+															<button type="button" data-toggle="modal" data-target="#exampleModal" data-th-attr="data-unidade=${unidade.id}, data-avarias=${unidade.avarias}" class="btn btn-outline-success">
+																<i class="far fa-save"></i>
+															</button>
+														</span> 
+														<!-- 
+														<span>
+															<button type="button" class="btn btn-outline-danger">
+																<i class="far fa-trash-alt"></i>
+															</button>
+														</span>
+														-->
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -155,29 +153,27 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+			<h5 class="modal-title" id="exampleModalLabel">Editar Avarias</h5>
 			<button type="button" class="close" data-dismiss="modal"
 			aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
-	<div class="modal-body">
-		<form>
-			<div class="form-group">
-				<label for="recipient-name" class="col-form-label">Recipient:</label>
-				<input type="text" class="form-control" id="recipient-name">
-			</div>
-			<div class="form-group">
-				<label for="message-text" class="col-form-label">Message:</label>
-				<textarea class="form-control" id="message-text"></textarea>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary"
-		data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Send message</button>
-	</div>
+	<form action="/livro/unidade/edit" data-th-action="@{/livro/unidade/edit}" method="POST">
+		<div class="modal-body">
+				<input type="hidden" name="id" id="unidade_id" />
+				<input type="hidden" name="livroId" id="unidade_livro_id" data-th-value="${livro.id}" />
+				<div class="form-group">
+					<label for="avarias" class="col-form-label">Avarias:</label>
+					<textarea class="form-control" name="avarias" id="unidade_avarias"></textarea>
+				</div>
+		
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+			<button type="submit" class="btn btn-primary">Editar</button>
+		</div>
+	</form>
 </div>
 </div>
 </div>
@@ -197,12 +193,11 @@ data-th-src="@{/assets/js/bootstrap.min.js}"></script>
 <script type="text/javascript">
 $('#exampleModal').on('show.bs.modal', function(event) {
 	var button = $(event.relatedTarget) // Button that triggered the modal
-	var recipient = button.data('whatever') // Extract info from data-* attributes
-	// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-	// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	var unidade = button.data('unidade') // Extract info from data-* attributes
+	var avarias = button.data('avarias') // Extract info from data-* attributes
 	var modal = $(this)
-	modal.find('.modal-title').text('New message to ' + recipient)
-	modal.find('.modal-body input').val(recipient)
+	modal.find('#unidade_id').val(unidade)
+	modal.find('#unidade_avarias').val(avarias)
 })
 </script>
 

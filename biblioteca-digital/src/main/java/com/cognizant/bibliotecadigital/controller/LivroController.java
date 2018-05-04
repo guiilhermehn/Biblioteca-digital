@@ -86,7 +86,7 @@ public class LivroController {
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
-		livroService.findByIsbn13(livro.getIsbn13());
+		//livroService.findByIsbn13(livro.getIsbn13());
 
 		livroService.save(livro);
 
@@ -102,5 +102,30 @@ public class LivroController {
 		ModelAndView redirect = new ModelAndView("redirect:/livros");
 		return redirect;
 	}
-
+	
+	@PostMapping("/livro/unidade/edit")
+	/*
+	 * name="id" 
+	 * name="livroId" 
+ 		name="avarias"
+	 * */
+	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId, @RequestParam("avarias") String avarias) {
+		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
+		unidadeLivroService.save(unidade);
+		
+		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
+	}
+	
+	@PostMapping("/livros/unidade/deletar")
+	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId, 
+			@RequestParam("livroId") long livroId ) {
+		livroService.deleteById(unidadeId);
+		return new ModelAndView("redirect:/livros/edit/" + livroId);
+	}
+	
+	@PostMapping("/livros/unidade/create")
+	public ModelAndView adicionarUnidade(@ModelAttribute UnidadeLivro unidade) {
+		unidadeLivroService.save(unidade);
+		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
+	}
 }
