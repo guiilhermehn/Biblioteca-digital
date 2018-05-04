@@ -10,6 +10,7 @@ public class BibliotecaDigitalApplication {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
 	
+	
 	//Bloco somente deve ser executado para popular o banco numa primeira execução 
 	/*
 	@Bean
