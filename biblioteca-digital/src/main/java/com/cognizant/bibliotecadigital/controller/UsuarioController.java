@@ -29,8 +29,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	
-
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");

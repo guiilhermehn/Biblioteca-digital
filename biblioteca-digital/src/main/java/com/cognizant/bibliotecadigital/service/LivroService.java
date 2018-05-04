@@ -34,4 +34,9 @@ public class LivroService {
 		return livroRepository.deleteById(id);
 	}
 	
+	
+	public Iterable<Livro> search(String query) {
+		return livroRepository.findByTituloContainingOrSinopseContainingOrAutorContaining(query, query, query);
+	}
+	
 }

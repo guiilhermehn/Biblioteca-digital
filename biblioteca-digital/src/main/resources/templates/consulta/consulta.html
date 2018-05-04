@@ -33,15 +33,18 @@
 
         <div class="container">
             <div class="row d-flex justify-content-center">
-                <div class="col-md-12 pt-md-5">
-                    <div class="input-group">
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                <div class="col-md-12 pt-1 pt-md-5">
+                    <form action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="q"  class="form-control" aria-label="Text input with dropdown button">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+            <!-- Não implemntado no MVP
             <div class="row d-flex justify-content-end">
                 <a class="nav-link" href="#" id="busca"> Busca Avançada</a>
             </div>
@@ -74,21 +77,23 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4" >
+                <div class="col-sm-6 col-md-4 col-lg-3 mt-4"  data-th-each="livro: ${livros}">
                     <div class="card">
-                        <a href="templateDetalhes.html">
+                        <a href="#" data-th-href="@{/consulta/{id}(id=${livro.id})}">
                             <img class="card-img-top" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
                             <div class="card-body">
                                 <h5 class="card-title" data-th-text="${livro.titulo}">Card title</h5>
-                                <p class="card-text" data-th-text="${livro.autores}">This card has supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text" data-th-text="${livro.autor}">This card has supporting text below as a natural lead-in to additional content.</p>
                             </div>
                         </a>
                     </div>
                 </div>
+                <!-- Just a template, replaced by data-th-each - - >
                 <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
                     <div class="card">
                         <a href="templateDetalhes.html">
@@ -170,7 +175,7 @@
                     </div>
                 </div>
             </div>
-
+            -->
         </div>
 
         <footer class="text-muted">

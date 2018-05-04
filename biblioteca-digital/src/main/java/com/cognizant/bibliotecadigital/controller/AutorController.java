@@ -13,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cognizant.bibliotecadigital.model.Autor;
 import com.cognizant.bibliotecadigital.service.AutorService;
 
-@Controller
+// @Controller
 public class AutorController {
 	
 	@Autowired
 	private AutorService autorService;
 	
-	@GetMapping("/autores")
+	// @GetMapping("/autores")
 	private ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/autor/autores");
 		mv.addObject("autores",autorService.findAll());
@@ -27,14 +27,14 @@ public class AutorController {
 		return mv;
 	}
 	
-	@GetMapping("/autores/novoAutor")
+	// @GetMapping("/autores/novoAutor")
 	public ModelAndView mostrarFormAutor() {
 		ModelAndView mv = new ModelAndView("/autor/autorCadastro");
 		mv.addObject("autor", new Autor());
 		return mv;
 	}
 	
-	@PostMapping("/autores/create")
+	// @PostMapping("/autores/create")
 	public ModelAndView create(@Valid @ModelAttribute Autor autor) {
 		
 		autorService.save(autor);
@@ -42,7 +42,7 @@ public class AutorController {
 		return mv;
 	}
 	
-	@PostMapping("/autores/deletarAutor")
+	// @PostMapping("/autores/deletarAutor")
 	public ModelAndView deletar(@RequestParam("id") long id) {
 		autorService.deleteById(id);
 		ModelAndView redirect = new ModelAndView("redirect:/autores");

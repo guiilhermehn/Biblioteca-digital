@@ -13,12 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "emprestimo")
@@ -51,7 +53,7 @@ public class Emprestimo implements Serializable {
 
 	@ManyToOne(targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidade_livro_id")
-	private List<UnidadeLivro> unidadeLivros;
+	private UnidadeLivro unidadeLivro;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
@@ -74,7 +76,19 @@ public class Emprestimo implements Serializable {
 		this.unidadeLivros = unidadeLivros;
 	}
 
+<<<<<<< HEAD
 
+=======
+	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
+			UnidadeLivro unidadeLivro, Usuario usuario) {
+		this.id = id;
+		this.dataRetirada = dataRetirada;
+		this.dataDevolucao = dataDevolucao;
+		this.prazoDevolucao = prazoDevolucao;
+		this.unidadeLivro = unidadeLivro;
+		this.usuario = usuario;
+	}
+>>>>>>> master
 
 	@Override
 	public int hashCode() {
@@ -127,11 +141,11 @@ public class Emprestimo implements Serializable {
 		this.id = id;
 	}
 
-	public Date getdataRetirada() {
+	public Date getDataRetirada() {
 		return dataRetirada;
 	}
 
-	public void setdataRetirada(Date dataRetirada) {
+	public void setDataRetirada(Date dataRetirada) {
 		this.dataRetirada = dataRetirada;
 	}
 
@@ -149,6 +163,24 @@ public class Emprestimo implements Serializable {
 
 	public void setPrazoDevolucao(Date prazoDevolucao) {
 		this.prazoDevolucao = prazoDevolucao;
+	}
+	
+	
+
+	public UnidadeLivro getUnidadeLivro() {
+		return unidadeLivro;
+	}
+
+	public void setUnidadeLivro(UnidadeLivro unidadeLivro) {
+		this.unidadeLivro = unidadeLivro;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
