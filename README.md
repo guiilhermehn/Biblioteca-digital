@@ -13,7 +13,7 @@
   - [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/);
   - and [Markdown](https://guides.github.com/features/mastering-markdown/).
   
-  \* *Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*)
+  \* *Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*.
 
 
 ## Documentation
