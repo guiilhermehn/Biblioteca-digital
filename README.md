@@ -1,7 +1,19 @@
 # Biblioteca Digital
 
 - Web application about a Library System.
-- **Tools used**: [Eclipse EE 4.4.0/4.7.3a](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a), [MySQL 5.7.7](https://www.mysql.com/products/community/) (*Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*), Maven, Hibernate, Spring, ~~Node.js, Apache Tomcat~~, [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html), [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/) and [Markdown](https://guides.github.com/features/mastering-markdown/).
+- **Tools used**:
+  - [Eclipse EE 4.4.0/4.7.3a](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)\*;
+  - [MySQL 5.7.7](https://www.mysql.com/products/community/)\*;
+  - Maven;
+  - Hibernate;
+  - Spring;
+  - ~~Node.js~~;
+  - ~~Apache Tomcat~~;
+  - [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html);
+  - [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/);
+  - and [Markdown](https://guides.github.com/features/mastering-markdown/).
+  
+  \* *Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*)
 
 
 ## Documentation
