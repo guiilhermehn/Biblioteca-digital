@@ -4,9 +4,9 @@
 - **Tools used**:
   - [Eclipse EE 4.4.0/4.7.3a](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)\*;
   - [MySQL 5.7.7](https://www.mysql.com/products/community/)\*;
-  - Maven;
-  - Hibernate;
-  - Spring;
+  - [Maven](https://maven.apache.org/);
+  - [Hibernate](http://hibernate.org/);
+  - [Spring](https://spring.io/);
   - ~~Node.js~~;
   - ~~Apache Tomcat~~;
   - [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html);
