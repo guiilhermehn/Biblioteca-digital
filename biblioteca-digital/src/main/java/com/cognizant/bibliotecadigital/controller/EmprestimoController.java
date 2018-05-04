@@ -31,7 +31,7 @@ public class EmprestimoController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
+
 //	@PostMapping("/emprestimos/deletarEmprestimo")
 //	public ModelAndView save(@RequestParam("id") Long id) {
 //		emprestimoService.deleteById(id);
@@ -39,9 +39,7 @@ public class EmprestimoController {
 //		
 //		return mv;
 //	}
-=======
 
->>>>>>> alexandrenunes
 }
 
 
