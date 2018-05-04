@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +36,7 @@ public class Emprestimo implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "data_retirada")
-	//@NotNull
+	@NotNull
 	private Date dataRetirada;
 
 	@Temporal(TemporalType.DATE)
@@ -47,7 +48,7 @@ public class Emprestimo implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "prazo_devolucao")
-	//@NotNull
+	@NotNull
 	private Date prazoDevolucao;
 
 	@ManyToOne(targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -60,21 +61,8 @@ public class Emprestimo implements Serializable {
 
 	// construtor
 	public Emprestimo() {
-		
-	}
-	
-	
 
-	public Emprestimo(Long id, Date dataRetirada, Date dataDevolucao, Date prazoDevolucao,
-			List<UnidadeLivro> unidadeLivros) {
-		super();
-		this.id = id;
-		this.dataRetirada = dataRetirada;
-		this.dataDevolucao = dataDevolucao;
-		this.prazoDevolucao = prazoDevolucao;
-		this.unidadeLivros = unidadeLivros;
 	}
-
 
 	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
 			UnidadeLivro unidadeLivro, Usuario usuario) {
@@ -85,7 +73,6 @@ public class Emprestimo implements Serializable {
 		this.unidadeLivro = unidadeLivro;
 		this.usuario = usuario;
 	}
-
 
 	@Override
 	public int hashCode() {
