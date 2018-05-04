@@ -40,9 +40,6 @@
             <h1 class="h3">Emprestimo</h1>
 
             <div class="accordion border shadow-sm rounded bg-primary " id="accordion">
-
-
-
                 <div  data-th-each="emprestimo, stat : ${emprestimos}">
                     <a data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                         <div class="row py-2 mx-0 border-bottom">
@@ -56,7 +53,6 @@
                         </div>
                     </a>
                     <div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
-
                         <div class="row pt-2 px-3">
                             <div class="d-none d-lg-block col-lg-4 col-xl-3">
                                 <img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
@@ -64,20 +60,6 @@
                             <dl class="col">
                                 <dt>Data de Retirada:</dt>
                                 <dd data-th-text="${emprestimo.dataRetirada}">DD/MMM/YYYY</dd>
-
-
-                                <dt>Data de Recebimento:</dt>
-                                <dd data-th-text="${}">DD/MMM/YYYY</dd>
-								<input type="hidden" th:field=*{id}>
-                                <dt>Data de Devolução:</dt>
-                                <dd data-th-text="${}">DD/MMM/YYYY</dd>
-								<input type="hidden" th:field=*{id}>
-                                <dt>Foto:</dt>
-                                <dd data-th-text="${}">filename.jpg</dd>
-                            </dl>
-                        </div>
-	                </div>
-				</div>
 
                                 <dt>Prazo de Devolução:</dt>
                                 <dd data-th-text="${emprestimo.prazoDevolucao}">DD/MMM/YYYY</dd>
@@ -101,7 +83,6 @@
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </main>
