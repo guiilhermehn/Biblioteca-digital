@@ -2,6 +2,19 @@ package com.cognizant.bibliotecadigital;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+<<<<<<< HEAD
+=======
+import org.springframework.context.annotation.Bean;
+
+import com.cognizant.bibliotecadigital.model.Autor;
+import com.cognizant.bibliotecadigital.model.CategoriaLivro;
+import com.cognizant.bibliotecadigital.model.Livro;
+import com.cognizant.bibliotecadigital.model.UnidadeLivro;
+import com.cognizant.bibliotecadigital.repository.AutorRepository;
+import com.cognizant.bibliotecadigital.repository.CategoriaLivroRepository;
+import com.cognizant.bibliotecadigital.repository.LivroRepository;
+import com.cognizant.bibliotecadigital.repository.UnidadeLivroRepository;
+>>>>>>> master
 
 @SpringBootApplication
 public class BibliotecaDigitalApplication {
@@ -13,7 +26,7 @@ public class BibliotecaDigitalApplication {
 	//Bloco somente deve ser executado para popular o banco numa primeira execução 
 	/*
 	@Bean
-	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo) {
+	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo) {
 		return (String[] args) -> {
 			
 			catRepo.save(new CategoriaLivro(0L, "categoria1"));
@@ -30,9 +43,10 @@ public class BibliotecaDigitalApplication {
 			
 			livro.getCategoriaLivros().add(catRepo.findById(1L).get());
 			livro.getCategoriaLivros().add(catRepo.findById(2L).get());
-			livro.getUnidadeLivros().add(new UnidadeLivro());
+			// livro.getUnidadeLivros().add(new UnidadeLivro());
 			
-			livRepo.save(livro);
+			Livro salvo = livRepo.save(livro);
+			unidadeRepo.save(new UnidadeLivro(0L, null, livRepo.findById(salvo.getId()).get()));
 		};
 	}
 	/**/
