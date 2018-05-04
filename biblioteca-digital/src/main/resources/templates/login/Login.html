@@ -14,8 +14,8 @@
         <link rel="icon" href="./favicon.ico">-->
     </head>
     <body class="text-center">
-    	
-    
+
+
         <form class="form-signin" data-th-action="@{/login}" method="post">
             <img class="mb-4" data-th-src="@{/assets/svg/book.svg}" src="../../static/assets/svg/book.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
@@ -25,9 +25,9 @@
 
             <label for="inputPassword" class="sr-only">Senha</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" 
-            oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')" name="senha">
+                   oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')" name="senha">
 
-          
+
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 

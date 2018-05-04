@@ -1,6 +1,7 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,18 +60,26 @@ public class Livro implements Serializable {
 	@Column(name="autor")
 	private String autor;
 
-	public String getAutor() {
-		return autor;
-	}
 
 
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "categoriaLivro_id") })
+	Set<CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 
+	@Transient
+	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Reserva> reservas;
 
+	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<UnidadeLivro> unidadeLivros;
+
+	
 	// Construtor
 	public Livro( ) {
+		this.categoriaLivros = new HashSet<>();
+		this.reservas = new ArrayList<>();
+		this.unidadeLivros = new ArrayList<>();
 	}
 
 	
@@ -92,21 +101,6 @@ public class Livro implements Serializable {
 		this.reservas = reservas;
 		this.unidadeLivros = unidadeLivros;
 	}
-
-
-
-
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "categoriaLivro_id") })
-	Set<CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
-
-	@Transient
-	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Reserva> reservas;
-
-	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<UnidadeLivro> unidadeLivros;
 
 	@Override
 	public int hashCode() {
@@ -265,6 +259,15 @@ public class Livro implements Serializable {
 
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
+	}
+	
+	public String getAutor() {
+		return autor;
+	}
+
+
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 	@Override

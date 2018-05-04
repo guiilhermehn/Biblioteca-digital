@@ -1,122 +1,93 @@
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
-	<title>Digital Library Solution Development - Consult</title>
-	<link rel="stylesheet" type="text/css"
-	href="../../static/assets/css/bootstrap.min.css"
-	data-th-href="@{/assets/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css"
-	href="../../static/assets/css/fontawesome-all.min.css"
-	data-th-href="@{/assets/css/fontawesome-all.min.css}">
-	<link rel="stylesheet" type="text/css"
-	href="../../static/assets/css/custom.css"
-	data-th-href="@{/assets/css/custom.css}">
-</head>
-<body>
-	<header
-	class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
-	<a class="navbar-brand text-white" href="#">Digital Library
-		Solution</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-		aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarNavDropdown">
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active"><a class="nav-link " href="#">
-				<i class="fas fa-book fa-lg"></i> Empréstimo
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <i
-				class="far fa-calendar-check fa-lg"></i> Reservas
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <i
-				class="fas fa-user-circle fa-lg"></i> Perfil
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <i
-				class="fas fa-sign-out-alt fa-lg"></i> Sair
-			</a></li>
-		</ul>
-	</div>
-</header>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>Digital Library Solution Development - Consult</title>
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
+    </head>
+    <body>
+        <header class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
+            <a class="navbar-brand text-white" href="#">Digital Library
+                Solution</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link " href="#"> <i class="fas fa-book fa-lg"></i> Empréstimo </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a></li>
+                </ul>
+            </div>
+        </header>
 
-<div class="container centerSearch">
-	<div class="row d-flex justify-content-center">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header">
-					<h4>Livros</h4>
-					<div class="d-flex justify-content-end">
-						<a data-th-href="@{/livros/new}" class="btn btn-outline-info">Cadastrar
-							Livro</a>
-						</div>
-						<div class="col-md-12">
-							<div class="input-group pt-md-5">
-								<input type="text" class="form-control"
-								aria-label="Text input with dropdown button">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button">
-										<i class="fas fa-search"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive-md">
-							<div data-spy="scroll" data-target="#navbar-example2"
-							data-offset="0">
-							<table class="table table-striped">
-								<thead>
-									<tr class="bg-success text-white">
-										<th scope="col">Livro</th>
-										<th scope="col">Autor</th>
-										<th scope="col">Publicação</th>
-										<th scope="col">Ações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr data-th-each="livro : ${livros}">
-										<td data-th-text="${livro.titulo}">Culinaria</td>
-										<td>
-										<span data-th-text="${livro.autor}"></span>
-										</td>
-										<td data-th-text="${livro.anoPublicacao}">2018</td>
-										<td>
-										
-										<a href="#"
-											data-th-href="@{/livros/edit/{id}(id=${livro.id})}"
-											class="btn btn-outline-warning"> <i class="far fa-edit"></i>
-										</a>
-										<form class="d-inline-block" data-th-action="@{/livros/deletarLivro}" method="POST">
-											<button type="submit" class="btn btn-outline-danger">
-												<i class="far fa-trash-alt"></i>
-											</button>
-											<input type="hidden" data-th-value="${livro.id}" name="id">
-										</form>
-										
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<footer class="text-muted">
-	<div class="container centerSearch"></div>
-</footer>
+        <div class="container centerSearch">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Livros</h4>
+                            <div class="d-flex justify-content-end">
+                                <a data-th-href="@{/livros/new}" class="btn btn-outline-info">Cadastrar Livro</a>
+                            </div>
+                            <div class="col-md-12">
+								<form method="GET" action="">
+                                	<div class="input-group pt-md-5">
+										<input type="text" name="q" class="form-control" aria-label="Text input with dropdown button">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="submit"> <i class="fas fa-search"></i> </button>
+										</div>
+									</div>
+								</form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive-md">
+                                <div data-spy="scroll" data-target="#navbar-example2"
+                                     data-offset="0">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="bg-success text-white">
+                                                <th scope="col">Livro</th>
+                                                <th scope="col">Autor</th>
+                                                <th scope="col">Publicação</th>
+                                                <th scope="col">Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-th-each="livro : ${livros}">
+                                                <td data-th-text="${livro.titulo}">Culinaria</td>
+                                                <td><span data-th-text="${livro.autor}"></span></td>
+                                                <td data-th-text="${livro.anoPublicacao}">2018</td>
+                                                <td>
+                                                    <a href="#" data-th-href="@{/livros/edit/{id}(id=${livro.id})}" class="btn btn-outline-warning"> <i class="far fa-edit"></i></a>
+                                                    <form class="d-inline-block"
+                                                          data-th-action="@{/livros/deletarLivro}" method="POST">
+                                                        <button type="submit" class="btn btn-outline-danger">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
+                                                        <input type="hidden" data-th-value="${livro.id}" name="id">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="text-muted">
+            <div class="container centerSearch"></div>
+        </footer>
 
-<script src="../../static/assets/js/jquery.min.js"
-data-th-src="@{/assets/js/jquery.min.js}"></script>
-<script src="../../static/assets/js/popper.js"
-data-th-src="@{/assets/js/popper.js}"></script>
-<script src="../../static/assets/js/bootstrap.min.js"
-data-th-src="@{/assets/js/bootstrap.min.js}"></script>
-
-</body>
+        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
+        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
+        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+    </body>
 </html>
