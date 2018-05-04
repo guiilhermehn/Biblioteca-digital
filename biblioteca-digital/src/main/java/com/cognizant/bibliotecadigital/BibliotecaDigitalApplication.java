@@ -1,20 +1,7 @@
 package com.cognizant.bibliotecadigital;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.cognizant.bibliotecadigital.model.Autor;
-import com.cognizant.bibliotecadigital.model.CategoriaLivro;
-import com.cognizant.bibliotecadigital.model.Livro;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
-import com.cognizant.bibliotecadigital.repository.AutorRepository;
-import com.cognizant.bibliotecadigital.repository.CategoriaLivroRepository;
-import com.cognizant.bibliotecadigital.repository.LivroRepository;
 
 @SpringBootApplication
 public class BibliotecaDigitalApplication {
