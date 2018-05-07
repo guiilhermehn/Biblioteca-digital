@@ -58,10 +58,10 @@ public class ReservaController {
 
 		GregorianCalendar dataReserva = new GregorianCalendar();
 
-//		if (!unidade.isEmprestado()) {
-//			redirectAttributes.addFlashAttribute("message", "Livro disponivel para emprestimo!");
-//			return new ModelAndView("redirect:/consulta/detalhes");
-//		}
+		if (unidade.isReservado()) {
+			redirectAttributes.addFlashAttribute("message", "Livro já reservado!");
+			return new ModelAndView("redirect:/reservas");
+		}
 
 		GregorianCalendar dataDisponibilidade = reservaService.getDataDisponibilidade(unidadeId);
 
