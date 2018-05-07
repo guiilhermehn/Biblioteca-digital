@@ -54,7 +54,7 @@ public class EmprestimoController {
 	 * @PostMapping("/emprestimos/deletarEmprestimo") public ModelAndView
 	 * deletar(@RequestParam("id") Long id) { emprestimoService.deleteById(id);
 	 * ModelAndView mv = new ModelAndView("redirect:/emprestimos");
-	 * 
+	 *
 	 * return mv; }
 	 */
 
@@ -71,20 +71,7 @@ public class EmprestimoController {
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
 		GregorianCalendar agora = new GregorianCalendar();
-		
-<<<<<<< HEAD
-		return mv;
-	}
-	/* TODO Adicionar melhoria realizada pela Raquel/Francisco
-	@PostMapping("/emprestimos/deletarEmprestimo")
-	public ModelAndView save(@RequestParam("id") Long id) {
-		emprestimoService.deleteById(id);
-		ModelAndView mv = new ModelAndView("redirect:/emprestimos");		
-		
-		return mv;
-	}*/
-}
-=======
+
 		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
@@ -97,7 +84,7 @@ public class EmprestimoController {
 		}
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
-		
+
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
 		emprestimoService.save(emprestimo);
 
@@ -107,7 +94,6 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
->>>>>>> master
 
 	// @PostMapping("/emprestimos/deletarEmprestimo")
 	// public ModelAndView save(@RequestParam("id") Long id) {
@@ -121,14 +107,14 @@ public class EmprestimoController {
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
 		String template = "email-devolucao";
-		
+
 
 		// TODO validar se usuário é o locatário
 
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
-		
+
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
-				
+
 
 		emprestimo.setDataDevolucao(new Date());
 
