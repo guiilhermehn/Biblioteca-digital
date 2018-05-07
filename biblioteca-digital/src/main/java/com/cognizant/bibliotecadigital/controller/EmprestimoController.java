@@ -72,6 +72,7 @@ public class EmprestimoController {
 
 		GregorianCalendar agora = new GregorianCalendar();
 		
+<<<<<<< HEAD
 		return mv;
 	}
 	/* TODO Adicionar melhoria realizada pela Raquel/Francisco
@@ -83,8 +84,30 @@ public class EmprestimoController {
 		return mv;
 	}*/
 }
+=======
+		String template = "email-emprestimo";
 
+		GregorianCalendar prazo = new GregorianCalendar();
+		prazo.add(Calendar.DAY_OF_MONTH, 7);
 
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			usuario = (Usuario) auth.getPrincipal();
+		}
+
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		
+		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
+		emprestimoService.save(emprestimo);
+
+		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(),assunto);
+
+		emailService.sendSimpleMessage(email,template);
+
+		return new ModelAndView("redirect:/emprestimos");
+	}
+>>>>>>> master
 
 	// @PostMapping("/emprestimos/deletarEmprestimo")
 	// public ModelAndView save(@RequestParam("id") Long id) {
