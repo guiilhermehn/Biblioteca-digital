@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.cognizant.bibliotecadigital.model.Livro;
 
 @Repository
-public interface LivroRepository extends CrudRepository<Livro, Long>{
+public interface LivroRepository extends CrudRepository<Livro, Long> {
 
+	Iterable<Livro> findByTituloContainingOrSinopseContainingOrAutorContaining(String titulo, String sinopse, String autor);
+	
 	Optional<Livro> findById(long id);
 	
 	@SuppressWarnings("unchecked")
@@ -18,4 +20,6 @@ public interface LivroRepository extends CrudRepository<Livro, Long>{
 	Livro deleteById(long id);
 	
 	Livro findByIsbn13(String isbn13);
+	
+	
 }

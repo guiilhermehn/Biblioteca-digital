@@ -60,4 +60,6 @@ public class UsuarioService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não Encontrado"));
 	}
 
+
+	
 }

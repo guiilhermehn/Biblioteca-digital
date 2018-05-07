@@ -15,9 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
+
 public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 902783495L;
@@ -36,12 +37,12 @@ public class Usuario implements Serializable, UserDetails {
 	private Long id;
 
 	@Column(name = "id_cgz")
-	@Size(min=6, max= 6)
+	@Size(min = 6, max = 6)
 	@NotNull
-	private Long idCgz;
+	private String idCgz;
 
 	@Column(name = "nome")
-	@Size(min=4,  max=80)
+	@Size(min = 4, max = 80)
 	@NotNull
 	@NotEmpty
 	private String nome;
@@ -63,16 +64,14 @@ public class Usuario implements Serializable, UserDetails {
 	private String vertical;
 
 	@Column(name = "senha")
-	@Size(min=4, max=16)
 	@NotNull
 	@NotEmpty
 	private String senha;
-	
+
 	@Transient
-	@NotNull
 	private String confirmaSenha;
-	
-	@ManyToMany(mappedBy="usuarios")
+
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
 	private Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
@@ -96,14 +95,6 @@ public class Usuario implements Serializable, UserDetails {
 		this.grade = grade;
 		this.senha = senha;
 		this.papeis = papeis;
-	}
-	
-	public boolean verificaSenha() {
-		if(senha.equals(confirmaSenha)) {
-		return true;
-		}else {
-			return false;
-		}
 	}
 
 	@Override
@@ -130,13 +121,13 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		
+
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		
+
 		return true;
 	}
 
@@ -239,11 +230,11 @@ public class Usuario implements Serializable, UserDetails {
 		this.id = id;
 	}
 
-	public Long getIdCgz() {
+	public String getIdCgz() {
 		return idCgz;
 	}
 
-	public void setIdCgz(Long idCgz) {
+	public void setIdCgz(String idCgz) {
 		this.idCgz = idCgz;
 	}
 
@@ -319,12 +310,19 @@ public class Usuario implements Serializable, UserDetails {
 		this.reservas = reservas;
 	}
 
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
 				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
 				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
 	}
- 
-	
+
 }

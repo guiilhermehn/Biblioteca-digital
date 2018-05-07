@@ -1,6 +1,7 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,11 +44,9 @@ public class Livro implements Serializable {
 	@Column(name = "titulo")
 	private String titulo;
 
-	@Size(min=2, max=4)
 	@Column(name = "ano_publicacao")
 	private int anoPublicacao;
 
-	@Size(min=1, max=3)
 	@Column(name = "edicao")
 	private int edicao;
 
@@ -57,37 +56,11 @@ public class Livro implements Serializable {
 
 	@Column(name = "foto")
 	private String foto;
-
-	// Construtor
-	public Livro( ) {
-		 autores = new HashSet<Autor>();
-	}
-
 	
-	// Joins com autor,categoriaLivro,reserva e unidadeLivro
-
-	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
-			int edicao, String sinopse, String foto, Set<Autor> autores,
-			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
-			List<UnidadeLivro> unidadeLivros) {
-		this.id = id;
-		this.isbn13 = isbn13;
-		this.titulo = titulo;
-		this.anoPublicacao = anoPublicacao;
-		this.edicao = edicao;
-		this.sinopse = sinopse;
-		this.foto = foto;
-		this.autores = autores;
-		this.categoriaLivros = categoriaLivros;
-		this.reservas = reservas;
-		this.unidadeLivros = unidadeLivros;
-	}
+	@Column(name="autor")
+	private String autor;
 
 
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "autor_id") })
-	Set<Autor> autores;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -101,12 +74,40 @@ public class Livro implements Serializable {
 	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
+	
+	// Construtor
+	public Livro( ) {
+		this.categoriaLivros = new HashSet<>();
+		this.reservas = new ArrayList<>();
+		this.unidadeLivros = new ArrayList<>();
+	}
+
+	
+	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
+	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
+			int edicao, String sinopse, String foto, String autor,
+			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+			List<UnidadeLivro> unidadeLivros) {
+		this.id = id;
+		this.isbn13 = isbn13;
+		this.titulo = titulo;
+		this.anoPublicacao = anoPublicacao;
+		this.autor = autor;
+		this.edicao = edicao;
+		this.sinopse = sinopse;
+		this.foto = foto;
+		this.categoriaLivros = categoriaLivros;
+		this.reservas = reservas;
+		this.unidadeLivros = unidadeLivros;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + anoPublicacao;
-		result = prime * result + ((autores == null) ? 0 : autores.hashCode());
+		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((categoriaLivros == null) ? 0 : categoriaLivros.hashCode());
 		result = prime * result + edicao;
 		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
@@ -130,10 +131,10 @@ public class Livro implements Serializable {
 		Livro other = (Livro) obj;
 		if (anoPublicacao != other.anoPublicacao)
 			return false;
-		if (autores == null) {
-			if (other.autores != null)
+		if (autor == null) {
+			if (other.autor != null)
 				return false;
-		} else if (!autores.equals(other.autores))
+		} else if (!autor.equals(other.autor))
 			return false;
 		if (categoriaLivros == null) {
 			if (other.categoriaLivros != null)
@@ -236,14 +237,6 @@ public class Livro implements Serializable {
 		this.foto = foto;
 	}
 
-	public Set<Autor> getAutores() {
-		return autores;
-	}
-
-	public void setAutores(Set<Autor> autores) {
-		this.autores = autores;
-	}
-
 	public Set<CategoriaLivro> getCategoriaLivros() {
 		return categoriaLivros;
 	}
@@ -266,6 +259,15 @@ public class Livro implements Serializable {
 
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
+	}
+	
+	public String getAutor() {
+		return autor;
+	}
+
+
+	public void setAutor(String autor) {
+		this.autor = autor;
 	}
 
 	@Override
