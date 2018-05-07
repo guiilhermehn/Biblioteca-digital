@@ -59,6 +59,9 @@ public class Livro implements Serializable {
 	
 	@Column(name="autor")
 	private String autor;
+	
+	@Transient
+	private boolean reservado;
 
 
 
@@ -269,6 +272,17 @@ public class Livro implements Serializable {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
+	
+
+	public boolean isReservado() {
+		return reservado;
+	}
+
+
+	public void setReservado(boolean reservado) {
+		this.reservado = reservado;
+	}
+
 
 	@Override
 	public String toString() {

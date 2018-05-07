@@ -12,16 +12,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.Reserva;
 import com.cognizant.bibliotecadigital.model.Status;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
@@ -32,7 +32,7 @@ public class ReservaController {
 	private ReservaService reservaService;
 
 	@Autowired
-	private UnidadeLivroService unidadeLivroService;
+	private LivroService livroService;
 
 	@GetMapping("/reservas")
 	public ModelAndView findAll() {
@@ -51,19 +51,19 @@ public class ReservaController {
 	}
 	
 	@PostMapping("/reservas/efetuarReserva")
-	public ModelAndView save(@RequestParam("unidadeId") @PathVariable("unidadeId") Long unidadeId,
+	public ModelAndView save(@RequestParam("livroId") Long livroId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
 
-		UnidadeLivro unidade = unidadeLivroService.findById(unidadeId).get();
+		Livro livro = livroService.findById(livroId).get();
 
 		GregorianCalendar dataReserva = new GregorianCalendar();
 
-		if (unidade.isReservado()) {
+		if (reservaService.isReservado(livroId)) {
 			redirectAttributes.addFlashAttribute("message", "Livro já reservado!");
 			return new ModelAndView("redirect:/reservas");
 		}
 
-		GregorianCalendar dataDisponibilidade = reservaService.getDataDisponibilidade(unidadeId);
+		GregorianCalendar dataDisponibilidade = reservaService.getDataDisponibilidade(livroId);
 
 		dataDisponibilidade.add(Calendar.DAY_OF_MONTH, 1);
 
@@ -73,7 +73,7 @@ public class ReservaController {
 			usuario = (Usuario) auth.getPrincipal();
 		}
 
-		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.AGUARDANDO, unidade.getLivro());
+		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.AGUARDANDO, livro);
 		reservaService.save(reserva);
 
 		return new ModelAndView("redirect:/reservas");

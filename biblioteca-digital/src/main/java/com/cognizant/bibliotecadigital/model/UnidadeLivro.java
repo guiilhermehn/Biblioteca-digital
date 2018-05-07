@@ -36,8 +36,7 @@ public class UnidadeLivro implements Serializable {
 	@Transient
 	private boolean emprestado;
 	
-	@Transient
-	private boolean reservado;
+	
 
 	// Construtor
 	public UnidadeLivro() {
@@ -120,15 +119,6 @@ public class UnidadeLivro implements Serializable {
 	}
 	
 	
-
-	public boolean isReservado() {
-		return reservado;
-	}
-
-	public void setReservado(boolean reservado) {
-		this.reservado = reservado;
-	}
-
 	@Override
 	public String toString() {
 		return "UnidadeLivro [id=" + id + ", avarias=" + avarias + "]";

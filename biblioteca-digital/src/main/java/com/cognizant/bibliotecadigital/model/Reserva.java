@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +46,9 @@ public class Reserva implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
+	
+	@Transient
+	private Date dataPrevisao;
 
 	public Long getId() {
 		return id;

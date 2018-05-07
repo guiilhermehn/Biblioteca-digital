@@ -39,15 +39,24 @@ public class ReservaService {
 		return id;
 	}
 
-	public GregorianCalendar getDataDisponibilidade(Long unidadeId) {
-		List<Emprestimo> result = (List<Emprestimo>) emprestimoRepository.findAllByUsuarioId(unidadeId);
-		Date date = result.get(0).getPrazoDevolucao();
-		
+	public GregorianCalendar getDataDisponibilidade(Long livroId) {
+		Date date;
+		List<Emprestimo> result = (List<Emprestimo>) emprestimoRepository.findAllByUsuarioId(livroId);
+		if(result.isEmpty()) {
+			date = new Date();
+		}else {
+		 date = result.get(livroId.intValue()).getPrazoDevolucao();
+		}
 		GregorianCalendar data = new GregorianCalendar();
 		data.setTime(date);
 		
 		
 		return data;
+	}
+
+
+	public boolean isReservado(Long livroId) {
+		return reservaRepository.countReservasByUnidadeLivroId(livroId)> 0L;
 	}
 
 	
