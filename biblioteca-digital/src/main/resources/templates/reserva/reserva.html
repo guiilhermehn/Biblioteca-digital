@@ -86,6 +86,9 @@
 
                                 <dt>Data da reserva:</dt> 
                                 <dd data-th-text="${reserva.dataReserva}">DD/MMM/YYYY</dd>
+                                
+                                <dt>Previsão de Disponibilidade:</dt> 
+                                <dd data-th-text="${reserva.dataPrevisao}">DD/MMM/YYYY</dd>
                             </dl>
                         </div>
                             
@@ -94,10 +97,10 @@
                         		<button class="btn btn-secondary mb-1">Apagar Reserva</button>
                         		<input type="hidden" th:value="${reserva.id}" name="id">
                         	</form>
-                        	 <!-- <form th:action="@{/emprestimos/efetuarEmprestimo}" method="POST">
-                               <input type="hidden" name="unidadeId" data-th-value="${unidade.id}" />
-                              <button class="btn btn-outline-success"  data-th-disabled="${unidade.emprestado}">Emprestimo</button>
-                              </form>-->
+                        	 <form th:action="@{/emprestimos/efetuarEmprestimoAposReserva}" method="POST">
+                               <input type="hidden" name="livroId" data-th-value="${reserva.id}" />
+                              <button class="btn btn-secondary mb-1"  data-th-disabled="${reserva.habilita}">Emprestrar</button>
+                              </form>
                         </div>
 	                </div>
 				</div>

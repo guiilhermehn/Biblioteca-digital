@@ -23,7 +23,6 @@ import com.cognizant.bibliotecadigital.model.Status;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
-import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
 public class ReservaController {
@@ -49,10 +48,10 @@ public class ReservaController {
 
 		return mv;
 	}
-	
+
 	@PostMapping("/reservas/efetuarReserva")
-	public ModelAndView save(@RequestParam("livroId") Long livroId,
-			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
+	public ModelAndView save(@RequestParam("livroId") Long livroId, RedirectAttributes redirectAttributes)
+			throws MessagingException, IOException {
 
 		Livro livro = livroService.findById(livroId).get();
 
@@ -73,7 +72,9 @@ public class ReservaController {
 			usuario = (Usuario) auth.getPrincipal();
 		}
 
-		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.AGUARDANDO, livro);
+		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.AGUARDANDO, livro,
+				dataDisponibilidade.getTime());
+
 		reservaService.save(reserva);
 
 		return new ModelAndView("redirect:/reservas");

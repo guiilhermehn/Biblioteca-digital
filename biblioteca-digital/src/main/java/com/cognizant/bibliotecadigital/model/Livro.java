@@ -283,6 +283,8 @@ public class Livro implements Serializable {
 		this.reservado = reservado;
 	}
 
+	
+
 
 	@Override
 	public String toString() {
