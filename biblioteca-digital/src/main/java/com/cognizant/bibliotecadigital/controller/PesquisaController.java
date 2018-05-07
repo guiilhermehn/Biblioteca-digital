@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.ReservaService;
 
 @Controller
 @RequestMapping
@@ -20,6 +21,9 @@ public class PesquisaController {
 	private LivroService livroService;
 	@Autowired
 	private EmprestimoService emprestadoService;
+	@Autowired
+	private ReservaService reservaService;
+	
 	
 	@GetMapping({"", "/consulta"})
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
@@ -44,7 +48,11 @@ public class PesquisaController {
 			unidade.setEmprestado(emprestadoService.isEmprestado(unidade.getId()));
 		});
 		
+		
+		livro.setReservado(reservaService.isReservado(id));
+		
 		mav.addObject("livro", livro);
+		
 		
 		return mav;
 	}
