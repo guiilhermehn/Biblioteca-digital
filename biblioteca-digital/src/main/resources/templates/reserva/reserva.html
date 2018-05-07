@@ -51,7 +51,7 @@
 	                        </div>
 	                        
                             <div class="col-12 col-md-6 col-lg-4">
-	                            <strong>Autor(es):</strong> <span data-th-text="${reserva.livro.autores}">Autores</span>
+	                            <strong>Autor(es):</strong> <span data-th-text="${reserva.livro.autor}">Autores</span>
 	                        </div>
                             
 	                        <div class="col-12 col-md-6 col-lg-4">
@@ -90,9 +90,10 @@
                         		<button class="btn btn-secondary mb-1">Apagar Reserva</button>
                         		<input type="hidden" th:value="${reserva.id}" name="id">
                         	</form>
-                        	<form>
-                        		<a href="#" class="btn btn-secondary mb-1">Efetuar empréstimo</a>
-                        	</form>
+                        	 <!-- <form th:action="@{/emprestimos/efetuarEmprestimo}" method="POST">
+                                     <input type="hidden" name="unidadeId" data-th-value="${unidade.id}" />
+                                     <button class="btn btn-outline-success"  data-th-disabled="${unidade.emprestado}">Emprestar</button>
+                            </form>-->
                         </div>
 	                </div>
 				</div>

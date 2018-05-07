@@ -73,6 +73,12 @@
                                                             <button class="btn btn-outline-success"  data-th-disabled="${unidade.emprestado}">Emprestimo</button>
                                                         </form>
                                                     </span>
+                                                     <span>
+                                                        <form th:action="@{/reservas/efetuarReserva}" method="POST">
+                                                            <input type="hidden" name="unidadeId" data-th-value="${unidade.id}" />
+                                                            <button class="btn btn-outline-success" >Reserva</button>
+                                                        </form>
+                                                    </span>
                                                     <!-- Not on MVP - - > 
                                                     <span> 
                                                         <a href="#"  class="btn btn-outline-primary">Reserva</a>

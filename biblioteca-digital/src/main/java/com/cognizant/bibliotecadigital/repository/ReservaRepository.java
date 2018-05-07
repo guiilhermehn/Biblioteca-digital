@@ -7,5 +7,6 @@ import com.cognizant.bibliotecadigital.model.Reserva;
 
 @Repository
 public interface ReservaRepository extends CrudRepository<Reserva, Long> {
+	
 		
 }

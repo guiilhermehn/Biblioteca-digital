@@ -57,6 +57,15 @@ public class Reserva implements Serializable {
 	public Reserva() {
 
 	}
+	
+
+	public Reserva(Usuario usuario, Date dataReserva, Status status, Livro livro) {
+		super();
+		this.usuario = usuario;
+		this.dataReserva = dataReserva;
+		this.status = status;
+		this.livro = livro;
+	}
 
 	@Override
 	public int hashCode() {
