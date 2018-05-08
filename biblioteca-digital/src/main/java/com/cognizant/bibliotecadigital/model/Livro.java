@@ -50,13 +50,18 @@ public class Livro implements Serializable {
 	@Column(name = "edicao")
 	private int edicao;
 
-	@Size(min=4, max=255)
+	@Size(min=4, max=10000)
 	@Column(name = "sinopse")
 	private String sinopse;
 
 	@Column(name = "foto")
 	private String foto;
 	
+	@Column(name = "url_foto")
+	private String urlFoto;
+	
+
+	@Size(min=4, max=1000)
 	@Column(name="autor")
 	private String autor;
 
@@ -117,6 +122,7 @@ public class Livro implements Serializable {
 		result = prime * result + ((sinopse == null) ? 0 : sinopse.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		result = prime * result + ((unidadeLivros == null) ? 0 : unidadeLivros.hashCode());
+		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
 		return result;
 	}
 
@@ -177,6 +183,11 @@ public class Livro implements Serializable {
 			if (other.unidadeLivros != null)
 				return false;
 		} else if (!unidadeLivros.equals(other.unidadeLivros))
+			return false;
+		if (urlFoto == null) {
+			if (other.urlFoto != null)
+				return false;
+		} else if (!urlFoto.equals(other.urlFoto))
 			return false;
 		return true;
 	}
@@ -268,6 +279,16 @@ public class Livro implements Serializable {
 
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+	
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 
 	@Override
