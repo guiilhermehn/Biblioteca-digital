@@ -13,12 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "emprestimo")
@@ -33,15 +35,15 @@ public class Emprestimo implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name = "data_entrega")
+	@Column(name = "data_retirada")
 	@NotNull
-	private Date dataEntrega;
+	private Date dataRetirada;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "data_devolucao")
-	@NotNull
 	private Date dataDevolucao;
+
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
@@ -51,7 +53,7 @@ public class Emprestimo implements Serializable {
 
 	@ManyToOne(targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "unidade_livro_id")
-	private List<UnidadeLivro> unidadeLivros;
+	private UnidadeLivro unidadeLivro;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
@@ -62,12 +64,22 @@ public class Emprestimo implements Serializable {
 
 	}
 
+	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
+			UnidadeLivro unidadeLivro, Usuario usuario) {
+		this.id = id;
+		this.dataRetirada = dataRetirada;
+		this.dataDevolucao = dataDevolucao;
+		this.prazoDevolucao = prazoDevolucao;
+		this.unidadeLivro = unidadeLivro;
+		this.usuario = usuario;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
-		result = prime * result + ((dataEntrega == null) ? 0 : dataEntrega.hashCode());
+		result = prime * result + ((dataRetirada == null) ? 0 : dataRetirada.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((prazoDevolucao == null) ? 0 : prazoDevolucao.hashCode());
 		return result;
@@ -87,10 +99,10 @@ public class Emprestimo implements Serializable {
 				return false;
 		} else if (!dataDevolucao.equals(other.dataDevolucao))
 			return false;
-		if (dataEntrega == null) {
-			if (other.dataEntrega != null)
+		if (dataRetirada == null) {
+			if (other.dataRetirada != null)
 				return false;
-		} else if (!dataEntrega.equals(other.dataEntrega))
+		} else if (!dataRetirada.equals(other.dataRetirada))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -113,12 +125,12 @@ public class Emprestimo implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataEntrega() {
-		return dataEntrega;
+	public Date getDataRetirada() {
+		return dataRetirada;
 	}
 
-	public void setDataEntrega(Date dataEntrega) {
-		this.dataEntrega = dataEntrega;
+	public void setDataRetirada(Date dataRetirada) {
+		this.dataRetirada = dataRetirada;
 	}
 
 	public Date getDataDevolucao() {
@@ -136,10 +148,28 @@ public class Emprestimo implements Serializable {
 	public void setPrazoDevolucao(Date prazoDevolucao) {
 		this.prazoDevolucao = prazoDevolucao;
 	}
+	
+	
+
+	public UnidadeLivro getUnidadeLivro() {
+		return unidadeLivro;
+	}
+
+	public void setUnidadeLivro(UnidadeLivro unidadeLivro) {
+		this.unidadeLivro = unidadeLivro;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Override
 	public String toString() {
-		return "Emprestimo [id=" + id + ", dataEntrega=" + dataEntrega + ", dataDevolucao=" + dataDevolucao
+		return "Emprestimo [id=" + id + ", dataRetirada=" + dataRetirada + ", dataDevolucao=" + dataDevolucao
 				+ ", prazoDevolucao=" + prazoDevolucao + "]";
 	}
 }

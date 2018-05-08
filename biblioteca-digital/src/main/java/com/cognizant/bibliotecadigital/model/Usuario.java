@@ -1,7 +1,9 @@
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,13 +12,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+
+public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 902783495L;
 
@@ -26,15 +37,20 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@Column(name = "id_cgz")
+	@Size(min = 6, max = 6)
 	@NotNull
-	private Long idCgz;
+	private String idCgz;
 
 	@Column(name = "nome")
+	@Size(min = 4, max = 80)
 	@NotNull
-	private String name;
+	@NotEmpty
+	private String nome;
 
 	@Column(name = "email")
+	@Email
 	@NotNull
+	@NotEmpty
 	private String email;
 
 	@Column(name = "grade", nullable = false)
@@ -49,7 +65,14 @@ public class Usuario implements Serializable {
 
 	@Column(name = "senha")
 	@NotNull
+	@NotEmpty
 	private String senha;
+
+	@Transient
+	private String confirmaSenha;
+
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
+	private Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
 
@@ -64,16 +87,69 @@ public class Usuario implements Serializable {
 
 	}
 
+	public Usuario(@NotNull String nome, @NotNull String email, @NotNull String grade, @NotNull String senha,
+			Set<Papel> papeis) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.grade = grade;
+		this.senha = senha;
+		this.papeis = papeis;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return papeis;
+	}
+
+	@Override
+	public String getPassword() {
+
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return nome;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return true;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((emprestimos == null) ? 0 : emprestimos.hashCode());
 		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
 		result = prime * result + ((horizontal == null) ? 0 : horizontal.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + (int) (idCgz ^ (idCgz >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idCgz == null) ? 0 : idCgz.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((papeis == null) ? 0 : papeis.hashCode());
+		result = prime * result + ((reservas == null) ? 0 : reservas.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((vertical == null) ? 0 : vertical.hashCode());
 		return result;
@@ -93,6 +169,11 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (emprestimos == null) {
+			if (other.emprestimos != null)
+				return false;
+		} else if (!emprestimos.equals(other.emprestimos))
+			return false;
 		if (grade == null) {
 			if (other.grade != null)
 				return false;
@@ -103,14 +184,30 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!horizontal.equals(other.horizontal))
 			return false;
-		if (id != other.id)
-			return false;
-		if (idCgz != other.idCgz)
-			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!id.equals(other.id))
+			return false;
+		if (idCgz == null) {
+			if (other.idCgz != null)
+				return false;
+		} else if (!idCgz.equals(other.idCgz))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (papeis == null) {
+			if (other.papeis != null)
+				return false;
+		} else if (!papeis.equals(other.papeis))
+			return false;
+		if (reservas == null) {
+			if (other.reservas != null)
+				return false;
+		} else if (!reservas.equals(other.reservas))
 			return false;
 		if (senha == null) {
 			if (other.senha != null)
@@ -133,20 +230,20 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public Long getIdCgz() {
+	public String getIdCgz() {
 		return idCgz;
 	}
 
-	public void setIdCgz(Long idCgz) {
+	public void setIdCgz(String idCgz) {
 		this.idCgz = idCgz;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -189,6 +286,14 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+	public Set<Papel> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(Set<Papel> papeis) {
+		this.papeis = papeis;
+	}
+
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
@@ -205,11 +310,19 @@ public class Usuario implements Serializable {
 		this.reservas = reservas;
 	}
 
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", name=" + name + ", email=" + email + ", grade=" + grade
-				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", emprestimos="
-				+ emprestimos + ", reservas=" + reservas + "]";
+		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
+				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
+				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
 	}
 
 }

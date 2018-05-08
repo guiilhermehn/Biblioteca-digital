@@ -19,4 +19,9 @@ public class AutorService {
 	public Iterable <Autor> findAll() {
 		return autorRepository.findAll();
 	}
+
+	public Long deleteById(long id) {
+		autorRepository.deleteById(id);
+		return id;
+	}
 }

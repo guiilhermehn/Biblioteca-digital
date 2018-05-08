@@ -16,4 +16,14 @@ public class ReservaService {
 		return reservaRepository.findAll();
 	}
 
+	public Object findById(Long id) {
+		return reservaRepository.findById(id);
+	}
+
+	public Long deleteById(Long id) {
+		reservaRepository.deleteById(id);
+		return id;
+	}
+
+	
 }
