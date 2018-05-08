@@ -70,21 +70,21 @@
                                   data-th-object="${livro}">
                                 <div class="media">
                                     <!--<img class="align-self-end mr-3" th:src = "@{/assets/img/livro.pg}" src="assets/img/livro.jg" alt="Generic placeholder image">-->
-
+									
                                     <div class="media-body">
                                         <label for="isbn13" class="col-form-label">ISBN13:</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="isbn13"
                                                    aria-label="Pesquisa" data-th-field="*{isbn13}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="button">
+                                                <button class="btn btn-outline-secondary" name="btnIsbn13" id="btnIsbn13" type="button">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="titulo" class="col-form-label">Titulo:</label> <input
-                                                type="text" class="form-control" data-th-field="*{titulo}">
+                                            <label for="titulo" class="col-form-label">Titulo:</label>
+                                             <input type="text" class="form-control" data-th-field="*{titulo}">
                                         </div>
                                         <div class="form-group">
                                             <label for="autor" class="col-form-label">Autor:</label> <input
@@ -108,11 +108,17 @@
                                             <textarea class="form-control" id="sinopse"
                                                       data-th-field="*{sinopse}"></textarea>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="urlFoto">Url Foto</label>
+                                             <input type="text" class="form-control" data-th-field="*{urlFoto}">
+                                             <img src="" data-th-id="bookImage"/>  
+                                        </div>
 
                                         <div class="form-group">
-                                            <label for="exampleFormControlFile1">Example file
-                                                input</label> <input type="file" class="form-control-file"
-                                                                 id="exampleFormControlFile1">
+                                            <label for="exampleFormControlFile1">Example file input</label>
+                                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                                                                           
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-center">
@@ -136,6 +142,9 @@
         data-th-src="@{/assets/js/popper.js}"></script>
         <script src="../../static/assets/js/bootstrap.min.js"
         data-th-src="@{/assets/js/bootstrap.min.js}"></script>
-
+        
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script src="../../static/assets/js/robo.js"
+		data-th-src="@{/assets/js/robo.js}"></script>
     </body>
 </html>
