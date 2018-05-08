@@ -1,8 +1,5 @@
 package com.cognizant.bibliotecadigital.service;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,19 +36,7 @@ public class ReservaService {
 		return id;
 	}
 
-	public GregorianCalendar getDataDisponibilidade(Long livroId) {
-		Date date;
-		List<Emprestimo> result = (List<Emprestimo>) emprestimoRepository.findAllByUsuarioId(livroId);
-		if (result.isEmpty()) {
-			date = new Date();
-		} else {
-			date = result.get(0).getPrazoDevolucao();
-		}
-		GregorianCalendar data = new GregorianCalendar();
-		data.setTime(date);
-
-		return data;
-	}
+	
 
 	public boolean isReservado(Long livroId) {
 		return reservaRepository.countReservasByUnidadeLivroId(livroId) > 0L;

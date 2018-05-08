@@ -2,7 +2,6 @@ package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,15 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -52,9 +48,8 @@ public class Reserva implements Serializable {
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
 
-	@Temporal(TemporalType.DATE)
+	@Transient
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	@Column(name = "data_previsao")
 	private Date dataPrevisao;
 
 	@Transient
@@ -72,14 +67,13 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro,
-			Date dataPrevisao) {
+	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro) {
 		super();
 		this.usuario = usuario;
 		this.dataReserva = dataReserva;
 		this.status = status;
 		this.livro = livro;
-		this.dataPrevisao = dataPrevisao;
+		//this.dataPrevisao = dataPrevisao;
 	}
 
 	@Override
@@ -182,18 +176,6 @@ public class Reserva implements Serializable {
 				+ ", livro=" + livro + "]";
 	}
 
-	@PostLoad
-	private void habilita() {
-		Date dataAtual = new Date();
-		
-		String dataPrevisaoFormatada = DateFormatUtils.format(getDataPrevisao(),  "dd-MM-yyyy");
-		String dataAtualFormatada = DateFormatUtils.format(dataAtual,  "dd-MM-yyyy");
-		
-		if (!dataPrevisaoFormatada.equals(dataAtualFormatada)) {
-			habilita = true;
-		} else {
-			habilita = false;
-		}
-	}
+	
 
 }

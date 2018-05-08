@@ -99,7 +99,7 @@
                         	</form>
                         	 <form th:action="@{/emprestimos/efetuarEmprestimoAposReserva}" method="POST">
                                <input type="hidden" name="livroId" data-th-value="${reserva.id}" />
-                              <button class="btn btn-secondary mb-1"  data-th-disabled="${reserva.habilita}">Emprestrar</button>
+                              <button class="btn btn-secondary mb-1"  data-th-disabled="${habilita}">Emprestrar</button>
                               </form>
                         </div>
 	                </div>

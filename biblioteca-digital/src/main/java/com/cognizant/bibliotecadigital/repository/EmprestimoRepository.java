@@ -17,4 +17,10 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 	Optional<Emprestimo> findEmprestimosByUnidadeLivroId(Long unidadeLivroId);
 	
 	Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId);
+	
+	@Query(value = " SELECT * from emprestimo WHERE unidade_livro_id IN(\r\n" + 
+			" SELECT ul.livro_id FROM reserva AS r \r\n" + 
+			" JOIN livro AS l ON l.id = r.livro_id \r\n" + 
+			" JOIN unidade_livro AS ul ON ul.livro_id = l.id WHERE r.id = ?)", nativeQuery = true)
+	Emprestimo findEmprestimoByReservaId(Long reservaId);
 }

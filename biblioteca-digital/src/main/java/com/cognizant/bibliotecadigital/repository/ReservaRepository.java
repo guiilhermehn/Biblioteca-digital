@@ -8,7 +8,9 @@ import com.cognizant.bibliotecadigital.model.Reserva;
 
 @Repository
 public interface ReservaRepository extends CrudRepository<Reserva, Long> {
-	@Query(value = "SELECT count(*) FROM reserva WHERE livro_id = ? AND status = 'AGUARDANDO'", nativeQuery = true)
+	@Query(value = "SELECT count(*) FROM reserva WHERE livro_id = ? AND status = 'EM_ESPERA'", nativeQuery = true)
 	long countReservasByUnidadeLivroId(Long livroId);
+	
+	
 		
 }

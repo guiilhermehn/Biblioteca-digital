@@ -20,12 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
-import com.cognizant.bibliotecadigital.model.Reserva;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
-import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
@@ -35,8 +33,7 @@ public class EmprestimoController {
 	private EmprestimoService emprestimoService;
 	@Autowired
 	private UnidadeLivroService unidadeService;
-	@Autowired
-	private ReservaService reservaService;
+	
 	@Autowired
 	private EmailService emailService;
 
@@ -99,46 +96,7 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
-	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
-	public ModelAndView emprestimoAposReserva(@RequestParam("livroId") Long livroId,
-			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
-		// emprestimoService.findById(id);
-
-		Reserva reserva = reservaService.findById(livroId).get();
-
-		//reserva.habilita();
-
-		if (emprestimoService.isEmprestado(livroId)) {
-			redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
-			return new ModelAndView("redirect:/emprestimos");
-		}
-
-		UnidadeLivro unidade = unidadeService.findById(livroId).get();
-
-		GregorianCalendar agora = new GregorianCalendar();
-
-		String template = "email-emprestimo";
-
-		GregorianCalendar prazo = new GregorianCalendar();
-		prazo.add(Calendar.DAY_OF_MONTH, 7);
-
-		Usuario usuario = null;
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
-		}
-
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
-
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
-		emprestimoService.save(emprestimo);
-
-		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
-
-		emailService.sendSimpleMessage(email, template);
-
-		return new ModelAndView("redirect:/emprestimos");
-	}
+	
 
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)

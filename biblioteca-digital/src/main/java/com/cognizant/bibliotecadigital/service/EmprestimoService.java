@@ -38,7 +38,13 @@ public class EmprestimoService {
 	}
 	
 	public Optional<Emprestimo> findByUnidadeLivroId(Long unidadeId) {
+
+		
 		return emprestimoRepository.findEmprestimosByUnidadeLivroId(unidadeId);
+	}
+	
+	public Emprestimo emprestimoPorReservaId(Long reservaId){
+		return emprestimoRepository.findEmprestimoByReservaId(reservaId);
 	}
 	
 	public Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId) {

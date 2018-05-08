@@ -20,6 +20,9 @@ public class UnidadeLivroService {
 	public UnidadeLivro save(UnidadeLivro unidadeLivro) {
 		return unidadeLivroRepository.save(unidadeLivro);
 	}
-
+	
+	public Iterable<UnidadeLivro>findAll(){
+		return unidadeLivroRepository.findAll();
+	}
 	
 }
