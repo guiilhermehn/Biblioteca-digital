@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -21,6 +22,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.repository.EmailRepository;
 import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 
 @Service
@@ -33,8 +35,12 @@ public class EmailService {
 	private SpringTemplateEngine templateEngine;
 	
 	@Autowired
-	private EmprestimoRepository emprestimoService;
+	private EmailRepository emailService;
 
+	public Iterable<Emprestimo> prazoDevolucao(){
+		return emailService.prazoDevolucao();
+	}
+	
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -70,7 +76,7 @@ public class EmailService {
 		return mail;
 	}
 	
-	public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
+	/*public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
 		Mail mail = new Mail();
 		mail.setFrom("noreply.digitallibrary@gmail.com");
 		mail.setTo(email);
@@ -84,5 +90,5 @@ public class EmailService {
 		mail.setModel(model);
 		
 		return mail;
-	}
+	}*/
 }

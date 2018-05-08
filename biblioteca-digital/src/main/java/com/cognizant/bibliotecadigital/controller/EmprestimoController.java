@@ -25,7 +25,6 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
-import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
@@ -39,8 +38,6 @@ public class EmprestimoController {
 	private UnidadeLivroService unidadeService;
 	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private EmprestimoRepository emprestimoRepository;
 
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
@@ -134,23 +131,21 @@ public class EmprestimoController {
 	}
 	
 	public void prazoDevolucaoEmail() {
-		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoRepository.prazoDevolucao();
-		String email = "", nome = "", livro = "", data = "";
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
+		String nome = "", email = "", livro = "", data = "";
 		for(int i = 0;i<emprestimos.size();i++) {
-			
-			nome = emprestimos.get(i).getUsuario().getNome().toString();
-			livro = emprestimos.get(i).getUnidadeLivro().getLivro().toString();
-			data = emprestimos.get(i).getPrazoDevolucao().toString();
-//			Mail mail = emailService.lembreteDevolucao(email, nome, livro, data);
-//			try {
-//				emailService.sendSimpleMessage(mail, "email-lembrete");
-//			} catch (MessagingException e) {
-//				System.out.println("ERROUUUU Messaging");
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				System.out.println("ERROUUUU IO");
-//				e.printStackTrace();
-//			}
+			try {
+				nome = emprestimos.get(i).getUsuario().getNome().toString();
+				System.out.println(nome);
+				email = emprestimos.get(i).getUsuario().getEmail().toString();
+				System.out.println(email);
+				data = emprestimos.get(i).getPrazoDevolucao().toString();
+				System.out.println(data);
+				livro = emprestimos.get(i).getUnidadeLivro().getLivro().getTitulo().toString();
+				System.out.println(livro);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
