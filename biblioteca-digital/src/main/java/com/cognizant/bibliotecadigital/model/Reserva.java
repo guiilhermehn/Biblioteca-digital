@@ -43,6 +43,11 @@ public class Reserva implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private Status status;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(name = "data_modifica_status")
+	private Date dataModificaStatus;
 
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
@@ -67,13 +72,13 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro) {
+	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro,@NotNull Date dataModificaStatus) {
 		super();
 		this.usuario = usuario;
 		this.dataReserva = dataReserva;
 		this.status = status;
 		this.livro = livro;
-		//this.dataPrevisao = dataPrevisao;
+		this.dataModificaStatus = dataModificaStatus;
 	}
 
 	@Override
@@ -168,6 +173,15 @@ public class Reserva implements Serializable {
 
 	public void setHabilita(Boolean habilita) {
 		this.habilita = habilita;
+	}
+	
+
+	public Date getDataModificaStatus() {
+		return dataModificaStatus;
+	}
+
+	public void setDataModificaStatus(Date dataModificaStatus) {
+		this.dataModificaStatus = dataModificaStatus;
 	}
 
 	@Override

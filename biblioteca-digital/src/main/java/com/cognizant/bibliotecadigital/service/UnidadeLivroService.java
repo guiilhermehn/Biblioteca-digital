@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.repository.UnidadeLivroRepository;
 
@@ -24,5 +25,8 @@ public class UnidadeLivroService {
 	public Iterable<UnidadeLivro>findAll(){
 		return unidadeLivroRepository.findAll();
 	}
+
+	
+	
 	
 }

@@ -98,8 +98,8 @@
                         		<input type="hidden" th:value="${reserva.id}" name="id">
                         	</form>
                         	 <form th:action="@{/emprestimos/efetuarEmprestimoAposReserva}" method="POST">
-                               <input type="hidden" name="livroId" data-th-value="${reserva.id}" />
-                              <button class="btn btn-secondary mb-1"  data-th-disabled="${habilita}">Emprestrar</button>
+                               <input type="hidden" name="reservaId" data-th-value="${reserva.id}" />
+                              <button class="btn btn-secondary mb-1"  data-th-disabled="${reserva.habilita}">Emprestrar</button>
                               </form>
                         </div>
 	                </div>

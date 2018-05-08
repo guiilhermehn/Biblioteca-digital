@@ -1,6 +1,8 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,7 +10,6 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -51,23 +52,23 @@ public class ReservaController {
 	@Autowired
 	private EmailService emailService;
 
-	boolean habilita;
-
 	@GetMapping("/reservas")
-	public ModelAndView findAll() {
+	public ModelAndView findAll() throws ParseException {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
 		for (Reserva reserva : reservas) {
+
 			Date disponibilidade = calculaDisponibilidade(reserva);
 
-			if (disponibilidade == null) {
-				habilita = true;
+			if (disponibilidade == null && reserva.getStatus().equals(Status.AGUARDANDO)) {
+				reserva.setHabilita(true);
+				reserva.setDataPrevisao(formataData(disponibilidade));
+			} else if (reserva.getStatus().equals(Status.EMPRESTADO)) {
+				reserva.setHabilita(false);
 				reserva.setDataPrevisao(null);
 			} else {
-
-				habilita(disponibilidade);
-
+				reserva.setHabilita(false);
 				reserva.setDataPrevisao(disponibilidade);
 			}
 		}
@@ -75,6 +76,14 @@ public class ReservaController {
 		mv.addObject("reservas", reservaService.findAll());
 
 		return mv;
+	}
+
+	private Date formataData(Date disponibilidade) throws ParseException {
+		SimpleDateFormat dt = new SimpleDateFormat("dd/mm/yyyy");
+		String data = dt.format(new Date());
+		Date dataFormatada = dt.parse(data);
+		return dataFormatada;
+
 	}
 
 	@PostMapping("/reservas/deletarReserva")
@@ -103,8 +112,9 @@ public class ReservaController {
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			usuario = (Usuario) auth.getPrincipal();
 		}
+		Date dataModificaStatus = new Date();
 
-		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.EM_ESPERA, livro);
+		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.EM_ESPERA, livro, dataModificaStatus);
 
 		reservaService.save(reserva);
 
@@ -112,14 +122,17 @@ public class ReservaController {
 	}
 
 	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
-	public ModelAndView emprestimoAposReserva(@RequestParam("livroId") Long livroId,
+	public ModelAndView emprestimoAposReserva(@RequestParam("reservaId") Long reservaId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
-		if (emprestimoService.isEmprestado(livroId)) {
+		
+		
+		if (emprestimoService.isEmprestado(reservaId)) {
 			redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
 			return new ModelAndView("redirect:/emprestimos");
 		}
-
-		UnidadeLivro unidade = unidadeService.findById(livroId).get();
+		
+		
+		UnidadeLivro unidade = reservaService.findUnidadeIdByReservaId(reservaId);
 
 		GregorianCalendar agora = new GregorianCalendar();
 
@@ -142,8 +155,15 @@ public class ReservaController {
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
-		
-		Reserva reserva = reservaService.findById(livroId).get();
+
+		Reserva reserva = reservaService.findById(reservaId).get();
+
+		reserva.setStatus(Status.EMPRESTADO);
+		reserva.setDataModificaStatus(new Date());
+
+		reservaService.save(reserva);
+
+		reserva.getHabilita();
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
@@ -152,7 +172,7 @@ public class ReservaController {
 
 		Emprestimo emprestimo = emprestimoService.emprestimoPorReservaId(reserva.getId());
 
-		if (emprestimo == null) {
+		if (emprestimo == null || emprestimo.getDataDevolucao() == null) {
 			return null;
 		}
 
@@ -162,19 +182,6 @@ public class ReservaController {
 
 		return data.getTime();
 
-	}
-
-	private void habilita(Date disponibilidade) {
-		Date dataAtual = new Date();
-
-		String dataPrevisaoFormatada = DateFormatUtils.format(disponibilidade, "dd-MM-yyyy");
-		String dataAtualFormatada = DateFormatUtils.format(dataAtual, "dd-MM-yyyy");
-
-		if (!dataPrevisaoFormatada.equals(dataAtualFormatada)) {
-			habilita = true;
-		} else {
-			habilita = false;
-		}
 	}
 
 }
