@@ -1,7 +1,7 @@
 function bookSearch(){
   var isbn13 = document.getElementById('isbn13').value
-  console.log(isbn13)
-  
+  console.log(isbn13);
+  clearForm();
   //Validação de ISBN
   var pattern = /^\d+$/;
   if(pattern.test(isbn13)){
@@ -26,6 +26,7 @@ function bookSearch(){
 	    	  }
 	    	  //Insere o ultimo autor na variavel
 	    	  autores += data.items[i].volumeInfo.authors[autoresLength-1]
+	    	  document.getElementById('isbn13').value = isbn13
 	    	  document.getElementById('autor').value = autores
 	    	  
 	    	  document.getElementById('anoPublicacao').value = data.items[i].volumeInfo.publishedDate
@@ -40,9 +41,14 @@ function bookSearch(){
 	    type: 'GET'
 	  });
   }else{
-	  document.getElementById('warning').innerText = "Por favor inserir apenas números!";
+	  document.getElementById('warning_isbn').innerText = "Por favor inserir apenas números!";
 	  document.getElementById('div_warning').style.display = 'block';
 		  
   }
 }
+function clearForm(){
+
+	  document.getElementById('form_new_livro').reset();
+}
+
  document.getElementById('btnIsbn13').addEventListener('click',bookSearch,false)
