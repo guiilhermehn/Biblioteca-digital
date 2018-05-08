@@ -3,6 +3,7 @@ package com.cognizant.bibliotecadigital.service;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -16,9 +17,11 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 
 @Service
 public class EmailService {
@@ -28,6 +31,9 @@ public class EmailService {
 
 	@Autowired
 	private SpringTemplateEngine templateEngine;
+	
+	@Autowired
+	private EmprestimoRepository emprestimoService;
 
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
@@ -63,5 +69,20 @@ public class EmailService {
 
 		return mail;
 	}
-
+	
+	public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
+		Mail mail = new Mail();
+		mail.setFrom("noreply.digitallibrary@gmail.com");
+		mail.setTo(email);
+		mail.setSubject("Lembre de Devolução");
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		model.put("name", nome);
+		model.put("livro", livro);
+		model.put("prazo", data);
+		mail.setModel(model);
+		
+		return mail;
+	}
 }

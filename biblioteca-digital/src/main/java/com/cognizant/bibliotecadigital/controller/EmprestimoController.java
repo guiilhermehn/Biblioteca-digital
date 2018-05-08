@@ -1,9 +1,12 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -22,6 +25,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
@@ -35,6 +39,8 @@ public class EmprestimoController {
 	private UnidadeLivroService unidadeService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private EmprestimoRepository emprestimoRepository;
 
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
@@ -75,7 +81,7 @@ public class EmprestimoController {
 		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
-		prazo.add(Calendar.DAY_OF_MONTH, 7);
+		prazo.add(Calendar.DAY_OF_MONTH, 2);
 
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -126,5 +132,25 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
-
+	
+	public void prazoDevolucaoEmail() {
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoRepository.prazoDevolucao();
+		String email = "", nome = "", livro = "", data = "";
+		for(int i = 0;i<emprestimos.size();i++) {
+			
+			nome = emprestimos.get(i).getUsuario().getNome().toString();
+			livro = emprestimos.get(i).getUnidadeLivro().getLivro().toString();
+			data = emprestimos.get(i).getPrazoDevolucao().toString();
+//			Mail mail = emailService.lembreteDevolucao(email, nome, livro, data);
+//			try {
+//				emailService.sendSimpleMessage(mail, "email-lembrete");
+//			} catch (MessagingException e) {
+//				System.out.println("ERROUUUU Messaging");
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				System.out.println("ERROUUUU IO");
+//				e.printStackTrace();
+//			}
+		}
+	}
 }

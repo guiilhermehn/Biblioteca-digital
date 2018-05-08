@@ -44,5 +44,9 @@ public class EmprestimoService {
 	public Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId) {
 		return emprestimoRepository.findAllByUsuarioId(usuarioId);
 	}
+	
+	public Iterable<Emprestimo> prazoDevolucao(){
+		return emprestimoRepository.prazoDevolucao();
+	}
 }
 
