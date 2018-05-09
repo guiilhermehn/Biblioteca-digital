@@ -5,6 +5,7 @@ import java.io.Console;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,22 +78,30 @@ public class LivroController{
 	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, BindingResult bindingRes,
 			RedirectAttributes redAttributes) {
 		
+		
 		if (bindingRes.hasErrors()) {
 			logger.info("Validation errors while submitting form!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-			return mv;
-			
+			return mv;			
 			
 		}
-		
-		Livro salvo = livroService.save(livro);
-		unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
+		try {
+			
+			Livro salvo = livroService.save(livro);
+			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
 
-		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
-		logger.info("Success submitting form!");
+			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
+			logger.info("Success submitting form!");
 
-		ModelAndView mv = new ModelAndView("redirect:/livros");
-		return mv;
+			ModelAndView mv = new ModelAndView("redirect:/livros");
+			return mv;
+		} catch (Exception e) {
+			System.out.println("Error= " + e);
+			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+			mv.addObject("ErrorKey", "ISBN já cadastrado!");
+			mv.addObject("key_warning_cond", "true");
+			return mv;
+		}
 	}
 
 	@PostMapping("/livros/update")

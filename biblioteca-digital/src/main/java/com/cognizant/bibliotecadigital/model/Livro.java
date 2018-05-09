@@ -24,6 +24,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
@@ -39,9 +40,10 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-
+	
 	@Column(name = "isbn13", unique = true)
-	@Size(min=8, max=13, message="ISBN inválido!")
+	@Size(max=13, message="ISBN inválido!")
+	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
 
 	@NotNull
@@ -52,6 +54,7 @@ public class Livro implements Serializable {
 
 	@Column(name = "ano_publicacao")
 	@Size(min=4, max=4, message="Ano deve conter 4 digitos!")
+	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String anoPublicacao;
 
 	@Column(name = "edicao")
