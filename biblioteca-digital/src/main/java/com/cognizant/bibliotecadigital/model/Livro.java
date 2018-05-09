@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
 
 @Transactional
 @Entity
@@ -72,7 +73,7 @@ public class Livro implements Serializable {
 	@Column(name="autor")
 	private String autor;
 
-
+	@Transient private MultipartFile file;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -96,7 +97,6 @@ public class Livro implements Serializable {
 
 	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
-
 	public Livro(Long id, String isbn13, String titulo, String anoPublicacao,
 			String edicao, String sinopse, String foto, String autor,
 			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
@@ -114,9 +114,6 @@ public class Livro implements Serializable {
 		this.unidadeLivros = unidadeLivros;
 	}
 
-	
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -285,7 +282,6 @@ public class Livro implements Serializable {
 	public List<UnidadeLivro> getUnidadeLivros() {
 		return unidadeLivros;
 	}
-
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
 	}
@@ -293,18 +289,22 @@ public class Livro implements Serializable {
 	public String getAutor() {
 		return autor;
 	}
-
-
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
 	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 
 	public String getUrlFoto() {
 		return urlFoto;
 	}
-
-
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
 	}

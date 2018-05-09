@@ -1,7 +1,23 @@
 package com.cognizant.bibliotecadigital;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.cognizant.bibliotecadigital.model.CategoriaLivro;
+import com.cognizant.bibliotecadigital.model.Livro;
+import com.cognizant.bibliotecadigital.model.Reserva;
+import com.cognizant.bibliotecadigital.model.UnidadeLivro;
+import com.cognizant.bibliotecadigital.repository.AutorRepository;
+import com.cognizant.bibliotecadigital.repository.CategoriaLivroRepository;
+import com.cognizant.bibliotecadigital.repository.LivroRepository;
+import com.cognizant.bibliotecadigital.repository.UnidadeLivroRepository;
 
 @SpringBootApplication
 public class BibliotecaDigitalApplication {
@@ -20,14 +36,11 @@ public class BibliotecaDigitalApplication {
 			catRepo.save(new CategoriaLivro(0L, "categoria1"));
 			catRepo.save(new CategoriaLivro(0L, "categoria2"));
 			
-			autRepo.save(new Autor(0L, "autor1"));
-			autRepo.save(new Autor(0L, "autor2"));
-			autRepo.save(new Autor(0L, "autor3"));
-			
-			Livro livro = new Livro(0L, "1234567890123", "titulo", 2000,
-					2, "sinopse", "foto", "Autor do livro",
-					new HashSet<>(), new ArrayList<>(),
-					new ArrayList<>());
+			Livro livro = new Livro(0L, "1234567890123", "titulo", "2019",
+					"1", "Sinopse", "", "Autor",
+					new HashSet<CategoriaLivro>(), 
+					new ArrayList<Reserva>(),
+					new ArrayList<UnidadeLivro>());
 			
 			livro.getCategoriaLivros().add(catRepo.findById(1L).get());
 			livro.getCategoriaLivros().add(catRepo.findById(2L).get());

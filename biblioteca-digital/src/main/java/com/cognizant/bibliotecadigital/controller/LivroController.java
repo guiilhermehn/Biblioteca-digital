@@ -8,6 +8,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,16 +28,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.StorageService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
 public class LivroController{
 
 	private static final Logger logger = LoggerFactory.getLogger(LivroController.class);
-	@Autowired
-	private LivroService livroService;
-	@Autowired
-	private UnidadeLivroService unidadeLivroService;
+	
+	@Autowired private LivroService livroService;
+	
+	@Autowired private UnidadeLivroService unidadeLivroService;
 
 	/*
 	@GetMapping("/livros")
@@ -57,7 +63,7 @@ public class LivroController{
 		return mav;
 	}
 
-	@GetMapping("/livros/edit/{id}")
+	@GetMapping({"/livros/edit/{id}","/livros/{id}/edit"})
 	public ModelAndView edit(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("/livro/livroEditar");
 		mv.addObject("livro", livroService.findById(id).get());
@@ -74,15 +80,25 @@ public class LivroController{
 	}
 
 	@PostMapping("/livros/create")
-	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, BindingResult bindingRes,
-			RedirectAttributes redAttributes) {
+	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, 
+			BindingResult bindingRes, RedirectAttributes redAttributes) {
 		
 		if (bindingRes.hasErrors()) {
 			logger.info("Validation errors while submitting form!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 			return mv;
-			
-			
+		}
+		
+		if (livro.getFile().getSize() != 0) {
+			String filename = StorageService.getInstance().store(livro.getFile());
+			if (filename.isEmpty()) {
+				redAttributes.addFlashAttribute("mensagem", "Houve um erro no processo de upload de '" + livro.getFile().getOriginalFilename() + "'.");
+				return new ModelAndView("redirect:/livros/new");
+			}
+			livro.setFoto(filename);
+			//redAttributes.addFlashAttribute("message", "You successfully uploaded '" + photo.getFile().getOriginalFilename() + "'.");
+			//photoRepo.save(photo);
+			//return new ModelAndView("redirect:/photos");
 		}
 		
 		Livro salvo = livroService.save(livro);
@@ -96,9 +112,28 @@ public class LivroController{
 	}
 
 	@PostMapping("/livros/update")
-	public ModelAndView update(@ModelAttribute Livro livro) {
+	public ModelAndView update(@ModelAttribute Livro livro, 
+			BindingResult bindingRes, RedirectAttributes redAttributes) {
 
 		//livroService.findByIsbn13(livro.getIsbn13());
+		
+		if (bindingRes.hasErrors()) {
+			logger.info("Validation errors while submitting form!");
+			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+			return mv;
+		}
+		
+		if (livro.getFile().getSize() != 0) {
+			String filename = StorageService.getInstance().store(livro.getFile());
+			if (filename.isEmpty()) {
+				redAttributes.addFlashAttribute("mensagem", "Houve um erro no processo de upload de '" + livro.getFile().getOriginalFilename() + "'.");
+				return new ModelAndView("redirect:/livros/new");
+			}
+			livro.setFoto(filename);
+			//redAttributes.addFlashAttribute("message", "You successfully uploaded '" + photo.getFile().getOriginalFilename() + "'.");
+			//photoRepo.save(photo);
+			//return new ModelAndView("redirect:/photos");
+		}
 
 		livroService.save(livro);
 
@@ -116,11 +151,6 @@ public class LivroController{
 	}
 	
 	@PostMapping("/livro/unidade/edit")
-	/*
-	 * name="id" 
-	 * name="livroId" 
- 		name="avarias"
-	 * */
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId, @RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
 		unidadeLivroService.save(unidade);
@@ -139,5 +169,26 @@ public class LivroController{
 	public ModelAndView adicionarUnidade(@ModelAttribute UnidadeLivro unidade) {
 		unidadeLivroService.save(unidade);
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
+	}
+	
+	
+	@GetMapping({"/livros/file/{id}","/livros/{id}/file"}) 
+	@ResponseBody
+	public ResponseEntity<Resource> show_file(@PathVariable("id") Long id) {
+		//Photo photo = photoRepo.findById(id).get();
+		Livro livro = livroService.findById(id).get();
+		
+		if (livro.getFoto() == null || livro.getFoto().isEmpty()) {
+			Resource resource = StorageService.getInstance().load(livro.getFoto());
+			if (resource.exists() || resource.isReadable()) {
+				return ResponseEntity.ok()
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + livro.getFoto() + "\"")
+						.body(resource);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }
