@@ -1,6 +1,7 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -132,22 +133,41 @@ public class EmprestimoController {
 	
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
-		String nome = "", email = "", livro = "", data = "";
+		String nome = "", email = "", livro = "", dataDev = "", dia = "", mes = "";
+		Date dataAtual = new Date();
 		Long id;
 		String template = "email-lembrete";
 		for(int i = 0;i<emprestimos.size();i++) {
 			try {
 				nome = emprestimos.get(i).getUsuario().getNome().toString();
 				email = emprestimos.get(i).getUsuario().getEmail().toString();
-				data = emprestimos.get(i).getPrazoDevolucao().toString();
+				Date data = emprestimos.get(i).getPrazoDevolucao();
+				
+				dataDev = data.toString();
+				mes = dataDev.substring(5, 7);
+				dia = dataDev.substring(8, 10);
+				dataDev = dia + "/" + mes;
+				
 				id = emprestimos.get(i).getUnidadeLivro().getId();
 				UnidadeLivro unidade = unidadeService.findById(id).get();
 				livro = unidade.getLivro().getTitulo().toString();
-				Mail mail = emailService.lembreteDevolucao(email, nome, livro, data);
+				
+				if(dataAtual.before(data)) {
+					template = "email-lembrete";
+				}
+				else if(dataAtual.after(data)) {
+					template = "email-esquecer";
+				}
+				Mail mail = emailService.lembreteDevolucao(email, nome, livro, dataDev);
 				emailService.sendSimpleMessage(mail, template);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public String formatarData(Date date) {
+		SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+		return formatar.format(date);
 	}
 }
