@@ -2,6 +2,7 @@ package com.cognizant.bibliotecadigital.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class EmailService {
 		Mail mail = new Mail();
 		mail.setFrom("noreply.digitallibrary@gmail.com");
 		mail.setTo(email);
-		mail.setSubject("Lembre de Devolução");
+		mail.setSubject("Lembrete de Devolução: " + livro);
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
