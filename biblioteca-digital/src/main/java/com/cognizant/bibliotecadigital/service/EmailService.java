@@ -35,10 +35,10 @@ public class EmailService {
 	private SpringTemplateEngine templateEngine;
 	
 	@Autowired
-	private EmailRepository emailService;
+	private EmailRepository emailRepository;
 
 	public Iterable<Emprestimo> prazoDevolucao(){
-		return emailService.prazoDevolucao();
+		return emailRepository.prazoDevolucao();
 	}
 	
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
@@ -76,7 +76,7 @@ public class EmailService {
 		return mail;
 	}
 	
-	/*public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
+	public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
 		Mail mail = new Mail();
 		mail.setFrom("noreply.digitallibrary@gmail.com");
 		mail.setTo(email);
@@ -90,5 +90,5 @@ public class EmailService {
 		mail.setModel(model);
 		
 		return mail;
-	}*/
+	}
 }

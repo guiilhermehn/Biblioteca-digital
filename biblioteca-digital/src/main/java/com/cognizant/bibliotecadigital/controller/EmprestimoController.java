@@ -133,16 +133,18 @@ public class EmprestimoController {
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
 		String nome = "", email = "", livro = "", data = "";
+		Long id;
+		String template = "email-lembrete";
 		for(int i = 0;i<emprestimos.size();i++) {
 			try {
 				nome = emprestimos.get(i).getUsuario().getNome().toString();
-				System.out.println(nome);
 				email = emprestimos.get(i).getUsuario().getEmail().toString();
-				System.out.println(email);
 				data = emprestimos.get(i).getPrazoDevolucao().toString();
-				System.out.println(data);
-				livro = emprestimos.get(i).getUnidadeLivro().getLivro().getTitulo().toString();
-				System.out.println(livro);
+				id = emprestimos.get(i).getUnidadeLivro().getId();
+				UnidadeLivro unidade = unidadeService.findById(id).get();
+				livro = unidade.getLivro().getTitulo().toString();
+				Mail mail = emailService.lembreteDevolucao(email, nome, livro, data);
+				emailService.sendSimpleMessage(mail, template);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
