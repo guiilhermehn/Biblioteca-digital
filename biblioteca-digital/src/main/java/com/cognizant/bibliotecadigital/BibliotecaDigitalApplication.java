@@ -1,32 +1,31 @@
 package com.cognizant.bibliotecadigital;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.provider.HibernateUtils;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.cognizant.bibliotecadigital.controller.EmprestimoController;
-import com.cognizant.bibliotecadigital.model.Mail;
 
 @SpringBootApplication
+@EnableScheduling
 public class BibliotecaDigitalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
-	
+
 	
 	//Bloco somente deve ser executado para popular o banco numa primeira execução
 	// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
 	//
-	@Bean
-	public CommandLineRunner mock(EmprestimoController emprestimo) {
+	/*@Bean
+	public CommandLineRunner mock(AgendamentoEmail ageEmail) {
 		return (String[] args) -> {
 			try{
-				emprestimo.prazoDevolucaoEmail();
+				//ageEmail.LembreteEmail();
+				//	emprestimo.prazoDevolucaoEmail();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -52,8 +51,8 @@ public class BibliotecaDigitalApplication {
 			
 			Livro salvo = livRepo.save(livro);
 			unidadeRepo.save(new UnidadeLivro(0L, null, livRepo.findById(salvo.getId()).get()));
-			*/
+			
 		};
-	}
+	*/
 	/**/
 }
