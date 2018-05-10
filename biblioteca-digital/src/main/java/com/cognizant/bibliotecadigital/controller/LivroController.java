@@ -112,7 +112,7 @@ public class LivroController{
 	}
 
 	@PostMapping("/livros/update")
-	public ModelAndView update(@ModelAttribute Livro livro, 
+	public ModelAndView update(@ModelAttribute Livro livro, @RequestParam(value = "apagaFoto", required = false, defaultValue = "false")  boolean apagaFoto,
 			BindingResult bindingRes, RedirectAttributes redAttributes) {
 
 		//livroService.findByIsbn13(livro.getIsbn13());
@@ -122,6 +122,11 @@ public class LivroController{
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 			return mv;
 		}
+		logger.info("Apagar Foto? " + apagaFoto);
+		if(apagaFoto && livro.getFoto() != null && !livro.getFoto().isEmpty()) {
+			StorageService.getInstance().delete(livro.getFoto());
+			livro.setFoto(null);
+		}
 		
 		if (livro.getFile().getSize() != 0) {
 			String filename = StorageService.getInstance().store(livro.getFile());
@@ -129,10 +134,10 @@ public class LivroController{
 				redAttributes.addFlashAttribute("mensagem", "Houve um erro no processo de upload de '" + livro.getFile().getOriginalFilename() + "'.");
 				return new ModelAndView("redirect:/livros/new");
 			}
+			if (livro.getFoto() != null && !livro.getFoto().isEmpty()) {
+				StorageService.getInstance().delete(livro.getFoto());
+			}
 			livro.setFoto(filename);
-			//redAttributes.addFlashAttribute("message", "You successfully uploaded '" + photo.getFile().getOriginalFilename() + "'.");
-			//photoRepo.save(photo);
-			//return new ModelAndView("redirect:/photos");
 		}
 
 		livroService.save(livro);

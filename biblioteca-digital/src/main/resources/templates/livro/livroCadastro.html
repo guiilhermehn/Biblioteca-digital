@@ -131,6 +131,9 @@
 											<label for="file">Insira o arquivo da foto (caso não possua link para foto)</label> 
 											<input type="file" class="form-control-file" data-th-field="*{file}" >
 										</div>
+										<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('file')}">
+											<span class="label label-danger" data-th-if="${#fields.hasErrors('file')}" data-th-errors="*{file}"></span>
+										</div>
 
 									</div>
 									<div class="card-footer d-flex justify-content-center">

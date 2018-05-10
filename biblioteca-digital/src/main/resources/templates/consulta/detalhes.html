@@ -31,7 +31,8 @@
                 <div class="col-md-12">
                     <div class="card space">
                         <div class="media">
-                            <img class="align-self-end mr-3" data-th-src="@{/assets/img/livro.jpg}" src="../../static/assets/img/livro.jpg" alt="Generic placeholder image">
+                            <img class="align-self-end mr-3 w-25" src="../../static/assets/img/livro.jpg" alt="Generic placeholder image"
+                            		data-th-src="${(livro.urlFoto != null && !#strings.isEmpty(livro.urlFoto))} ? ${livro.urlFoto} : ( ${(livro.foto != null && !#strings.isEmpty(livro.foto))} ? @{/livros/{id}/file (id = ${livro.id})} : @{'/assets/img/livro.jpg'})">
                             <div class="media-body">
                                 <h3 class="text-justify">
                                     Titulo: <span data-th-text="${livro.titulo}"></span>
