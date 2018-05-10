@@ -27,38 +27,178 @@
     <div class="page-header header-filter clear-filter backgroud-gradient">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+          <div class="col-md-5 col-sm-6 ml-auto mr-auto" id="acessodiv">
             <div class="card card-signup">
               <form class="form" method="" action="">
-                  <h4 class="card-title text-center">Acesso a livraria</h4>
+                <h4 class="card-title text-center">Acesso a livraria</h4>
                 <div class="card-body">
+                  <span class="bmd-form-group"><div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">mail</i>
+                      </span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="E-mail...">
+                  </div>
+                </span>
                 <span class="bmd-form-group"><div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">mail</i>
+                      <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" placeholder="E-mail...">
+                  <input type="password" class="form-control" placeholder="Senha...">
                 </div>
               </span>
-              <span class="bmd-form-group"><div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
-                  </span>
+            </div>
+            <div class="form-check col-md-11 ml-auto mr-auto">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" value="" checked=""> Lembre-se de mim
+                <span class="form-check-sign">
+                  <span class="check"></span>
+                </span>
+              </label>
+            </div>
+            <div class="footer text-center">
+              <a href="inicio.html" class="btn btn-outline-primary ">Login<div class="ripple-container"></div></a>
+            </div>
+            <div class="container" style="padding-top:30px;">
+              <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                  <p class="text-left ">
+                    <a id="esqueceu" href="#esqueceudiv" class="text-muted text-danger">Esqueceu sua senha?</a>
+                  </p>
                 </div>
-                <input type="password" class="form-control" placeholder="Senha...">
+                <div class="col-md-6 ml-auto mr-auto">
+                  <p class="text-right ">
+                    Novo por aqui?<a id="registro" href="#cadastrodiv" class="text-muted text-info">&ensp; Cadastre-se</a>
+                  </p>
+                </div>
               </div>
-            </span>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="footer text-center">
-        <a href="inicio.html" class="btn btn-primary btn-link ">Login<div class="ripple-container"></div></a>
+    </div>
+
+    <div class="col-md-5 col-sm-6 ml-auto mr-auto" style="display:none;" id="esqueceudiv">
+      <div class="card card-signup">
+        <form class="form" method="" action="">
+          <h4 class="card-title text-center">Esqueceu sua senha?</h4>
+          <h5 class=" text-center" >Digite seu e-mail, enviaremos uma nova senha</h5>
+          <div class="card-body">
+            <span class="bmd-form-group"><div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">mail</i>
+                </span>
+              </div>
+              <input type="email" class="form-control" placeholder="E-mail...">
+            </div>
+          </span>
+      </div>
+      <div class="footer text-center" style="padding-top:14px; padding-bottom:14px;">
+        <a href="login.html" class="btn btn-outline-danger ">Voltar<div class="ripple-container"></div></a>
+        <a href="login.html" class="btn btn-outline-primary ">Enviar<div class="ripple-container"></div></a>
       </div>
     </form>
+    </div>
+    </div>
+
+
+    <div class="col-md-5 col-sm-6 ml-auto mr-auto" style="display:none;" id="cadastrodiv">
+      <div class="card card-signup">
+        <form class="form" method="" action="">
+          <h4 class="card-title text-center">Faça seu registro!</h4>
+          <div class="card-body">
+            <span class="bmd-form-group">
+              <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">face</i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Nome...">
+            </div>
+          </span>
+            <span class="bmd-form-group">
+              <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">settings</i>
+                </span>
+              </div>
+              <input type="number" class="form-control" placeholder="ID Cognizant...">
+            </div>
+          </span>
+          <span class="bmd-form-group">
+            <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">settings</i>
+              </span>
+            </div>
+            <input type="text" class="form-control" placeholder="Grade...">
+          </div>
+        </span>
+        <span class="bmd-form-group">
+          <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">settings</i>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Horizontal...">
+        </div>
+      </span>
+      <span class="bmd-form-group">
+        <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="material-icons">settings</i>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Vertical...">
+      </div>
+    </span>
+    <span class="bmd-form-group"><div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="material-icons">mail</i>
+        </span>
+      </div>
+      <input type="email" class="form-control" placeholder="E-mail...">
+    </div>
+  </span>
+          <span class="bmd-form-group"><div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            <input type="password" class="form-control" placeholder="Senha...">
+          </div>
+        </span>
+
+        <span class="bmd-form-group"><div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="material-icons">lock_outline</i>
+            </span>
+          </div>
+          <input type="password" class="form-control" placeholder="Confirmar senha...">
+        </div>
+      </span>
+        </div>
+        <div class="footer text-center" style="padding-top: 30px; padding-bottom:30px;">
+        <a href="login.html" class="btn btn-outline-primary ">Efetuar Cadastro <div class="ripple-container"></div></a>
+        </div>
+        <div class="container" style="padding-top:30px;">
+        </div>
+        </form>
+    </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
 
 </div>
 <!--   Core JS Files   -->
@@ -75,6 +215,18 @@
 <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
 <script>
 
+$( document ).ready(function() {
+  $( "#esqueceu" ).click(function() {
+    $("#esqueceudiv").show();
+    $("#acessodiv").hide();
+});
+
+$( "#registro" ).click(function() {
+  $("#cadastrodiv").show();
+  $("#acessodiv").hide();
+});
+
+});
 </script>
 
 </body>
