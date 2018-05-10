@@ -17,7 +17,7 @@ function bookSearch(){
 	    },
 	
 	    success: function(data){
-	      if(data.totalItems > 0){
+	      if(data.totalItems != 1){
 	    	  for(i=0; i < data.items.length; i++){
 		    	  document.getElementById('titulo').value = data.items[i].volumeInfo.title
 		    	  var autores = ""
