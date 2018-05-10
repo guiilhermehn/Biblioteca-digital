@@ -150,5 +150,11 @@
 
 .star-rating .fa-star{color: yellow;}
 .img-150 {
-   width: 150px; // a altura se adequa proporcionalmente
+   width: 150px;
+}
+
+.product-page .page-header{
+    min-height: 40vh;
+    height: auto;
+    background-position: top center;
 }
