@@ -37,9 +37,12 @@ public class Papel implements GrantedAuthority, Serializable {
 			@JoinColumn(name = "usuario_id") })
 	public Set<Usuario> usuarios;
 
+	public Papel() {}
+	
 	public Papel(String string) {
 	
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

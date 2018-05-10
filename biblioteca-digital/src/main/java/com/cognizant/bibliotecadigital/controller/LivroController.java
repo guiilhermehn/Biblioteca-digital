@@ -178,7 +178,7 @@ public class LivroController{
 		//Photo photo = photoRepo.findById(id).get();
 		Livro livro = livroService.findById(id).get();
 		
-		if (livro.getFoto() == null || livro.getFoto().isEmpty()) {
+		if (livro.getFoto() != null || !livro.getFoto().isEmpty()) {
 			Resource resource = StorageService.getInstance().load(livro.getFoto());
 			if (resource.exists() || resource.isReadable()) {
 				return ResponseEntity.ok()
