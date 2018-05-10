@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+   UI UX / DESGIN
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="./assets/css/material-kit.css" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="./assets/css/custom.css" rel="stylesheet" />
+</head>
+
+<body class="index-page sidebar-collapse">
+  <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+      <div class="container">
+          <div class="navbar-translate">
+              <a class="navbar-brand" href="#">Digital </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav ml-auto">
+                  <li class="dropdown nav-item">
+                      <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                          <i class="material-icons">apps</i> Components
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <div class="page-header header-filter clear-filter backgroud-gradient" data-parallax="true">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand">
+            <h1>UI Digital Library Kit.</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main main-raised">
+    <div class="section section-basic">
+      <div class="container">
+        <div class="title">
+          <h2>Elementos Básicos</h2>
+        </div>
+        <!--  buttons -->
+        <div id="buttons" class="cd-section">
+          <div class="title">
+            <h3>Formatos de Botões </h3>
+          </div>
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <button class="btn btn-outline-primary ">Padrão</button>
+              <button class="btn  btn-primary btn-link ">Padrão Simples</button>
+              <button class="btn btn-rose btn-fab btn-link">
+                <i class="material-icons">favorite</i>
+              </button>
+            </div>
+          </div>
+          <div class="title">
+            <h3>
+              <small>Tamanho máximo</small>
+            </h3>
+          </div>
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <button class="btn btn-outline-primary">Regular</button>
+            </div>
+          </div>
+          <div class="title">
+            <h3>
+              <small> Cor </small>
+            </h3>
+          </div>
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <button class="btn btn-outline-primary">Padrão</button>
+              <button class="btn btn-outline-success">Salvar</button>
+              <button class="btn btn-outline-danger">Cancelar</button>
+              <div class="row">
+                <button class="btn  btn-primary btn-link ">Padrão Simples</button>
+                <button class="btn  btn-success btn-link ">Salvar Simples</button>
+                <button class="btn  btn-danger btn-link ">Cancelar Simples</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--                 end buttons		         -->
+        <div class="space-50"></div>
+        <!--                 inputs -->
+        <div id="inputs">
+          <div class="title">
+            <h3>Inputs</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-sm-4">
+              <div class="form-group">
+                <label for="exampleInput1" class="bmd-label-floating">E-mail</label>
+                <input type="email" class="form-control" id="exampleInput1">
+                <span class="bmd-help">Digite um e-mail válido.</span>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+              <div class="form-group has-success">
+                <label for="exampleInput2" class="bmd-label-floating">Sucesso input</label>
+                <input type="text" class="form-control" id="exampleInput2">
+                <span class="form-control-feedback">
+                  <i class="material-icons">done</i>
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+              <div class="form-group has-danger">
+                <label for="exampleInput3" class="bmd-label-floating">Error input</label>
+                <input type="email" class="form-control" id="exampleInput3">
+                <span class="bmd-help has-danger">We'll never share your email with anyone else.</span>
+                <span class="form-control-feedback">
+                  <i class="material-icons">clear</i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--                 end inputs -->
+        <div class="space-70"></div>
+        <!--                 textarea/checkbox/radio/toggle -->
+        <div id="checkRadios">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="title">
+                <h3>Checkboxes</h3>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value=""> Unchecked
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" checked> Checked
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" disabled> Disabled unchecked
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" disabled checked> Disabled checked
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="title">
+                <h3>Radio Buttons</h3>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> Radio is off
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked> Radio is on
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadios1" id="exampleRadios11" value="option1" disabled> Disabled radio is off
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="exampleRadio1" id="exampleRadios21" value="option2" checked disabled> Disabled radio is on
+                  <span class="circle">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="space-70"></div>
+        <!--    progress/sliders -->
+        <div id="progress">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="title">
+                    <h3>Tags</h3>
+                </div>
+                <input type="text" value="Amsterdam,Washington,Sydney,Beijing" class="tagsinput form-control" data-role="tagsinput" data-color="rose">
+                <!-- You can change data-color="rose" with one of our colors primary | warning | info | danger | success -->
+            </div>
+            <div class="col-md-6">
+              <div class="title">
+                <h3>Paginação</h3>
+              </div>
+              <ul class="pagination pagination-info">
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link"> prev</a>
+                </li>
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link">1</a>
+                </li>
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link">2</a>
+                </li>
+                <li class="active page-item">
+                  <a href="javascript:void(0);" class="page-link">3</a>
+                </li>
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link">4</a>
+                </li>
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link">5</a>
+                </li>
+                <li class="page-item">
+                  <a href="javascript:void(0);" class="page-link">next </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-navbars cd-section" id="navigation">
+      <div class="container">
+        <div class="title">
+          <h3>Header</h3>
+        </div>
+      </div>
+      <!--             navbar -->
+      <div id="navbar">
+
+        <div class="navigation-example backgroud-gradient">
+          <!--        primary navbar  -->
+          <nav class="navbar navbar-primary navbar-expand-lg">
+            <div class="container">
+              <div class="navbar-translate">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                  <li class="active nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">explore</i> Discover
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">account_circle</i> Profile
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">settings</i> Settings
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!--        end primary navbar -->
+          <!--         inverse navbar with notifications     -->
+        <div class="navigation-example backgroud-gradient">
+          <!--        primary navbar  -->
+          <nav class="navbar navbar-transparent navbar-expand-lg">
+            <div class="container">
+              <div class="navbar-translate">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                  <li class="active nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">explore</i> Discover
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">account_circle</i> Profile
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#pablo" class="nav-link">
+                      <i class="material-icons">settings</i> Settings
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!--        end primary navbar -->
+          <!--         inverse navbar with notifications     -->
+        </div>
+      </div>
+      <!-- end navbar  -->
+    </div>
+    <div class="section section-white">
+      <div class="container">
+        <!--                 nav pills -->
+        <div id="navigation-pills">
+          <div class="title">
+            <h3>Navegação no perfil do usuário</h3>
+          </div>
+          <div class="title">
+            <h3>
+              <small>Com icones</small>
+            </h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-8">
+              <ul class="nav nav-pills nav-pills-icons nav-pills-info" role="tablist">
+                <!--
+                                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                            -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#dashboard-1" role="tab" data-toggle="tab">
+                    <i class="material-icons">dashboard</i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="#schedule-1" role="tab" data-toggle="tab">
+                    <i class="material-icons">schedule</i> Schedule
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#tasks-1" role="tab" data-toggle="tab">
+                    <i class="material-icons">list</i> Tasks
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content tab-space">
+                <div class="tab-pane active" id="dashboard-1">
+                  Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.
+                  <br>
+                  <br> Dramatically visualize customer directed convergence without revolutionary ROI.
+                </div>
+                <div class="tab-pane" id="schedule-1">
+                  Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                  <br>
+                  <br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                </div>
+                <div class="tab-pane" id="tasks-1">
+                  Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                  <br>
+                  <br>Dynamically innovate resource-leveling customer service for state of the art customer service.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--                 end nav pills -->
+      </div>
+    </div>
+    <!--        notifications -->
+    <div class="section cd-section section-notifications" id="notifications">
+      <div class="container">
+        <div class="title">
+          <h3>Notificações</h3>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <div class="container">
+          <div class="alert-icon">
+            <i class="material-icons">info_outline</i>
+          </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+          </button>
+          <b>Info alert:</b> You&apos;ve got some friends nearby, stop looking at your phone and find them...
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <div class="container">
+          <div class="alert-icon">
+            <i class="material-icons">warning</i>
+          </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+          </button>
+          <b>Warning Alert:</b> Hey, it looks like you still have the &quot;copyright &#xA9; 2015&quot; in your footer. Please update it!
+        </div>
+      </div>
+      <div class="alert alert-danger">
+        <div class="container">
+          <div class="alert-icon">
+            <i class="material-icons">error_outline</i>
+          </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+          </button>
+          <b>Error Alert:</b> Damn man! You screwed up the server this time. You should find a good excuse for your Boss...
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--        end notifications -->
+    <div class="section">
+      <div class="container tim-container">
+        <!--     	        typography -->
+        <div id="typography" class="cd-section">
+          <div class="title">
+            <h2>Typography</h2>
+          </div>
+          <div class="row">
+            <div class="tim-typo">
+              <h1>
+                <span class="tim-note">Header 1</span>The Life of Material Kit </h1>
+            </div>
+            <div class="tim-typo">
+              <h2>
+                <span class="tim-note">Header 2</span>The Life of Material Kit</h2>
+            </div>
+            <div class="tim-typo">
+              <h3>
+                <span class="tim-note">Header 3</span>The Life of Material Kit</h3>
+            </div>
+            <div class="tim-typo">
+              <h4>
+                <span class="tim-note">Header 4</span>The Life of Material Kit</h4>
+            </div>
+            <div class="tim-typo">
+              <h5>
+                <span class="tim-note">Header 5</span>The Life of Material Kit</h5>
+            </div>
+            <div class="tim-typo">
+              <h6>
+                <span class="tim-note">Header 6</span>The Life of Material Kit</h6>
+            </div>
+            <div class="tim-typo">
+              <h1 class="title">
+                <span class="tim-note">Header 1 Title</span>The Life of Material Kit </h1>
+            </div>
+            <div class="tim-typo">
+              <h2 class="title">
+                <span class="tim-note">Header 2 Title</span>The Life of Material Kit</h2>
+            </div>
+            <div class="tim-typo">
+              <h3 class="title">
+                <span class="tim-note">Header 3 Title</span>The Life of Material Kit</h3>
+            </div>
+            <div class="tim-typo">
+              <h4 class="title">
+                <span class="tim-note">Header 4 Title</span>The Life of Material Kit</h4>
+            </div>
+            <div class="tim-typo">
+              <p>
+                <span class="tim-note">Paragraph</span>
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Quote</span>
+              <div class="blockquote undefined">
+                <p>
+                  I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that&#x2019;s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.
+                </p>
+                <small>
+                  Kanye West, Musician
+                </small>
+              </div>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Muted Text</span>
+              <p class="text-muted">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+              </p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Primary Text</span>
+              <p class="text-primary">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Info Text</span>
+              <p class="text-info">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Success Text</span>
+              <p class="text-success">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Warning Text</span>
+              <p class="text-warning">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers...
+              </p>
+            </div>
+            <div class="tim-typo">
+              <span class="tim-note">Danger Text</span>
+              <p class="text-danger">
+                I will be the leader of a company that ends up being worth billions of dollars, because I got the answers... </p>
+            </div>
+            <div class="tim-typo">
+              <h2>
+                <span class="tim-note">Small Tag</span>
+                Header with small subtitle
+                <br>
+                <small>Use &quot;small&quot; tag for the headers</small>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <!--                 end typography -->
+        <div class="space-50"></div>
+        <div id="contentAreas" class="cd-section">
+            <h2>Content Areas</h2>
+            <!--                 tables -->
+            <div id="tables">
+                <div class="title">
+                    <h3>Tables</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Simple Table</h4>
+                    </div>
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h4>
+                            <small>Simple With Actions</small>
+                        </h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>Name</th>
+                                        <th>Job Position</th>
+                                        <th>Since</th>
+                                        <th class="text-right">Salary</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>Andrew Mike</td>
+                                        <td>Develop</td>
+                                        <td>2013</td>
+                                        <td class="text-right">&#x20AC; 99,225</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td>John Doe</td>
+                                        <td>Design</td>
+                                        <td>2012</td>
+                                        <td class="text-right">&#x20AC; 89,241</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td>Alex Mike</td>
+                                        <td>Design</td>
+                                        <td>2010</td>
+                                        <td class="text-right">&#x20AC; 92,144</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">4</td>
+                                        <td>Mike Monday</td>
+                                        <td>Marketing</td>
+                                        <td>2013</td>
+                                        <td class="text-right">&#x20AC; 49,990</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">5</td>
+                                        <td>Paul Dickens</td>
+                                        <td>Communication</td>
+                                        <td>2015</td>
+                                        <td class="text-right">&#x20AC; 69,201</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--                 end tables -->
+            <div class="space-50"></div>
+            <!--                 comments -->
+            <div id="comments">
+                <div class="title">
+                    <h3>Comments</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <div class="media-area">
+                            <h3 class="title text-center">10 Comments</h3>
+                            <div class="media">
+                                <a class="float-left" href="#pablo">
+                                    <div class="avatar">
+                                        <img class="media-object rounded-circle img-fluid" src="assets/img/faces/avatar.jpg" alt="...">
+                                    </div>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Tina Andrew
+                                        <small>&#xB7; 7 minutes ago</small>
+                                    </h4>
+                                    <p>Chance too good. God level bars. I&apos;m so proud of @LifeOfDesiigner #1 song in the country. Panda! Don&apos;t be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
+                                    <p>All praises and blessings to the families of people who never gave up on dreams. Don&apos;t forget, You&apos;re Awesome!</p>
+                                    <div class="media-footer">
+                                        <a href="#pablo" class="btn btn-primary btn-link float-right" rel="tooltip" title="Reply to Comment">
+                                            <i class="material-icons">reply</i> Reply
+                                        </a>
+                                        <a href="#pablo" class="btn btn-danger btn-link float-right">
+                                            <i class="material-icons">favorite</i> 243
+                                        </a>
+                                    </div>
+                                    <div class="media media-post">
+                                        <a class="author float-left" href="#pablo">
+                                            <div class="avatar">
+                                                <img class="media-object rounded-circle img-fluid" alt="64x64" src="assets/img/faces/kendall.jpg">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <textarea class="form-control" placeholder="Write a nice reply or go home..." rows="4"></textarea>
+                                            <div class="media-footer">
+                                                <a href="#pablo" class="btn btn-outline-primary float-right">
+                                                    <i class="material-icons">reply</i> Reply
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="float-left" href="#pablo">
+                                    <div class="avatar">
+                                        <img class="media-object" alt="Tim Picture" src="assets/img/faces/marc.jpg">
+                                    </div>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">John Camber
+                                        <small>&#xB7; Yesterday</small>
+                                    </h4>
+                                    <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
+                                    <p> Don&apos;t forget, You&apos;re Awesome!</p>
+                                    <div class="media-footer">
+                                        <a href="#pablo" class="btn btn-primary btn-link float-right" rel="tooltip" title="Reply to Comment">
+                                            <i class="material-icons">reply</i> Reply
+                                        </a>
+                                        <a href="#pablo" class="btn btn-link btn-secondary float-right">
+                                            <i class="material-icons">favorite</i> 25
+                                        </a>
+                                    </div>
+                                    <div class="media">
+                                        <a class="float-left" href="#pablo">
+                                            <div class="avatar">
+                                                <img class="media-object" alt="64x64" src="assets/img/faces/avatar.jpg">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Tina Andrew
+                                                <small>&#xB7; 2 Days Ago</small>
+                                            </h4>
+                                            <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
+                                            <p> Don&apos;t forget, You&apos;re Awesome!</p>
+                                            <div class="media-footer">
+                                                <a href="#pablo" class="btn btn-primary btn-link float-right" rel="tooltip" title="Reply to Comment">
+                                                    <i class="material-icons">reply</i> Reply
+                                                </a>
+                                                <a href="#pablo" class="btn btn-danger btn-link float-right">
+                                                    <i class="material-icons">favorite</i> 243
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a class="float-left" href="#pablo">
+                                    <div class="avatar">
+                                        <img class="media-object" alt="64x64" src="assets/img/faces/kendall.jpg">
+                                    </div>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Rosa Thompson
+                                        <small>&#xB7; 2 Days Ago</small>
+                                    </h4>
+                                    <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
+                                    <p> Don&apos;t forget, You&apos;re Awesome!</p>
+                                    <div class="media-footer">
+                                        <a href="#pablo" class="btn btn-primary btn-link float-right" rel="tooltip" title="Reply to Comment">
+                                            <i class="material-icons">reply</i> Reply
+                                        </a>
+                                        <a href="#pablo" class="btn btn-danger btn-link float-right">
+                                            <i class="material-icons">favorite</i> 243
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pagination-area">
+                                <ul class="pagination pagination-info justify-content-center text-center">
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">&#xAB;</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">2</a>
+                                    </li>
+                                    <li class="active page-item">
+                                        <a href="#pablo" class="page-link">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">4</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">5</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#pablo" class="page-link">&#xBB;</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h3 class="text-center">Post your comment
+                            <small>- Logged In User -</small>
+                        </h3>
+                        <div class="media media-post">
+                            <a class="author float-left" href="#pablo">
+                                <div class="avatar">
+                                    <img class="media-object" alt="64x64" src="assets/img/faces/avatar.jpg">
+                                </div>
+                            </a>
+                            <div class="media-body">
+                                <textarea class="form-control" placeholder="Write some nice stuff or nothing..." rows="6"></textarea>
+                                <div class="media-footer">
+                                    <a href="#pablo" class="btn btn-outline-primary btn-wd float-right">Post Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end media-post -->
+                        <h3 class="text-center">Post your comment
+                            <br>
+                            <small>- Not Logged In User -</small>
+                        </h3>
+                        <div class="media media-post">
+                            <a class="author float-left" href="#pablo">
+                                <div class="avatar">
+                                    <img class="media-object" alt="64x64" src="assets/img/placeholder.jpg">
+                                </div>
+                            </a>
+                            <div class="media-body">
+                                <form class="form">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Your Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Your email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <textarea class="form-control" placeholder="Write some nice stuff or nothing..." rows="6"></textarea>
+                                    <div class="media-footer">
+                                        <h6>Sign in with</h6>
+                                        <a href="" class="btn btn-just-icon btn-round btn-twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a href="" class="btn btn-just-icon btn-round btn-facebook">
+                                            <i class="fa fa-facebook-square"></i>
+                                        </a>
+                                        <a href="" class="btn btn-just-icon btn-round btn-google">
+                                            <i class="fa fa-google-plus-square"></i>
+                                        </a>
+                                        <a href="#pablo" class="btn btn-outline-primary  float-right">Post Comment</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- end media-body -->
+                        </div>
+                        <!-- end media-post -->
+                    </div>
+                </div>
+            </div>
+            <!--                 end comments                 -->
+        </div>
+<div id="cards" class="cd-section">
+    <div class="section-gray">
+        <!--     *********    MORPHING CARDS     *********      -->
+        <div class="cards" id="morphingCards">
+            <div class="container">
+                <div class="title">
+                    <h3 id="manualRotatingCards">Livros</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="rotating-card-container manual-flip">
+                            <div class="card card-rotate">
+                                <div class="front">
+                                    <div class="card-body">
+                                        <h5 class="card-category card-category-social text-success">
+                                        Titulo: Blabla bla
+                                        </h5>
+                                        <h4 class="card-title">
+                                            <a href="">Autor: Fulano de Tal</a>
+                                        </h4>
+
+                                        <div class="row">
+                                          <div class="col-xs-6 mx-auto">
+                                            <a href="#" class="thumbnail">
+                                              <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                            </a>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="stats text-center">
+                                            <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                                <i class="material-icons">refresh</i> Mais informações
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="card-body">
+                                        <br>
+                                        <h5 class="card-title">
+                                          Sinopse:
+                                        </h5>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                        </p>
+
+                                        <div class="container">
+                                          <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                        <div class="stats text-center">
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                 Reservar
+                                            </a>
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                Emprestimo
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <button type="button" name="button" class="btn btn-link btn-rotate">
+                                            <i class="material-icons">refresh</i> Voltar.
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="rotating-card-container manual-flip">
+                            <div class="card card-rotate">
+                                <div class="front">
+                                    <div class="card-body">
+                                        <h5 class="card-category card-category-social text-success">
+                                        Titulo: Blabla bla
+                                        </h5>
+                                        <h4 class="card-title">
+                                            <a href="">Autor: Fulano de Tal</a>
+                                        </h4>
+
+                                        <div class="row">
+                                          <div class="col-xs-6 mx-auto">
+                                            <a href="#" class="thumbnail">
+                                              <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                            </a>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="stats text-center">
+                                            <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                                <i class="material-icons">refresh</i> Mais informações
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="card-body">
+                                        <br>
+                                        <h5 class="card-title">
+                                          Sinopse:
+                                        </h5>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                        </p>
+
+                                        <div class="container">
+                                          <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                        <div class="stats text-center">
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                 Reservar
+                                            </a>
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                Emprestimo
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <button type="button" name="button" class="btn btn-link btn-rotate">
+                                            <i class="material-icons">refresh</i> Voltar.
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="rotating-card-container manual-flip">
+                            <div class="card card-rotate">
+                                <div class="front">
+                                    <div class="card-body">
+                                        <h5 class="card-category card-category-social text-success">
+                                        Titulo: Blabla bla
+                                        </h5>
+                                        <h4 class="card-title">
+                                            <a href="">Autor: Fulano de Tal</a>
+                                        </h4>
+
+                                        <div class="row">
+                                          <div class="col-xs-6 mx-auto">
+                                            <a href="#" class="thumbnail">
+                                              <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                            </a>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="stats text-center">
+                                            <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                                <i class="material-icons">refresh</i> Mais informações
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="card-body">
+                                        <br>
+                                        <h5 class="card-title">
+                                          Sinopse:
+                                        </h5>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                        </p>
+
+                                        <div class="container">
+                                          <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                        <div class="stats text-center">
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                 Reservar
+                                            </a>
+                                            <a href="#pablo" class="btn btn-outline-primary">
+                                                Emprestimo
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <button type="button" name="button" class="btn btn-link btn-rotate">
+                                            <i class="material-icons">refresh</i> Voltar.
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--     *********    END MORPHING CARDS      *********      -->
+    </div>
+</div>
+      </div>
+    </div>
+    <div class="section cd-section" id="javascriptComponents">
+      <div class="container">
+        <div class="title">
+            <h2>Javascript components</h2>
+        </div>
+        <!--                 modals -->
+        <div class="row" id="modals">
+            <div class="col-md-6">
+                <div class="title">
+                    <h3>Modal</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <button class="btn btn-outline-primary  " data-toggle="modal" data-target="#myModal">
+                            <i class="material-icons">library_books</i> Classic
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#noticeModal">
+                            <i class="material-icons">info_outline</i> Notice
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#smallAlertModal">
+                            <i class="material-icons">notifications</i> Small alert
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="title">
+                        <h3>Datetime Picker</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="label-control">Date Picker</label>
+                                <input type="text" class="form-control datepicker" value="10/10/2016">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="title">
+                    <h3>Popovers</h3>
+                </div>
+                <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="left" title="Popover on left" data-content="Here will be some very useful information about his popover. Here will be some very useful information about his popover." data-container="body">On left</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="top" title="Popover on top" data-content="Here will be some very useful information about his popover." data-container="body">On top</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="bottom" title="Popover on bottom" data-content="Here will be some very useful information about his popover." data-container="body">On bottom</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="popover" data-placement="right" title="Popover on right" data-content="Here will be some very useful information about his popover." data-container="body">On right</button>
+                <br>
+                <br>
+                <div class="title">
+                    <h3>Tooltips</h3>
+                </div>
+                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="left" title="Tooltip on left" data-container="body">On left</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-container="body">On top</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" data-container="body">On bottom</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="right" title="Tooltip on right" data-container="body">On right</button>
+            </div>
+        </div>
+        <!--                 end modals	             -->
+        <!--                 collapse -->
+        <div id="collapse">
+            <div class="title">
+                <h3>Collapse</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="accordion" role="tablist">
+                        <div class="card card-collapse">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Collapsible Group Item #1
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-collapse">
+                            <div class="card-header" role="tab" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Collapsible Group Item #2
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-collapse">
+                            <div class="card-header" role="tab" id="headingThree">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Collapsible Group Item #3
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--                 end collapse -->
+        </div>
+        <!--                 end modals	             -->
+      </div>
+    </div>
+  </div>
+  <!-- Classic Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <i class="material-icons">clear</i>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+                  </p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-link">Nice Button</button>
+                  <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--  End Modal -->
+  <!-- notice modal -->
+  <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-notice" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">How Do You Become an Affiliate?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <i class="material-icons">clear</i>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="instruction">
+                      <div class="row">
+                          <div class="col-md-8">
+                              <strong>1. Register</strong>
+                              <p>The first step is to create an account at
+                                  <a href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or go for the classic version, whatever works best for you.</p>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="picture">
+                                  <img src="assets/img/dg1.jpg" alt="Thumbnail Image" class="rounded img-fluid">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="instruction">
+                      <div class="row">
+                          <div class="col-md-8">
+                              <strong>2. Apply</strong>
+                              <p>The first step is to create an account at
+                                  <a href="http://www.creative-tim.com/">Creative Tim</a>. You can choose a social network or go for the classic version, whatever works best for you.</p>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="picture">
+                                  <img src="assets/img/dg2.jpg" alt="Thumbnail Image" class="rounded img-fluid">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <p>If you have more questions, don&apos;t hesitate to contact us or send us a tweet @creativetim. We&apos;re here to help!</p>
+              </div>
+              <div class="modal-footer text-center">
+                  <button type="button" class="btn btn-info btn-round" data-dismiss="modal">Sounds good!</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- end notice modal -->
+  <!-- small modal -->
+  <div class="modal fade" id="smallAlertModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-small" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+              </div>
+              <div class="modal-body text-center">
+                  <h5>Are you sure you want to do this? </h5>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-link" data-dismiss="modal">Never mind</button>
+                  <button type="button" class="btn btn-success btn-link">Yes</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--    end small modal -->
+    <!--   Core JS Files   -->
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <script src="./assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+  <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
+  <script>
+    $(document).ready(function() {
+      //init DateTimePickers
+      materialKit.initFormExtendedDatetimepickers();
+
+      // Sliders Init
+      materialKit.initSliders();
+    });
+
+
+    function scrollToDownload() {
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+  <script>
+  var $star_rating = $('.star-rating .fa');
+
+  var SetRatingStar = function() {
+    return $star_rating.each(function() {
+      if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+        return $(this).removeClass('fa-star-o').addClass('fa-star');
+      } else {
+        return $(this).removeClass('fa-star').addClass('fa-star-o');
+      }
+    });
+  };
+
+  $star_rating.on('click', function() {
+    $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+    return SetRatingStar();
+  });
+
+  SetRatingStar();
+  $(document).ready(function() {
+
+  });
+  </script>
+</body>
+
+</html>
