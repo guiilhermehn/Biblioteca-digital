@@ -36,17 +36,17 @@ public class LivroController {
 		return mv;
 	}
 	*/
-	
+
 	@GetMapping("/livros")
 	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("/livro/livroPesquisa");
-		
+
 		if (query.equals("")) {
 			mav.addObject("livros", livroService.findAll());
 		} else {
 			mav.addObject("livros", livroService.search(query));
 		}
-		
+
 		return mav;
 	}
 
@@ -61,7 +61,7 @@ public class LivroController {
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-		
+
 		mv.addObject("livro", new Livro());
 		return mv;
 	}
@@ -73,7 +73,7 @@ public class LivroController {
 		if (bindingRes.hasErrors()) {
 			return new ModelAndView("/livro/livroCadastro");
 		}
-		
+
 		Livro salvo = livroService.save(livro);
 		unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
 
@@ -102,27 +102,27 @@ public class LivroController {
 		ModelAndView redirect = new ModelAndView("redirect:/livros");
 		return redirect;
 	}
-	
+
 	@PostMapping("/livro/unidade/edit")
 	/*
-	 * name="id" 
-	 * name="livroId" 
+	 * name="id"
+	 * name="livroId"
  		name="avarias"
 	 * */
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId, @RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
 		unidadeLivroService.save(unidade);
-		
+
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
-	
+
 	@PostMapping("/livros/unidade/deletar")
-	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId, 
+	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId,
 			@RequestParam("livroId") long livroId ) {
 		livroService.deleteById(unidadeId);
 		return new ModelAndView("redirect:/livros/edit/" + livroId);
 	}
-	
+
 	@PostMapping("/livros/unidade/create")
 	public ModelAndView adicionarUnidade(@ModelAttribute UnidadeLivro unidade) {
 		unidadeLivroService.save(unidade);

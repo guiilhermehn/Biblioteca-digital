@@ -29,22 +29,22 @@
 
             <label for="inputName" class="sr-only">Nome</label>
             <input type="text" id="inputName" class="form-control" placeholder="Nome" required=""
-                   autofocus="" data-th-field="*{nome}"> 
+                   autofocus="" data-th-field="*{nome}">
             <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputID"class="sr-only">ID Cognizant</label> 
+            <label for="inputID"class="sr-only">ID Cognizant</label>
             <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant"required="" onkeydown="javascript: return event.keyCode == 69 ? false : true"
                    data-th-field="*{idCgz}">
             <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputGrade" class="sr-only">Grade</label> 
+            <label for="inputGrade" class="sr-only">Grade</label>
             <input type="text" id="inputGrade" class="form-control" placeholder="Grade"
                    required="" data-th-field="*{grade}">
             <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputHor" class="sr-only">Horizontal</label> 
+            <label for="inputHor" class="sr-only">Horizontal</label>
             <input type="text" id="inputHor" class="form-control"
                    placeholder="Horizontal" required=""
                    data-th-field="*{horizontal}">
             <span th:if="${#fields.hasErrors('horizontal')}" th:errors="*{horizontal}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputVer" class="sr-only">Vertical</label> 
+            <label for="inputVer" class="sr-only">Vertical</label>
             <input type="text" id="inputVer" class="form-control"
                    placeholder="Vertical" required=""
                    data-th-field="*{vertical}">
@@ -60,15 +60,15 @@
                 <option value="Externo/Exemplo4">
               </datalist> -->
 
-            <label for="inputEmail" class="sr-only">Email</label> 
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email"required="" value="@cognizant.com" data-th-field="*{email}"> 
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email"required="" value="@cognizant.com" data-th-field="*{email}">
             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputPassword" class="sr-only">Senha</label> 
+            <label for="inputPassword" class="sr-only">Senha</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" oninvalid="this.setCustomValidity('Insira uma senha válida')"
-                   oninput="setCustomValidity('')" 
-                   data-th-field="*{senha}"> 
+                   oninput="setCustomValidity('')"
+                   data-th-field="*{senha}">
             <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputPassword"class="sr-only">Confirmar Senha</label> 
+            <label for="inputPassword"class="sr-only">Confirmar Senha</label>
             <input type="password"
                    id="inputPassword" class="form-control" placeholder="Confirmar Senha"
                    required=""
@@ -104,5 +104,3 @@
         crossorigin="anonymous"></script>
     </body>
 </html>
-
-
