@@ -68,75 +68,316 @@
           <div class="main main-raised">
             <div class="container">
               <div class="section text-center">
-                <div class="row d-flex justify-content-center">
-                  <div class="col-md-12 pt-1 pt-md-5">
+                <div class="row">
+                  <div class="col-md-12 ">
                     <form action="#" method="GET">
                       <div class="input-group">
-                        <input type="text" name="q" class="form-control" aria-label="Text input with dropdown button">
-                        <div class="input-group-append">
-                          <button class="btn btn-primary btn-link" type="submit">Pesquisar</button>
+                        <input type="text" name="" class="form-control">
+                        <button class="btn btn-outline-primary btn-link" type="submit">Pesquisar</button>
+                        <div class="col-md-12 row d-flex justify-content-end">
+                          <div style="margin-right:-30px;">
+                            <button class="btn btn-outline-primary btn-link btn-sm" type="button" id="pesquisa">Pesquisa Avançada</button>
+                          </div>
                         </div>
-                        <a class="nav-link" href="#" id="busca"> Busca Avançada</a>
                       </div>
                     </form>
                   </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div id="resultado" style="display:none;">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="form-control">
-                            <form data-th-action="@{/consulta}" method="post">
-                                <div class="form-group">
-                                    <label for="filtre">Filtro:</label>
-                                    <select class="form-control" id="filtre">
-                                        <option>Um</option>
-                                        <option>Dois</option>
-                                        <option>Tres</option>
-                                        <option>Quatro</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="contain">Author</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="contain">Contains the words</label>
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <div class="d-flex justify-content-end"><button type="submit" class="btn btn-primary "><i class="fas fa-search"></i></button></div>
-                            </form>
-                        </div>
+                  <div class="col-lg-5 col-md-5 col-sm-5 ml-auto mr-auto" id="avancado" style="display:none;">
+                    <select class="selectpicker " data-style="select-with-transition" title="Filtro" data-size="7">
+                      <option value="2">Foobar</option>
+                      <option value="3">Is great</option>
+                    </select>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Autor...">
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Livro...">
+                    </div>
+                    <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+                  </div>
 
-            <footer class="footer" data-background-color="black">
-              <div class="container">
-                <div class="copyright float-right">
-                  ©
-                  <script>
-                  document.write(new Date().getFullYear())
-                  </script>
+                  <div id="cards" class="cd-section">
+                    <div class="section-gray">
+                      <!--     *********    MORPHING CARDS     *********      -->
+                      <div class="cards" id="morphingCards">
+                        <div class="container">
+                          <div class="title">
+                            <h3 id="manualRotatingCards">Livros</h3>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                              <div class="rotating-card-container manual-flip">
+                                <div class="card card-rotate">
+                                  <div class="front">
+                                    <div class="card-body">
+                                      <h4 class=" text-success">
+                                        <a href="">Autor: Fulano de Tal</a>
+                                      </h4>
+                                      <div class="row">
+                                        <div class="col-xs-6 mx-auto">
+                                          <a href="#" class="thumbnail">
+                                            <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                          </a>
+                                        </div>
+                                      </div>
+                                      <div class="stats text-center">
+                                        <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                          <i class="material-icons">refresh</i> Mais informações
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="back">
+                                    <div class="card-body">
+                                      <h5 class="card-title">
+                                        Sinopse:
+                                      </h5>
+                                      <p class="card-description">
+                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                      </p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="stats text-center">
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Reservar
+                                        </a>
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Emprestimo
+                                        </a>
+                                      </div>
+                                      <br>
+                                      <button type="button" name="button" class="btn btn-link btn-rotate">
+                                        <i class="material-icons">refresh</i> Voltar.
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                              <div class="rotating-card-container manual-flip">
+                                <div class="card card-rotate">
+                                  <div class="front">
+                                    <div class="card-body">
+                                      <h5 class="card-category card-category-social card-title">
+                                        Titulo: Blabla bla
+                                      </h5>
+                                      <h4 class=" text-success">
+                                        <a href="">Autor: Fulano de Tal</a>
+                                      </h4>
+                                      <div class="row">
+                                        <div class="col-xs-6 mx-auto">
+                                          <a href="#" class="thumbnail">
+                                            <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                          </a>
+                                        </div>
+                                      </div>
+                                      <div class="stats text-center">
+                                        <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                          <i class="material-icons">refresh</i> Mais informações
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="back">
+                                    <div class="card-body">
+                                      <h5 class="card-title">
+                                        Sinopse:
+                                      </h5>
+                                      <p class="card-description">
+                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                      </p>
+
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="stats text-center">
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Reservar
+                                        </a>
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Emprestimo
+                                        </a>
+                                      </div>
+                                      <br>
+                                      <button type="button" name="button" class="btn btn-link btn-rotate">
+                                        <i class="material-icons">refresh</i> Voltar.
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                              <div class="rotating-card-container manual-flip">
+                                <div class="card card-rotate">
+                                  <div class="front">
+                                    <div class="card-body">
+                                      <h5 class="card-category card-category-social card-title">
+                                        Titulo: Blabla bla
+                                      </h5>
+                                      <h4 class=" text-success">
+                                        <a href="">Autor: Fulano de Tal</a>
+                                      </h4>
+                                      <div class="row">
+                                        <div class="col-xs-6 mx-auto">
+                                          <a href="#" class="thumbnail">
+                                            <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                          </a>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="stats text-center">
+                                        <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                          <i class="material-icons">refresh</i> Mais informações
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="back">
+                                    <div class="card-body">
+                                      <br>
+                                      <h5 class="card-title">
+                                        Sinopse:
+                                      </h5>
+                                      <p class="card-description">
+                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                      </p>
+
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="star-rating">
+                                              <span class="fa fa-star-o" data-rating="1"></span>
+                                              <span class="fa fa-star-o" data-rating="2"></span>
+                                              <span class="fa fa-star-o" data-rating="3"></span>
+                                              <span class="fa fa-star-o" data-rating="4"></span>
+                                              <span class="fa fa-star-o" data-rating="5"></span>
+                                              <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="stats text-center">
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Reservar
+                                        </a>
+                                        <a href="#pablo" class="btn btn-outline-primary">
+                                          Emprestimo
+                                        </a>
+                                      </div>
+                                      <br>
+                                      <button type="button" name="button" class="btn btn-link btn-rotate">
+                                        <i class="material-icons">refresh</i> Voltar.
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--     *********    END MORPHING CARDS      *********      -->
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
-            </footer>
+            </div>
+          </div>
 
-            <!--   Core JS Files   -->
-            <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
-            <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-            <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-            <script src="./assets/js/plugins/moment.min.js"></script>
-            <script src="./assets/js/plugins/bootstrap-tagsinput.js"></script>
-            <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-            <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
-            <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-            <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-            <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-            <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
+          <footer class="footer" data-background-color="black">
+            <div class="container">
+              <div class="copyright float-right">
+                ©
+                <script>
+                document.write(new Date().getFullYear())
+                </script>
+              </div>
+            </div>
+          </footer>
 
-          </body>
-          </html>
+          <!--   Core JS Files   -->
+          <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+          <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+          <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+          <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+          <script src="./assets/js/plugins/bootstrap-selectpicker.js"></script>
+          <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+          <script src="./assets/js/plugins/moment.min.js"></script>
+          <script src="./assets/js/plugins/bootstrap-tagsinput.js"></script>
+          <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+          <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+          <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+          <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+          <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+          <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
+
+          <script>
+          $(document).ready(function () {
+            $("#pesquisa").click(function () {
+              $("#avancado").toggle();
+            });
+          });
+          </script>
+          <script>
+          var $star_rating = $('.star-rating .fa');
+
+          var SetRatingStar = function() {
+            return $star_rating.each(function() {
+              if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+                return $(this).removeClass('fa-star-o').addClass('fa-star');
+              } else {
+                return $(this).removeClass('fa-star').addClass('fa-star-o');
+              }
+            });
+          };
+
+          $star_rating.on('click', function() {
+            $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+            return SetRatingStar();
+          });
+
+          SetRatingStar();
+          $(document).ready(function() {
+
+          });
+          </script>
+        </body>
+        </html>
