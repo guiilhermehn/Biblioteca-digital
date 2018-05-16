@@ -31,8 +31,7 @@ public class Papel implements GrantedAuthority, Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
-	
-	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "papel_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "usuario_id") })
 	public Set<Usuario> usuarios;
@@ -40,6 +39,11 @@ public class Papel implements GrantedAuthority, Serializable {
 	public Papel(String string) {
 	
 	}
+	
+	public Papel() {
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
