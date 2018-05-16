@@ -16,10 +16,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Transactional
 @Entity
 @Table(name = "Reserva")
 public class Reserva implements Serializable {
@@ -43,7 +45,7 @@ public class Reserva implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private Status status;
-	
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(name = "data_modifica_status")
@@ -54,11 +56,13 @@ public class Reserva implements Serializable {
 	private Livro livro;
 
 	@Transient
-	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-	private Date dataPrevisao;
+	private String dataPrevisao = "";
 
 	@Transient
-	private Boolean habilita;
+	private Boolean habilita = false;
+
+	@Transient
+	private Boolean habilitaApagarReserva = false;
 
 	public Long getId() {
 		return id;
@@ -72,7 +76,8 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro,@NotNull Date dataModificaStatus) {
+	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro,
+			@NotNull Date dataModificaStatus) {
 		super();
 		this.usuario = usuario;
 		this.dataReserva = dataReserva;
@@ -159,11 +164,11 @@ public class Reserva implements Serializable {
 		this.livro = livro;
 	}
 
-	public Date getDataPrevisao() {
+	public String getDataPrevisao() {
 		return dataPrevisao;
 	}
 
-	public void setDataPrevisao(Date dataPrevisao) {
+	public void setDataPrevisao(String dataPrevisao) {
 		this.dataPrevisao = dataPrevisao;
 	}
 
@@ -174,7 +179,6 @@ public class Reserva implements Serializable {
 	public void setHabilita(Boolean habilita) {
 		this.habilita = habilita;
 	}
-	
 
 	public Date getDataModificaStatus() {
 		return dataModificaStatus;
@@ -183,6 +187,16 @@ public class Reserva implements Serializable {
 	public void setDataModificaStatus(Date dataModificaStatus) {
 		this.dataModificaStatus = dataModificaStatus;
 	}
+	
+	
+
+	public Boolean getHabilitaApagarReserva() {
+		return habilitaApagarReserva;
+	}
+
+	public void setHabilitaApagarReserva(Boolean habilitaApagarReserva) {
+		this.habilitaApagarReserva = habilitaApagarReserva;
+	}
 
 	@Override
 	public String toString() {
@@ -190,6 +204,11 @@ public class Reserva implements Serializable {
 				+ ", livro=" + livro + "]";
 	}
 
-	
+	public boolean isValidaStatusEmEspera(Reserva reserva, Emprestimo emprestimo) {
+		if (reserva.getStatus().equals(Status.EM_ESPERA) && emprestimo.getDataDevolucao() != null) {
+			return true;
+		}
+		return false;
+	}
 
 }

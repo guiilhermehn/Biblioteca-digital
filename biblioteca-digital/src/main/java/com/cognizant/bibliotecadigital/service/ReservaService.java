@@ -1,14 +1,11 @@
 package com.cognizant.bibliotecadigital.service;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.bibliotecadigital.model.Reserva;
-import com.cognizant.bibliotecadigital.model.Status;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.repository.ReservaRepository;
 
 @Service
@@ -36,15 +33,50 @@ public class ReservaService {
 		return id;
 	}
 
-	public boolean isReservado(Long livroId) {
-		return reservaRepository.countReservasByUnidadeLivroId(livroId) > 0L;
+	public boolean isReservado(Long livroId,Long usuarioId) {
+		return reservaRepository.countReservasByUnidadeLivroId(livroId,usuarioId) > 0L;
 	}
 
 
 
-	public UnidadeLivro findUnidadeIdByReservaId(Long reservaId) {
+	public Long findUnidadeIdByReservaId(Long reservaId) {
 		
 		return reservaRepository.findUnidadeIdByReservaId(reservaId);
+	}
+
+
+
+	public Long findReservaIdByEmprestimo(Long id) {
+		
+		return reservaRepository.findReservaIdByEmprestimoId(id);
+	}
+
+
+
+	public boolean isEmprestadoOuDevolvido(Long id) {
+		
+		return reservaRepository.countEmprestadoOuDevolvido(id) > 0L;
+	}
+
+
+
+	public Iterable<Reserva> findAllByUsuarioId(Long id) {
+		
+		return reservaRepository.findAllByUsuarioId(id);
+	}
+
+
+
+	public boolean countReservasPorIdLivro(Long id,Long usuarioId) {
+		
+		return reservaRepository.countReservasPorIdLivro(id,usuarioId) == 0L;
+	}
+
+
+
+	public boolean countReservaAguardandoPorUnidadeId(Long id) {
+		
+		return reservaRepository.countReservaAguardandoPorUnidadeId(id) == 0L;
 	}
 
 }

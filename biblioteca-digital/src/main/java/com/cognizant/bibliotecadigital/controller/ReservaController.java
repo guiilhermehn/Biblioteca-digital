@@ -2,7 +2,7 @@ package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,7 @@ import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.Reserva;
 import com.cognizant.bibliotecadigital.model.Status;
+import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
@@ -57,37 +59,68 @@ public class ReservaController {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		for (Reserva reserva : reservas) {
-
-			Date disponibilidade = calculaDisponibilidade(reserva);
-
-			if (disponibilidade == null && reserva.getStatus().equals(Status.AGUARDANDO)) {
-				reserva.setHabilita(true);
-				reserva.setDataPrevisao(formataData(disponibilidade));
-			} else if (reserva.getStatus().equals(Status.EMPRESTADO)) {
-				reserva.setHabilita(false);
-				reserva.setDataPrevisao(null);
-			} else {
-				reserva.setHabilita(false);
-				reserva.setDataPrevisao(disponibilidade);
-			}
+		List<Reserva> reservasPorUsuario = new ArrayList<>();
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			usuario = (Usuario) auth.getPrincipal();
 		}
 
-		mv.addObject("reservas", reservaService.findAll());
+		if (!reservas.isEmpty()) {
+
+			for (Reserva reserva : reservas) {
+				
+				List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService
+						.emprestimoPorReservaId(reserva.getId());
+				if (!emprestimos.isEmpty()) {
+					for (Emprestimo emprestimo : emprestimos) {
+						if(reserva.getStatus().equals(Status.FINALIZADO)) {
+							reserva.setHabilita(true);
+							continue;
+						}
+						Date disponibilidade = calculaDisponibilidade(emprestimo);
+						if (emprestimo.getDataDevolucao() == null) {
+							reserva.setStatus(Status.EM_ESPERA);
+							reserva.setDataPrevisao(formataData(disponibilidade));
+							reserva.setHabilita(true);
+						} else {
+							reserva.setStatus(Status.AGUARDANDO);
+							reserva.setHabilita(false);
+						}
+					}
+					if (reserva.getUsuario().getId().equals(usuario.getId())) {
+						reservasPorUsuario.add(reserva);
+					}
+					reservaService.save(reserva);
+				}
+
+			}
+
+		}
+
+		mv.addObject("reservas", reservasPorUsuario);
 
 		return mv;
 	}
 
-	private Date formataData(Date disponibilidade) throws ParseException {
-		SimpleDateFormat dt = new SimpleDateFormat("dd/mm/yyyy");
-		String data = dt.format(new Date());
-		Date dataFormatada = dt.parse(data);
+	private String formataData(Date disponibilidade) {
+		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
+
 		return dataFormatada;
 
 	}
 
 	@PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
+
+		Reserva reserva = reservaService.findById(id).get();
+
+		if (reservaService.isEmprestadoOuDevolvido(id)) {
+			reserva.setHabilitaApagarReserva(false);
+		} else {
+			reserva.setHabilitaApagarReserva(true);
+		}
+
 		reservaService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/reservas");
 
@@ -102,16 +135,12 @@ public class ReservaController {
 
 		GregorianCalendar dataReserva = new GregorianCalendar();
 
-		if (reservaService.isReservado(livroId)) {
-			redirectAttributes.addFlashAttribute("message", "Livro já reservado!");
-			return new ModelAndView("redirect:/reservas");
-		}
-
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			usuario = (Usuario) auth.getPrincipal();
 		}
+
 		Date dataModificaStatus = new Date();
 
 		Reserva reserva = new Reserva(usuario, dataReserva.getTime(), Status.EM_ESPERA, livro, dataModificaStatus);
@@ -124,15 +153,15 @@ public class ReservaController {
 	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
 	public ModelAndView emprestimoAposReserva(@RequestParam("reservaId") Long reservaId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
-		
-		
-		if (emprestimoService.isEmprestado(reservaId)) {
-			redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
-			return new ModelAndView("redirect:/emprestimos");
-		}
-		
-		
-		UnidadeLivro unidade = reservaService.findUnidadeIdByReservaId(reservaId);
+
+		// if (emprestimoService.isEmprestado(reservaId)) {
+		// redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
+		// return new ModelAndView("redirect:/emprestimos");
+		// }
+
+		Long unidadeId = reservaService.findUnidadeIdByReservaId(reservaId);
+
+		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
 		GregorianCalendar agora = new GregorianCalendar();
 
@@ -149,31 +178,30 @@ public class ReservaController {
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
 
+		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
+
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
 		emprestimoService.save(emprestimo);
 
+		Reserva reserva = reservaService.findById(reservaId).get();
+
+		reserva.setStatus(Status.FINALIZADO);
+		reserva.setDataModificaStatus(new Date());
+
+		reservaService.save(reserva);
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
-		Reserva reserva = reservaService.findById(reservaId).get();
-
-		reserva.setStatus(Status.EMPRESTADO);
-		reserva.setDataModificaStatus(new Date());
-
-		reservaService.save(reserva);
-
-		reserva.getHabilita();
-
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
-	private Date calculaDisponibilidade(Reserva reserva) {
+	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
-		Emprestimo emprestimo = emprestimoService.emprestimoPorReservaId(reserva.getId());
-
-		if (emprestimo == null || emprestimo.getDataDevolucao() == null) {
-			return null;
+		if (emprestimo == null) {
+			return new Date();
+		} else if (emprestimo.getDataDevolucao() == null) {
+			return emprestimo.getPrazoDevolucao();
 		}
 
 		GregorianCalendar data = new GregorianCalendar();

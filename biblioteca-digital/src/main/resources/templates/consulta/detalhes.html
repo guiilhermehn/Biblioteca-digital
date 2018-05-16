@@ -76,7 +76,7 @@
                                                      <span>
                                                         <form th:action="@{/reservas/efetuarReserva}" method="POST">
                                                             <input type="hidden" name="livroId" data-th-value="${livro.id}" />
-                                                            <button class="btn btn-outline-success" data-th-disabled="${livro.reservado}" >Reserva</button>
+                                                            <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Reserva</button>
                                                         </form>
                                                     </span>
                                                     <!-- Not on MVP - - > 

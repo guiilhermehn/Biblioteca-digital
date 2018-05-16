@@ -12,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import org.springframework.data.annotation.Transient;
 
+@Transactional
 @Entity
 @Table(name = "unidadeLivro")
 public class UnidadeLivro implements Serializable {
@@ -35,6 +37,9 @@ public class UnidadeLivro implements Serializable {
 	
 	@Transient
 	private boolean emprestado;
+	
+	@Transient
+	private boolean reservado;
 	
 	
 
@@ -119,6 +124,14 @@ public class UnidadeLivro implements Serializable {
 	}
 	
 	
+	public boolean isReservado() {
+		return reservado;
+	}
+
+	public void setReservado(boolean reservado) {
+		this.reservado = reservado;
+	}
+
 	@Override
 	public String toString() {
 		return "UnidadeLivro [id=" + id + ", avarias=" + avarias + "]";
