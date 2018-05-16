@@ -2,6 +2,7 @@ package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,8 +21,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.transaction.Transactional;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 @Transactional
 @Entity
@@ -34,33 +40,50 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-
+	
 	@Column(name = "isbn13", unique = true)
-	@Size(min=8, max=13)
+	@Size(max=13, message="ISBN inválido!")
+	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
 
 	@NotNull
-	@Size(min=4, max=255)
+	@Size(min=1, max=255, message="Titulo deve conter entre 1 e 255 caracteres!")
 	@Column(name = "titulo")
 	private String titulo;
 
+
 	@Column(name = "ano_publicacao")
-	private int anoPublicacao;
+	@Size(min=4, max=4, message="Ano deve conter 4 digitos!")
+	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
+	private String anoPublicacao;
 
 	@Column(name = "edicao")
-	private int edicao;
+	private String edicao;
 
-	@Size(min=4, max=255)
+
+	@Size(min=0, max=10000, message="Descrição atingiu o limite máximo de 10.000 caracteres!")
 	@Column(name = "sinopse")
 	private String sinopse;
 
 	@Column(name = "foto")
 	private String foto;
 	
+	@Column(name = "url_foto")
+	private String urlFoto;
+	
+
+	@Size(min=4, max=1000, message="Autor deve conter entre 4 e 1000 digitos!")
 	@Column(name="autor")
+
 	private String autor;
 
+	@Column(name = "statusLivro")
+	private StatusLivro statusLivro;
 
+	@Transient
+	private boolean habilita;
+
+	
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -71,23 +94,23 @@ public class Livro implements Serializable {
 	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
-	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
-	
 	// Construtor
-	public Livro( ) {
+	public Livro() {
 		this.categoriaLivros = new HashSet<>();
 		this.reservas = new ArrayList<>();
 		this.unidadeLivros = new ArrayList<>();
 	}
 
-	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
 
-	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
-			int edicao, String sinopse, String foto, String autor,
+
+	public Livro(Long id, String isbn13, String titulo, String anoPublicacao,
+			String edicao, String sinopse, String foto, String autor,
 			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+
 			List<UnidadeLivro> unidadeLivros) {
 		this.id = id;
 		this.isbn13 = isbn13;
@@ -100,16 +123,20 @@ public class Livro implements Serializable {
 		this.categoriaLivros = categoriaLivros;
 		this.reservas = reservas;
 		this.unidadeLivros = unidadeLivros;
+		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
+	
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + anoPublicacao;
+		result = prime * result + ((anoPublicacao == null) ? 0 : anoPublicacao.hashCode());
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((categoriaLivros == null) ? 0 : categoriaLivros.hashCode());
-		result = prime * result + edicao;
+		result = prime * result + ((edicao == null) ? 0 : edicao.hashCode());
 		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isbn13 == null) ? 0 : isbn13.hashCode());
@@ -117,8 +144,10 @@ public class Livro implements Serializable {
 		result = prime * result + ((sinopse == null) ? 0 : sinopse.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		result = prime * result + ((unidadeLivros == null) ? 0 : unidadeLivros.hashCode());
+		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -129,7 +158,10 @@ public class Livro implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Livro other = (Livro) obj;
-		if (anoPublicacao != other.anoPublicacao)
+		if (anoPublicacao == null) {
+			if (other.anoPublicacao != null)
+				return false;
+		} else if (!anoPublicacao.equals(other.anoPublicacao))
 			return false;
 		if (autor == null) {
 			if (other.autor != null)
@@ -141,7 +173,10 @@ public class Livro implements Serializable {
 				return false;
 		} else if (!categoriaLivros.equals(other.categoriaLivros))
 			return false;
-		if (edicao != other.edicao)
+		if (edicao == null) {
+			if (other.edicao != null)
+				return false;
+		} else if (!edicao.equals(other.edicao))
 			return false;
 		if (foto == null) {
 			if (other.foto != null)
@@ -178,8 +213,14 @@ public class Livro implements Serializable {
 				return false;
 		} else if (!unidadeLivros.equals(other.unidadeLivros))
 			return false;
+		if (urlFoto == null) {
+			if (other.urlFoto != null)
+				return false;
+		} else if (!urlFoto.equals(other.urlFoto))
+			return false;
 		return true;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -205,19 +246,19 @@ public class Livro implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public int getAnoPublicacao() {
+	public String getAnoPublicacao() {
 		return anoPublicacao;
 	}
 
-	public void setAnoPublicacao(int anoPublicacao) {
+	public void setAnoPublicacao(String anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
 
-	public int getEdicao() {
+	public String getEdicao() {
 		return edicao;
 	}
 
-	public void setEdicao(int edicao) {
+	public void setEdicao(String edicao) {
 		this.edicao = edicao;
 	}
 
@@ -260,14 +301,39 @@ public class Livro implements Serializable {
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
 	}
-	
+
 	public String getAutor() {
 		return autor;
 	}
 
-
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+	
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
+
+	public StatusLivro getStatusLivro() {
+		return statusLivro;
+	}
+
+	public void setStatusLivro(StatusLivro statusLivro) {
+		this.statusLivro = statusLivro;
 	}
 
 	@Override

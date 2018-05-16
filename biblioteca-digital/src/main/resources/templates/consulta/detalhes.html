@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"> <a class="nav-link "  data-th-href="@{/emprestimos}"> <i class="fas fa-book fa-lg"></i> Empréstimo</a> </li>
-                   <!--   <li class="nav-item"> <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a> </li>-->
+                     <li class="nav-item"> <a class="nav-link" data-th-href="@{/reservas}"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a> </li>
                      <li class="nav-item">
                         <a class="nav-link" data-th-href="@{/livros}"> <i class="far fa-calendar-check fa-lg"></i> Livros</a>
                     </li>
@@ -71,6 +71,12 @@
                                                         <form th:action="@{/emprestimos/efetuarEmprestimo}" method="POST">
                                                             <input type="hidden" name="unidadeId" data-th-value="${unidade.id}" />
                                                             <button class="btn btn-outline-success"  data-th-disabled="${unidade.emprestado}">Emprestimo</button>
+                                                        </form>
+                                                    </span>
+                                                     <span>
+                                                        <form th:action="@{/reservas/efetuarReserva}" method="POST">
+                                                            <input type="hidden" name="livroId" data-th-value="${livro.id}" />
+                                                            <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Reserva</button>
                                                         </form>
                                                     </span>
                                                     <!-- Not on MVP - - > 

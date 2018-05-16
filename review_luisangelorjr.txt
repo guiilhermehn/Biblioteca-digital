@@ -1,0 +1,89 @@
+@luisangelorjr
+
+1 - FOCO PRINCIPAL ENGAJAMENTO E INTERAÇÃO não o registro
+2 - Usuário não usar o sistema como um peso
+
+#PensarForaDaCaixa
+#UX
+#Gamefication
+#Storyteling
+#SalesForce (Cria o ambiente de graça, patentes/niveis, etc)
+#Paixão
+
+SoloLearn - app
+NetFlix
+Clash Of Clan
+Metal Gear Solid 4
+Mercado Livre
+
+*ChatBots e IA?
+
+Marketing Digital
+
+  Esquecer formulário
+
+ - Luiz - Desejo do usuário sobre sugestão de livro
+
+ - Luiz - Demografia e tracking - avaliar o que já leu e o que absorveu, o feedback
+  ao retornar o livro (o que mais chamou atenção no livro, ser mais pessoal) - Possibilidade
+  futura: Linkar com o GoPerfom
+
+ - Luiz - Tamanho da view - para Mobile
+
+ - Cadastro de livros - API - Amazon - Alexandre
+
+ - Cadastro do livro - Origem (se veio de doação/Cognizant) - Há na Board
+
+ - Controle com nota fiscal
+
+ - Responsável da Biblioteca e Treinamento Adicional -
+
+ - Fluxo
+
+ - Livros com assuntos relacionados - TODO categorias
+
+ - Agendamento, visualizar a data de retorno e reserva  - TODO em backlog
+
+ - Não devolução - Acionamento por responsável por Digital - Possivelmente Luiz
+
+ - Quando a pessoa devolve o livro, o sistema dará outras opções dependendo do empréstimo para continuidade do ciclo de leitura
+
+ - Livros sugeridos
+
+ - Cultura da experiência da continuidade. O aplicativo tem que gerar nos usuários essa Cultura
+
+ - Luiz disse sobre o DOJO - https://imasters.com.br/dojo/ -
+
+ - Luiz sobre a retrospectiva 11/04 e 15/04
+ API / Imagem /
+
+ - Como mostra a devolução e avaria
+
+ - Luiz esperava mais sobre funcionalidades
+ Vender o BackLog para o cliente (quando partir para o DOING)
+ TIP: MAS o cliente irá querer mais, saber vender o pós. Quais são os NextSteps
+
+ - FOCO NO USUÁRIO em Digital Business estamos no processo de transformação Digital #UserExperience #UE
+ - User Experience
+ - Meus Favoritos - CoraçãoJoiaEstrela
+ - Compartilhar
+ - Novidades da Semana
+ - Ranking leitores
+ - Graduação
+ - Solo Learn
+ - Yammer
+ - Email - Será a melhor forma de engajamento
+ - Resumo dos principais livros
+ - Footer ou Header: Formas de ir para outras seções
+
+Estímulos para pontos, quiz
+
+StakeHolders estamos na mesma jornada
+
+Sistemas falando humanamente com o usuário
+
+Produtividade do Time Scrum é crescente
+
+Trocar IDs com a Ana
+
+Trello será criado pelo Márcio

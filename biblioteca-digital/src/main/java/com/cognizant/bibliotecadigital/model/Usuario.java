@@ -12,10 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,7 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-
+@Transactional
 public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 902783495L;
@@ -71,8 +74,12 @@ public class Usuario implements Serializable, UserDetails {
 	@Transient
 	private String confirmaSenha;
 
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-	private Set<Papel> papeis;
+	@Transient
+	private Boolean verificaRole = false;
+
+	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
+	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id") }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
 
@@ -83,9 +90,6 @@ public class Usuario implements Serializable, UserDetails {
 	private List<Reserva> reservas;
 
 	// Construtor
-	public Usuario() {
-
-	}
 
 	public Usuario(@NotNull String nome, @NotNull String email, @NotNull String grade, @NotNull String senha,
 			Set<Papel> papeis) {
@@ -97,44 +101,18 @@ public class Usuario implements Serializable, UserDetails {
 		this.papeis = papeis;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return papeis;
+	public Usuario() {
+		super();
 	}
 
-	@Override
-	public String getPassword() {
+	
 
-		return senha;
+	public Boolean getVerificaRole() {
+		return verificaRole;
 	}
 
-	@Override
-	public String getUsername() {
-		return nome;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-
-		return true;
+	public void setVerificaRole(Boolean verificaRole) {
+		this.verificaRole = verificaRole;
 	}
 
 	@Override
@@ -323,6 +301,48 @@ public class Usuario implements Serializable, UserDetails {
 		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
 				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
 				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		
+		return false;
 	}
 
 }
