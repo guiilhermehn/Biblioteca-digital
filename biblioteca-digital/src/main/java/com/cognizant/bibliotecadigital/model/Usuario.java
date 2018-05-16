@@ -2,6 +2,7 @@ package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -102,7 +103,8 @@ public class Usuario implements Serializable, UserDetails {
 	}
 
 	public Usuario() {
-		super();
+		this.id = 0L;
+		this.papeis = new HashSet<>();
 	}
 
 	

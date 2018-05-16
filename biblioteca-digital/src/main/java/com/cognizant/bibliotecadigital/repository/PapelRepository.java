@@ -9,4 +9,6 @@ import com.cognizant.bibliotecadigital.model.Papel;
 public interface PapelRepository extends CrudRepository<Papel, Long> {
 	
 	Optional<Papel> findByNome(String nome);
+	
+	boolean existsByNome(String nome);
 }
