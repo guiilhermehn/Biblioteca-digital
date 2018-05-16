@@ -67,7 +67,7 @@ public class UsuarioController {
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_USUARIO"))));
-		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
+		//List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
 		usuarioService.save(usuario);
 		
 		//Long idUser = usuarioService.findIdUsuarioByEmail(usuario.getEmail());
