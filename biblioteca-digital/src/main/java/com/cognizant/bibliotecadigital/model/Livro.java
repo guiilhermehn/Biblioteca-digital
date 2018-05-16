@@ -36,11 +36,11 @@ public class Livro implements Serializable {
 	private Long id;
 
 	@Column(name = "isbn13", unique = true)
-	@Size(min=8, max=13)
+	@Size(min = 8, max = 13)
 	private String isbn13;
 
 	@NotNull
-	@Size(min=4, max=255)
+	@Size(min = 4, max = 255)
 	@Column(name = "titulo")
 	private String titulo;
 
@@ -50,17 +50,23 @@ public class Livro implements Serializable {
 	@Column(name = "edicao")
 	private int edicao;
 
-	@Size(min=4, max=255)
+	@Size(min = 4, max = 255)
 	@Column(name = "sinopse")
 	private String sinopse;
 
 	@Column(name = "foto")
 	private String foto;
-	
-	@Column(name="autor")
+
+	@Column(name = "autor")
 	private String autor;
 
+	@Column(name = "statusLivro")
+	private StatusLivro statusLivro;
 
+	@Transient
+	private boolean habilita;
+
+	
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -74,20 +80,17 @@ public class Livro implements Serializable {
 	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
-	
 	// Construtor
-	public Livro( ) {
+	public Livro() {
 		this.categoriaLivros = new HashSet<>();
 		this.reservas = new ArrayList<>();
 		this.unidadeLivros = new ArrayList<>();
 	}
 
-	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
 
-	public Livro(Long id, String isbn13, String titulo, int anoPublicacao,
-			int edicao, String sinopse, String foto, String autor,
-			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+	public Livro(Long id, String isbn13, String titulo, int anoPublicacao, int edicao, String sinopse, String foto,
+			String autor, Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
 			List<UnidadeLivro> unidadeLivros) {
 		this.id = id;
 		this.isbn13 = isbn13;
@@ -100,6 +103,7 @@ public class Livro implements Serializable {
 		this.categoriaLivros = categoriaLivros;
 		this.reservas = reservas;
 		this.unidadeLivros = unidadeLivros;
+		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
 	@Override
@@ -260,14 +264,29 @@ public class Livro implements Serializable {
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
 	}
-	
+
 	public String getAutor() {
 		return autor;
 	}
 
-
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
+
+	public StatusLivro getStatusLivro() {
+		return statusLivro;
+	}
+
+	public void setStatusLivro(StatusLivro statusLivro) {
+		this.statusLivro = statusLivro;
 	}
 
 	@Override

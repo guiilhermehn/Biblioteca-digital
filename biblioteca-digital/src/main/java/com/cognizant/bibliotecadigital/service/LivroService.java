@@ -38,5 +38,9 @@ public class LivroService {
 	public Iterable<Livro> search(String query) {
 		return livroRepository.findByTituloContainingOrSinopseContainingOrAutorContaining(query, query, query);
 	}
+
+	public boolean findIdUsuarioComEmprestimo(Long idUsuario) {
+		return livroRepository.findIdUsuarioComEmprestimo(idUsuario) > 0L;
+	}
 	
 }
