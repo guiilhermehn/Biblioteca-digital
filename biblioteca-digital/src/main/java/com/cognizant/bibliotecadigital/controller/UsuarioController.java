@@ -68,9 +68,11 @@ public class UsuarioController {
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
-		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(papelService.findByNome("ROLE_USUARIO").get())));
+		//usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(papelService.findByNome("ROLE_USUARIO").get())));
 		//List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
+		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
 		usuarioService.save(usuario);
+		
 		
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
