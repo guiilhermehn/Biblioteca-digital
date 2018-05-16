@@ -12,10 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,7 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
-
+@Transactional
 public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 902783495L;
@@ -70,8 +73,12 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Transient
 	private String confirmaSenha;
+	
+	@Transient
+	private Boolean verificaRole = false;
 
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
+	
+	@ManyToMany(mappedBy="usuarios", fetch=FetchType.EAGER)
 	private Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
@@ -135,6 +142,15 @@ public class Usuario implements Serializable, UserDetails {
 	public boolean isEnabled() {
 
 		return true;
+	}
+	
+
+	public Boolean getVerificaRole() {
+		return verificaRole;
+	}
+
+	public void setVerificaRole(Boolean verificaRole) {
+		this.verificaRole = verificaRole;
 	}
 
 	@Override
