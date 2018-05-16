@@ -67,23 +67,101 @@
           </div>
           <div class="main main-raised">
             <div class="container">
+              <!-- TODO: Limpar bloco original comentado @luisangelorjr
               <div class="section text-center">
-                <div class="row d-flex justify-content-center">
-                  <div class="col-md-12 pt-1 pt-md-5">
+                <div class="row d-flex justify-content-center"> -->
+                <div class="col-md-12 pt-1 pt-md-5">
+                    <h3>Inserir ISBN</h3>
+                    <h5>para consulta online</h5>
                     <form action="#" method="GET">
                       <div class="input-group">
-                        <input type="text" name="q" class="form-control" aria-label="Text input with dropdown button">
+                        <input type="text" class="form-control" id="isbn13" aria-label="Pesquisa" data-th-field="*{isbn13}">
                         <div class="input-group-append">
                           <button class="btn btn-primary btn-link" type="submit">Consultar</button>
                         </div>
                         <a class="nav-link" href="#" id="busca">Cadastrar</a>
                       </div>
+
                     </form>
+                    <!-- Campos após ISBN -->
+                    <div class="media">
+
+                                    <div class="media-body">
+                                        <div class="form-group">
+                                            <label for="titulo" class="col-form-label">Titulo:</label> <input type="text" class="form-control" data-th-field="*{titulo}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="autor" class="col-form-label">Autor:</label> <input type="text" class="form-control" data-th-field="*{autor}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="anoPublicacao">Ano de Publicação</label> <input type="text" class="form-control" id="anoPublicacao" data-th-field="*{anoPublicacao}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="anoPublicacao">Edição</label> <input type="text" class="form-control" id="edicao" data-th-field="*{edicao}">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="" sinopse""="" class="col-form-label">Descrição:</label>
+                                            <textarea class="form-control" id="sinopse" data-th-field="*{sinopse}"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1">Example file
+                                                input</label> <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                        </div>
+                                    </div>
+
+                                    <!-- TODO Carregar diretamente da thumbnail do Google Books -->
+                                    <div class="card-footer d-flex justify-content-center">
+                                      <div>
+                                        <h6>Preview:</h6>
+                                          <div class="card-body">
+                                                                            <h4 class="card-title">
+                                                                                  <a href="">Admirável Mundo Novo</a>
+                                                                              </h4>
+                                                                              <h5 class="card-category card-category-social text-success">
+                                                                              Aldous Huxley
+                                                                              </h5>
+
+                                                                              <div class="row">
+                                                                                <div class="col-xs-6 mx-auto">
+                                                                                  <a href="#" class="thumbnail">
+                                                                                    <img class="img-150 " src="https://books.google.com.br/books/content?id=FfX-AgAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;imgtk=AFLRE735UmjiTkej2e2ScOEaQHlIiG7JshSdpBONXAmzGgyCSqQoPGcFVuO3D7_Q2D2QQ6uV3nj44Gk_OBABMaN7_BmIjtR_tU6WYmorfWpbzhRSYl7GYAr7uJkud-W8_Oc002aQEfJn" alt="Capa" title="Capa" width="128" border="1" id="summary-frontcover">
+                                                                                  </a>
+                                                                                </div>
+                                                                              </div>
+
+
+                                                                              <div class="stats text-center">
+                                                                                  <button type="button" name="button" class="btn  btn-primary btn-link  btn-rotate">
+                                                                                      <i class="material-icons">refresh</i> Mais informações
+                                                                                  </button>
+                                                                              </div>
+                                                                          </div>
+                                                                        </div>
+
+
+
+
+
+
+
+                                    </div>
+
+                        </div>
+
+
+
                   </div>
                 </div>
               </div>
+
               </div>
             </div>
+
+            <!-- TODO Retirar bloco de código
             <div id="resultado" style="display:none;">
                 <div class="col-md-12">
                     <div class="card">
@@ -111,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
             <footer class="footer" data-background-color="black">
