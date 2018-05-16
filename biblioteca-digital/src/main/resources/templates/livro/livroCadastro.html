@@ -1,141 +1,156 @@
 
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <title>Digital Library Solution Development - Consult</title>
-        <link rel="stylesheet" type="text/css"
-              href="../../static/assets/css/bootstrap.min.css"
-              data-th-href="@{/assets/css/bootstrap.min.css}">
-        <link rel="stylesheet" type="text/css"
-              href="../../static/assets/css/fontawesome-all.min.css"
-              data-th-href="@{/assets/css/fontawesome-all.min.css}">
-        <link rel="stylesheet" type="text/css"
-              href="../../static/assets/css/custom.css"
-              data-th-href="@{/assets/css/custom.css}">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Digital Library Solution Development - Consult</title>
+<link rel="stylesheet" type="text/css"
+	href="../../static/assets/css/bootstrap.min.css"
+	data-th-href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="../../static/assets/css/fontawesome-all.min.css"
+	data-th-href="@{/assets/css/fontawesome-all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="../../static/assets/css/custom.css"
+	data-th-href="@{/assets/css/custom.css}">
 
-        <script type="text/javascript">
-            function add_fields() {
-                var d = document.getElementById("autor");
+<script type="text/javascript">
+	function add_fields() {
+		var d = document.getElementById("autor");
 
-                //d.innerHTML += "<input	type='text' class='form-control'/>";
-                var input = document.createElement("input");
-                input.classList.add("form-control");
-                d.appendChild(input);
-            }
-        </script>
+		//d.innerHTML += "<input	type='text' class='form-control'/>";
+		var input = document.createElement("input");
+		input.classList.add("form-control");
+		d.appendChild(input);
+	}
+</script>
 
 
 </head>
 <body>
-	<header
-		class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
-		<a class="navbar-brand text-white" data-th-href="@{/consulta}">Digital Library
-			Solution</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link " data-th-href="@{/emprestimos}">
-						<i class="fas fa-book fa-lg"></i> Empréstimo
-				</a></li>
-				 <li class="nav-item">
-                        <a class="nav-link" data-th-href="@{/livros}"> <i class="far fa-calendar-check fa-lg"></i> Livros</a>
-                    </li>
-				<li class="nav-item"><a class="nav-link" data-th-href="@{/reservas}"> <i
-						class="far fa-calendar-check fa-lg"></i> Reservas
-				</a></li>  
-				<li class="nav-item"><a class="nav-link" href="#"> <i
-						class="fas fa-user-circle fa-lg"></i> Perfil
-				</a></li>
-				<li class="nav-item">
-                        <a class="nav-link" data-th-href="@{/logout}"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
-                    </li>
-			</ul>
+	<div th:replace="fragments/header :: header">...</div>
+
+	<div class="container centerSearch">
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="modal-title" id="exampleModalLabel">Livros</h5>
+					</div>
+					<div class="card-body">
+
+						<form data-th-action="@{/livros/create}" method="POST"
+							data-th-object="${livro}" data-th-id="form_new_livro">
+
+							<div class="media">
+								<!--<img class="align-self-end mr-3" th:src = "@{/assets/img/livro.pg}" src="assets/img/livro.jg" alt="Generic placeholder image">-->
+
+								<div class="media-body">
+									<label for="isbn13" class="col-form-label">ISBN13:</label>
+									<div class="input-group">
+										<input type="text" class="form-control" id="isbn13"
+											aria-label="Pesquisa" data-th-field="*{isbn13}">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" name="btnIsbn13"
+												id="btnIsbn13" type="button">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('isbn13')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('isbn13')}" data-th-errors="*{isbn13}"></span>
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-id="div_warning" style	="display: none">
+										<span class="label label-danger" data-th-id="warning_isbn"></span>	
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-id="key_warning" data-th-style	="${key_warning_cond} ? 'display:block' : 'display:none'">									
+										<input type="hidden" data-th-text="${ErrorKey}" >
+									</div>
+
+									
+										<div class="form-group">
+											<label for="titulo" class="col-form-label">Titulo:</label> <input
+												type="text" class="form-control" data-th-field="*{titulo}">
+										</div>
+										<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('titulo')}">
+											<span class="label label-danger" data-th-if="${#fields.hasErrors('titulo')}" data-th-errors="*{titulo}"></span>
+										</div>
+									
+									<div class="form-group">
+										<label for="autor" class="col-form-label">Autor:</label> <input
+											type="text" class="form-control" data-th-field="*{autor}">
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('autor')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('autor')}" data-th-errors="*{autor}"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="anoPublicacao">Ano de Publicação</label> <input
+											type="text" class="form-control" id="anoPublicacao"
+											data-th-field="*{anoPublicacao}">
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('anoPublicacao')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('anoPublicacao')}" data-th-errors="*{anoPublicacao}"></span>
+									</div>
+									
+									<div class="form-group">
+										<label for="anoPublicacao">Edição</label> <input type="text"
+											class="form-control" id="edicao" data-th-field="*{edicao}">
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('edicao')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('edicao')}" data-th-errors="*{edicao}"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="" sinopse"" class="col-form-label">Descrição:</label>
+										<textarea class="form-control" id="sinopse"
+											data-th-field="*{sinopse}"></textarea>
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('sinopse')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('sinopse')}" data-th-errors="*{sinopse}"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="urlFoto">Url Foto</label> <input type="text"
+											class="form-control" data-th-field="*{urlFoto}"> <img
+											src="" data-th-id="bookImage" />
+									</div>
+									<div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('urlFoto')}">
+										<span class="label label-danger" data-th-if="${#fields.hasErrors('urlFoto')}" data-th-errors="*{urlFoto}"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="exampleFormControlFile1">Example file
+											input</label> <input type="file" class="form-control-file"
+											id="exampleFormControlFile1">
+									</div>
+									
+								</div>
+								<div class="card-footer d-flex justify-content-center">
+									<button type="submit" class="btn btn-primary ">Cadastrar</button>
+								</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
 		</div>
-	</header>
+	</div>
 
-        <div class="container centerSearch">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Livros</h5>
-                        </div>
-                        <div class="card-body">
-                            <form data-th-action="@{/livros/create}" method="post"
-                                  data-th-object="${livro}">
-                                <div class="media">
-                                    <!--<img class="align-self-end mr-3" th:src = "@{/assets/img/livro.pg}" src="assets/img/livro.jg" alt="Generic placeholder image">-->
+	<footer class="text-muted">
+		<div class="container centerSearch"></div>
+	</footer>
 
-                                    <div class="media-body">
-                                        <label for="isbn13" class="col-form-label">ISBN13:</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="isbn13"
-                                                   aria-label="Pesquisa" data-th-field="*{isbn13}">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="button">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="titulo" class="col-form-label">Titulo:</label> <input
-                                                type="text" class="form-control" data-th-field="*{titulo}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="autor" class="col-form-label">Autor:</label> <input
-                                                type="text" class="form-control" data-th-field="*{autor}">
-                                        </div>
+	<script src="../../static/assets/js/jquery.min.js"
+		data-th-src="@{/assets/js/jquery.min.js}"></script>
+	<script src="../../static/assets/js/popper.js"
+		data-th-src="@{/assets/js/popper.js}"></script>
+	<script src="../../static/assets/js/bootstrap.min.js"
+		data-th-src="@{/assets/js/bootstrap.min.js}"></script>
 
-                                        <div class="form-group">
-                                            <label for="anoPublicacao">Ano de Publicação</label> <input
-                                                type="text" class="form-control" id="anoPublicacao"
-                                                data-th-field="*{anoPublicacao}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="anoPublicacao">Edição</label> <input
-                                                type="text" class="form-control" id="edicao"
-                                                data-th-field="*{edicao}">
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="" sinopse"" class="col-form-label">Descrição:</label>
-                                            <textarea class="form-control" id="sinopse"
-                                                      data-th-field="*{sinopse}"></textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="exampleFormControlFile1">Example file
-                                                input</label> <input type="file" class="form-control-file"
-                                                                 id="exampleFormControlFile1">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary ">Cadastrar</button>
-                                    </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer class="text-muted">
-            <div class="container centerSearch"></div>
-        </footer>
-
-        <script src="../../static/assets/js/jquery.min.js"
-        data-th-src="@{/assets/js/jquery.min.js}"></script>
-        <script src="../../static/assets/js/popper.js"
-        data-th-src="@{/assets/js/popper.js}"></script>
-        <script src="../../static/assets/js/bootstrap.min.js"
-        data-th-src="@{/assets/js/bootstrap.min.js}"></script>
-
-    </body>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="../../static/assets/js/robo.js"
+		data-th-src="@{/assets/js/robo.js}"></script>
+</body>
 </html>
