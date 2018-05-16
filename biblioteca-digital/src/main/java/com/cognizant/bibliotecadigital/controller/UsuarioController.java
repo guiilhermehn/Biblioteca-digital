@@ -2,10 +2,13 @@ package com.cognizant.bibliotecadigital.controller;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,16 +60,21 @@ public class UsuarioController {
 
 	@PostMapping("/register/create")
 	public ModelAndView create( @ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
-
+		
 		if (bindingRes.hasErrors()) {
 			return register() ;
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
-		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_COMUM"))));
-		
+		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_USUARIO"))));
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
 		usuarioService.save(usuario);
-
+		
+		//Long idUser = usuarioService.findIdUsuarioByEmail(usuario.getEmail());
+/*		usuario.getPapeis().forEach(papeis -> {
+			papeis.setId(usuario.getId());
+		});*/
+		
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
 	}

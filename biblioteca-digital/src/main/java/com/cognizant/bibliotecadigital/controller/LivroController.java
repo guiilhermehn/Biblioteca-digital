@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Livro;
+import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
@@ -102,6 +103,16 @@ public class LivroController{
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
+
+		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
+		
+		Livro salvo = livroService.save(livro);
+		unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
+
+		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
+
+		ModelAndView mv = new ModelAndView("redirect:/livros");
+		return mv;
 	}
 
 	@PostMapping("/livros/update")

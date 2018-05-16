@@ -16,9 +16,12 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.repository.EmailRepository;
+
 
 @Service
 public class EmailService {
@@ -28,7 +31,14 @@ public class EmailService {
 
 	@Autowired
 	private SpringTemplateEngine templateEngine;
+	
+	@Autowired
+	private EmailRepository emailRepository;
 
+	public Iterable<Emprestimo> prazoDevolucao(){
+		return emailRepository.prazoDevolucao();
+	}
+	
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -63,5 +73,20 @@ public class EmailService {
 
 		return mail;
 	}
-
+	
+	public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
+		Mail mail = new Mail();
+		mail.setFrom("noreply.digitallibrary@gmail.com");
+		mail.setTo(email);
+		mail.setSubject("Lembrete de Devolução: " + livro);
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		model.put("name", nome);
+		model.put("livro", livro);
+		model.put("prazo", data);
+		mail.setModel(model);
+		
+		return mail;
+	}
 }

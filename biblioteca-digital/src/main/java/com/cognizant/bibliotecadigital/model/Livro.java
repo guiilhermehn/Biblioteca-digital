@@ -60,6 +60,7 @@ public class Livro implements Serializable {
 	@Column(name = "edicao")
 	private String edicao;
 
+
 	@Size(min=0, max=10000, message="Descrição atingiu o limite máximo de 10.000 caracteres!")
 	@Column(name = "sinopse")
 	private String sinopse;
@@ -73,9 +74,16 @@ public class Livro implements Serializable {
 
 	@Size(min=4, max=1000, message="Autor deve conter entre 4 e 1000 digitos!")
 	@Column(name="autor")
+
 	private String autor;
 
+	@Column(name = "statusLivro")
+	private StatusLivro statusLivro;
 
+	@Transient
+	private boolean habilita;
+
+	
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -86,23 +94,23 @@ public class Livro implements Serializable {
 	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
-	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
-	
 	// Construtor
-	public Livro( ) {
+	public Livro() {
 		this.categoriaLivros = new HashSet<>();
 		this.reservas = new ArrayList<>();
 		this.unidadeLivros = new ArrayList<>();
 	}
 
-	
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
 
 	public Livro(Long id, String isbn13, String titulo, String anoPublicacao,
 			String edicao, String sinopse, String foto, String autor,
 			Set<CategoriaLivro> categoriaLivros, List<Reserva> reservas,
+
 			List<UnidadeLivro> unidadeLivros) {
 		this.id = id;
 		this.isbn13 = isbn13;
@@ -115,6 +123,7 @@ public class Livro implements Serializable {
 		this.categoriaLivros = categoriaLivros;
 		this.reservas = reservas;
 		this.unidadeLivros = unidadeLivros;
+		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
 	
@@ -292,11 +301,10 @@ public class Livro implements Serializable {
 	public void setUnidadeLivros(List<UnidadeLivro> unidadeLivros) {
 		this.unidadeLivros = unidadeLivros;
 	}
-	
+
 	public String getAutor() {
 		return autor;
 	}
-
 
 	public void setAutor(String autor) {
 		this.autor = autor;
@@ -310,6 +318,22 @@ public class Livro implements Serializable {
 
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
+	}
+
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
+
+	public StatusLivro getStatusLivro() {
+		return statusLivro;
+	}
+
+	public void setStatusLivro(StatusLivro statusLivro) {
+		this.statusLivro = statusLivro;
 	}
 
 	@Override
