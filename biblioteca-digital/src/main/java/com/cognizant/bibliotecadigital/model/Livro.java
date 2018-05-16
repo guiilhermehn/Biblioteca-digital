@@ -77,7 +77,7 @@ public class Livro implements Serializable {
 	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
-	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
 	// Construtor

@@ -25,7 +25,6 @@ public class UsuarioService implements UserDetailsService {
 
 	public Usuario save(Usuario usuario) {
 		return usuarioRepository.save(usuario);
-
 	}
 
 	public Iterable<Usuario> findAll() {
@@ -60,6 +59,15 @@ public class UsuarioService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não Encontrado"));
 	}
 
-
+	public Long findIdUsuarioByRole() {
+		return usuarioRepository.findIdUsuarioByRole();
+	}
 	
+	public Long findIdUsuarioByEmail(String email) {
+		return usuarioRepository.findIdUsuarioByEmail(email);
+	}
+	
+/*	public Long registerRole(Long idUser) {
+		return usuarioRepository.registerRoleToUser(idUser);
+	}*/
 }

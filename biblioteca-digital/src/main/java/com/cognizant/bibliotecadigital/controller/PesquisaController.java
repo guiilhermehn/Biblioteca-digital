@@ -15,12 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Livro;
+
 import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
+import com.cognizant.bibliotecadigital.service.UsuarioService;
+
 
 @Controller
 @RequestMapping
@@ -28,6 +31,10 @@ public class PesquisaController {
 
 	@Autowired
 	private LivroService livroService;
+	
+	//@Autowired
+	//private UsuarioService usuarioService;
+	
 	@Autowired
 	private EmprestimoService emprestadoService;
 	@Autowired

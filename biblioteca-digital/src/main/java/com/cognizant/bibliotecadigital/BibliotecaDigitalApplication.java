@@ -2,21 +2,34 @@ package com.cognizant.bibliotecadigital;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 
 @SpringBootApplication
+@EnableScheduling
 public class BibliotecaDigitalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
+
 	
-	
-	//Bloco somente deve ser executado para popular o banco numa primeira execução 
-	/*
-	@Bean
-	public CommandLineRunner mock(CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo) {
+	//Bloco somente deve ser executado para popular o banco numa primeira execução
+	// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
+	//
+	/*@Bean
+	public CommandLineRunner mock(AgendamentoEmail ageEmail) {
 		return (String[] args) -> {
-			
+			try{
+				//ageEmail.LembreteEmail();
+				//	emprestimo.prazoDevolucaoEmail();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//Mail mail = email.lembreteDevolucao();
+			//System.out.println(emprestimo.prazoDevolucao());
+			//email.sendSimpleMessage(mail, "email-lembrete");
+			/*
 			catRepo.save(new CategoriaLivro(0L, "categoria1"));
 			catRepo.save(new CategoriaLivro(0L, "categoria2"));
 			
@@ -35,7 +48,8 @@ public class BibliotecaDigitalApplication {
 			
 			Livro salvo = livRepo.save(livro);
 			unidadeRepo.save(new UnidadeLivro(0L, null, livRepo.findById(salvo.getId()).get()));
+			
 		};
-	}
+	*/
 	/**/
 }
