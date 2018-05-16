@@ -91,6 +91,8 @@ public class LivroController{
 			Livro salvo = livroService.save(livro);
 			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
 
+
+			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 			logger.info("Success submitting form!");
 
@@ -103,16 +105,6 @@ public class LivroController{
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
-
-		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
-		
-		Livro salvo = livroService.save(livro);
-		unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
-
-		redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
-
-		ModelAndView mv = new ModelAndView("redirect:/livros");
-		return mv;
 	}
 
 	@PostMapping("/livros/update")
