@@ -2,11 +2,8 @@ package com.cognizant.bibliotecadigital.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -24,7 +21,7 @@ import com.cognizant.bibliotecadigital.model.Mail;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.repository.EmailRepository;
-import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
+
 
 @Service
 public class EmailService {
