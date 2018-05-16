@@ -1,17 +1,24 @@
 package com.cognizant.bibliotecadigital.controller;
 
 
+import java.io.Console;
+
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Livro;
@@ -21,8 +28,9 @@ import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
-public class LivroController {
+public class LivroController{
 
+	private static final Logger logger = LoggerFactory.getLogger(LivroController.class);
 	@Autowired
 	private LivroService livroService;
 	@Autowired
@@ -68,13 +76,34 @@ public class LivroController {
 	}
 
 	@PostMapping("/livros/create")
-	public ModelAndView save(@Valid @ModelAttribute Livro livro, BindingResult bindingRes,
+	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, BindingResult bindingRes,
 			RedirectAttributes redAttributes) {
-
-		if (bindingRes.hasErrors()) {
-			return new ModelAndView("/livro/livroCadastro");
-		}
 		
+		
+		if (bindingRes.hasErrors()) {
+			logger.info("Validation errors while submitting form!");
+			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+			return mv;			
+			
+		}
+		try {
+			
+			Livro salvo = livroService.save(livro);
+			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
+
+			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
+			logger.info("Success submitting form!");
+
+			ModelAndView mv = new ModelAndView("redirect:/livros");
+			return mv;
+		} catch (Exception e) {
+			System.out.println("Error= " + e);
+			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+			mv.addObject("ErrorKey", "ISBN já cadastrado!");
+			mv.addObject("key_warning_cond", "true");
+			return mv;
+		}
+
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		
 		Livro salvo = livroService.save(livro);
