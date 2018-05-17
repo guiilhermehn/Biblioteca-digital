@@ -65,7 +65,7 @@
               </label>
             </div>
             <div class="footer text-center">
-              <a class="btn btn-outline-primary " type="submit" >Login<div class="ripple-container"></div></a>
+              <button class="btn btn-outline-primary " type="submit" >Login<div class="ripple-container"></div></button>
             </div>
             <div class="container" style="padding-top:30px;">
               <div class="row">
@@ -118,9 +118,11 @@
 <!-- INICIO - Form para realizar cadastro do usuario do usuario -->
     <div class="col-md-5 col-sm-6 ml-auto mr-auto" style="display:none;" id="cadastrodiv">
       <div class="card card-signup">
-        <form class="form" method="" action="">
+        <form class="form" th:action="@{/register/create}" data-th-object="${usuario}" method="post" >
           <h4 class="card-title text-center">Faça seu registro!</h4>
           <div class="card-body">
+            <!-- /TODO Adicionar mensagens personalizadas de erros-->
+            <div class="alert alert-danger" data-th-if="${msgErro} != null" data-th-text="${msgErro}"></div>
             <span class="bmd-form-group">
               <div class="input-group">
               <div class="input-group-prepend">
@@ -128,7 +130,8 @@
                   <i class="material-icons">face</i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Nome...">
+              <input type="text" class="form-control" placeholder="Nome..." data-th-field="*{nome}" >
+              <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger help-block" >Incorrect date</span>
             </div>
           </span>
             <span class="bmd-form-group">
@@ -138,7 +141,9 @@
                   <i class="material-icons">settings</i>
                 </span>
               </div>
-              <input type="number" class="form-control" placeholder="ID Cognizant...">
+              <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant..."required="" onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                     data-th-field="*{idCgz}">
+              <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
             </div>
           </span>
           <span class="bmd-form-group">
@@ -148,7 +153,8 @@
                 <i class="material-icons">settings</i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Grade...">
+            <input type="text" id="inputGrade" class="form-control" placeholder="Grade" required="" data-th-field="*{grade}">
+            <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger help-block" >Incorrect date</span>
           </div>
         </span>
         <span class="bmd-form-group">
@@ -158,7 +164,8 @@
               <i class="material-icons">settings</i>
             </span>
           </div>
-          <input type="text" class="form-control" placeholder="Horizontal...">
+          <input type="text" id="inputHor" class="form-control" placeholder="Horizontal" required=""data-th-field="*{horizontal}">
+          <span th:if="${#fields.hasErrors('horizontal')}" th:errors="*{horizontal}" class="text-danger help-block" >Incorrect date</span>
         </div>
       </span>
       <span class="bmd-form-group">
@@ -168,7 +175,8 @@
             <i class="material-icons">settings</i>
           </span>
         </div>
-        <input type="text" class="form-control" placeholder="Vertical...">
+        <input type="text" id="inputVer" class="form-control" placeholder="Vertical" required="" data-th-field="*{vertical}">
+        <span th:if="${#fields.hasErrors('vertical')}" th:errors="*{vertical}" class="text-danger help-block" >Incorrect date</span>
       </div>
     </span>
     <span class="bmd-form-group"><div class="input-group">
@@ -177,7 +185,8 @@
           <i class="material-icons">mail</i>
         </span>
       </div>
-      <input type="email" class="form-control" placeholder="E-mail...">
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email"required="" value="@cognizant.com" data-th-field="*{email}">
+      <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
     </div>
   </span>
           <span class="bmd-form-group"><div class="input-group">
@@ -186,7 +195,10 @@
                 <i class="material-icons">lock_outline</i>
               </span>
             </div>
-            <input type="password" class="form-control" placeholder="Senha...">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Senha..." required="" oninvalid="this.setCustomValidity('Insira uma senha válida')"
+                   oninput="setCustomValidity('')"
+                   data-th-field="*{senha}">
+            <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
           </div>
         </span>
 
@@ -196,12 +208,17 @@
               <i class="material-icons">lock_outline</i>
             </span>
           </div>
-          <input type="password" class="form-control" placeholder="Confirmar senha...">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Confirmar Senha" required=""
+                 oninvalid="this.setCustomValidity('Insira uma senha válida')"
+                 oninput="setCustomValidity('')"
+                 data-th-field="*{confirmaSenha}" >
+          <span th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger help-block" >Incorrect date</span>
+
         </div>
       </span>
         </div>
         <div class="footer text-center" style="padding-top: 30px; padding-bottom:30px;">
-        <a href="login.html" class="btn btn-outline-primary ">Efetuar Cadastro <div class="ripple-container"></div></a>
+          <button href="login.html" class="btn btn-outline-primary ">Efetuar Cadastro <div class="ripple-container"></div></button>
         </div>
         <div class="container" style="padding-top:30px;">
         </div>
