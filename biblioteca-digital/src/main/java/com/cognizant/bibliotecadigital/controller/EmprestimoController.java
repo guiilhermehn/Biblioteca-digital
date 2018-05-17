@@ -156,9 +156,12 @@ public class EmprestimoController {
 		if(!emprestimos.isEmpty()) {
 		for (Emprestimo emprestimo : emprestimos) {
 			Livro livro = emprestimo.getUnidadeLivro().getLivro();
-			if(emprestimo.getDataDevolucao()!=null && 
-					livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
-				devolucoesEmAnalise.add(emprestimo);
+			if(emprestimo.getDataDevolucao()!=null) {
+					if(livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+						emprestimo.setHabilita(false);
+					}
+					devolucoesEmAnalise.add(emprestimo);
+					emprestimo.setHabilita(true);
 			}
 		}
 		}

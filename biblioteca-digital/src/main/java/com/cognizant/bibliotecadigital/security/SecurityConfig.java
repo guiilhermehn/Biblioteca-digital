@@ -71,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/").authenticated()
 				.antMatchers("/livros").hasRole("ADMIN")
 				.antMatchers("/gerenciar").hasRole("ADMIN")
+				.antMatchers("/emprestimos/livrosDevolvidos").hasRole("ADMIN")
 				.and()
 					.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("senha")
 						.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/").permitAll()						
