@@ -56,6 +56,8 @@ public class Emprestimo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
+	private boolean habilita;
 
 	// construtor
 	public Emprestimo() {
@@ -165,6 +167,13 @@ public class Emprestimo implements Serializable {
 		this.usuario = usuario;
 	}
 	
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
 
 	@Override
 	public String toString() {

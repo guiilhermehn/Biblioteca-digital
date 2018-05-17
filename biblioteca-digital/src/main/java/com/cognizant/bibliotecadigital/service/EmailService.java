@@ -52,8 +52,12 @@ public class EmailService {
 		Context context = new Context();
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
+		
+
+		Usuario adm = usuarioService.emailAdm().get();
 
 		helper.setTo(mail.getTo());
+		helper.setReplyTo(adm.getEmail());
 		helper.setText(html, true);
 		helper.setSubject(mail.getSubject());
 		helper.setFrom(mail.getFrom());
@@ -64,10 +68,9 @@ public class EmailService {
 	public Mail enviarEmail(Usuario usuario,UnidadeLivro unidade, String assunto) {
 		Mail mail = new Mail();
 		
-		Usuario adm = usuarioService.emailAdm().get();
 		mail.setFrom("no-reply@bibliotecacognizant.com");
+		
 		mail.setTo(usuario.getEmail()); 
-		mail.setTo(adm.getEmail()); 
 		mail.setSubject(assunto);
 
 		Map<String, Object> model = new HashMap<String, Object>();
