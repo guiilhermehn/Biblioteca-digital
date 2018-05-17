@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Digital Library Solution</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- CSS style -->
+<style media="screen">
+  .body{
+    background-color: green;
+  }
+</style>
+<body class="product-page body">
+    <div class="page-header header-filter clear-filter backgroud-gradient">
+    </div>
+    <div class="main main-raised">
+      <div class="container">
+          <div class="row">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="col-md-12">
+                      <div class="card card-collapse">
+                        <div class="card-header" role="tab" id="headingOne">
+                          <div class="col-md-3"><img src="../static/assets/img/Logo_Cognizant.png" class="img-responsive" alt="Some picture" height="100"></div>
+                          <h5 class="mb-0">
+                            <a aria-expanded="true">
+                              <h2><b>Lembrete</b></h2>
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <h3>
+                              <p th:text="${'Olá ' + name + ','}"></p> <br>
+                              <p th:text="${'O Emprestimo do livro ' + livro + ' foi concluído com sucesso!'}"></p>
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <footer class="footer" data-background-color="black">
+        <div class="container">
+        </div>
+      </footer>
+    </body>
+    </html>

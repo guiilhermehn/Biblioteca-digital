@@ -10,7 +10,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 
 @Repository
 public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
-	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ?", nativeQuery = true)
+	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ? && e.data_devolucao is null", nativeQuery = true)
 	long countEmprestimosByUsuarioId(Long unidadeLivroId);
 	
 	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ?1 AND data_devolucao IS NULL", nativeQuery = true)
