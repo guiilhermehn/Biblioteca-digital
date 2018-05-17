@@ -1,6 +1,5 @@
 package com.cognizant.bibliotecadigital.controller;
 
-
 import java.io.Console;
 
 import javax.validation.Valid;
@@ -28,26 +27,28 @@ import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 
 @Controller
-public class LivroController{
+public class LivroController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LivroController.class);
 	@Autowired
 	private LivroService livroService;
 	@Autowired
 	private UnidadeLivroService unidadeLivroService;
-	
-	//Retorna todos os livros cadastrados
+
+
 	@GetMapping("/livros")
 	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
-		
+
 		if (query.equals("")) {
 			mv.addObject("livros", livroService.findAll());
 		} else {
 			mv.addObject("livros", livroService.search(query));
 		}
+
 		
 		return mv;
+
 	}
 	
 	//Retorna o livro pela ID informada
@@ -63,7 +64,7 @@ public class LivroController{
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-		
+
 		mv.addObject("livro", new Livro());
 		return mv;
 	}
@@ -71,20 +72,18 @@ public class LivroController{
 	@PostMapping("/livros/create")
 	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, BindingResult bindingRes,
 			RedirectAttributes redAttributes) {
-		
-		
+
 		if (bindingRes.hasErrors()) {
 			logger.info("Erro na validação ao submeter o formulário!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
-			return mv;			
-			
+			return mv;
+
 		}
 		try {
 			Livro salvo = livroService.save(livro);
 			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
-
-
 			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
+
 			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 			logger.info("Sucesso ao submiter o formulário!");
 
@@ -97,6 +96,7 @@ public class LivroController{
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
+
 	}
 
 	@PostMapping("/livros/update")
@@ -115,27 +115,26 @@ public class LivroController{
 		ModelAndView redirect = new ModelAndView("redirect:/livros");
 		return redirect;
 	}
-	
+
 	@PostMapping("/livro/unidade/edit")
 	/*
-	 * name="id" 
-	 * name="livroId" 
- 		name="avarias"
-	 * */
-	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId, @RequestParam("avarias") String avarias) {
+	 * name="id" name="livroId" name="avarias"
+	 */
+	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId,
+			@RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
 		unidadeLivroService.save(unidade);
-		
+
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
-	
+
 	@PostMapping("/livros/unidade/deletar")
-	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId, 
-			@RequestParam("livroId") long livroId ) {
+	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId,
+			@RequestParam("livroId") long livroId) {
 		livroService.deleteById(unidadeId);
 		return new ModelAndView("redirect:/livros/edit/" + livroId);
 	}
-	
+
 	@PostMapping("/livros/unidade/create")
 	public ModelAndView adicionarUnidade(@ModelAttribute UnidadeLivro unidade) {
 		unidadeLivroService.save(unidade);
