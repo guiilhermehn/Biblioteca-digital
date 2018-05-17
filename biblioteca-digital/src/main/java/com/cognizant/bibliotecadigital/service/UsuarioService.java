@@ -35,7 +35,22 @@ public class UsuarioService implements UserDetailsService {
 		return usuarioRepository.findById(id);
 	}
 
-	
+	private static final Map<String, Usuario> USUARIOS;
+
+	static {
+		USUARIOS = new LinkedHashMap<>();
+
+		Usuario u1 = new Usuario("fulano", "fulano@fulano", "programador",
+				SecurityConfig.bcryptPasswordEncoder().encode("abcd1234"),
+				new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_ADMIN"))));
+		USUARIOS.put(u1.getEmail(), u1);
+
+		Usuario u2 = new Usuario("ciclano", "ciclano@ciclano", "programador",
+				SecurityConfig.bcryptPasswordEncoder().encode("abcd1234"),
+				new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_COMUM"))));
+		USUARIOS.put(u2.getEmail(), u2);
+
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
