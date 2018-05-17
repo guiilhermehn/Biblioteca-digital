@@ -73,8 +73,6 @@ public class EmprestimoController {
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		
-		
 
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
@@ -173,10 +171,5 @@ public class EmprestimoController {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public String formatarData(Date date) {
-		SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
-		return formatar.format(date);
 	}
 }
