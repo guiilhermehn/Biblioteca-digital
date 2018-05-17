@@ -1,13 +1,10 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -144,7 +141,7 @@ public class EmprestimoController {
 		String livro = "", dataDev = "", dia = "", mes = "";
 		Date dataAtual = new Date();
 		Long id;
-		String template = "email-lembrete";
+		String template = "";
 		for(int i = 0;i<emprestimos.size();i++) {
 			try {
 				Usuario usuario = emprestimos.get(i).getUsuario();
