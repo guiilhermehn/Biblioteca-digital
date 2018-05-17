@@ -1,6 +1,7 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -88,6 +89,10 @@ public class EmprestimoController {
 		}
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
+		
+		unidade.setLivro(unidade.getLivro());
+		
+		unidadeService.save(unidade);
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
 
@@ -97,12 +102,72 @@ public class EmprestimoController {
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
+		
+
+		
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
+			throws MessagingException, IOException {
+		String template = "email-devolucao-analise";
+
+		// TODO validar se usuário é o locatário
+
+		Emprestimo emprestimo = emprestimoService.findById(id).get();
+
+		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
+
+		emprestimo.setDataDevolucao(new Date());
+		Livro livro = emprestimo.getUnidadeLivro().getLivro();
+		livro.setStatusLivro(StatusLivro.EM_ANALISE);
+		livroService.save(livro);
+
+		emprestimoService.save(emprestimo);
+
+		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
+		if (idReserva != null) {
+			Reserva reserva = reservaService.findById(idReserva).get();
+
+			reserva.setStatus(Status.EM_ANALISE);
+
+			reservaService.save(reserva);
+
+		}
+
+		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
+
+		emailService.sendSimpleMessage(email, template);
+
+		return new ModelAndView("redirect:/emprestimos");
+	}
+	
+	
+	
+	@GetMapping("/emprestimos/livrosDevolvidos")
+	public ModelAndView findAllDevolucoes()
+			throws MessagingException, IOException {
+		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
+		
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
+		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+		if(!emprestimos.isEmpty()) {
+		for (Emprestimo emprestimo : emprestimos) {
+			Livro livro = emprestimo.getUnidadeLivro().getLivro();
+			if(emprestimo.getDataDevolucao()!=null && 
+					livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+				devolucoesEmAnalise.add(emprestimo);
+			}
+		}
+		}
+		mv.addObject("emprestimos", devolucoesEmAnalise);
+
+		return mv;
+	}
+	@PostMapping("/emprestimos/confirmaDevolucao")
+	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
 		String template = "email-devolucao";
 
@@ -112,7 +177,7 @@ public class EmprestimoController {
 
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
 
-		emprestimo.setDataDevolucao(new Date());
+		
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);

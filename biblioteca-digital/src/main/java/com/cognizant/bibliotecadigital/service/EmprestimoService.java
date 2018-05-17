@@ -60,5 +60,10 @@ public class EmprestimoService {
 		return emprestimoRepository.countEmprestimoPorUsuarioId(idUsuario)== 0L ;
 		
 	}
+
+	public Iterable<Emprestimo> findAllDevolvidos() {
+		
+		return emprestimoRepository.findEmprestimosDevolvidos();
+	}
 }
 

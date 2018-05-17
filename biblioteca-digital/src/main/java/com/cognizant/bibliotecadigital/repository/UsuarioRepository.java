@@ -17,6 +17,11 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 			"join papel p on p.id = up.papel_id where p.nome = 'ROLE_ADMIN'", nativeQuery = true)
 	Long findIdUsuarioByRole();
 	
+	@Query(value= "select * from usuario u\r\n" + 
+			"join usuario_papel up on u.id = up.usuario_id\r\n" + 
+			"join papel p on p.id = up.papel_id where p.nome = 'ROLE_ADMIN'",nativeQuery = true)
+	Optional<Usuario> emailAdm();
+	
 	
 
 /*	@Query(value="insert into usuario_papel values(2,?)")

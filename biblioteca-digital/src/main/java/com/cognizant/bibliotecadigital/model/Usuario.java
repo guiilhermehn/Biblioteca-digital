@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -51,7 +52,7 @@ public class Usuario implements Serializable, UserDetails {
 	@NotEmpty
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
 	@Email
 	@NotNull
 	@NotEmpty
@@ -79,7 +80,7 @@ public class Usuario implements Serializable, UserDetails {
 	private Boolean verificaRole = false;
 
 	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
-	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id") }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id",unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
 	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
