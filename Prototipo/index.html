@@ -11,9 +11,9 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="./assets/css/material-kit.css" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="./assets/css/custom.css" rel="stylesheet" />
+  <link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+  <!-- CSS Custom :) -->
+  <link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
 </head>
 <body class="index-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
@@ -104,17 +104,17 @@
   </footer>
 
   <!--   Core JS Files   -->
-  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-  <script src="./assets/js/plugins/moment.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <script data-th-src="{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/plugins/moment.min.js}"></script>
+  <script data-th-src="{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
+  <script data-th-src="{/assets/js/material-kit.min.js}" type="text/javascript"></script>
 
 </body>
 </html>
