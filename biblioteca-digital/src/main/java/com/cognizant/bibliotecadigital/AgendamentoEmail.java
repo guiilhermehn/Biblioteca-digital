@@ -14,7 +14,6 @@ public class AgendamentoEmail {
 		@Autowired
 		EmprestimoController empController;
 		
-		@Scheduled(cron = "* * 10 * * * ", zone = ZONE_TIME)
 		@Scheduled(cron = "0 0 09 * * *", zone = ZONE_TIME)
 		public void LembreteEmail(){
 			

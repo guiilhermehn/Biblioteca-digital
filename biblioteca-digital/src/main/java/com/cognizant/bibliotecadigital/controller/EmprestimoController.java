@@ -1,13 +1,10 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -73,14 +70,12 @@ public class EmprestimoController {
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		
-		
 
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
 		GregorianCalendar agora = new GregorianCalendar();
 
-		String template = "email-emprestimo";
+		String template = "email";
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 2);
@@ -143,20 +138,16 @@ public class EmprestimoController {
 	
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
-		String nome = "", email = "", livro = "", dataDev = "", dia = "", mes = "";
+		String livro = "", dataDev = "";
 		Date dataAtual = new Date();
 		Long id;
-		String template = "email-lembrete";
+		String template = "";
 		for(int i = 0;i<emprestimos.size();i++) {
 			try {
-				nome = emprestimos.get(i).getUsuario().getNome().toString();
-				email = emprestimos.get(i).getUsuario().getEmail().toString();
+				Usuario usuario = emprestimos.get(i).getUsuario();
 				Date data = emprestimos.get(i).getPrazoDevolucao();
 				
-				dataDev = data.toString();
-				mes = dataDev.substring(5, 7);
-				dia = dataDev.substring(8, 10);
-				dataDev = dia + "/" + mes;
+				dataDev = formatarData(data);
 				
 				id = emprestimos.get(i).getUnidadeLivro().getId();
 				UnidadeLivro unidade = unidadeService.findById(id).get();
@@ -168,7 +159,7 @@ public class EmprestimoController {
 				else if(dataAtual.after(data)) {
 					template = "email-esquecer";
 				}
-				Mail mail = emailService.lembreteDevolucao(email, nome, livro, dataDev);
+				Mail mail = emailService.lembreteDevolucao(usuario, livro, dataDev);
 				emailService.sendSimpleMessage(mail, template);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -176,8 +167,13 @@ public class EmprestimoController {
 		}
 	}
 	
-	public String formatarData(Date date) {
-		SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
-		return formatar.format(date);
+	public String formatarData(Date data) {
+		String dataDev = "", mes = "", dia = "";
+		dataDev = data.toString();
+		mes = dataDev.substring(5, 7);
+		dia = dataDev.substring(8, 10);
+		dataDev = dia + "/" + mes;
+		
+		return dataDev;
 	}
 }
