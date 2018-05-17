@@ -159,9 +159,11 @@ public class EmprestimoController {
 			if(emprestimo.getDataDevolucao()!=null) {
 					if(livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
 						emprestimo.setHabilita(false);
+					}else {
+						emprestimo.setHabilita(true);
 					}
 					devolucoesEmAnalise.add(emprestimo);
-					emprestimo.setHabilita(true);
+					
 			}
 		}
 		}
