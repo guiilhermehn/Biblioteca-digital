@@ -34,7 +34,10 @@ public class EmailService {
 	
 	@Autowired
 	private EmailRepository emailRepository;
-
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	public Iterable<Emprestimo> prazoDevolucao(){
 		return emailRepository.prazoDevolucao();
 	}
@@ -62,6 +65,7 @@ public class EmailService {
 		Mail mail = new Mail();
 		mail.setFrom("no-reply@bibliotecacognizant.com");
 		mail.setTo(usuario.getEmail()); 
+		mail.setTo(usuarioService.emailAdm().orElse(null).toString()); 
 		mail.setSubject(assunto);
 
 		Map<String, Object> model = new HashMap<String, Object>();

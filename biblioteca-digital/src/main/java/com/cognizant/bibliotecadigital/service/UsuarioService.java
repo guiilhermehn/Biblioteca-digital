@@ -66,6 +66,11 @@ public class UsuarioService implements UserDetailsService {
 	public Optional<Usuario> findByEmail(String email) {
 		return usuarioRepository.findByEmail(email);
 	}
+
+	public Optional<Usuario> emailAdm() {
+		
+		return usuarioRepository.emailAdm();
+	}
 	
 /*	public Long registerRole(Long idUser) {
 		return usuarioRepository.registerRoleToUser(idUser);

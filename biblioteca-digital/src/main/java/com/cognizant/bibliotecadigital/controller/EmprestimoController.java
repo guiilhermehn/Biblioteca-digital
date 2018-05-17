@@ -102,12 +102,61 @@ public class EmprestimoController {
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
+		
+
+		
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
+			throws MessagingException, IOException {
+		String template = "email-devolucao-analise";
+
+		// TODO validar se usuário é o locatário
+
+		Emprestimo emprestimo = emprestimoService.findById(id).get();
+
+		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
+
+		emprestimo.setDataDevolucao(new Date());
+		Livro livro = emprestimo.getUnidadeLivro().getLivro();
+		livro.setStatusLivro(StatusLivro.EM_ANALISE);
+		livroService.save(livro);
+
+		emprestimoService.save(emprestimo);
+
+		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
+		if (idReserva != null) {
+			Reserva reserva = reservaService.findById(idReserva).get();
+
+			reserva.setStatus(Status.EM_ANALISE);
+
+			reservaService.save(reserva);
+
+		}
+
+		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
+
+		emailService.sendSimpleMessage(email, template);
+
+		return new ModelAndView("redirect:/emprestimos");
+	}
+	
+	
+	@GetMapping("/emprestimos/livrosDevolvidos")
+	public ModelAndView findAllDevolucoes(@RequestParam("id") Long livroId, RedirectAttributes redirectAttributes)
+			throws MessagingException, IOException {
+		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
+		
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAllDevolvidos();
+		mv.addObject("Emprestimo", emprestimos);
+
+		return mv;
+	}
+	@PostMapping("/emprestimos/confirmaDevolucao")
+	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
 		String template = "email-devolucao";
 
