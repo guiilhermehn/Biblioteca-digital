@@ -35,30 +35,22 @@ public class LivroController{
 	private LivroService livroService;
 	@Autowired
 	private UnidadeLivroService unidadeLivroService;
-
-	/*
-	@GetMapping("/livros")
-	public ModelAndView findAll() {
-		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
-		mv.addObject("livros", livroService.findAll());
-
-		return mv;
-	}
-	*/
 	
+	//Retorna todos os livros cadastrados
 	@GetMapping("/livros")
 	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
-		ModelAndView mav = new ModelAndView("/livro/livroPesquisa");
+		ModelAndView mv = new ModelAndView("/livro/livroPesquisa");
 		
 		if (query.equals("")) {
-			mav.addObject("livros", livroService.findAll());
+			mv.addObject("livros", livroService.findAll());
 		} else {
-			mav.addObject("livros", livroService.search(query));
+			mv.addObject("livros", livroService.search(query));
 		}
 		
-		return mav;
+		return mv;
 	}
-
+	
+	//Retorna o livro pela ID informada
 	@GetMapping("/livros/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("/livro/livroEditar");
@@ -66,7 +58,8 @@ public class LivroController{
 
 		return mv;
 	}
-
+	
+	
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
@@ -81,20 +74,19 @@ public class LivroController{
 		
 		
 		if (bindingRes.hasErrors()) {
-			logger.info("Validation errors while submitting form!");
+			logger.info("Erro na validação ao submeter o formulário!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 			return mv;			
 			
 		}
 		try {
-			
 			Livro salvo = livroService.save(livro);
 			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
 
 
 			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
-			logger.info("Success submitting form!");
+			logger.info("Sucesso ao submiter o formulário!");
 
 			ModelAndView mv = new ModelAndView("redirect:/livros");
 			return mv;
@@ -110,14 +102,11 @@ public class LivroController{
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
-		//livroService.findByIsbn13(livro.getIsbn13());
-
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
 
 		return mv;
-
 	}
 
 	@PostMapping("/livros/deletarLivro")

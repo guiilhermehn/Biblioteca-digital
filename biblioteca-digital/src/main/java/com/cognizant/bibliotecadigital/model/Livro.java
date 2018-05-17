@@ -29,6 +29,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+
+
 @Transactional
 @Entity
 @Table(name = "livro")
@@ -82,7 +84,28 @@ public class Livro implements Serializable {
 
 	@Transient
 	private boolean habilita;
-
+	
+	/* O codigo abaixo é o relacionamento ManyToMany entre o livro e o autor. 
+	 * Não foi implementada, por um motivo de decisão técnica, por esse motivo optou-se por inserir 
+	 * uma String com os nomes dos autores como um campo unico do livro.	 
+	 */
+//	@ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                CascadeType.PERSIST,
+//                CascadeType.MERGE
+//            })
+//    @JoinTable(name = "book_authors",
+//            joinColumns = { @JoinColumn(name = "book_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "author_id") })
+//    private Set<Author> authors = new HashSet<>();
+//	public Set<Author> getAuthors() {
+//		return authors;
+//	}
+//
+//
+//	public void setAuthors(Set<Author> tags) {
+//		this.authors = tags;
+//	}
 	
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
