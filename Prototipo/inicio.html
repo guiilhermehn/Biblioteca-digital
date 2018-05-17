@@ -11,14 +11,16 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="./assets/css/material-kit.css" rel="stylesheet" />
-  <link href="./assets/css/custom.css" rel="stylesheet" />
+  <link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+  <!-- CSS Custom :) -->
+  <link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+
 </head>
 <body class="product-page  sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" data-th-href="@{index.html}">
           Digital Library Solution </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,17 +45,17 @@
                     <i class="material-icons">apps</i> Minhas ações
                     <div class="ripple-container"></div></a>
                     <div class="dropdown-menu dropdown-with-icons">
-                      <a href="emprestimo.html" class="dropdown-item">
+                      <a data-th-href="emprestimo.html" class="dropdown-item">
                         <i class="material-icons">layers</i> Meus Emprestimos
                       </a>
-                      <a href="reserva.html" class="dropdown-item">
+                      <a data-th-href="reserva.html" class="dropdown-item">
                         <i class="material-icons">content_paste</i> Minhas Reservas
                       </a>
                     </div>
                   </li>
 
                   <li class="nav-item">
-                    <a href="login.html" class="nav-link">
+                    <a data-th-href="login.html" class="nav-link">
                       <i class="material-icons">settings</i> Sair
                     </a>
                   </li>
@@ -125,7 +127,7 @@
                                       <div class="row">
                                         <div class="col-xs-6 mx-auto">
                                           <a href="#" class="thumbnail">
-                                            <img class="img-150 " src="./assets/img/81J9B389SYL.jpg" />
+                                            <img class="img-150 " data-th-src="@{/assets/img/81J9B389SYL.jpg}" />
                                           </a>
                                         </div>
                                       </div>
@@ -539,20 +541,19 @@
           </footer>
 
           <!--   Core JS Files   -->
-          <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
-          <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-          <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
           <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-          <script src="./assets/js/plugins/bootstrap-selectpicker.js"></script>
-          <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-          <script src="./assets/js/plugins/moment.min.js"></script>
-          <script src="./assets/js/plugins/bootstrap-tagsinput.js"></script>
+          <script data-th-src="{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+          <script data-th-src="{/assets/js/plugins/moment.min.js}"></script>
+          <script data-th-src="{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
           <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-          <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
           <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-          <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
           <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-          <script src="./assets/js/material-kit.min.js" type="text/javascript"></script>
+          <script data-th-src="{/assets/js/material-kit.min.js}" type="text/javascript"></script>
 
           <script>
           $(document).ready(function () {
