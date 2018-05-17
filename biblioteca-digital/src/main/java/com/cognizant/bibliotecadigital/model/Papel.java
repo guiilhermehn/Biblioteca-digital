@@ -31,14 +31,13 @@ public class Papel implements GrantedAuthority, Serializable {
 	@Column(name = "nome")
 	private String nome;
 
-	
-
-	public Papel(String string) {
-
-	}
 
 	public Papel() {
-
+	}
+	
+	public Papel(String nome) {
+		super();
+		this.nome = nome;
 	}
 
 	@Override
