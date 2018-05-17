@@ -83,10 +83,10 @@ public class LivroController {
 
 		}
 		try {
-
+			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 			Livro salvo = livroService.save(livro);
 			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
-			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
+			
 
 			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 			logger.info("Success submitting form!");
