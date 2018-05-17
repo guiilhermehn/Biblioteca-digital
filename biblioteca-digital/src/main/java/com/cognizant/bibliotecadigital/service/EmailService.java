@@ -74,15 +74,15 @@ public class EmailService {
 		return mail;
 	}
 	
-	public Mail lembreteDevolucao(String email, String nome, String livro, String data) {
+	public Mail lembreteDevolucao(Usuario usuario, String livro, String data) {
 		Mail mail = new Mail();
 		mail.setFrom("noreply.digitallibrary@gmail.com");
-		mail.setTo(email);
+		mail.setTo(usuario.getEmail());
 		mail.setSubject("Lembrete de Devolução: " + livro);
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		
-		model.put("name", nome);
+		model.put("name", usuario.getNome());
 		model.put("livro", livro);
 		model.put("prazo", data);
 		mail.setModel(model);

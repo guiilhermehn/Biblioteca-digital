@@ -80,7 +80,7 @@ public class EmprestimoController {
 
 		GregorianCalendar agora = new GregorianCalendar();
 
-		String template = "email-emprestimo";
+		String template = "email";
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 2);
@@ -143,14 +143,13 @@ public class EmprestimoController {
 	
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
-		String nome = "", email = "", livro = "", dataDev = "", dia = "", mes = "";
+		String livro = "", dataDev = "", dia = "", mes = "";
 		Date dataAtual = new Date();
 		Long id;
 		String template = "email-lembrete";
 		for(int i = 0;i<emprestimos.size();i++) {
 			try {
-				nome = emprestimos.get(i).getUsuario().getNome().toString();
-				email = emprestimos.get(i).getUsuario().getEmail().toString();
+				Usuario usuario = emprestimos.get(i).getUsuario();
 				Date data = emprestimos.get(i).getPrazoDevolucao();
 				
 				dataDev = data.toString();
@@ -168,7 +167,7 @@ public class EmprestimoController {
 				else if(dataAtual.after(data)) {
 					template = "email-esquecer";
 				}
-				Mail mail = emailService.lembreteDevolucao(email, nome, livro, dataDev);
+				Mail mail = emailService.lembreteDevolucao(usuario, livro, dataDev);
 				emailService.sendSimpleMessage(mail, template);
 			} catch (Exception e) {
 				e.printStackTrace();
