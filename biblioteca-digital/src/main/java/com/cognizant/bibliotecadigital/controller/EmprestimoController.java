@@ -93,6 +93,10 @@ public class EmprestimoController {
 		}
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
+		
+		unidade.setLivro(unidade.getLivro());
+		
+		unidadeService.save(unidade);
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
 
@@ -145,13 +149,24 @@ public class EmprestimoController {
 	}
 	
 	
+	
 	@GetMapping("/emprestimos/livrosDevolvidos")
-	public ModelAndView findAllDevolucoes(@RequestParam("id") Long livroId, RedirectAttributes redirectAttributes)
+	public ModelAndView findAllDevolucoes()
 			throws MessagingException, IOException {
 		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
 		
-		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAllDevolvidos();
-		mv.addObject("Emprestimo", emprestimos);
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
+		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+		if(!emprestimos.isEmpty()) {
+		for (Emprestimo emprestimo : emprestimos) {
+			Livro livro = emprestimo.getUnidadeLivro().getLivro();
+			if(emprestimo.getDataDevolucao()!=null && 
+					livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+				devolucoesEmAnalise.add(emprestimo);
+			}
+		}
+		}
+		mv.addObject("emprestimos", devolucoesEmAnalise);
 
 		return mv;
 	}
@@ -166,7 +181,7 @@ public class EmprestimoController {
 
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
 
-		emprestimo.setDataDevolucao(new Date());
+		
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
