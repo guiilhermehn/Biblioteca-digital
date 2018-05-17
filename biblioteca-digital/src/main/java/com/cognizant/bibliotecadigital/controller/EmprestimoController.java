@@ -138,7 +138,7 @@ public class EmprestimoController {
 	
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
-		String livro = "", dataDev = "", dia = "", mes = "";
+		String livro = "", dataDev = "";
 		Date dataAtual = new Date();
 		Long id;
 		String template = "";
@@ -147,10 +147,7 @@ public class EmprestimoController {
 				Usuario usuario = emprestimos.get(i).getUsuario();
 				Date data = emprestimos.get(i).getPrazoDevolucao();
 				
-				dataDev = data.toString();
-				mes = dataDev.substring(5, 7);
-				dia = dataDev.substring(8, 10);
-				dataDev = dia + "/" + mes;
+				dataDev = formatarData(data);
 				
 				id = emprestimos.get(i).getUnidadeLivro().getId();
 				UnidadeLivro unidade = unidadeService.findById(id).get();
@@ -168,5 +165,15 @@ public class EmprestimoController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public String formatarData(Date data) {
+		String dataDev = "", mes = "", dia = "";
+		dataDev = data.toString();
+		mes = dataDev.substring(5, 7);
+		dia = dataDev.substring(8, 10);
+		dataDev = dia + "/" + mes;
+		
+		return dataDev;
 	}
 }
