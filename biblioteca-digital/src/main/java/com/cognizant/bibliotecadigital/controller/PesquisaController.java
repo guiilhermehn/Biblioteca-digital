@@ -1,6 +1,5 @@
 package com.cognizant.bibliotecadigital.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -12,12 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Livro;
-
 import com.cognizant.bibliotecadigital.model.StatusLivro;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
@@ -29,19 +24,10 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 @RequestMapping
 public class PesquisaController {
 
-	@Autowired
-	private LivroService livroService;
-	
-	@Autowired
-	private UsuarioService usuarioService;
-	
-	//@Autowired
-	//private UsuarioService usuarioService;
-	
-	@Autowired
-	private EmprestimoService emprestadoService;
-	@Autowired
-	private ReservaService reservaService;
+	@Autowired private LivroService livroService;
+	@Autowired private UsuarioService usuarioService;
+	@Autowired private EmprestimoService emprestadoService;
+	@Autowired private ReservaService reservaService;
 
 	@GetMapping({ "", "/consulta" })
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {

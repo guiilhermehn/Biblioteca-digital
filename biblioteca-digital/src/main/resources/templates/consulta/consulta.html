@@ -88,7 +88,7 @@
                 <div class="col-sm-6 col-md-4 col-lg-3 mt-4"  data-th-each="livro: ${livros}">
                     <div class="card">
                         <a href="#" data-th-href="@{/consulta/{id}(id=${livro.id})}">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
+                            <img class="card-img-top" src="../../static/assets/img/livro.jpg" data-th-src="${(livro.urlFoto != null && !#strings.isEmpty(livro.urlFoto))} ? ${livro.urlFoto} : ( ${(livro.foto != null && !#strings.isEmpty(livro.foto))} ? @{/livros/{id}/file (id = ${livro.id})} : @{'/assets/img/livro.jpg'})" />
                             <div class="card-body">
                                 <h5 class="card-title" data-th-text="${livro.titulo}">Card title</h5>
                                 <p class="card-text" data-th-text="${livro.autor}">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -96,95 +96,13 @@
                         </a>
                     </div>
                 </div>
-                <!-- Just a template, replaced by data-th-each - - >
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                    <div class="card">
-                        <a href="templateDetalhes.html">
-                            <img class="card-img-top" src="../../static/assets/img/livro.jpg">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            -->
+            <footer class="text-muted">
+                <div class="container centerSearch"></div>
+            </footer>
         </div>
-
-        <footer class="text-muted">
-            <div class="container centerSearch"></div>
-        </footer>
-
+        
         <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
         <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
         <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>

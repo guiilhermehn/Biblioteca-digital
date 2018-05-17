@@ -26,6 +26,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -83,7 +84,7 @@ public class Livro implements Serializable {
 	@Transient
 	private boolean habilita;
 
-	
+	@Transient private MultipartFile file;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
@@ -126,9 +127,6 @@ public class Livro implements Serializable {
 		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
-	
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -309,13 +307,18 @@ public class Livro implements Serializable {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	
 
-	public String getUrlFoto() {
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+	
+    public String getUrlFoto() {
 		return urlFoto;
 	}
-
-
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
 	}

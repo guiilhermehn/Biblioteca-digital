@@ -3,15 +3,10 @@ package com.cognizant.bibliotecadigital;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.scheduling.annotation.EnableScheduling;
-
 import com.cognizant.bibliotecadigital.model.Papel;
 import com.cognizant.bibliotecadigital.repository.PapelRepository;
-import com.cognizant.bibliotecadigital.service.PapelService;
-
-
-
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableScheduling
