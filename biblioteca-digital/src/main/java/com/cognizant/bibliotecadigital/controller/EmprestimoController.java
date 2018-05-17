@@ -35,6 +35,7 @@ import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
+import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class EmprestimoController {
@@ -49,6 +50,8 @@ public class EmprestimoController {
 	private EmailService emailService;
 	@Autowired
 	private LivroService livroService;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
@@ -57,30 +60,21 @@ public class EmprestimoController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		mv.addObject("emprestimos", emprestimoService.findAllByUsuarioId(usuario.getId()));
 		return mv;
 	}
 
-	/*
-	 * @PostMapping("/emprestimos/deletarEmprestimo") public ModelAndView
-	 * deletar(@RequestParam("id") Long id) { emprestimoService.deleteById(id);
-	 * ModelAndView mv = new ModelAndView("redirect:/emprestimos");
-	 * 
-	 * return mv; }
-	 */
+
 
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		// emprestimoService.findById(id);
-
-//		if (emprestimoService.isEmprestado(unidadeId)) {
-//			redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
-//			return new ModelAndView("redirect:/emprestimos");
-//		}
+		
+		
 
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
@@ -94,7 +88,8 @@ public class EmprestimoController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);

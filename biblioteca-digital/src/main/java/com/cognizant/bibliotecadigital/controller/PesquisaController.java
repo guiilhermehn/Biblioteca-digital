@@ -32,6 +32,9 @@ public class PesquisaController {
 	@Autowired
 	private LivroService livroService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	//@Autowired
 	//private UsuarioService usuarioService;
 	
@@ -62,7 +65,8 @@ public class PesquisaController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		livro.getUnidadeLivros().forEach(unidade -> {

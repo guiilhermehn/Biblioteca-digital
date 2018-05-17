@@ -35,6 +35,7 @@ import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
+import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class ReservaController {
@@ -53,6 +54,11 @@ public class ReservaController {
 
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+
 
 	@GetMapping("/reservas")
 	public ModelAndView findAll() throws ParseException {
@@ -63,7 +69,8 @@ public class ReservaController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		if (!reservas.isEmpty()) {
@@ -138,7 +145,8 @@ public class ReservaController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		Date dataModificaStatus = new Date();
@@ -173,7 +181,8 @@ public class ReservaController {
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			usuario = (Usuario) auth.getPrincipal();
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);

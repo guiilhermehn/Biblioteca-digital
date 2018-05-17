@@ -1,8 +1,15 @@
 package com.cognizant.bibliotecadigital;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+
+import com.cognizant.bibliotecadigital.model.Papel;
+import com.cognizant.bibliotecadigital.repository.PapelRepository;
+
+
 
 
 @SpringBootApplication
@@ -17,15 +24,18 @@ public class BibliotecaDigitalApplication {
 	//Bloco somente deve ser executado para popular o banco numa primeira execução
 	// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
 	//
-	/*@Bean
-	public CommandLineRunner mock(AgendamentoEmail ageEmail) {
+	@Bean
+	public CommandLineRunner mock(PapelRepository papelRepository) {
 		return (String[] args) -> {
-			try{
-				//ageEmail.LembreteEmail();
-				//	emprestimo.prazoDevolucaoEmail();
-			} catch (Exception e) {
-				e.printStackTrace();
+			// NÃO APAGUE
+			if(!papelRepository.existsByNome("ROLE_USUARIO")) {
+				papelRepository.save(new Papel("ROLE_USUARIO"));
 			}
+			if(!papelRepository.existsByNome("ROLE_ADMIN")) {
+				papelRepository.save(new Papel("ROLE_ADMIN"));
+			}
+			
+			/*
 			//Mail mail = email.lembreteDevolucao();
 			//System.out.println(emprestimo.prazoDevolucao());
 			//email.sendSimpleMessage(mail, "email-lembrete");
@@ -48,8 +58,7 @@ public class BibliotecaDigitalApplication {
 			
 			Livro salvo = livRepo.save(livro);
 			unidadeRepo.save(new UnidadeLivro(0L, null, livRepo.findById(salvo.getId()).get()));
-			
+			*/
 		};
-	*/
-	/**/
+		}
 }

@@ -19,6 +19,9 @@ public class EmprestimoService {
 		return emprestimoRepository.findAll();
 	}
 	
+	public Optional<Emprestimo> findById(Long id) {
+		return emprestimoRepository.findById(id);
+	}
 
 	public Emprestimo save(Emprestimo emprestimo) {
 		return emprestimoRepository.save(emprestimo);
@@ -30,9 +33,9 @@ public class EmprestimoService {
 	}
 
 
-	public Optional<Emprestimo> findById(Long id) {
+/*	public Optional<Emprestimo> findById(Long id) {
 		return emprestimoRepository.findById(id);
-	}
+	} */
 
 	public boolean isEmprestado(Long unidadeLivroId) {
 		return emprestimoRepository.countEmprestimosByUsuarioId(unidadeLivroId) == 0L;

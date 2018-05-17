@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cognizant.bibliotecadigital.model.Papel;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.security.SecurityConfig;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
@@ -30,6 +31,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PapelService papelService;
 	
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
@@ -56,8 +60,6 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
-	
-
 	@PostMapping("/register/create")
 	public ModelAndView create( @ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 		
@@ -66,14 +68,11 @@ public class UsuarioController {
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
-		usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(new Papel("ROLE_USUARIO"))));
-		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
+		//usuario.setPapeis(new LinkedHashSet<>(Arrays.asList(papelService.findByNome("ROLE_USUARIO").get())));
+		//List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_EMPLOYEE");
+		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
 		usuarioService.save(usuario);
 		
-		//Long idUser = usuarioService.findIdUsuarioByEmail(usuario.getEmail());
-/*		usuario.getPapeis().forEach(papeis -> {
-			papeis.setId(usuario.getId());
-		});*/
 		
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
