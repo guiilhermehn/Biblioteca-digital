@@ -22,7 +22,7 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 			" and data_reserva in( select min(data_reserva) from reserva  where e.unidade_livro_id = e.unidade_livro_id);",nativeQuery= true)
 	Long findReservaIdByEmprestimoId(Long id);
 
-	@Query(value="SELECT count(*) FROM reserva WHERE livro_id = ? AND status = 'EMPRESTADO' OR status = 'DEVOLVIDO'",nativeQuery = true)
+	@Query(value="SELECT count(*) FROM reserva WHERE livro_id = ? AND status = 'FINALIZADO'",nativeQuery = true)
 	Long countEmprestadoOuDevolvido(Long id);
 
 	@Query(value=" select * from reserva where usuario_id = ?",nativeQuery = true)

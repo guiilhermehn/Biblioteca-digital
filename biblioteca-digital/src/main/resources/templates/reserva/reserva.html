@@ -95,7 +95,7 @@
                         <div class="text-right mx-3 mb-3">
                         	<form th:action="@{/reservas/deletarReserva}" method="POST">
                         		<input type="hidden" th:value="${reserva.id}" name="id">
-                        		<button class="btn btn-secondary mb-1"  data-th-disabled="${reserva.habilita}">Apagar Reserva</button>
+                        		<button class="btn btn-secondary mb-1"  data-th-disabled="${reserva.habilitaApagarReserva}">Apagar Reserva</button>
                         	</form>
                         	
                         	 <form th:action="@{/emprestimos/efetuarEmprestimoAposReserva}" method="POST">
