@@ -44,7 +44,7 @@
               </a>
               <div class="dropdown-menu dropdown-with-icons">
                 <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-                  <i class="material-icons">layers</i> Meus Emprestimos
+                  <i class="material-icons">layers</i> Meus Empréstimo
                 </a>
                 <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
                   <i class="material-icons">content_paste</i> Minhas Reservas
@@ -71,13 +71,12 @@
               <h2>Meus Empréstimos</h2>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="col-md-12">
                     <div id="accordion" role="tablist" data-th-each="emprestimo, stat : ${emprestimos}">
                       <div class="card card-collapse">
                         <div class="card-header" role="tab" id="headingOne" data-th-id="'heading'+${stat.index}">
                           <h5 class="mb-0">
-                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-th-attr="href='#collapse'+${stat.index}; aria-controls='collapse'+${stat.index}">
-                              Titulo: <span data-th-text="{emprestimo.unidadeLivro.livro.titulo}"></span> &emsp; Autor: <span data-th-text="${emprestimo.unidadeLivro.livro.autor}"></span> &emsp; &emsp; <i class="material-icons">keyboard_arrow_down</i>
+                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-th-attr="href='#collapse' + ${stat.index}, aria-controls='collapse' + ${stat.index}">
+                              <strong data-th-text="${emprestimo.unidadeLivro.livro.titulo}"></strong> &emsp; <span data-th-text="${emprestimo.unidadeLivro.livro.autor}"></span> &emsp; &emsp; <i class="material-icons">keyboard_arrow_down</i>
                             </a>
                           </h5>
                         </div>
@@ -96,7 +95,7 @@
                               <div data-th-text="${emprestimo.dataDevolucao}">DD/MMM/YYYY</div>
                             </div>
                             <div class="text-right mx-3 mb-3">
-                              <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST"  data-th-if="${emprestimo.dataDevolucao != null}">
+                              <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST"  data-th-if="${emprestimo.dataDevolucao == null}">
                                 <input type="hidden" data-th-value="${emprestimo.id}" name="id">
                                 <button class="btn btn-outline-danger" data-th-disabled="${emprestimo.dataDevolucao != null}">Devolver</button>
                               </form>
@@ -141,7 +140,7 @@
                       -->
 
                     </div>
-                  </div>
+
                 </div>
               </div>
             </div>
