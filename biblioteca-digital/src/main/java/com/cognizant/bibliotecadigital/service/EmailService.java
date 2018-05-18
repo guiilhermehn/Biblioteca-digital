@@ -12,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
+import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.Mail;
+import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.repository.EmailRepository;
@@ -42,6 +45,7 @@ public class EmailService {
 		return emailRepository.prazoDevolucao();
 	}
 	
+	@Async
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -51,6 +55,8 @@ public class EmailService {
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
 
+		String reply = mail.getReplyTo() == "" ? "" : mail.getReplyTo();
+		
 		helper.setTo(mail.getTo());
 		helper.setText(html, true);
 		helper.setSubject(mail.getSubject());
@@ -61,6 +67,8 @@ public class EmailService {
 
 	public Mail enviarEmail(Usuario usuario,UnidadeLivro unidade, String assunto) {
 		Mail mail = new Mail();
+		
+		Livro livro = unidade.getLivro();
 		
 		Usuario adm = usuarioService.emailAdm().get();
 		mail.setFrom("no-reply@bibliotecacognizant.com");
@@ -73,6 +81,11 @@ public class EmailService {
 		model.put("name", usuario.getNome());
 		model.put("livro", unidade.getLivro().getTitulo().toString());
 		model.put("location", "Brasil");
+		if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+			model.put("ADM", "Revisado por: " + adm.getNome());
+		} else {
+			model.put("ADM", "");
+		}
 		mail.setModel(model);
 
 		return mail;

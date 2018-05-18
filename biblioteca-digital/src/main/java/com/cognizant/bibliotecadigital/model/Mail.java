@@ -7,6 +7,7 @@ public class Mail {
 
     private String from;
     private String to;
+    private String replyTo;
     private String subject;
     private List<Object> attachments;
     private Map<String, Object> model;
@@ -59,6 +60,14 @@ public class Mail {
 	public String toString() {
 		return "Mail [from=" + from + ", to=" + to + ", subject=" + subject + ", attachments=" + attachments
 				+ ", model=" + model + "]";
+	}
+
+	public String getReplyTo() {
+		return replyTo;
+	}
+
+	public void setReplyTo(String replyTo) {
+		this.replyTo = replyTo;
 	}
         
 }
