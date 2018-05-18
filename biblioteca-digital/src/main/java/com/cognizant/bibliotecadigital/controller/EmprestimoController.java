@@ -74,7 +74,7 @@ public class EmprestimoController {
 
 		GregorianCalendar agora = new GregorianCalendar();
 
-		String template = "email";
+		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 2);

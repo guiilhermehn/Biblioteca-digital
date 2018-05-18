@@ -47,8 +47,6 @@ public class EmailService {
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 				StandardCharsets.UTF_8.name());
 
-		helper.addAttachment("logo.png", new ClassPathResource("Logo_Cognizant.png"));
-
 		Context context = new Context();
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
