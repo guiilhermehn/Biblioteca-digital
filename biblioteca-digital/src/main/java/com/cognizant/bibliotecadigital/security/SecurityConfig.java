@@ -56,10 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//auth.authenticationProvider(authenticationProvider());
 		auth.jdbcAuthentication()
 			.usersByUsernameQuery("select email, senha, true from usuario where email=?")
-			.authoritiesByUsernameQuery("select u.email, p.nome from usuario u\r\n" + 
-					"join usuario_papel up on u.id = up.usuario_id\r\n" + 
-					"join papel p on p.id = up.papel_id\r\n"
-					+ "where u.email=?")
+			.authoritiesByUsernameQuery("select u.email, p.nome from usuario u " + 
+					"join usuario_papel up on u.id = up.usuario_id " + 
+					"join papel p on p.id = up.papel_id " + 
+                    "where u.email=?")
 			.dataSource(dataSource)
 			.passwordEncoder(passwordEncoder());
 	}
@@ -68,7 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
-				.antMatchers("/").authenticated()
+				//.antMatchers("/").authenticated()
+                .anyRequest().authenticated()
 				.antMatchers("/livros").hasRole("ADMIN")
 				.antMatchers("/gerenciar").hasRole("ADMIN")
 				.and()
@@ -80,8 +81,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 					.exceptionHandling().accessDeniedPage("/consulta");
 	}
-	
-	
-
-
 }

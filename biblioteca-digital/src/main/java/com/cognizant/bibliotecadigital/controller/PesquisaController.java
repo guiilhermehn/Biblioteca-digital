@@ -43,6 +43,7 @@ public class PesquisaController {
 	@Autowired
 	private ReservaService reservaService;
 
+    // TODO rever rotas? Usar "" para index.html?
 	@GetMapping({ "", "/consulta" })
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("consulta/consulta");

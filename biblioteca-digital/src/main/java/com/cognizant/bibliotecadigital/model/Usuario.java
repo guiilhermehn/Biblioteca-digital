@@ -34,8 +34,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class Usuario implements Serializable, UserDetails {
 
-	private static final long serialVersionUID = 902783495L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -80,7 +78,7 @@ public class Usuario implements Serializable, UserDetails {
 	private Boolean verificaRole = false;
 
 	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
-	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id",unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "usuario_id", unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
 	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva

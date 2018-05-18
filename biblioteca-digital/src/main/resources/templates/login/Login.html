@@ -92,20 +92,21 @@
 <!-- TODO: Não está implementado o Back-end dessa funcionalidade -->
     <div class="col-md-5 col-sm-6 ml-auto mr-auto" style="display:none;" id="esqueceudiv">
       <div class="card card-signup">
-        <form class="form" method="" action="">
+        <form class="form" method="get" action="#">
           <h4 class="card-title text-center">Esqueceu sua senha?</h4>
           <h5 class=" text-center" >Digite seu e-mail, enviaremos uma nova senha</h5>
-          <div class="card-body">
-            <span class="bmd-form-group"><div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="material-icons">mail</i>
-                </span>
-              </div>
-              <input type="email" class="form-control" placeholder="E-mail...">
+            <div class="card-body">
+                <div class="bmd-form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="material-icons">mail</i>
+                            </span>
+                        </div>
+                        <input type="email" class="form-control" placeholder="E-mail...">
+                    </div>
+                </div>
             </div>
-          </span>
-        </div>
         <div class="footer text-center" style="padding-top:14px; padding-bottom:14px;">
           <a href="login.html" class="btn btn-outline-danger ">Voltar<div class="ripple-container"></div></a>
           <a href="login.html" class="btn btn-outline-primary ">Enviar<div class="ripple-container"></div></a>
@@ -195,7 +196,7 @@
                 <i class="material-icons">lock_outline</i>
               </span>
             </div>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha..." required="" oninvalid="this.setCustomValidity('Insira uma senha válida')"
+            <input type="password" id="createInputPassword" class="form-control" placeholder="Senha..." required="" oninvalid="this.setCustomValidity('Insira uma senha válida')"
                    oninput="setCustomValidity('')"
                    data-th-field="*{senha}">
             <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
@@ -208,7 +209,7 @@
               <i class="material-icons">lock_outline</i>
             </span>
           </div>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Confirmar Senha" required=""
+          <input type="password" id="confirmInputPassword" class="form-control" placeholder="Confirmar Senha" required=""
                  oninvalid="this.setCustomValidity('Insira uma senha válida')"
                  oninput="setCustomValidity('')"
                  data-th-field="*{confirmaSenha}" >
@@ -237,9 +238,9 @@
 <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
 <script src="../../static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../../static/assets/js/plugins/nouislider.min.js" type="text/javascript" data-th-src="@{static/assets/js/plugins/nouislider.min.js}"></script>
+<script src="../../static/assets/js/plugins/nouislider.min.js" type="text/javascript" data-th-src="@{/assets/js/plugins/nouislider.min.js}"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="../../static/assets/js/material-kit.min.js" type="text/javascript" data-th-src="@{assets/js/material-kit.min.js}"></script>
+<script src="../../static/assets/js/material-kit.min.js" type="text/javascript" data-th-src="@{/assets/js/material-kit.min.js}"></script>
 <script>
 
 $( document ).ready(function() {

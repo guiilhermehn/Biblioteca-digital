@@ -66,8 +66,6 @@ public class EmprestimoController {
 		return mv;
 	}
 
-
-
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -144,8 +142,6 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 	
-	
-	
 	@GetMapping("/emprestimos/livrosDevolvidos")
 	public ModelAndView findAllDevolucoes()
 			throws MessagingException, IOException {
@@ -166,6 +162,7 @@ public class EmprestimoController {
 
 		return mv;
 	}
+    
 	@PostMapping("/emprestimos/confirmaDevolucao")
 	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -200,7 +197,9 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
-	
+    
+    
+	// TODO Mover para classe utilitária
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
 		String livro = "", dataDev = "";
@@ -232,6 +231,7 @@ public class EmprestimoController {
 		}
 	}
 	
+    // TODO Mover para classe utilitária
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";
 		dataDev = data.toString();

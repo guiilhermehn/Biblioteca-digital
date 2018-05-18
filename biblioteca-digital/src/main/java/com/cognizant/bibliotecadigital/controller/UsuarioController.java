@@ -38,11 +38,12 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
-		login.addObject("usuario", new Usuario());
+		
 		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
-		}
+		} 
+        login.addObject("usuario", new Usuario());
 
 		return login;
 	}

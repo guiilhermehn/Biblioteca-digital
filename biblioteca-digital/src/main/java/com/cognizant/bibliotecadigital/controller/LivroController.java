@@ -80,8 +80,8 @@ public class LivroController {
 			logger.info("Validation errors while submitting form!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 			return mv;
-
 		}
+        
 		try {
 			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 			Livro salvo = livroService.save(livro);

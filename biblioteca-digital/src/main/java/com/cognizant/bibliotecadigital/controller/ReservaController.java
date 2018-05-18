@@ -36,6 +36,8 @@ import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class ReservaController {
@@ -65,7 +67,7 @@ public class ReservaController {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		List<Reserva> reservasPorUsuario = new ArrayList<>();
+		Set<Reserva> reservasPorUsuario = new HashSet();
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -74,9 +76,8 @@ public class ReservaController {
 		}
 
 		if (!reservas.isEmpty()) {
-
 			for (Reserva reserva : reservas) {
-				
+			
 				List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService
 						.emprestimoPorReservaId(reserva.getId());
 				if (!emprestimos.isEmpty()) {
@@ -110,11 +111,11 @@ public class ReservaController {
 		return mv;
 	}
 
+    // TODO Mover para classe utilitária
 	private String formataData(Date disponibilidade) {
 		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
 
 		return dataFormatada;
-
 	}
 
 	@PostMapping("/reservas/deletarReserva")
@@ -205,6 +206,7 @@ public class ReservaController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+    // TODO Mover para classe utilitária
 	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
 		if (emprestimo == null) {
