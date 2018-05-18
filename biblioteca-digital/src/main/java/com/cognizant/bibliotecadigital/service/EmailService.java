@@ -59,6 +59,7 @@ public class EmailService {
 		
 		helper.setTo(mail.getTo());
 		helper.setText(html, true);
+		helper.setReplyTo(reply);
 		helper.setSubject(mail.getSubject());
 		helper.setFrom(mail.getFrom());
 
@@ -93,8 +94,11 @@ public class EmailService {
 	
 	public Mail lembreteDevolucao(Usuario usuario, String livro, String data) {
 		Mail mail = new Mail();
+		Usuario adm = usuarioService.emailAdm().get();
+		
 		mail.setFrom("noreply.digitallibrary@gmail.com");
 		mail.setTo(usuario.getEmail());
+		mail.setReplyTo(adm.getEmail());
 		mail.setSubject("Lembrete de Devolução: " + livro);
 		
 		Map<String, Object> model = new HashMap<String, Object>();

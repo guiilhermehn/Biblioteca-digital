@@ -1,5 +1,6 @@
 package com.cognizant.bibliotecadigital.model;
 
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,6 +58,12 @@ public class Emprestimo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
+	@Transient
+	private boolean habilita;
+	
+	@Column(name="emprestimos_status")
+	private Status emprestimoStatus;
 
 	// construtor
 	public Emprestimo() {
@@ -63,13 +71,14 @@ public class Emprestimo implements Serializable {
 	}
 
 	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
-			UnidadeLivro unidadeLivro, Usuario usuario) {
+			UnidadeLivro unidadeLivro, Usuario usuario,Status emprestimoStatus) {
 		this.id = id;
 		this.dataRetirada = dataRetirada;
 		this.dataDevolucao = dataDevolucao;
 		this.prazoDevolucao = prazoDevolucao;
 		this.unidadeLivro = unidadeLivro;
 		this.usuario = usuario;
+		this.emprestimoStatus = emprestimoStatus;
 	}
 
 	@Override
@@ -148,6 +157,22 @@ public class Emprestimo implements Serializable {
 	}
 	
 	
+
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
+
+	public Status getEmprestimoStatus() {
+		return emprestimoStatus;
+	}
+
+	public void setEmprestimoStatus(Status emprestimoStatus) {
+		this.emprestimoStatus = emprestimoStatus;
+	}
 
 	public UnidadeLivro getUnidadeLivro() {
 		return unidadeLivro;
