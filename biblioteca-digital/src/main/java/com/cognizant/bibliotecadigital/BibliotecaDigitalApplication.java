@@ -1,21 +1,38 @@
 package com.cognizant.bibliotecadigital;
 
+import java.util.concurrent.Executor;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
 import com.cognizant.bibliotecadigital.model.Papel;
 import com.cognizant.bibliotecadigital.repository.PapelRepository;
 
 @SpringBootApplication
 @EnableScheduling
-public class BibliotecaDigitalApplication {
+@EnableAsync
+public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
 
+	@Override
+	  public Executor getAsyncExecutor() {
+	    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+	    executor.setCorePoolSize(2);
+	    executor.setMaxPoolSize(2);
+	    executor.setQueueCapacity(500);
+	    executor.setThreadNamePrefix("send-mailer-");
+	    executor.initialize();
+	    return executor;
+	  }
 	
 	//Bloco somente deve ser executado para popular o banco numa primeira execução
 	// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
