@@ -109,8 +109,24 @@
                           </div>
 
                           <div class="col-md-12" style="margin-top:35px;">
-                            <a href="emprestimo.html"class="btn btn-outline-success">Emprestimo</a>
-                              <a href="reserva.html"class="btn btn-outline-success">Reserva</a>
+                          
+	                          <span>
+	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
+	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
+	                                 <button class="btn btn-outline-success"  data-th-disabled="${livro.unidadeLivros[0].emprestado}">Emprestimo</button>
+	                             </form>
+	                          </span>
+	                          <span>
+	                             <form data-th-action="@{/reservas/efetuarReserva}" method="POST" class="d-inline-block">
+	                                 <input type="hidden" name="livroId" data-th-value="${livro.id}" />
+	                                 <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Reserva</button>
+	                             </form>
+	                         </span>
+                          
+                          <!-- 
+                            <a href="emprestimo.html" class="btn btn-outline-success">Emprestimo</a>
+                            <a href="reserva.html" class="btn btn-outline-success">Reserva</a>
+                             -->
                           </div>
                         </div>
                         <div class="col-md-12">
