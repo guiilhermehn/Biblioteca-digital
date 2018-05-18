@@ -36,7 +36,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13", unique = true)
+	@Column(name = "isbn13")
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -77,6 +77,9 @@ public class Livro implements Serializable {
 
 	@Transient
 	private boolean habilita;
+	
+	@Transient
+	private List<Long> idsListaDesejos = new ArrayList<>();
 
 	
 
@@ -329,6 +332,16 @@ public class Livro implements Serializable {
 
 	public void setStatusLivro(StatusLivro statusLivro) {
 		this.statusLivro = statusLivro;
+	}
+	
+	
+
+	public List<Long> getIdsListaDesejos() {
+		return idsListaDesejos;
+	}
+
+	public void setIdsListaDesejos(List<Long> idsListaDesejos) {
+		this.idsListaDesejos = idsListaDesejos;
 	}
 
 	@Override

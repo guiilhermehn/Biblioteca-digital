@@ -52,6 +52,7 @@ public class Usuario implements Serializable, UserDetails {
 	private String nome;
 
 	@Column(name = "email",unique = true)
+	@Size(max=200)
 	@Email
 	@NotNull
 	@NotEmpty

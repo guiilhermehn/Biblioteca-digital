@@ -78,6 +78,11 @@
                                                             <input type="hidden" name="livroId" data-th-value="${livro.id}" />
                                                             <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Reserva</button>
                                                         </form>
+                                                         <span>
+                                                        <form th:action="@{/listaDesejos}" method="POST">
+                                                            <input type="hidden" name="id" data-th-value="${livro.id}" />
+                                                            <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Wish List</button>
+                                                        </form>
                                                     </span>
                                                     <!-- Not on MVP - - > 
                                                     <span> 
