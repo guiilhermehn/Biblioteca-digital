@@ -74,7 +74,7 @@ public class EmailService {
 		Usuario adm = usuarioService.emailAdm().get();
 		mail.setFrom("no-reply@bibliotecacognizant.com");
 		mail.setTo(usuario.getEmail()); 
-		mail.setTo(adm.getEmail()); 
+		mail.setReplyTo(adm.getEmail());
 		mail.setSubject(assunto);
 
 		Map<String, Object> model = new HashMap<String, Object>();

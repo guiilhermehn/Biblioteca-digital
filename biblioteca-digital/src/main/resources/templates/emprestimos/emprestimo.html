@@ -95,7 +95,7 @@
                               <div data-th-text="${emprestimo.dataDevolucao}">DD/MMM/YYYY</div>
                             </div>
                             <div class="text-right mx-3 mb-3">
-                              <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST"  data-th-if="${emprestimo.dataDevolucao == null}">
+                              <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST">
                                 <input type="hidden" data-th-value="${emprestimo.id}" name="id">
                                 <button class="btn btn-outline-danger" data-th-disabled="${emprestimo.dataDevolucao != null}">Devolver</button>
                               </form>

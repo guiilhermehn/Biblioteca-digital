@@ -11,7 +11,7 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 	@Query(value = "SELECT count(*) FROM reserva WHERE livro_id = ? AND (status = 'EM_ESPERA' OR status = 'AGUARDANDO') and usuario_id = ?", nativeQuery = true)
 	long countReservasByUnidadeLivroId(Long livroId, Long usuarioId);
 
-	@Query(value="select ul.id from reserva r join unidade_livro ul where r.id = ?",nativeQuery = true)
+	@Query(value="select ul.id from reserva r join unidade_livro ul where r.id = ? ",nativeQuery = true)
 	Long findUnidadeIdByReservaId(Long reservaId);
 	
 	@Query(value="select r.id from emprestimo e \r\n" + 
