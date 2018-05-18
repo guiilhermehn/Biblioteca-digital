@@ -84,10 +84,11 @@
             <div id="cards" class="cd-section">
               <div class="section-gray">
                 <!--     *********    MORPHING CARDS     *********      -->
-                <div class="cards" id="morphingCards">
+                <div class="row">
+                <div class="cards col-md-6" id="morphingCards" data-th-each="livro: ${livros}">
                   <div class="container">
                     <div class="row">
-                      <div class="col-md-12" data-th-each="livro: ${livros}">
+                      <div class="col-md-12" >
                         <div class="rotating-card-container manual-flip">
                           <div class="card card-rotate">
                             <div class="front">
@@ -103,7 +104,7 @@
                                 <div class="row">
                                   <div class="col-xs-6 mx-auto">
                                    <a  data-th-href="@{consulta/{id}(id=${livro.id})} " class="thumbnail">
-                                      <img class="img-150 " data-th-src="@{/assets/img/81J9B389SYL.jpg}" />
+                                      <img class="img-150 " data-th-src="${livro.urlFoto}" />
                                     </a>
                                   </div>
                                 </div>
@@ -119,7 +120,7 @@
                                 <h5 class="card-title">
                                   Sinopse:
                                 </h5>
-                                <p class="card-description" data-th-text="${livro.sinopse}">
+                                <p class="card-description" data-th-text="${#strings.abbreviate(livro.sinopse,150)}">
                                   Sinopse...
                                 </p>
                                 <div class="container">
@@ -151,6 +152,7 @@
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
                 <!--     *********    END MORPHING CARDS      *********      -->
                 <div class="col-md-3 ml-auto mr-auto" style="margin-top: 30px;">
