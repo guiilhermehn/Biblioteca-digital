@@ -18,53 +18,53 @@
 
     <!--Adicionar fragmento Header padrão -->
     <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-        <div class="container">
-          <div class="navbar-translate">
-            <a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-              <span class="navbar-toggler-icon"></span>
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-              <li class="active nav-item">
-                <a href="#pablo" data-th-href="@{/}" class="nav-link">
-                  <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#pablo" class="nav-link">
-                  <i class="material-icons">account_circle</i> Perfil <div class="ripple-container"></div>
-                </a>
-              </li>
-              <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
-                  <i class="material-icons">apps</i> Minhas ações
-                  <div class="ripple-container"></div>
-                </a>
-                <div class="dropdown-menu dropdown-with-icons">
-                  <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-                    <i class="material-icons">layers</i> Meus Emprestimos
-                  </a>
-                  <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
-                    <i class="material-icons">content_paste</i> Minhas Reservas
-                  </a>
-                </div>
-              </li>
-  
-              <li class="nav-item">
-                <a href="login.html" data-th-href="@{/logout}"  class="nav-link">
-                  <i class="material-icons">settings</i> Sair
-                </a>
-              </li>
-  
-            </ul>
-          </div>
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+          </button>
         </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="active nav-item">
+              <a href="#pablo" data-th-href="@{/}" class="nav-link">
+                <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pablo" class="nav-link">
+                <i class="material-icons">account_circle</i> Perfil <div class="ripple-container"></div>
+              </a>
+            </li>
+            <li class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">apps</i> Minhas ações
+                <div class="ripple-container"></div>
+              </a>
+              <div class="dropdown-menu dropdown-with-icons">
+                <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
+                  <i class="material-icons">layers</i> Meus Emprestimos
+                </a>
+                <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
+                  <i class="material-icons">content_paste</i> Minhas Reservas
+                </a>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a href="login.html" data-th-href="@{/logout}"  class="nav-link">
+                <i class="material-icons">settings</i> Sair
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
     </nav>
-    <!- - Fim do header -->
+    <!--  Fim do header-->
 
     <div class="page-header header-filter clear-filter backgroud-gradient"></div>
             <div class="main main-raised">
@@ -145,7 +145,7 @@
                                 <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
                                 <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
                                 <div class="media-footer">
-                                  <a href="#pablo" class="btn btn-danger btn-link float-right">
+                                  <a href="" class="btn btn-danger btn-link float-right">
                                     <i class="material-icons">favorite</i> 243
                                   </a>
                                 </div>
@@ -214,21 +214,20 @@
                   </div>
                 </footer>
 
-                <!--   Core JS Files   -->
-                <script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
-                <script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
-                <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-                <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-                <script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
-                <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-                <script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
-                <script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
-                <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-                <script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
-                <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-                <script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
-                <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-                <script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+    <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+    <script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+    <script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+    <script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
 
                 <script>
                   $(document).ready(function () {
