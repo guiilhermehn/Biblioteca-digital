@@ -40,7 +40,7 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">face</i>
+                      <i class="material-icons">face</i><abbr class="required" title="obrigatório">*</abbr>
                     </span>
                   </div>
                   <input type="text" class="form-control" placeholder="Nome..." data-th-field="*{nome}" required="true" >
@@ -51,10 +51,10 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">settings</i>
+                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
                     </span>
                   </div>
-                  <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant..." required="true" onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                  <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant... " required="true" onkeydown="javascript: return event.keyCode == 69 ? false : true"
                   data-th-field="*{idCgz}">
                   <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
                 </div>
@@ -63,7 +63,7 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">settings</i>
+                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
                     </span>
                   </div>
                   <input type="text" id="inputGrade" class="form-control" placeholder="Grade" required="false" data-th-field="*{grade}">
@@ -74,7 +74,7 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">settings</i>
+                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
                     </span>
                   </div>
                   <input type="text" id="inputHor" class="form-control" placeholder="Horizontal" required="false" data-th-field="*{horizontal}">
@@ -85,7 +85,7 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">settings</i>
+                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
                     </span>
                   </div>
                   <input type="text" id="inputVer" class="form-control" placeholder="Vertical" required="false" data-th-field="*{vertical}">
@@ -95,7 +95,7 @@
               <span class="bmd-form-group"><div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
-                    <i class="material-icons">mail</i>
+                    <i class="material-icons">mail</i><abbr class="required" title="obrigatório">*</abbr>
                   </span>
                 </div>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="true" value="@cognizant.com" data-th-field="*{email}">
@@ -105,7 +105,7 @@
             <span class="bmd-form-group"><div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">
-                  <i class="material-icons">lock_outline</i>
+                  <i class="material-icons">lock_outline</i><abbr class="required" title="obrigatório">*</abbr>
                 </span>
               </div>
               <input type="password" id="createInputPassword" class="form-control" placeholder="Senha..." required="true" oninvalid="this.setCustomValidity('Insira uma senha válida')"
@@ -118,7 +118,7 @@
           <span class="bmd-form-group"><div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">
-                <i class="material-icons">lock_outline</i>
+                <i class="material-icons">lock_outline</i><abbr class="required" title="obrigatório">*</abbr>
               </span>
             </div>
             <input type="password" id="confirmInputPassword" class="form-control" placeholder="Confirmar Senha" required="true"
