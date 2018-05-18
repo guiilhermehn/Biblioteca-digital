@@ -2,7 +2,7 @@ package com.cognizant.bibliotecadigital.model;
 
 public enum Status {
 
-	EM_ESPERA, AGUARDANDO, FINALIZADO, EM_ANALISE;
+	EM_ESPERA, AGUARDANDO, FINALIZADO, EM_ANALISE,ATIVO;
 	
 	@Override
 	public String toString() {
@@ -17,6 +17,9 @@ public enum Status {
 		}	
 		if (this == EM_ANALISE ) {
 			return "Em análise";
+		}
+		if (this == ATIVO ) {
+			return "Ativo";
 		}	
 		return "Não encontrado";
 	}

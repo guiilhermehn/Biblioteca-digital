@@ -56,11 +56,7 @@ public class Mail {
         this.model = model;
     }
 
-	@Override
-	public String toString() {
-		return "Mail [from=" + from + ", to=" + to + ", subject=" + subject + ", attachments=" + attachments
-				+ ", model=" + model + "]";
-	}
+	
 
 	public String getReplyTo() {
 		return replyTo;
@@ -68,6 +64,12 @@ public class Mail {
 
 	public void setReplyTo(String replyTo) {
 		this.replyTo = replyTo;
+	}
+
+	@Override
+	public String toString() {
+		return "Mail [from=" + from + ", to=" + to + ", replyTo=" + replyTo + ", subject=" + subject + ", attachments="
+				+ attachments + ", model=" + model + "]";
 	}
         
 }

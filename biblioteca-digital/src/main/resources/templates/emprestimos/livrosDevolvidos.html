@@ -76,7 +76,7 @@
                         <div class="text-right mx-3 mb-3">
                             <form th:action="@{/emprestimos/confirmaDevolucao}" method="POST">
                                 <input type="hidden" th:value="${emprestimo.id}" name="id">
-                                <button class="btn btn-outline-danger mb-1" >Confirma Devolucão</button>
+                                <button class="btn btn-outline-danger mb-1" data-th-disabled="${emprestimo.habilita}">Confirma Devolucão</button>
                             </form>
                             <!--
                             <form>

@@ -186,7 +186,7 @@ public class ReservaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
