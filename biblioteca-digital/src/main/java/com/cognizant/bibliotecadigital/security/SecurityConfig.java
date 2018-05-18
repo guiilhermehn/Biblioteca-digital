@@ -68,10 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
-				//.antMatchers("/").authenticated()
-                .anyRequest().authenticated()
-				.antMatchers("/livros").hasRole("ADMIN")
-				.antMatchers("/gerenciar").hasRole("ADMIN")
+				.antMatchers("/livros", "/livros/**").hasRole("ADMIN")
+				.antMatchers("/**").authenticated()
+                //.anyRequest().authenticated()
 				.and()
 					.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("senha")
 						.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/").permitAll()						
@@ -79,6 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.and()
-					.exceptionHandling().accessDeniedPage("/consulta");
+					.exceptionHandling().accessDeniedPage("/erroAutorizacao");
 	}
 }
