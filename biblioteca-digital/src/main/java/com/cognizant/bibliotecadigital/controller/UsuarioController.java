@@ -56,20 +56,20 @@ public class UsuarioController {
 		return mv;
 	}
 
-	/*
+	
 	@GetMapping("/register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView("register/Register");
 		modelAndView.addObject("usuario", new Usuario());
 		return modelAndView;
 	}
-	*/
+	
 	
 	@PostMapping("/register/create")
 	public ModelAndView create( @ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 		
 		if (bindingRes.hasErrors()) {
-			return new ModelAndView("login/Login");
+			return new ModelAndView("register/Register");
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
@@ -90,6 +90,14 @@ public class UsuarioController {
 
 		return mv;
 	}
+	
+	 // Alteração que o Jackson pediu 
+	@GetMapping("/erroAutorizacao")
+	public ModelAndView exibirErro() {
+		ModelAndView mv = new ModelAndView("/login/erro404");
+		
+		return mv;
+	} 
 
 	/*
 	 * Alteração Bruno TODO : Usuario altera seu perfil ( dados pessoais)

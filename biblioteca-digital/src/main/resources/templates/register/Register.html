@@ -1,108 +1,167 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-              crossorigin="anonymous">
-        <!-- TODO Customizar o CSS para esse template    -->
-        <link href="./assets/css/register.css" rel="stylesheet">
-        <!--TODO  Adicionar favicon
-            <link rel="icon" href="./favicon.ico">-->
-        <title>Digital Library Solution - Register</title>
-    </head>
-    <body class="text-center">
+<html>
 
-        <form class="form-signin" th:action="@{/register/create}" data-th-object="${usuario}" method="post">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <title>Digital Library Solution</title>
 
-            <!-- TODO Inserir logo em .svg do projeto-->
-            <img class="mb-4" th:src="@{/assets/svg/book.svg}"
-                 src="./assets/svg/book.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
-            <!-- /TODO Adicionar mensagens personalizadas de erros-->
-            <div class="alert alert-danger" data-th-if="${msgErro} != null" data-th-text="${msgErro}"></div>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link type="text/css" href="../../static/assets/css/material-kit.css" rel="stylesheet" data-th-href="@{/assets/css/material-kit.css}" />
+  <!-- CSS customizado do projeto-->
+   <link type="text/css" href="../../static/assets/css/custom.css" rel="stylesheet" data-th-href="@{/assets/css/custom.css}" />
+</head>
+<body class="login-page">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="index.html">
+          Digital Library Solution - Cadastro </a>
+        </div>
+      </div>
+    </nav>
 
-            <label for="inputName" class="sr-only">Nome</label>
-            <input type="text" id="inputName" class="form-control" placeholder="Nome" required=""
-                   autofocus="" data-th-field="*{nome}"> 
-            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputID"class="sr-only">ID Cognizant</label> 
-            <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant"required="" onkeydown="javascript: return event.keyCode == 69 ? false : true"
-                   data-th-field="*{idCgz}">
-            <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputGrade" class="sr-only">Grade</label> 
-            <input type="text" id="inputGrade" class="form-control" placeholder="Grade"
-                   required="" data-th-field="*{grade}">
-            <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputHor" class="sr-only">Horizontal</label> 
-            <input type="text" id="inputHor" class="form-control"
-                   placeholder="Horizontal" required=""
-                   data-th-field="*{horizontal}">
-            <span th:if="${#fields.hasErrors('horizontal')}" th:errors="*{horizontal}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputVer" class="sr-only">Vertical</label> 
-            <input type="text" id="inputVer" class="form-control"
-                   placeholder="Vertical" required=""
-                   data-th-field="*{vertical}">
-            <span th:if="${#fields.hasErrors('vertical')}" th:errors="*{vertical}" class="text-danger help-block" >Incorrect date</span>
-
-            <!-- TODO Não temos a lista das horizontais verticais no momento
-           <label for="horizontalVertical" class="sr-only">Horizontal/Vertical</label>
-            <input list="listHorizontalVertical" id="horizontalVertical" class="form-control" placeholder="Horizontal/Vertical"name="horizontalVertical" />
-              <datalist id="listHorizontalVertical">
-                <option value="RH/Exemplo1">
-                <option value="TI/Exemplo2">
-                <option value="Vendas/Exemplo3">
-                <option value="Externo/Exemplo4">
-              </datalist> -->
-
-            <label for="inputEmail" class="sr-only">Email</label> 
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email"required="" value="@cognizant.com" data-th-field="*{email}"> 
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputPassword" class="sr-only">Senha</label> 
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" oninvalid="this.setCustomValidity('Insira uma senha válida')"
-                   oninput="setCustomValidity('')" 
-                   data-th-field="*{senha}"> 
-            <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
-            <label for="inputPassword"class="sr-only">Confirmar Senha</label> 
-            <input type="password"
-                   id="inputPassword" class="form-control" placeholder="Confirmar Senha"
-                   required=""
-                   oninvalid="this.setCustomValidity('Insira uma senha válida')"
-                   oninput="setCustomValidity('')"
-                   data-th-field="*{confirmaSenha}" >
-
+<!-- INICIO - Form para realizar cadastro do usuario do usuario -->
+<div class="page-header header-filter clear-filter backgroud-gradient">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-sm-6 ml-auto mr-auto" >
+        <div class="card card-signup">
+          <form class="form" th:action="@{/register/create}" data-th-object="${usuario}" method="post" >
+            <h4 class="card-title text-center">Faça seu registro!</h4>
+            <div class="card-body">
+              <!-- /TODO Adicionar mensagens personalizadas de erros-->
+              <div class="alert alert-danger" data-th-if="${msgErro} != null" data-th-text="${msgErro}"></div>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">face</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Nome..." data-th-field="*{nome}" required="true" >
+                  <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger help-block" >Incorrect date</span>
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">settings</i>
+                    </span>
+                  </div>
+                  <input type="number"id="inputID" class="form-control" placeholder="ID Cognizant..." required="true" onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                  data-th-field="*{idCgz}">
+                  <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">settings</i>
+                    </span>
+                  </div>
+                  <input type="text" id="inputGrade" class="form-control" placeholder="Grade" required="false" data-th-field="*{grade}">
+                  <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger help-block" >Incorrect date</span>
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">settings</i>
+                    </span>
+                  </div>
+                  <input type="text" id="inputHor" class="form-control" placeholder="Horizontal" required="false" data-th-field="*{horizontal}">
+                  <span th:if="${#fields.hasErrors('horizontal')}" th:errors="*{horizontal}" class="text-danger help-block" >Incorrect date</span>
+                </div>
+              </span>
+              <span class="bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">settings</i>
+                    </span>
+                  </div>
+                  <input type="text" id="inputVer" class="form-control" placeholder="Vertical" required="false" data-th-field="*{vertical}">
+                  <span th:if="${#fields.hasErrors('vertical')}" th:errors="*{vertical}" class="text-danger help-block" >Incorrect date</span>
+                </div>
+              </span>
+              <span class="bmd-form-group"><div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">mail</i>
+                  </span>
+                </div>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="true" value="@cognizant.com" data-th-field="*{email}">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
+              </div>
+            </span>
+            <span class="bmd-form-group"><div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">lock_outline</i>
+                </span>
+              </div>
+              <input type="password" id="createInputPassword" class="form-control" placeholder="Senha..." required="true" oninvalid="this.setCustomValidity('Insira uma senha válida')"
+              oninput="setCustomValidity('')"
+              data-th-field="*{senha}">
+              <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
+            </div>
+          </span>
+          
+          <span class="bmd-form-group"><div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            <input type="password" id="confirmInputPassword" class="form-control" placeholder="Confirmar Senha" required="true"
+            oninvalid="this.setCustomValidity('Insira uma senha válida')"
+            oninput="setCustomValidity('')"
+            data-th-field="*{confirmaSenha}" >
             <span th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger help-block" >Incorrect date</span>
+            
+          </div>
+        </span>
+      </div>
+      <div class="footer text-center" style="padding-top: 30px; padding-bottom:30px;">
+        <button href="login.html" class="btn btn-outline-primary" type="submit">Efetuar Cadastro <div class="ripple-container"></div></button>
+      </div>
+      <div class="container" style="padding-top:30px;">
+      </div>
+    </form>
+  </div>
+</div>
 
-            <div class="checkbox mb-3">
-                <label> <input type="checkbox" value="remember-me">
-                    Lembrar-me
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+<!-- FIM - Form para Login do usuario -->
 
-            <div class="login-register">
-                <a href="../login/login.html">Login</a>
-            </div>
+</div>
+</div>
+</div>
 
-        </form>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-        crossorigin="anonymous"></script>
-        <script
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-        crossorigin="anonymous"></script>
-    </body>
+
+
+
+	<!--   Core JS Files   -->
+<script src="../../static/assets/js/core/jquery.min.js" type="text/javascript" data-th-src="@{/assets/js/core/jquery.min.js}" ></script>
+<script src="../../static/assets/js/core/popper.min.js" type="text/javascript" data-th-src="@{/assets/js/core/popper.min.js}"></script>
+<script src="../../static/assets/js/core/bootstrap-material-design.min.js" type="text/javascript" data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}"></script>
+<script src="../../static/assets/js/plugins/moment.min.js" data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+<script src="../../static/assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+<script src="../../static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="../../static/assets/js/plugins/nouislider.min.js" type="text/javascript" data-th-src="@{/assets/js/plugins/nouislider.min.js}"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script src="../../static/assets/js/material-kit.min.js" type="text/javascript" data-th-src="@{/assets/js/material-kit.min.js}"></script>
+
+
+</body>
 </html>
-
-
