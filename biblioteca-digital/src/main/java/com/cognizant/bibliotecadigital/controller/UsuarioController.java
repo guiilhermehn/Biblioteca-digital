@@ -94,7 +94,7 @@ public class UsuarioController {
 	 // Alteração que o Jackson pediu 
 	@GetMapping("/erroAutorizacao")
 	public ModelAndView exibirErro() {
-		ModelAndView mv = new ModelAndView("/login/erro404");
+		ModelAndView mv = new ModelAndView("/login/erro401");
 		
 		return mv;
 	} 
