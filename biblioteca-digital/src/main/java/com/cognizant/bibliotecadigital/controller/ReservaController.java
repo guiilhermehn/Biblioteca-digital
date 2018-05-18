@@ -56,11 +56,9 @@ public class ReservaController {
 
 	@Autowired
 	private EmailService emailService;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
-
 
 	@GetMapping("/reservas")
 	public ModelAndView findAll() throws ParseException {
@@ -77,12 +75,12 @@ public class ReservaController {
 
 		if (!reservas.isEmpty()) {
 			for (Reserva reserva : reservas) {
-			
+
 				List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService
 						.emprestimoPorReservaId(reserva.getId());
 				if (!emprestimos.isEmpty()) {
 					for (Emprestimo emprestimo : emprestimos) {
-						if(reserva.getStatus().equals(Status.FINALIZADO)) {
+						if (reserva.getStatus().equals(Status.FINALIZADO)) {
 							reserva.setHabilita(true);
 							continue;
 						}
@@ -162,11 +160,6 @@ public class ReservaController {
 	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
 	public ModelAndView emprestimoAposReserva(@RequestParam("reservaId") Long reservaId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
-
-		// if (emprestimoService.isEmprestado(reservaId)) {
-		// redirectAttributes.addFlashAttribute("message", "Livro já está emprestado!");
-		// return new ModelAndView("redirect:/emprestimos");
-		// }
 
 		Long unidadeId = reservaService.findUnidadeIdByReservaId(reservaId);
 

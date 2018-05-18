@@ -17,7 +17,9 @@ import com.cognizant.bibliotecadigital.repository.PapelRepository;
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
+
 public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
@@ -34,9 +36,6 @@ public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
 	    return executor;
 	  }
 	
-	//Bloco somente deve ser executado para popular o banco numa primeira execução
-	// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
-	//
 	@Bean
 	public CommandLineRunner mock(PapelRepository papelRepository) {
 		return (String[] args) -> {
@@ -47,7 +46,10 @@ public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
 			if(!papelRepository.existsByNome("ROLE_ADMIN")) {
 				papelRepository.save(new Papel("ROLE_ADMIN"));
 			}
-			
+			//TESTES
+			//Bloco somente deve ser executado para popular o banco numa primeira execução
+			// CategoriaLivroRepository catRepo, AutorRepository autRepo, LivroRepository livRepo, UnidadeLivroRepository unidadeRepo EmailService email
+			//
 			/*
 			//Mail mail = email.lembreteDevolucao();
 			//System.out.println(emprestimo.prazoDevolucao());

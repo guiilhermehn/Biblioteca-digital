@@ -87,9 +87,9 @@ public class EmprestimoController {
 		}
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
-		
+
 		unidade.setLivro(unidade.getLivro());
-		
+
 		unidadeService.save(unidade);
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
@@ -100,9 +100,6 @@ public class EmprestimoController {
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
-		
-
-		
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
@@ -110,13 +107,8 @@ public class EmprestimoController {
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		String template = "email-devolucao-analise";
-
-		// TODO validar se usuário é o locatário
 
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
-
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
 
 		emprestimo.setDataDevolucao(new Date());
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
@@ -135,53 +127,55 @@ public class EmprestimoController {
 
 		}
 
-		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
-
-		emailService.sendSimpleMessage(email, template);
+		// TODO Fazer Span Para Notificar Que a Devolucao Está sob Analise
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
-	
+
 	@GetMapping("/emprestimos/livrosDevolvidos")
-	public ModelAndView findAllDevolucoes()
-			throws MessagingException, IOException {
+	public ModelAndView findAllDevolucoes() throws MessagingException, IOException {
 		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
-		
+
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
 		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
-		if(!emprestimos.isEmpty()) {
-		for (Emprestimo emprestimo : emprestimos) {
-			Livro livro = emprestimo.getUnidadeLivro().getLivro();
-			if(emprestimo.getDataDevolucao()!=null)
-				if(livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
-						&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
-					emprestimo.setHabilita(false);
-					emprestimo.setEmprestimoStatus(Status.FINALIZADO);
-				
-			}else {
-				emprestimo.setHabilita(true);
+
+		
+			
+		if (!emprestimos.isEmpty()) {
+			for (Emprestimo emprestimo : emprestimos) {
+				Livro livro = emprestimo.getUnidadeLivro().getLivro();
+				if (emprestimo.getDataDevolucao() != null) {
+					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+						emprestimo.setHabilita(false);
+
+					} else {
+						emprestimo.setHabilita(true);
+					}
+					emprestimoService.save(emprestimo);
+					devolucoesEmAnalise.add(emprestimo);
+
+				}
+
+
 			}
-			emprestimoService.save(emprestimo);
-			devolucoesEmAnalise.add(emprestimo);
-		}
+			
 		}
 		mv.addObject("emprestimos", devolucoesEmAnalise);
 
 		return mv;
 	}
+
     
+
 	@PostMapping("/emprestimos/confirmaDevolucao")
 	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
 		String template = "email-devolucao";
 
-		// TODO validar se usuário é o locatário
-
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
 
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
 
-		
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
@@ -204,30 +198,31 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
+
     
     
 	// TODO Mover para classe utilitária
+
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
 		String livro = "", dataDev = "";
 		Date dataAtual = new Date();
 		Long id;
 		String template = "";
-		for(int i = 0;i<emprestimos.size();i++) {
+		for (int i = 0; i < emprestimos.size(); i++) {
 			try {
 				Usuario usuario = emprestimos.get(i).getUsuario();
 				Date data = emprestimos.get(i).getPrazoDevolucao();
-				
+
 				dataDev = formatarData(data);
-				
+
 				id = emprestimos.get(i).getUnidadeLivro().getId();
 				UnidadeLivro unidade = unidadeService.findById(id).get();
 				livro = unidade.getLivro().getTitulo().toString();
-				
-				if(dataAtual.before(data)) {
+
+				if (dataAtual.before(data)) {
 					template = "email-lembrete";
-				}
-				else if(dataAtual.after(data)) {
+				} else if (dataAtual.after(data)) {
 					template = "email-esquecer";
 				}
 				Mail mail = emailService.lembreteDevolucao(usuario, livro, dataDev);
@@ -237,15 +232,17 @@ public class EmprestimoController {
 			}
 		}
 	}
+
 	
     // TODO Mover para classe utilitária
+
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";
 		dataDev = data.toString();
 		mes = dataDev.substring(5, 7);
 		dia = dataDev.substring(8, 10);
 		dataDev = dia + "/" + mes;
-		
+
 		return dataDev;
 	}
 }

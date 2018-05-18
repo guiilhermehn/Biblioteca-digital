@@ -23,12 +23,13 @@ public class Autor implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
-	//@Transient
-	//private List<String> nomeAutores;
+	/*IMPLEMENTAR FUTURAMENTE
+	 * @Transient
+	private List<String> nomeAutores;
 
-	/*@ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
-	Set<Livro> livros = new HashSet<Livro>();
-*/
+	@ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+	Set<Livro> livros = new HashSet<Livro>();*/
+
 	// Construtor
 	public Autor() {
 		super();

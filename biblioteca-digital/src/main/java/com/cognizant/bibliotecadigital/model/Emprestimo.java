@@ -17,12 +17,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 @Entity
+@Transactional
 @Table(name = "emprestimo")
 public class Emprestimo implements Serializable {
 
@@ -61,9 +63,11 @@ public class Emprestimo implements Serializable {
 	
 	@Transient
 	private boolean habilita;
+
 	
 	@Column(name="emprestimos_status")
 	private Status emprestimoStatus;
+
 
 	// construtor
 	public Emprestimo() {
@@ -158,14 +162,7 @@ public class Emprestimo implements Serializable {
 	
 	
 
-	public boolean isHabilita() {
-		return habilita;
-	}
-
-	public void setHabilita(boolean habilita) {
-		this.habilita = habilita;
-	}
-
+	
 	public Status getEmprestimoStatus() {
 		return emprestimoStatus;
 	}
@@ -190,6 +187,13 @@ public class Emprestimo implements Serializable {
 		this.usuario = usuario;
 	}
 	
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
 
 	@Override
 	public String toString() {

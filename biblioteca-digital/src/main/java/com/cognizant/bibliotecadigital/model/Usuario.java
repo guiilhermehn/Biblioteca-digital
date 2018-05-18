@@ -19,7 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

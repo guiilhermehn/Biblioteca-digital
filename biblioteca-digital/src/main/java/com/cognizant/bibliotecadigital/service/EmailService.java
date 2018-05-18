@@ -41,10 +41,12 @@ public class EmailService {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	
+	
 	public Iterable<Emprestimo> prazoDevolucao(){
 		return emailRepository.prazoDevolucao();
 	}
-	
+
 	@Async
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
@@ -54,10 +56,14 @@ public class EmailService {
 		Context context = new Context();
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
+		
+
+		Usuario adm = usuarioService.emailAdm().get();
 
 		String reply = mail.getReplyTo() == "" ? "" : mail.getReplyTo();
 		
 		helper.setTo(mail.getTo());
+		helper.setReplyTo(adm.getEmail());
 		helper.setText(html, true);
 		helper.setReplyTo(reply);
 		helper.setSubject(mail.getSubject());
@@ -69,12 +75,17 @@ public class EmailService {
 	public Mail enviarEmail(Usuario usuario,UnidadeLivro unidade, String assunto) {
 		Mail mail = new Mail();
 		
+
 		Livro livro = unidade.getLivro();
 		
 		Usuario adm = usuarioService.emailAdm().get();
+
 		mail.setFrom("no-reply@bibliotecacognizant.com");
+		
 		mail.setTo(usuario.getEmail()); 
+
 		mail.setReplyTo(adm.getEmail());
+
 		mail.setSubject(assunto);
 
 		Map<String, Object> model = new HashMap<String, Object>();
