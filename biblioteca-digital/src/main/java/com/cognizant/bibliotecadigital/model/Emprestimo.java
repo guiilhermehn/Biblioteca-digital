@@ -15,12 +15,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 @Entity
+@Transactional
 @Table(name = "emprestimo")
 public class Emprestimo implements Serializable {
 
@@ -57,6 +60,7 @@ public class Emprestimo implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
+	@Transient
 	private boolean habilita;
 
 	// construtor

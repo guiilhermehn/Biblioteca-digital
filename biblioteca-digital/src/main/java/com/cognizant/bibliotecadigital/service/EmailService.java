@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -38,10 +39,12 @@ public class EmailService {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	
+	
 	public Iterable<Emprestimo> prazoDevolucao(){
 		return emailRepository.prazoDevolucao();
 	}
-	
+	@Async
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,

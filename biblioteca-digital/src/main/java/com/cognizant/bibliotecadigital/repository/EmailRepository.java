@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 
 @Repository
 public interface EmailRepository extends CrudRepository<Emprestimo, Long> {

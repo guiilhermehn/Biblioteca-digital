@@ -1,6 +1,5 @@
 package com.cognizant.bibliotecadigital.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,6 @@ public class EmprestimoService {
 		return id;
 	}
 
-
-/*	public Optional<Emprestimo> findById(Long id) {
-		return emprestimoRepository.findById(id);
-	} */
 
 	public boolean isEmprestado(Long unidadeLivroId) {
 		return emprestimoRepository.countEmprestimosByUsuarioId(unidadeLivroId) == 0L;

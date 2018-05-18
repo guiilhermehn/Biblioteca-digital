@@ -1,7 +1,5 @@
 package com.cognizant.bibliotecadigital.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,17 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cognizant.bibliotecadigital.model.Emprestimo;
 import com.cognizant.bibliotecadigital.model.Livro;
-
 import com.cognizant.bibliotecadigital.model.StatusLivro;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
-
 
 @Controller
 @RequestMapping
@@ -31,13 +25,10 @@ public class PesquisaController {
 
 	@Autowired
 	private LivroService livroService;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	//@Autowired
-	//private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private EmprestimoService emprestadoService;
 	@Autowired
@@ -72,8 +63,7 @@ public class PesquisaController {
 		livro.getUnidadeLivros().forEach(unidade -> {
 			if (reservaService.countReservaAguardandoPorUnidadeId(unidade.getId())
 					&& emprestadoService.isEmprestado(livro.getId())
-					&& !livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)
-					) {
+					&& !livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
 				unidade.setEmprestado(false);
 			} else {
 				unidade.setEmprestado(true);
@@ -82,7 +72,7 @@ public class PesquisaController {
 
 		if (livro.getStatusLivro().equals(StatusLivro.COM_EMPRESTIMO)
 				&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())
-				&& reservaService.countReservasPorIdLivro(id,usuario.getId())) {
+				&& reservaService.countReservasPorIdLivro(id, usuario.getId())) {
 			livro.setHabilita(false);
 		} else {
 			livro.setHabilita(true);

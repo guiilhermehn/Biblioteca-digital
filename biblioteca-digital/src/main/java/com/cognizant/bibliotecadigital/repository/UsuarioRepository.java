@@ -23,7 +23,4 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	Optional<Usuario> emailAdm();
 	
 	
-
-/*	@Query(value="insert into usuario_papel values(2,?)")
-	Long registerRoleToUser(Long idUser);*/
 }
