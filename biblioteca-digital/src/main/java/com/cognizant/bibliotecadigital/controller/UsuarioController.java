@@ -38,6 +38,8 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
+		login.addObject("usuario", new Usuario());
+		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
 		}
@@ -53,18 +55,20 @@ public class UsuarioController {
 		return mv;
 	}
 
+	/*
 	@GetMapping("/register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView("register/Register");
 		modelAndView.addObject("usuario", new Usuario());
 		return modelAndView;
 	}
-
+	*/
+	
 	@PostMapping("/register/create")
 	public ModelAndView create( @ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 		
 		if (bindingRes.hasErrors()) {
-			return register() ;
+			return new ModelAndView("login/Login");
 		} 
 		
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
