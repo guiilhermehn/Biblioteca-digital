@@ -59,39 +59,16 @@
                   <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
                 </div>
               </span>
-              <span class="bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
-                    </span>
-                  </div>
-                  <input type="text" id="inputGrade" class="form-control" placeholder="Grade" required="false" data-th-field="*{grade}">
-                  <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger help-block" >Incorrect date</span>
+              <span class="bmd-form-group"><div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
+                  </span>
                 </div>
-              </span>
-              <span class="bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
-                    </span>
-                  </div>
-                  <input type="text" id="inputHor" class="form-control" placeholder="Horizontal" required="false" data-th-field="*{horizontal}">
-                  <span th:if="${#fields.hasErrors('horizontal')}" th:errors="*{horizontal}" class="text-danger help-block" >Incorrect date</span>
-                </div>
-              </span>
-              <span class="bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
-                    </span>
-                  </div>
-                  <input type="text" id="inputVer" class="form-control" placeholder="Vertical" required="false" data-th-field="*{vertical}">
-                  <span th:if="${#fields.hasErrors('vertical')}" th:errors="*{vertical}" class="text-danger help-block" >Incorrect date</span>
-                </div>
-              </span>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Área" required="true" value="@cognizant.com" data-th-field="*{email}">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
+              </div>
+            </span>
               <span class="bmd-form-group"><div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
@@ -114,7 +91,7 @@
               <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
             </div>
           </span>
-          
+
           <span class="bmd-form-group"><div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">
@@ -126,7 +103,7 @@
             oninput="setCustomValidity('')"
             data-th-field="*{confirmaSenha}" >
             <span th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger help-block" >Incorrect date</span>
-            
+
           </div>
         </span>
       </div>
@@ -165,4 +142,3 @@
 
 </body>
 </html>
-
