@@ -57,8 +57,6 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   - [Maven](https://maven.apache.org/);
   - [Hibernate](http://hibernate.org/);
   - [Spring](https://spring.io/);
-  - ~~Node.js~~;
-  - ~~Apache Tomcat~~;
   - [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html);
   - [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/);
   - and [Markdown](https://guides.github.com/features/mastering-markdown/).
