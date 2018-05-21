@@ -31,6 +31,7 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
@@ -50,6 +51,9 @@ public class EmprestimoController {
 	private LivroService livroService;
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PapelService papelService;
 
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
@@ -61,6 +65,9 @@ public class EmprestimoController {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		mv.addObject("emprestimos", emprestimoService.findAllByUsuarioId(usuario.getId()));
 		return mv;
