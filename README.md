@@ -11,10 +11,10 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
 ## b.Funcionalidades implementadas
   -  Cadastro manual de usuário
   -  Validação de login
-  -  Validação de usuário (admin)
+  -  Validação de usuário (*admin*)
   -  Consulta de livros
-  -  Cadastro manual de livros (admin)
-  -  Busca automatizada de detalhes do livro com uso da [API do Google](https://developers.google.com/books/) (admin)
+  -  Cadastro manual de livros (*admin*)
+  -  Busca automatizada de detalhes do livro com uso da [API do Google](https://developers.google.com/books/) (*admin*)
   -  Prazo máximo de duração do empréstimo (07 dias)
   -  Empréstimo de livros (máximo um livro por usuário)
   -  Reserva de livros (máximo uma reserva por usuário)
@@ -23,13 +23,13 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Notificação de disponibilidade do livro
   -  Notificação de disponibilidade de reserva
   -  Devolução de livros
-  -  Relatar avarias do livro (admin)
+  -  Relatar avarias do livro (*admin*)
   
 ## c.Funcionalidades não implementadas
-  -  Uso do login da Cognizant(SSO)
+  -  Uso do login da Cognizant (SSO)
   -  Sugestão de livros caso ele não exista no sistema
   -  Renovar empréstimo do livro
-  -  Usuário admim pode gerenciar outros usuários (admin)
+  -  Usuário admim pode gerenciar outros usuários (*admin*)
   -  Bloqueio da página do usuário (botões),caso ele não devolva o livro no prazo determinado (até que ele devolva o livro)
   -  Geração de relatórios de livros por meio de filtro por categorias (acesso para o usuário)
   -  Amostra de livros em destaque
@@ -37,7 +37,7 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Mostrar livros mais procurados no mês
   -  Mostrar o Top 10 dos usuarios do aplicativo (os que mais lêem)
   -  Tela para o admin ver os livros sugeridos pelo usuário (admin)
-  -  Usuário poderá pegar mais livros emprestados de uma única vez (emprestimo curto prazo)
+  -  Usuário poderá pegar mais livros emprestados de uma única vez (empréstimo curto prazo)
   -  Mais reservas poderão ser feitas por unidade de livro
   -  Recomendações de livros entre usuários
   -  Sugestão de leitura 
@@ -88,7 +88,7 @@ Criem um banco com o nome de "biblioteca_db", o Hibernate se encarregará de cri
 Todas as páginas são geradas utilizando templates "*tageados*" com Thymeleaf.
 Os templates ficam em [resources/templates](https://github.com/guiilhermehn/Biblioteca-digital/tree/master/biblioteca-digital/src/main/resources)
 
-#### :star: UI Kit Design :star:
+### :star: UI Kit Design :star:
 Foi montada a ***UI Kit Design*** para guiar a identidade visual da aplicação.
 Consulte-a no repositório base
 
