@@ -109,7 +109,7 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
  | :---: | :---: | :---: | :---: | :---: |
  | [<img src="https://avatars2.githubusercontent.com/u/26582544?s=460&v=4" width="110px;"/><br /><sub>Guilherme</sub>](https://github.com/guiilhermehn)<br /> | [<img src="https://avatars3.githubusercontent.com/u/13643850?s=460&v=4" width="110px;"/><br /><sub>Jackson</sub>](https://github.com/jacksonsfranca)<br /> | [<img src="https://avatars0.githubusercontent.com/u/22268900?s=460&v=4" width="110px;"/><br /><sub>Luís Ângelo</sub>](https://github.com/luisangelorjr)<br /> :octocat:| [<img src="https://avatars0.githubusercontent.com/u/38658934?s=460&v=4" width="110px;"/><br /><sub>Philipe</sub>](https://github.com/philipe-silva)<br /> | [<img src="https://avatars2.githubusercontent.com/u/38658746?s=460&v=4" width="110px;"/><br /><sub>Raquel</sub>](https://github.com/psousaraquel)<br /> |
  
- 
+#### Scrum Master 
 | [<img src="ScrumMaster-Marcio.jpeg" width="110px;"/><br /><sub>Márcio - Scrum Master</sub>](ScrumMaster-Marcio.jpeg)<br /> |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
