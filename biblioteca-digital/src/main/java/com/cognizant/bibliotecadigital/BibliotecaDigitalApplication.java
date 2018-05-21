@@ -78,4 +78,4 @@ public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
 		};
 		}
 }
->>>>>>> master
+
