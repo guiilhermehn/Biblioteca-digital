@@ -31,9 +31,12 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
+		
+		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
-		}
+		} 
+        login.addObject("usuario", new Usuario());
 
 		return login;
 	}
@@ -46,19 +49,22 @@ public class UsuarioController {
 		return mv;
 	}
 
+	
 	@GetMapping("/register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView("register/Register");
 		modelAndView.addObject("usuario", new Usuario());
 		return modelAndView;
 	}
-
+	
+	
 	@PostMapping("/register/create")
 	public ModelAndView create(@ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 
 		if (bindingRes.hasErrors()) {
 			return register();
 		}
+
 
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
@@ -75,5 +81,13 @@ public class UsuarioController {
 
 		return mv;
 	}
+	
+	 // Alteração que o Jackson pediu 
+	@GetMapping("/erroAutorizacao")
+	public ModelAndView exibirErro() {
+		ModelAndView mv = new ModelAndView("/login/erro401");
+		
+		return mv;
+	} 
 
 }

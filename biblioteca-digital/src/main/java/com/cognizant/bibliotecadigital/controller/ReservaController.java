@@ -2,11 +2,12 @@ package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -63,7 +64,7 @@ public class ReservaController {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		List<Reserva> reservasPorUsuario = new ArrayList<>();
+		Set<Reserva> reservasPorUsuario = new HashSet();
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -72,7 +73,6 @@ public class ReservaController {
 		}
 
 		if (!reservas.isEmpty()) {
-
 			for (Reserva reserva : reservas) {
 
 				List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService
@@ -108,11 +108,11 @@ public class ReservaController {
 		return mv;
 	}
 
+    // TODO Mover para classe utilitária
 	private String formataData(Date disponibilidade) {
 		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
 
 		return dataFormatada;
-
 	}
 
 	@PostMapping("/reservas/deletarReserva")
@@ -178,7 +178,7 @@ public class ReservaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
@@ -198,6 +198,7 @@ public class ReservaController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+    // TODO Mover para classe utilitária
 	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
 		if (emprestimo == null) {

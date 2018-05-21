@@ -74,7 +74,7 @@ public class EmprestimoController {
 
 		GregorianCalendar agora = new GregorianCalendar();
 
-		String template = "email";
+		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 7);
@@ -92,7 +92,7 @@ public class EmprestimoController {
 
 		unidadeService.save(unidade);
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
 		emprestimoService.save(emprestimo);
@@ -114,7 +114,7 @@ public class EmprestimoController {
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.EM_ANALISE);
 		livroService.save(livro);
-
+		emprestimo.setEmprestimoStatus(Status.EM_ANALISE);
 		emprestimoService.save(emprestimo);
 
 		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
@@ -138,26 +138,36 @@ public class EmprestimoController {
 
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
 		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+
+		
+			
 		if (!emprestimos.isEmpty()) {
 			for (Emprestimo emprestimo : emprestimos) {
 				Livro livro = emprestimo.getUnidadeLivro().getLivro();
 				if (emprestimo.getDataDevolucao() != null) {
-					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
+							&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
 						emprestimo.setHabilita(false);
+						emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 
 					} else {
 						emprestimo.setHabilita(true);
 					}
+					emprestimoService.save(emprestimo);
 					devolucoesEmAnalise.add(emprestimo);
 
 				}
 
+
 			}
+			
 		}
 		mv.addObject("emprestimos", devolucoesEmAnalise);
 
 		return mv;
 	}
+
+    
 
 	@PostMapping("/emprestimos/confirmaDevolucao")
 	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
@@ -182,14 +192,16 @@ public class EmprestimoController {
 
 			reservaService.save(reserva);
 
+		}else {
+			//rotinaWishList(livro,emprestimo);
 		}
-
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
+
 
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
@@ -220,6 +232,9 @@ public class EmprestimoController {
 			}
 		}
 	}
+
+	
+    // TODO Mover para classe utilitária
 
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";

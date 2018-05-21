@@ -1,5 +1,8 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -7,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +38,7 @@ public class PesquisaController {
 	@Autowired
 	private ReservaService reservaService;
 
+    // TODO rever rotas? Usar "" para index.html?
 	@GetMapping({ "", "/consulta" })
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("consulta/consulta");
@@ -81,6 +86,28 @@ public class PesquisaController {
 		mav.addObject("livro", livro);
 
 		return mav;
+	}
+
+	@PostMapping("/listaDesejos")
+	public ModelAndView wishList(@RequestParam("id") Long id) {
+
+		Livro livro = livroService.findById(id).get();
+		
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		
+			livro.getIdsListaDesejos().add(usuario.getId());
+		
+		livroService.save(livro);
+
+		return new ModelAndView("");
+
 	}
 
 }
