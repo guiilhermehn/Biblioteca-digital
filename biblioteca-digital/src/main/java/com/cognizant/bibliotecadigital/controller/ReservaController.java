@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
@@ -6,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -63,10 +66,8 @@ public class ReservaController {
 	private PapelService papelService;
 
 	@GetMapping("/reservas")
-	public ModelAndView findAll() throws ParseException, MessagingException, IOException {
+	public ModelAndView findAll() throws ParseException {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
-		
-		
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
 		List<Reserva> reservasPorUsuario = new ArrayList<>();
@@ -96,8 +97,6 @@ public class ReservaController {
 						} else {
 							reserva.setStatus(Status.AGUARDANDO);
 							reserva.setHabilita(false);
-							
-
 						}
 					}
 					if (reserva.getUsuario().getId().equals(usuario.getId())) {
@@ -131,9 +130,9 @@ public class ReservaController {
 		Reserva reserva = reservaService.findById(id).get();
 
 		if (reservaService.isEmprestadoOuDevolvido(id)) {
-			reserva.setHabilitaApagarReserva(true);
-		} else {
 			reserva.setHabilitaApagarReserva(false);
+		} else {
+			reserva.setHabilitaApagarReserva(true);
 		}
 
 		reservaService.deleteById(id);
@@ -224,5 +223,6 @@ public class ReservaController {
 		return data.getTime();
 
 	}
+
 
 }

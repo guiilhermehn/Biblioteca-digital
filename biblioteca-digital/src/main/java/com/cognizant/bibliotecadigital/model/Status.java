@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 public enum Status {
@@ -26,3 +27,4 @@ public enum Status {
 	}
 
 }
+

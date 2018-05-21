@@ -111,6 +111,14 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+
+	
+	@PostMapping("/emprestimos/deletarEmprestimo")
+	public ModelAndView save(@RequestParam("id") Long id) {
+		emprestimoService.deleteById(id);
+		ModelAndView mv = new ModelAndView("redirect:/emprestimos");		
+		return mv;
+	}
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -137,6 +145,7 @@ public class EmprestimoController {
 
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
 		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+
 
 		
 			
@@ -186,6 +195,7 @@ public class EmprestimoController {
 		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
 		if (idReserva != null) {
 			Reserva reserva = reservaService.findById(idReserva).get();
+
 
 			reserva.setStatus(Status.AGUARDANDO);
 
