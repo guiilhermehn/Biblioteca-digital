@@ -100,7 +100,7 @@ Consulte-a no repositório base
 ### Consulta API Google Books
 A consulta através do ISBN do livro é realizada no Front-End utilizando JavaScript
 Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
-**Lembre-se**: O erro relatado sobre um ISBN para mais de um livro. Caso haja mais de um, o primeiro relacionado é será preenchido
+**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado é será preenchido
 
 ## Contribuições
 ### 1º  Graduation Program:
