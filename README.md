@@ -88,7 +88,7 @@ Criem um banco com o nome de "biblioteca_db", o Hibernate se encarregará de cri
 Todas as páginas são geradas utilizando templates "*tageados*" com Thymeleaf.
 Os templates ficam em [resources/templates](https://github.com/guiilhermehn/Biblioteca-digital/tree/master/biblioteca-digital/src/main/resources)
 
-#### UI Kit Design
+#### :star: UI Kit Design :star:
 Foi montada a ***UI Kit Design*** para guiar a identidade visual da aplicação.
 Consulte-a no repositório base
 
