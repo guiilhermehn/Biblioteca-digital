@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -10,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
+import org.springframework.data.annotation.Transient;
+
+@Transactional
 @Entity
 @Table(name = "unidadeLivro")
 public class UnidadeLivro implements Serializable {
@@ -28,11 +33,27 @@ public class UnidadeLivro implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
+	
+	@Transient
+	private boolean emprestado;
+	
+	@Transient
+	private boolean reservado;
+	
+	
 
 	// Construtor
 	public UnidadeLivro() {
 		this.id = 0L;
 	}
+
+	public UnidadeLivro(Long id, String avarias, Livro livro) {
+		this.id = id;
+		this.avarias = avarias;
+		this.livro = livro;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -92,9 +113,28 @@ public class UnidadeLivro implements Serializable {
 		this.avarias = avarias;
 	}
 
+	
+	public boolean isEmprestado() {
+		return emprestado;
+	}
+
+	public void setEmprestado(boolean emprestado) {
+		this.emprestado = emprestado;
+	}
+	
+	
+	public boolean isReservado() {
+		return reservado;
+	}
+
+	public void setReservado(boolean reservado) {
+		this.reservado = reservado;
+	}
+
 	@Override
 	public String toString() {
 		return "UnidadeLivro [id=" + id + ", avarias=" + avarias + "]";
 	}
 
 }
+

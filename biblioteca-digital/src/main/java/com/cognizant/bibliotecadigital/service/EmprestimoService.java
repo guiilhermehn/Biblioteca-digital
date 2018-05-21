@@ -1,13 +1,11 @@
 package com.cognizant.bibliotecadigital.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
-<<<<<<< HEAD
-=======
-import com.cognizant.bibliotecadigital.model.Livro;
->>>>>>> master
 import com.cognizant.bibliotecadigital.repository.EmprestimoRepository;
 
 @Service
@@ -19,16 +17,14 @@ public class EmprestimoService {
 	public Iterable<Emprestimo> findAll() {
 		return emprestimoRepository.findAll();
 	}
-<<<<<<< HEAD
 
-	public Object findById(Long id) {
+	public Optional<Emprestimo> findById(Long id) {
 		return emprestimoRepository.findById(id);
-=======
-	
+	}
 
 	public Emprestimo save(Emprestimo emprestimo) {
 		return emprestimoRepository.save(emprestimo);
->>>>>>> master
+
 	}
 
 	public Long deleteById(Long id) {
@@ -36,5 +32,34 @@ public class EmprestimoService {
 		return id;
 	}
 
+
+	public boolean isEmprestado(Long unidadeLivroId) {
+		return emprestimoRepository.countEmprestimosByUsuarioId(unidadeLivroId) == 0L;
+	}
 	
+	public Optional<Emprestimo> findByUnidadeLivroId(Long unidadeId) {
+
+		
+		return emprestimoRepository.findEmprestimosByUnidadeLivroId(unidadeId);
+	}
+	
+	public Iterable<Emprestimo> emprestimoPorReservaId(Long reservaId){
+		return emprestimoRepository.findEmprestimoByReservaId(reservaId);
+	}
+	
+	public Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId) {
+		return emprestimoRepository.findAllByUsuarioId(usuarioId);
+	}
+
+
+	public boolean countEmprestimoPorUsuarioId(Long idUsuario) {
+		return emprestimoRepository.countEmprestimoPorUsuarioId(idUsuario)== 0L ;
+		
+	}
+
+	public Iterable<Emprestimo> findAllDevolvidos() {
+		
+		return emprestimoRepository.findEmprestimosDevolvidos();
+	}
 }
+

@@ -15,9 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Transactional
 @Entity
 @Table(name = "Reserva")
 public class Reserva implements Serializable {
@@ -42,9 +46,23 @@ public class Reserva implements Serializable {
 	@Column(name = "status")
 	private Status status;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(name = "data_modifica_status")
+	private Date dataModificaStatus;
+
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
+
+	@Transient
+	private String dataPrevisao = "";
+
+	@Transient
+	private Boolean habilita = false;
+
+	@Transient
+	private Boolean habilitaApagarReserva = false;
 
 	public Long getId() {
 		return id;
@@ -56,6 +74,16 @@ public class Reserva implements Serializable {
 
 	public Reserva() {
 
+	}
+
+	public Reserva(Usuario usuario, @NotNull Date dataReserva, @NotNull Status status, @NotNull Livro livro,
+			@NotNull Date dataModificaStatus) {
+		super();
+		this.usuario = usuario;
+		this.dataReserva = dataReserva;
+		this.status = status;
+		this.livro = livro;
+		this.dataModificaStatus = dataModificaStatus;
 	}
 
 	@Override
@@ -136,10 +164,51 @@ public class Reserva implements Serializable {
 		this.livro = livro;
 	}
 
+	public String getDataPrevisao() {
+		return dataPrevisao;
+	}
+
+	public void setDataPrevisao(String dataPrevisao) {
+		this.dataPrevisao = dataPrevisao;
+	}
+
+	public Boolean getHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(Boolean habilita) {
+		this.habilita = habilita;
+	}
+
+	public Date getDataModificaStatus() {
+		return dataModificaStatus;
+	}
+
+	public void setDataModificaStatus(Date dataModificaStatus) {
+		this.dataModificaStatus = dataModificaStatus;
+	}
+	
+	
+
+	public Boolean getHabilitaApagarReserva() {
+		return habilitaApagarReserva;
+	}
+
+	public void setHabilitaApagarReserva(Boolean habilitaApagarReserva) {
+		this.habilitaApagarReserva = habilitaApagarReserva;
+	}
+
 	@Override
 	public String toString() {
 		return "Reserva [id=" + id + ", usuario=" + usuario + ", dataReserva=" + dataReserva + ", status=" + status
 				+ ", livro=" + livro + "]";
+	}
+
+	public boolean isValidaStatusEmEspera(Reserva reserva, Emprestimo emprestimo) {
+		if (reserva.getStatus().equals(Status.EM_ESPERA) && emprestimo.getDataDevolucao() != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

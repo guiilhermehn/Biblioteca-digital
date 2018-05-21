@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Usuario;
+import com.cognizant.bibliotecadigital.security.SecurityConfig;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
@@ -24,21 +25,20 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@Autowired
+	private PapelService papelService;
+
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
+		
+		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
-		}
+		} 
+        login.addObject("usuario", new Usuario());
 
 		return login;
-	}
-
-	@GetMapping("/register")
-	public ModelAndView register() {
-		ModelAndView modelAndView = new ModelAndView("register/Register");
-		modelAndView.addObject("usuario", new Usuario());
-		return modelAndView;
 	}
 
 	@GetMapping("/usuarios")
@@ -49,32 +49,30 @@ public class UsuarioController {
 		return mv;
 	}
 
-	@PostMapping("/register")
-	public ModelAndView create(@ModelAttribute Usuario usuario) {
+	
+	@GetMapping("/register")
+	public ModelAndView register() {
+		ModelAndView modelAndView = new ModelAndView("register/Register");
+		modelAndView.addObject("usuario", new Usuario());
+		return modelAndView;
+	}
+	
+	
+	@PostMapping("/register/create")
+	public ModelAndView create(@ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 
+		if (bindingRes.hasErrors()) {
+			return register();
+		}
+
+
+		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
+		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
 		usuarioService.save(usuario);
 
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
 	}
-
-	// @GetMapping("/usuarios/novo")
-	// public ModelAndView novo() {
-	// ModelAndView modelAndView = new ModelAndView("/pessoa/pessoa_form");
-	// modelAndView.addObject("usuario", new Usuario());
-	// return modelAndView;
-	// }
-
-	/*
-	 @PostMapping(path = "/usuarios/salvar") 
-	 public ModelAndView create(@Valid @ModelAttribute Usuario usuario, BindingResult bindingRes, RedirectAttributes redAttributes) {
-			if (bindingRes.hasErrors()){
-				return new ModelAndView("/pessoa/pessoa_form");
-			}
-	 usuarioService.save(usuario);
-	 redAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
-	 return new ModelAndView("redirect:/usuarios"); }
-	 */
 
 	@GetMapping("/usuarios/{id}")
 	public ModelAndView detail(@PathVariable("id") Long id) {
@@ -83,13 +81,13 @@ public class UsuarioController {
 
 		return mv;
 	}
-
-	/*
-	 * Alteração Bruno TODO : Usuario altera seu perfil ( dados pessoais)
-	 * 
-	 * @GetMapping("/usuarios/perfil") public ModelAndView novo() { ModelAndView
-	 * modelAndView = new ModelAndView("/pessoa/pessoa_form");
-	 * modelAndView.addObject("usuario", new Usuario()); return modelAndView; }
-	 */
+	
+	 // Alteração que o Jackson pediu 
+	@GetMapping("/erroAutorizacao")
+	public ModelAndView exibirErro() {
+		ModelAndView mv = new ModelAndView("/login/erro401");
+		
+		return mv;
+	} 
 
 }

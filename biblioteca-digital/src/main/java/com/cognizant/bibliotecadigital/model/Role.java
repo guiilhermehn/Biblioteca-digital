@@ -1,11 +1,20 @@
 package com.cognizant.bibliotecadigital.model;
+/*package com.cognizant.bibliotecadigital.model;
+
+************TODO**************
+SUJEITO A DELETAR
+>>>>>>> master
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+<<<<<<< HEAD
 @Entity
+=======
+@Entity(name="role")
+>>>>>>> master
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,3 +50,7 @@ public class Role {
 	}
 
 }
+<<<<<<< HEAD
+=======
+*/
+

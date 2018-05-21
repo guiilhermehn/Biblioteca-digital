@@ -1,7 +1,9 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,12 +14,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,9 +31,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "usuario")
+@Transactional
 public class Usuario implements Serializable, UserDetails {
 
-	private static final long serialVersionUID = 902783495L;
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,17 +43,18 @@ public class Usuario implements Serializable, UserDetails {
 	private Long id;
 
 	@Column(name = "id_cgz")
-	@Size(min=6, max= 6)
+	@Size(min = 6, max = 6)
 	@NotNull
-	private Long idCgz;
+	private String idCgz;
 
 	@Column(name = "nome")
-	@Size(min=4,  max=80)
+	@Size(min = 4, max = 80)
 	@NotNull
 	@NotEmpty
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
+	@Size(max=255)
 	@Email
 	@NotNull
 	@NotEmpty
@@ -63,17 +71,19 @@ public class Usuario implements Serializable, UserDetails {
 	private String vertical;
 
 	@Column(name = "senha")
-	@Size(min=4, max=16)
 	@NotNull
 	@NotEmpty
 	private String senha;
-	
+
 	@Transient
-	@NotNull
 	private String confirmaSenha;
-	
-	@ManyToMany(mappedBy="usuarios")
-	private Set<Papel> papeis;
+
+	@Transient
+	private Boolean verificaRole = false;
+
+	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "usuario_id", unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
 
@@ -84,9 +94,6 @@ public class Usuario implements Serializable, UserDetails {
 	private List<Reserva> reservas;
 
 	// Construtor
-	public Usuario() {
-
-	}
 
 	public Usuario(@NotNull String nome, @NotNull String email, @NotNull String grade, @NotNull String senha,
 			Set<Papel> papeis) {
@@ -97,53 +104,20 @@ public class Usuario implements Serializable, UserDetails {
 		this.senha = senha;
 		this.papeis = papeis;
 	}
+
+	public Usuario() {
+		this.id = 0L;
+		this.papeis = new HashSet<>();
+	}
+
 	
-	public boolean verificaSenha() {
-		if(senha.equals(confirmaSenha)) {
-		return true;
-		}else {
-			return false;
-		}
+
+	public Boolean getVerificaRole() {
+		return verificaRole;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return papeis;
-	}
-
-	@Override
-	public String getPassword() {
-
-		return senha;
-	}
-
-	@Override
-	public String getUsername() {
-		return nome;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-
-		return true;
+	public void setVerificaRole(Boolean verificaRole) {
+		this.verificaRole = verificaRole;
 	}
 
 	@Override
@@ -239,11 +213,11 @@ public class Usuario implements Serializable, UserDetails {
 		this.id = id;
 	}
 
-	public Long getIdCgz() {
+	public String getIdCgz() {
 		return idCgz;
 	}
 
-	public void setIdCgz(Long idCgz) {
+	public void setIdCgz(String idCgz) {
 		this.idCgz = idCgz;
 	}
 
@@ -319,12 +293,62 @@ public class Usuario implements Serializable, UserDetails {
 		this.reservas = reservas;
 	}
 
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
 				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
 				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
 	}
- 
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		
+		return false;
+	}
+
 }
+

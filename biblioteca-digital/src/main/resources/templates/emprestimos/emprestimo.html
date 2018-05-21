@@ -1,92 +1,193 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Digital Library Solution Development - Reserved</title>
-        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
-        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
-        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
-    </head>
-    <body>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
-          <a class="navbar-brand text-white" href="#">Digital Library Solution</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <title>Digital Library Solution</title>
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="./assets/css/material-kit.css" data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="./assets/css/custom.css" data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+  </head>
+  <body class="product-page sidebar-collapse">
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+      <div class="container">
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item   ">
-                <a class="nav-link " href="#"> <i class="fas fa-book fa-lg"></i> Empréstimo</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="active nav-item">
+              <a href="#pablo" data-th-href="@{/}" class="nav-link">
+                <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pablo" class="nav-link">
+                <i class="material-icons">account_circle</i> Perfil <div class="ripple-container"></div>
+              </a>
+            </li>
+            <li class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">apps</i> Minhas ações
+                <div class="ripple-container"></div>
+              </a>
+              <div class="dropdown-menu dropdown-with-icons">
+                <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
+                  <i class="material-icons">layers</i> Meus Empréstimo
+                </a>
+                <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
+                  <i class="material-icons">content_paste</i> Minhas Reservas
+                </a>
+              </div>
+            </li>
 
-        <main class="container">
-            <div style="height: 64px">
-                <!-- Espaçamento para manter o conteudo abaixo da navbar (fixed-top) -->
-            </div>
+            <li class="nav-item">
+              <a href="login.html" data-th-href="@{/logout}"  class="nav-link">
+                <i class="material-icons">settings</i> Sair
+              </a>
+            </li>
 
-            <h1 class="h3">Emprestimo</h1>
-
-            <div class="accordion border shadow-sm rounded bg-primary " id="accordion">
-            	<div data-th-each="reserva, stat : ${reservas}">
-	                <a data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-	                    <div class="row py-2 mx-0 border-bottom">
-	                        <div class="col-12 col-lg-4 text-white">
-	                            <strong>Título:</strong> <span data-th-text="${reserva.livro.titulo}">Título</span>
-	                        </div>
-
-                            <div class="col-12 col-md-6 col-lg-4 text-white">
-	                            <strong>Autor(es):</strong> <span data-th-text="${reserva.livro.autores}">Autores</span>
-	                        </div>
-	                    </div>
-	                </a>
-	                <div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
-                        <div class="row pt-2 px-3">
-                            <div class="d-none d-lg-block col-lg-4 col-xl-3">
-                                <img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="page-header header-filter clear-filter backgroud-gradient"></div>
+    <div class="main main-raised">
+      <div class="container">
+        <div class="section">
+          <div class="row">
+            <div class="container-fluid">
+              <h2>Meus Empréstimos</h2>
+              <div class="row">
+                <div class="col-md-12">
+                    <div id="accordion" role="tablist" data-th-each="emprestimo, stat : ${emprestimos}">
+                      <div class="card card-collapse">
+                        <div class="card-header" role="tab" id="headingOne" data-th-id="'heading'+${stat.index}">
+                          <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-th-attr="href='#collapse' + ${stat.index}, aria-controls='collapse' + ${stat.index}">
+                              <strong data-th-text="${emprestimo.unidadeLivro.livro.titulo}"></strong> &emsp; <span data-th-text="${emprestimo.unidadeLivro.livro.autor}"></span> &emsp; &emsp; <i class="material-icons">keyboard_arrow_down</i>
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="collapseOne" data-th-id="'collapse'+${stat.index}" class="collapse show" role="tabpanel" data-th-attr="aria-labelledby='heading'+${stat.index}" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="col-md-12">
+                              <p class="font-weight-bold"> Data de Retirada:</p>
+                              <div data-th-text="${emprestimo.dataRetirada}">DD/MMM/YYYY</div>
                             </div>
-                            <dl class="col">
-
-                                <dt>Data de Recebimento:</dt>
-                                <dd data-th-text="${#dates.format(emprestimo.releaseDate, 'dd-MMM-yyyy')}">DD/MMM/YYYY</dd>
-
-                                <dt>Data de Devolução:</dt>
-                                <dd data-th-text="${reserva.livro.edicao}">DD/MMM/YYYY</dd>
-
-                                <dt>Foto:</dt>
-                                <dd data-th-text="${reserva.livro.foto}">filename.jpg</dd>
-                            </dl>
+                            <div class="col-md-12">
+                              <p class="font-weight-bold">Prazo de Devolução:</p>
+                              <div data-th-text="${emprestimo.prazoDevolucao}">DD/MMM/YYYY</div>
+                            </div>
+                            <div class="col-md-12">
+                              <p class="font-weight-bold">Data de Devolução:</p>
+                              <div data-th-text="${emprestimo.dataDevolucao}">DD/MMM/YYYY</div>
+                            </div>
+                            <div class="text-right mx-3 mb-3">
+                              <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST">
+                                <input type="hidden" data-th-value="${emprestimo.id}" name="id">
+                                <button class="btn btn-outline-danger" data-th-disabled="${emprestimo.dataDevolucao != null}">Devolver</button>
+                              </form>
+                              <!--
+                              <button class="btn btn-outline-danger" data-toggle="modal" data-target="#smallAlertModal">Devolver</button>
+                              -->
+                            </div>
+                          </div>
                         </div>
-
-                        <div class="text-right mx-3 mb-3">
-                        	<form th:action="@{/emprestimos/deletarReserva}" method="POST">
-                        		<button class="btn btn-outline-danger mb-1">Cancelar Emprestimo</button>
-                        		<input type="hidden" th:value="${emprestimo.id}" name="id">
-                        	</form>
-                        	<form>
-                        		<a href="#" class="btn btn-outline-success mb-1">Efetuar empréstimo</a>
-                        	</form>
+                      </div>
+                      <!--
+                      <div class="card card-collapse">
+                        <div class="card-header" role="tab" id="headingTwo">
+                          <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                              Titulo: Bla bla bla &emsp; Autor: bla bla bla &emsp; &emsp;
+                              <i class="material-icons">keyboard_arrow_down</i>
+                            </a>
+                          </h5>
                         </div>
-	                </div>
-				</div>
+                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="col-md-12">
+                              <p class="font-weight-bold"> Data de Retirada:</p>
+                              <div>DD/MMM/YYYY</div>
+                            </div>
+                            <div class="col-md-12">
+                              <p class="font-weight-bold">Prazo de Devolução:</p>
+                              <div>DD/MMM/YYYY</div>
+                            </div>
+                            <div class="col-md-12">
+                              <p class="font-weight-bold">Data de Devolução:</p>
+                              <div>DD/MMM/YYYY</div>
+                            </div>
+                            <div class="text-right mx-3 mb-3">
+                              <button class="btn btn-outline-danger" data-toggle="modal" data-target="#smallAlertModal">Devolver</button>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                      -->
 
+                    </div>
+
+                </div>
+              </div>
             </div>
-        </main>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
-        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
-        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
-    </body>
+    <!-- TODO ignorado por hora. devemos modificar o fluxo para comportar o uso deste modal? -->
+    <!-- small modal -->
+    <div class="modal fade" id="smallAlertModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-small" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5>Você receberar um e-mail confirmando sua devolução! </h5>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Sair</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" data-background-color="black">
+      <div class="container">
+        <div class="copyright float-right">
+          © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+        </div>
+      </div>
+    </footer>
+
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js" data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+    <script src="./assets/js/core/popper.min.js" data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+    <script src="./assets/js/core/bootstrap-material-design.min.js" data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="./assets/js/plugins/bootstrap-selectpicker.js" data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+    <script src="./assets/js/plugins/moment.min.js" data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+    <script src="./assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="./assets/js/plugins/bootstrap-datetimepicker.js" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="./assets/js/plugins/nouislider.min.js" data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/material-kit.min.js" data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+  </body>
 </html>
