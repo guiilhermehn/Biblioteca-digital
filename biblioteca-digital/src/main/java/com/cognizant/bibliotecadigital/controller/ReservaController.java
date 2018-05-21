@@ -2,6 +2,7 @@ package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -64,7 +65,7 @@ public class ReservaController {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		Set<Reserva> reservasPorUsuario = new HashSet();
+		List<Reserva> reservasPorUsuario = new ArrayList<>();
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
