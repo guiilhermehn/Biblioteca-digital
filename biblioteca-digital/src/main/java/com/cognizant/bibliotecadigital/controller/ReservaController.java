@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -61,7 +59,7 @@ public class ReservaController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private PapelService papelService;
 
@@ -87,6 +85,7 @@ public class ReservaController {
 					for (Emprestimo emprestimo : emprestimos) {
 						if (reserva.getStatus().equals(Status.FINALIZADO)) {
 							reserva.setHabilita(true);
+							reserva.setHabilitaApagarReserva(true);
 							continue;
 						}
 						Date disponibilidade = calculaDisponibilidade(emprestimo);
@@ -94,6 +93,7 @@ public class ReservaController {
 							reserva.setStatus(Status.EM_ESPERA);
 							reserva.setDataPrevisao(formataData(disponibilidade));
 							reserva.setHabilita(true);
+
 						} else {
 							reserva.setStatus(Status.AGUARDANDO);
 							reserva.setHabilita(false);
@@ -110,14 +110,14 @@ public class ReservaController {
 		}
 
 		mv.addObject("reservas", reservasPorUsuario);
-		
+
 		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
 		mv.addObject("isAdmin", isAdmin);
 
 		return mv;
 	}
 
-    // TODO Mover para classe utilitária
+	// TODO Mover para classe utilitária
 	private String formataData(Date disponibilidade) {
 		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
 
@@ -127,13 +127,7 @@ public class ReservaController {
 	@PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
 
-		Reserva reserva = reservaService.findById(id).get();
-
-		if (reservaService.isEmprestadoOuDevolvido(id)) {
-			reserva.setHabilitaApagarReserva(false);
-		} else {
-			reserva.setHabilitaApagarReserva(true);
-		}
+		
 
 		reservaService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/reservas");
@@ -187,7 +181,8 @@ public class ReservaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,
+				Status.ATIVO);
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
@@ -207,7 +202,7 @@ public class ReservaController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
-    // TODO Mover para classe utilitária
+	// TODO Mover para classe utilitária
 	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
 		if (emprestimo == null) {
@@ -223,6 +218,5 @@ public class ReservaController {
 		return data.getTime();
 
 	}
-
 
 }
