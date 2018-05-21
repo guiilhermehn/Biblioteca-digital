@@ -63,8 +63,10 @@ public class ReservaController {
 	private PapelService papelService;
 
 	@GetMapping("/reservas")
-	public ModelAndView findAll() throws ParseException {
+	public ModelAndView findAll() throws ParseException, MessagingException, IOException {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
+		
+		
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
 		List<Reserva> reservasPorUsuario = new ArrayList<>();
@@ -94,6 +96,8 @@ public class ReservaController {
 						} else {
 							reserva.setStatus(Status.AGUARDANDO);
 							reserva.setHabilita(false);
+							
+
 						}
 					}
 					if (reserva.getUsuario().getId().equals(usuario.getId())) {
@@ -127,9 +131,9 @@ public class ReservaController {
 		Reserva reserva = reservaService.findById(id).get();
 
 		if (reservaService.isEmprestadoOuDevolvido(id)) {
-			reserva.setHabilitaApagarReserva(false);
-		} else {
 			reserva.setHabilitaApagarReserva(true);
+		} else {
+			reserva.setHabilitaApagarReserva(false);
 		}
 
 		reservaService.deleteById(id);

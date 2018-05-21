@@ -74,8 +74,11 @@ public class EmailService {
 		mail.setFrom("no-reply@bibliotecacognizant.com");
 		mail.setTo(usuario.getEmail());
 
+		if(livro.getStatusLivro().equals(StatusLivro.SEM_EMPRESTIMO)) {
 		mail.setReplyTo(adm.getEmail());
-
+		}else {
+			mail.setReplyTo("");
+		}
 		mail.setSubject(assunto);
 
 		Map<String, Object> model = new HashMap<String, Object>();
