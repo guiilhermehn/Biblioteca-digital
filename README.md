@@ -13,8 +13,8 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Validação de login
   -  Validação de usuário (admin)
   -  Consulta de livros
-  -  Cadastro manual de livros
-  -  Cadastro de livros com uso da [API do Google](https://developers.google.com/books/)
+  -  Cadastro manual de livros (admin)
+  -  Busca automatizada de detalhes do livro com uso da [API do Google](https://developers.google.com/books/) (admin)
   -  Prazo máximo de duração do empréstimo (07 dias)
   -  Empréstimo de livros (máximo um livro por usuário)
   -  Reserva de livros (máximo uma reserva por usuário)
@@ -29,26 +29,26 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Uso do login da Cognizant(SSO)
   -  Sugestão de livros caso ele não exista no sistema
   -  Renovar empréstimo do livro
-  -  Usuário admim pode gerenciar outros usuários
+  -  Usuário admim pode gerenciar outros usuários (admin)
   -  Bloqueio da página do usuário (botões),caso ele não devolva o livro no prazo determinado (até que ele devolva o livro)
   -  Geração de relatórios de livros por meio de filtro por categorias (acesso para o usuário)
   -  Amostra de livros em destaque
   -  Lista de livros desejados pelo usuario (WishList)
   -  Mostrar livros mais procurados no mês
-  -  Mostrar o top ten dos usuarios do aplicativo (os que mais lêem)
-  -  Tela para o admin ver os livros sugeridos pelo usuário
-  -  Usuário poderá pegar mais livros emprestados de uma única vez
+  -  Mostrar o Top 10 dos usuarios do aplicativo (os que mais lêem)
+  -  Tela para o admin ver os livros sugeridos pelo usuário (admin)
+  -  Usuário poderá pegar mais livros emprestados de uma única vez (emprestimo curto prazo)
   -  Mais reservas poderão ser feitas por unidade de livro
-  -  recomendações de livros entre usuários
+  -  Recomendações de livros entre usuários
   -  Sugestão de leitura 
-  -  Tela para o admin com lista de livros sugeridos pelos usuários
+  -  Tela para o admin com lista de livros sugeridos pelos usuários (admin)
   -  Empréstimo de curto prazo
   -  Tela com lista de emprestimos para poder ser editada pelo usuário
-  -  Notificação de prazo de reserva do usuário para o admin
+  -  Notificação de prazo de reserva do usuário para o admin (admin)
   -  Exportar informações de reserva para a agenda do usuário
-  -  Pop-up com as avarias do livro
+  -  Pop-up com as avarias do livro (página de detalhes do livro)
   -  Perfil do usuário no menu
-  -  Botão de esqueci minha senha
+  -  Funcionalidade do botão de esqueci minha senha
   -  Página do perfil do usuário  
 
 ## **Tools used**:
@@ -71,7 +71,7 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
  Problema na lógica da integração das regras de negócio quando se há mais de um empréstimo por livro e por usuário.
  Limitamos a quantidade de empréstimos por livro para o máximo de 01 empréstimo e máximo de 01 reserva
    
-### Mais de um ISBN por livro 
+### Mais de um livro por ISBN 
  Não há uma regularização sobre o ISBN ser único mundialmente. Na API do Google, houve casos em que encontramos +27 livros para um mesmo ISBN.    
  
 ## Como começar 
@@ -90,9 +90,14 @@ Criem um banco com o nome de "biblioteca_db", o Hibernate se encarregará de cri
 Todas as páginas são geradas utilizando templates "*tageados*" com Thymeleaf.
 Os templates ficam em [resources/templates](https://github.com/guiilhermehn/Biblioteca-digital/tree/master/biblioteca-digital/src/main/resources)
 
+#### UI Kit Design
+Foi montada a ***UI Kit Design*** para guiar a identidade visual da aplicação.
+Consulte-a no repositório base
+
 ### Consulta API Google Books
 A consulta através do ISBN do livro é realizada no Front-End utilizando JavaScript
-Após inserir um ISBN último/primeiro relacionado
+Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
+**Lembre-se**: O erro relatado sobre um ISBN para mais de um livro. Caso haja mais de um, o primeiro relacionado é será preenchido
 
 ## Contribuições
 ### 1º  Graduation Program:
@@ -103,7 +108,8 @@ Após inserir um ISBN último/primeiro relacionado
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ### 2º Graduation Program:
-...
+
+    ###Preencher###
 
 ## Versionamento
 Nós recomendamos utilizar o [SemVer](http://semver.org/) para versionamento.
