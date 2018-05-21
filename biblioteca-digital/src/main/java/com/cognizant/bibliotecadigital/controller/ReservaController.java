@@ -34,6 +34,7 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
@@ -58,6 +59,9 @@ public class ReservaController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PapelService papelService;
 
 	@GetMapping("/reservas")
 	public ModelAndView findAll() throws ParseException {
@@ -104,6 +108,9 @@ public class ReservaController {
 		}
 
 		mv.addObject("reservas", reservasPorUsuario);
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		return mv;
 	}
