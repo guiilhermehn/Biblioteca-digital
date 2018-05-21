@@ -97,7 +97,7 @@
                             <div class="text-right mx-3 mb-3">
                               <form data-th-action="@{/emprestimos/efetuarDevolucao}" method="POST">
                                 <input type="hidden" data-th-value="${emprestimo.id}" name="id">
-                                <button class="btn btn-outline-danger" data-th-disabled="${emprestimo.dataDevolucao != null}">Devolver</button>
+                                <button class="btn btn-outline-success"  role="button" aria-disabled="true" th:classappend="{emprestimo.dataDevolucao != null} ? disable : btn-outline-secondary "   data-th-disabled="${emprestimo.dataDevolucao != null}">Devolver</button>
                               </form>
                               <!--
                               <button class="btn btn-outline-danger" data-toggle="modal" data-target="#smallAlertModal">Devolver</button>
