@@ -17,7 +17,31 @@
 
 
 ## Documentation
+
 The [Wiki](https://github.com/guiilhermehn/Biblioteca-digital/wiki) contains all the information about the project (in progress). You can contribute to the Wiki directly here on GitHub! :+1: See how in [Markdown](https://guides.github.com/features/mastering-markdown/).
 
 
-![Logo da Cognizant](https://raw.githubusercontent.com/guiilhermehn/Biblioteca-digital/9aa74df204d0ecb8126cf191a9409230caed15eb/biblioteca-digital/src/main/resources/static/assets/img/logo_cognizant.png.png?token=AVPL5KmAk7jBDuF145lbCo_qskNeMHpiks5a9amzwA%3D%3D)
+![Logo da Cognizant]()
+
+## ☑ TODO
+
+- [X] Front-End UI Kit
+- [X] Integração Front/Back-End
+- [ ] Add...
+
+## Contribuições
+
+### 1º  Graduation Program:
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars2.githubusercontent.com/u/36986045?s=400&v=4" width="110px;"/><br /><sub>Alexandre</sub>](https://github.com/alexandrenunes-cs)<br /> | [<img src="https://avatars0.githubusercontent.com/u/17655232?s=400&v=4" width="110px;"/><br /><sub>Bruno</sub>](https://github.com/brunojsan)<br /> | [<img src="https://avatars3.githubusercontent.com/u/22897211?s=460&v=4" width="110px;"/><br /><sub>Diego</sub>](https://github.com/DiegoMatsuki)<br /> | [<img src="https://avatars3.githubusercontent.com/u/38724994?s=460&v=4" width="110px;"/><br /><sub>Francisco</sub>](https://github.com/franrock)<br /> | [<img src="https://avatars1.githubusercontent.com/u/17627827?s=460&v=4" width="110px;"/><br /><sub>Iury</sub>](https://github.com/Sizzin)<br /> |
+ | :---: | :---: | :---: | :---: | :---: |
+ | [<img src="https://avatars2.githubusercontent.com/u/26582544?s=460&v=4" width="110px;"/><br /><sub>Guilherme</sub>](https://github.com/guiilhermehn)<br /> | [<img src="https://avatars3.githubusercontent.com/u/13643850?s=460&v=4" width="110px;"/><br /><sub>Jackson</sub>](https://github.com/jacksonsfranca)<br /> | [<img src="https://avatars0.githubusercontent.com/u/22268900?s=460&v=4" width="110px;"/><br /><sub>Luís Ângelo</sub>](https://github.com/luisangelorjr)<br /> :octocat:| [<img src="https://avatars0.githubusercontent.com/u/38658934?s=460&v=4" width="110px;"/><br /><sub>Philipe</sub>](https://github.com/philipe-silva)<br /> | [<img src="https://avatars2.githubusercontent.com/u/38658746?s=460&v=4" width="110px;"/><br /><sub>Raquel</sub>](https://github.com/psousaraquel)<br /> |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+### 2º Graduation Program:
+...
+
+## Versionamento
+
+Nós recomendamos utilizar o [SemVer](http://semver.org/) para versionamento.
+Para verificar as versões disponíveis, veja as [tags no repositório](https://github.com/guiilhermehn/Biblioteca-digital/releases). 
