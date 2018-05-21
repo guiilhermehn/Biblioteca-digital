@@ -145,8 +145,10 @@ public class EmprestimoController {
 			for (Emprestimo emprestimo : emprestimos) {
 				Livro livro = emprestimo.getUnidadeLivro().getLivro();
 				if (emprestimo.getDataDevolucao() != null) {
-					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
+							&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
 						emprestimo.setHabilita(false);
+						emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 
 					} else {
 						emprestimo.setHabilita(true);
@@ -190,8 +192,9 @@ public class EmprestimoController {
 
 			reservaService.save(reserva);
 
+		}else {
+			//rotinaWishList(livro,emprestimo);
 		}
-
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
@@ -199,9 +202,6 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
-    
-    
-	// TODO Mover para classe utilitária
 
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();

@@ -46,7 +46,6 @@ public class Emprestimo implements Serializable {
 	@Column(name = "data_devolucao")
 	private Date dataDevolucao;
 
-
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "prazo_devolucao")
@@ -60,14 +59,17 @@ public class Emprestimo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	@Transient
 	private boolean habilita;
+
 
 	
 	@Column(name="emprestimos_status")
 	private Status emprestimoStatus;
 
+
+	
 
 	// construtor
 	public Emprestimo() {
@@ -75,7 +77,9 @@ public class Emprestimo implements Serializable {
 	}
 
 	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
-			UnidadeLivro unidadeLivro, Usuario usuario,Status emprestimoStatus) {
+
+			UnidadeLivro unidadeLivro, Usuario usuario, Status emprestimoStatus) {
+
 		this.id = id;
 		this.dataRetirada = dataRetirada;
 		this.dataDevolucao = dataDevolucao;
@@ -159,8 +163,6 @@ public class Emprestimo implements Serializable {
 	public void setPrazoDevolucao(Date prazoDevolucao) {
 		this.prazoDevolucao = prazoDevolucao;
 	}
-	
-	
 
 	
 	public Status getEmprestimoStatus() {
@@ -186,7 +188,7 @@ public class Emprestimo implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public boolean isHabilita() {
 		return habilita;
 	}
@@ -194,6 +196,7 @@ public class Emprestimo implements Serializable {
 	public void setHabilita(boolean habilita) {
 		this.habilita = habilita;
 	}
+
 
 	@Override
 	public String toString() {
