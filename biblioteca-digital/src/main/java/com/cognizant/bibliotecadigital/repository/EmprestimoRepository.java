@@ -13,7 +13,7 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ? && e.data_devolucao is null", nativeQuery = true)
 	long countEmprestimosByUsuarioId(Long unidadeLivroId);
 	
-	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ?1 AND data_devolucao IS NULL", nativeQuery = true)
+	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ? AND data_devolucao IS NULL", nativeQuery = true)
 	Optional<Emprestimo> findEmprestimosByUnidadeLivroId(Long unidadeLivroId);
 	
 	Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId);
