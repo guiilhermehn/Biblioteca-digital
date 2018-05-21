@@ -108,6 +108,9 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 | [<img src="https://avatars2.githubusercontent.com/u/36986045?s=400&v=4" width="110px;"/><br /><sub>Alexandre</sub>](https://github.com/alexandrenunes-cs)<br /> | [<img src="https://avatars0.githubusercontent.com/u/17655232?s=400&v=4" width="110px;"/><br /><sub>Bruno</sub>](https://github.com/brunojsan)<br /> | [<img src="https://avatars3.githubusercontent.com/u/22897211?s=460&v=4" width="110px;"/><br /><sub>Diego</sub>](https://github.com/DiegoMatsuki)<br /> | [<img src="https://avatars3.githubusercontent.com/u/38724994?s=460&v=4" width="110px;"/><br /><sub>Francisco</sub>](https://github.com/franrock)<br /> | [<img src="https://avatars1.githubusercontent.com/u/17627827?s=460&v=4" width="110px;"/><br /><sub>Iury</sub>](https://github.com/Sizzin)<br /> |
  | :---: | :---: | :---: | :---: | :---: |
  | [<img src="https://avatars2.githubusercontent.com/u/26582544?s=460&v=4" width="110px;"/><br /><sub>Guilherme</sub>](https://github.com/guiilhermehn)<br /> | [<img src="https://avatars3.githubusercontent.com/u/13643850?s=460&v=4" width="110px;"/><br /><sub>Jackson</sub>](https://github.com/jacksonsfranca)<br /> | [<img src="https://avatars0.githubusercontent.com/u/22268900?s=460&v=4" width="110px;"/><br /><sub>Luís Ângelo</sub>](https://github.com/luisangelorjr)<br /> :octocat:| [<img src="https://avatars0.githubusercontent.com/u/38658934?s=460&v=4" width="110px;"/><br /><sub>Philipe</sub>](https://github.com/philipe-silva)<br /> | [<img src="https://avatars2.githubusercontent.com/u/38658746?s=460&v=4" width="110px;"/><br /><sub>Raquel</sub>](https://github.com/psousaraquel)<br /> |
+ 
+ 
+ [<img src="ScrumMaster-Marcio.jpeg" width="110px;"/><br /><sub>Márcio - Scrum Master</sub>](ScrumMaster-Marcio.jpeg)<br />
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ### 2º Graduation Program:
