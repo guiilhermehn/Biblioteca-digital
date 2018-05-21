@@ -114,8 +114,8 @@
                           
 	                          <span>
 	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
-	                                 <input type="hidden" name="unidadeId" data-th-value="${unidade.id}" />
-	                                 <button class="btn btn-outline-success"  data-th-disabled="${unidade.emprestado}">Emprestimo</button>
+	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
+	                                 <button class="btn btn-outline-success"  data-th-disabled="${livro.unidadeLivros[0].emprestado}">Emprestimo</button>
 	                             </form>
 	                          </span>
 	                          <span>
