@@ -24,4 +24,5 @@ public class AutorService {
 		autorRepository.deleteById(id);
 		return id;
 	}
+
 }

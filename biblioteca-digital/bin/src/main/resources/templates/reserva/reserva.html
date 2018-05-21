@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Digital Library Solution Development - Reserved</title>
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
+    </head>
+    <body>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
+          <a class="navbar-brand text-white" href="#">Digital Library Solution</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item   ">
+                <a class="nav-link " href="#"> <i class="fas fa-book fa-lg"></i> Empréstimo</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> <i class="fas fa-user-circle fa-lg"></i> Perfil </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="container">
+            <div style="height: 64px">
+                <!-- Espaçamento para manter o conteudo abaixo da navbar (fixed-top) -->
+            </div>
+
+            <h1 class="h3">Reservas</h1>
+
+            <div class="accordion border shadow-sm rounded" id="accordion">
+            	<div data-th-each="reserva, stat : ${reservas}">
+	                <a data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+	                    <div class="row py-2 mx-0 border-bottom">
+	                        <div class="col-12 col-lg-4">
+	                            <strong>Título:</strong> <span data-th-text="${reserva.livro.titulo}">Título</span>
+	                        </div>
+	                        
+                            <div class="col-12 col-md-6 col-lg-4">
+	                            <strong>Autor(es):</strong> <span data-th-text="${reserva.livro.autores}">Autores</span>
+	                        </div>
+                            
+	                        <div class="col-12 col-md-6 col-lg-4">
+	                            <strong>Disponibilidade:</strong> <span data-th-text="${reserva.status}">Na prateleira XPTO</span>
+	                        </div>
+	                    </div>
+	                </a>
+	                <div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse bg-light border-bottom" aria-labelledby="heading1" data-parent="#accordion">
+                        <div class="row pt-2 px-3">
+                            <div class="d-none d-lg-block col-lg-4 col-xl-3">
+                                <img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="@{/assets/img/livro.jpg}">
+                            </div>
+                            <dl class="col">
+                                <dt>Descrição:</dt>
+                                <dd data-th-text="${reserva.livro.sinopse}">Sinopse</dd>
+
+                                <dt>ISBN 13:</dt>
+                                <dd data-th-text="${reserva.livro.isbn13}">XXXXXXXXXXXXXX</dd>
+
+                                <dt>Ano de Publicação:</dt>
+                                <dd data-th-text="${reserva.livro.anoPublicacao}">YYYY</dd>
+
+                                <dt>Edição:</dt>
+                                <dd data-th-text="${reserva.livro.edicao}">ZZ</dd>
+
+                                <dt>Foto:</dt>
+                                <dd data-th-text="${reserva.livro.foto}">filename.jpg</dd>
+
+                                <dt>Data da reserva:</dt> 
+                                <dd data-th-text="${reserva.dataReserva}">DD/MMM/YYYY</dd>
+                            </dl>
+                        </div>
+                            
+                        <div class="text-right mx-3 mb-3">
+                        	<form th:action="@{/reservas/deletarReserva}" method="POST">
+                        		<button class="btn btn-secondary mb-1">Apagar Reserva</button>
+                        		<input type="hidden" th:value="${reserva.id}" name="id">
+                        	</form>
+                        	<form>
+                        		<a href="#" class="btn btn-secondary mb-1">Efetuar empréstimo</a>
+                        	</form>
+                        </div>
+	                </div>
+				</div>
+                
+            </div>
+        </main>
+
+        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
+        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
+        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+    </body>
+</html>
