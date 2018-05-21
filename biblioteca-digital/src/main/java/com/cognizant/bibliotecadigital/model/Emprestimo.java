@@ -1,5 +1,5 @@
-package com.cognizant.bibliotecadigital.model;
 
+package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.Date;

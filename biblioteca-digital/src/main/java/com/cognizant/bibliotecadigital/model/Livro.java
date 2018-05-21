@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -24,6 +25,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+
 @Transactional
 @Entity
 @Table(name = "livro")
@@ -36,7 +39,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13")
+	@Column(name = "isbn13", unique = true)
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -78,9 +81,27 @@ public class Livro implements Serializable {
 	@Transient
 	private boolean habilita;
 	
-	@Transient
-	private List<Long> idsListaDesejos = new ArrayList<>();
-
+	/* O codigo abaixo é o relacionamento ManyToMany entre o livro e o autor. 
+	 * Não foi implementada, por um motivo de decisão técnica, por esse motivo optou-se por inserir 
+	 * uma String com os nomes dos autores como um campo unico do livro.	 
+	 */
+//	@ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                CascadeType.PERSIST,
+//                CascadeType.MERGE
+//            })
+//    @JoinTable(name = "book_authors",
+//            joinColumns = { @JoinColumn(name = "book_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "author_id") })
+//    private Set<Author> authors = new HashSet<>();
+//	public Set<Author> getAuthors() {
+//		return authors;
+//	}
+//
+//
+//	public void setAuthors(Set<Author> tags) {
+//		this.authors = tags;
+//	}
 	
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
@@ -332,16 +353,6 @@ public class Livro implements Serializable {
 
 	public void setStatusLivro(StatusLivro statusLivro) {
 		this.statusLivro = statusLivro;
-	}
-	
-	
-
-	public List<Long> getIdsListaDesejos() {
-		return idsListaDesejos;
-	}
-
-	public void setIdsListaDesejos(List<Long> idsListaDesejos) {
-		this.idsListaDesejos = idsListaDesejos;
 	}
 
 	@Override

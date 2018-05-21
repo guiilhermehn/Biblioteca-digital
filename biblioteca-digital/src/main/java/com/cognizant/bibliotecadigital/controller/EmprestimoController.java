@@ -101,7 +101,7 @@ public class EmprestimoController {
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
+		String assunto = "Emprestimo do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
 		emprestimoService.save(emprestimo);
 
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
@@ -111,6 +111,14 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+
+	
+	@PostMapping("/emprestimos/deletarEmprestimo")
+	public ModelAndView save(@RequestParam("id") Long id) {
+		emprestimoService.deleteById(id);
+		ModelAndView mv = new ModelAndView("redirect:/emprestimos");		
+		return mv;
+	}
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -124,15 +132,7 @@ public class EmprestimoController {
 		emprestimo.setEmprestimoStatus(Status.EM_ANALISE);
 		emprestimoService.save(emprestimo);
 
-		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
-		if (idReserva != null) {
-			Reserva reserva = reservaService.findById(idReserva).get();
-
-			reserva.setStatus(Status.EM_ANALISE);
-
-			reservaService.save(reserva);
-
-		}
+	
 
 		// TODO Fazer Span Para Notificar Que a Devolucao Está sob Analise
 
@@ -145,6 +145,7 @@ public class EmprestimoController {
 
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
 		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+
 
 		
 			
@@ -183,7 +184,7 @@ public class EmprestimoController {
 
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
+		String assunto = "Devolucao do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
 
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
@@ -195,18 +196,23 @@ public class EmprestimoController {
 		if (idReserva != null) {
 			Reserva reserva = reservaService.findById(idReserva).get();
 
+
 			reserva.setStatus(Status.AGUARDANDO);
 
 			reservaService.save(reserva);
+			String assuntoReservaDisponivel = "Reserva Disponivel!";
+			String templateReservaDisponivel = "email-disponibilidade-reserva";
+			Mail email = emailService.enviarEmail(reserva.getUsuario(), emprestimo.getUnidadeLivro(), assuntoReservaDisponivel);
 
-		}else {
-			//rotinaWishList(livro,emprestimo);
+			emailService.sendSimpleMessage(email, templateReservaDisponivel);
+
 		}
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/emprestimos");
+		return new ModelAndView("redirect:/em"
+				+ "prestimos");
 	}
 
 

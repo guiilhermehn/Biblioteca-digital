@@ -115,9 +115,6 @@ public class PesquisaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 		
-		
-			livro.getIdsListaDesejos().add(usuario.getId());
-		
 		livroService.save(livro);
 
 		return new ModelAndView("");

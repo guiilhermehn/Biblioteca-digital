@@ -17,13 +17,14 @@ public class EmprestimoService {
 	public Iterable<Emprestimo> findAll() {
 		return emprestimoRepository.findAll();
 	}
-	
+
 	public Optional<Emprestimo> findById(Long id) {
 		return emprestimoRepository.findById(id);
 	}
 
 	public Emprestimo save(Emprestimo emprestimo) {
 		return emprestimoRepository.save(emprestimo);
+
 	}
 
 	public Long deleteById(Long id) {

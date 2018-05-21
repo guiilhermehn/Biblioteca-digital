@@ -1,277 +1,304 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-		<title>Digital Library Solution</title>
-
-		<!--     Fonts and icons     -->
-		<link rel="stylesheet" type="text/css"
-			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-		<link rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-		<!-- CSS Files -->
-		<link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
-		<!-- CSS Just for demo purpose, don't include it in your project -->
-		<link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
-	</head>
-	<body class="product-page  sidebar-collapse">
-		<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-			<div class="container">
-				<div class="navbar-translate">
-				<a class="navbar-brand" href="index.html" data-th-href="@{/}" > Digital Library Solution </a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					<span class="navbar-toggler-icon"></span>
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				</div>
-				<div class="collapse navbar-collapse">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-					<a href="login.html"  data-th-href="@{/logout}" class="nav-link">
-						<i class="material-icons">settings</i> Sair
-					</a>
-					</li>
-				</ul>
-				</div>
-			</div>
-		</nav>
-
-		<div class="page-header header-filter clear-filter backgroud-gradient">
-		</div>
-		<div class="main main-raised">
-			<div class="container">
-				<form data-th-action="@{/livros/update}" method="post"
-					data-th-object="${livro}">
-
-					<div class="section">
-						<h3 class="text-center">Editar Livro</h3>
-						<div class="row">
-							<div class="container">
-
-								<div class="row">
-									<div class="col-md-8">
-										<form data-th-action="@{/livros/update}" method="post" data-th-object="${livro}">
-
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> ISBN: </span>
-												</div>
-												<input type="hidden" data-th-field="*{id}" /> 
-												<input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Inserir o ISBN para iniciar o cadastro...">
-												<!--                       <div class="input-group-append"> -->
-												<!-- 										<button class="btn btn-primary btn-link" type="submit"> -->
-												<!-- 											<i class="material-icons"> search</i> -->
-												<!-- 										</button> -->
-												<!-- 									</div> -->
-											</div>
-
-											<div class="input-group ">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> Titulo: </span>
-												</div>
-												<input type="text" data-th-field="*{titulo}"
-													class="form-control">
-											</div>
-
-											<div class="input-group ">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> Autor: </span>
-												</div>
-												<input type="text" data-th-field="*{autor}"
-													class="form-control">
-											</div>
-
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> Ano Publicação: </span>
-												</div>
-												<input type="number" data-th-field="*{anoPublicacao}"
-													class="form-control">
-
-												<div class="input-group col-md-6">
-													<div class="input-group-prepend">
-														<span class="input-group-text"> Edição: </span>
-													</div>
-													<input type="text" data-th-field="*{edicao}"
-														class="form-control">
-												</div>
-											</div>
-
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"> Descrição: </span>
-												</div>
-												<textarea class="form-control" data-th-field="*{sinopse}"
-													rows="5"></textarea>
-											</div>
-
-											<div class="form-group ">
-												<div class="input-group-prepend">
-													<span class="input-group-text">Url Foto: </span>
-													<input type="text"
-														class="form-control" data-th-field="*{urlFoto}">
-												</div>
-
-											</div>
-
-
-										</form>
-									</div>
-									<div class="col-md-4">
-										<p>PREVIEW:</p>
-										<img data-th-src="${livro.urlFoto}" class="img-responsive"
-											data-th-id="bookImage" alt="Capa do livro" height="307">
-									</div>
-
-
-								</div>
-
-								<div class="row">
-									<div class="col-md-12">
-										<div id="accordion" role="tablist">
-											<div class="card card-collapse">
-												<div class="card-header" role="tab" id="headingOne">
-													<h5 class="mb-0">
-														<a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-															Cadastro Unidades <i class="material-icons">keyboard_arrow_down</i>
-														</a>
-													</h5>
-												</div>
-
-												<div id="collapseOne" class="collapse show" role="tabpanel"
-													aria-labelledby="headingOne" data-parent="#accordion">
-													<div class="card-body">
-														<!-- Adicionar novas unidades - ->
-														<div class="row  justify-content-center">
-															<button type="button" rel="tooltip" class="btn btn-outline-success btn-link" data-original-title="" title="">Adicionar Nova unidade</button>
-														</div>
-														<!- - fim novas unidades -->
-
-														<div class="table-responsive">
-															<table class="table">
-																<thead>
-																	<tr>
-																		<th class="text-center">Cod. Unid</th>
-																		<th>Avarias</th>
-																		<th>Ações</th>
-																	<tr>
-																</thead>
-																<tbody data-th-each="unidade: ${livro.unidadeLivros}">
-																	<tr>
-																		<td class="text-center" data-th-text="${unidade.id}">1</td>
-																		<td data-th-text="${unidade.avarias}">2013</td>
-																		<td class="td-actions">
-																			<button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm" data-toggle="modal" data-target="#exampleModal" data-th-attr="data-unidade=${unidade.id}, data-avarias=${unidade.avarias}">
-																				<i class="material-icons">edit</i>
-																			</button>
-																			<!-- remover unidade - ->
-																			<button type="button" rel="tooltip"
-																				class="btn btn-danger btn-link btn-just-icon btn-sm">
-																				<i class="material-icons">close</i>
-																			</button>
-																			<!- - fim remover unidade -->
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col-xs-6 mr-auto ml-auto">
-										<button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>
-										<a class="btn btn-outline-danger btn-link" id="cancelar" data-th-href="@{/livros}">Cancelar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-
-
-		<!-- Avarias Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Editar Avarias</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<form action="/livro/unidade/edit"
-						data-th-action="@{/livro/unidade/edit}" method="POST">
-						<div class="modal-body">
-							<input type="hidden" name="id" id="unidade_id" /> 
-							<input type="hidden" name="livroId" id="unidade_livro_id" data-th-value="${livro.id}" />
-							<div class="form-group">
-								<label for="avarias" class="col-form-label">Avarias:</label>
-								<textarea class="form-control" name="avarias" id="unidade_avarias"></textarea>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<div class="row">
-								<div class="col-xs-6 mr-auto ml-auto">
-									<button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>
-									<button class="btn btn-outline-danger btn-link" type="button" data-dismiss="modal" id="cancelar">Cancelar</button>
-								</div>
-							</div>
-						</div>
-					</form>
-
-				</div>
-			</div>
-		</div>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <title>Digital Library Solution</title>
+  
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+</head>
+<body class="product-page  sidebar-collapse">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="index.html" data-th-href="@{/}" > Digital Library Solution </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="active nav-item">
+            <a href="#pablo" data-th-href="@{/}" class="nav-link">
+              <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pablo" class="nav-link">
+              <i class="material-icons">account_circle</i> Perfil <div class="ripple-container"></div>
+            </a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+              <i class="material-icons">apps</i> Minhas ações
+              <div class="ripple-container"></div>
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
+                <i class="material-icons">layers</i> Meus Empréstimos
+              </a>
+              <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
+                <i class="material-icons">content_paste</i> Minhas Reservas
+              </a>
+              <a href="emprestimo.html" data-th-href="@{/livros}" class="dropdown-item" th:if="${isAdmin}">
+                <i class="material-icons">book</i> Livros
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="login.html"  data-th-href="@{/logout}" class="nav-link">
+              <i class="material-icons">settings</i> Sair
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="page-header header-filter clear-filter backgroud-gradient">
+  </div>
+  <div class="main main-raised">
+    <div class="container">
+      <form data-th-action="@{/livros/update}" method="post"
+      data-th-object="${livro}">
+      
+      <div class="section">
+        <h3 class="text-center">Editar Livro</h3>
+        <div class="row">
+          <div class="container">
+            
+            <div class="row">
+              <div class="col-md-8">
+                <form data-th-action="@{/livros/update}" method="post" data-th-object="${livro}">
+                  
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> ISBN: </span>
+                    </div>
+                    <input type="hidden" data-th-field="*{id}" /> 
+                    <input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Inserir o ISBN para iniciar o cadastro...">
+                    <!--                       <div class="input-group-append"> -->
+                    <!-- 										<button class="btn btn-primary btn-link" type="submit"> -->
+                    <!-- 											<i class="material-icons"> search</i> -->
+                    <!-- 										</button> -->
+                    <!-- 									</div> -->
+                  </div>
+                  
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> Titulo: </span>
+                    </div>
+                    <input type="text" data-th-field="*{titulo}"
+                    class="form-control">
+                  </div>
+                  
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> Autor: </span>
+                    </div>
+                    <input type="text" data-th-field="*{autor}"
+                    class="form-control">
+                  </div>
+                  
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> Ano Publicação: </span>
+                    </div>
+                    <input type="number" data-th-field="*{anoPublicacao}"
+                    class="form-control">
+                    
+                    <div class="input-group col-md-6">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"> Edição: </span>
+                      </div>
+                      <input type="text" data-th-field="*{edicao}"
+                      class="form-control">
+                    </div>
+                  </div>
+                  
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"> Descrição: </span>
+                    </div>
+                    <textarea class="form-control" data-th-field="*{sinopse}"
+                    rows="5"></textarea>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Url Foto: </span>
+                      <input type="text"
+                      class="form-control" data-th-field="*{urlFoto}">
+                    </div>
+                    
+                  </div>
+                  
+                  
+                </form>
+              </div>
+              <div class="col-md-4">
+                <p>PREVIEW:</p>
+                <img data-th-src="${(livro.urlFoto == null OR livro.urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive"
+                data-th-id="bookImage" alt="Capa do livro" height="307">
+              </div>
+              
+              
+            </div>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div id="accordion" role="tablist">
+                  <div class="card card-collapse">
+                    <div class="card-header" role="tab" id="headingOne">
+                      <h5 class="mb-0">
+                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Cadastro Unidades <i class="material-icons">keyboard_arrow_down</i>
+                        </a>
+                      </h5>
+                    </div>
+                    
+                    <div id="collapseOne" class="collapse show" role="tabpanel"
+                    aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <!-- Adicionar novas unidades - ->
+                      <div class="row  justify-content-center">
+                      <button type="button" rel="tooltip" class="btn btn-outline-success btn-link" data-original-title="" title="">Adicionar Nova unidade</button>
+                    </div>
+                    <!- - fim novas unidades -->
+                    
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Cod. Unid</th>
+                            <th>Avarias</th>
+                            <th>Ações</th>
+                            <tr>
+                            </thead>
+                            <tbody data-th-each="unidade: ${livro.unidadeLivros}">
+                              <tr>
+                                <td class="text-center" data-th-text="${unidade.id}">1</td>
+                                <td data-th-text="${unidade.avarias}">2013</td>
+                                <td class="td-actions">
+                                  <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm" data-toggle="modal" data-target="#exampleModal" data-th-attr="data-unidade=${unidade.id}, data-avarias=${unidade.avarias}">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <!-- remover unidade - ->
+                                  <button type="button" rel="tooltip"
+                                  class="btn btn-danger btn-link btn-just-icon btn-sm">
+                                  <i class="material-icons">close</i>
+                                </button>
+                                <!- - fim remover unidade -->
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="row">
+            <div class="col-xs-6 mr-auto ml-auto">
+              <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>
+              <a class="btn btn-outline-danger btn-link" id="cancelar" onclick="window.history.back()">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
 
 
-		<footer class="footer" data-background-color="black">
-			<div class="container">
-				<div class="copyright float-right">
-				© <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
-				</div>
-			</div>
-		</footer>
+<!-- Avarias Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Avarias</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <form action="/livro/unidade/edit"
+      data-th-action="@{/livro/unidade/edit}" method="POST">
+      <div class="modal-body">
+        <input type="hidden" name="id" id="unidade_id" /> 
+        <input type="hidden" name="livroId" id="unidade_livro_id" data-th-value="${livro.id}" />
+        <div class="form-group">
+          <label for="avarias" class="col-form-label">Avarias:</label>
+          <textarea class="form-control" name="avarias" id="unidade_avarias"></textarea>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-6 mr-auto ml-auto">
+            <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>
+            <button class="btn btn-outline-danger btn-link" type="button" data-dismiss="modal" id="cancelar">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+</div>
+</div>
+
+
+<footer class="footer" data-background-color="black">
+  <div class="container">
+    <div class="copyright float-right">
+      © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+    </div>
+  </div>
+</footer>
 
 
 
-		<!--   Core JS Files   -->
-		<script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
-		<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-		<script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
-		<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-		<script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
-		<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-		<script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
-		<script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
-		<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-		<script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
-		<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-		<script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
-		<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-		<script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+<!--   Core JS Files   -->
+<script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+<script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+<script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
 
-		<script type="text/javascript">
-			$('#exampleModal').on('show.bs.modal', function(event) {
-				var button = $(event.relatedTarget) // Button that triggered the modal
-				var unidade = button.data('unidade') // Extract info from data-* attributes
-				var avarias = button.data('avarias') // Extract info from data-* attributes
-				var modal = $(this)
-				modal.find('#unidade_id').val(unidade)
-				modal.find('#unidade_avarias').val(avarias)
-			})
-		</script>
-	</body>
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function(event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var unidade = button.data('unidade') // Extract info from data-* attributes
+  var avarias = button.data('avarias') // Extract info from data-* attributes
+  var modal = $(this)
+  modal.find('#unidade_id').val(unidade)
+  modal.find('#unidade_avarias').val(avarias)
+})
+</script>
+</body>
 </html>

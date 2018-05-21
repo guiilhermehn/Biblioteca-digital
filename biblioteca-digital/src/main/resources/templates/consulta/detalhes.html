@@ -80,7 +80,7 @@
                       <h1 data-th-text="${livro.titulo}">Titulo: Bla bla bla</h1>
                       <h2 data-th-text="${livro.autor}">Autor: Bla Bla bla</h2>
                       <div class="row">
-                        <div class="col-md-3"><img data-th-src="${livro.urlFoto}" class="img-responsive" alt="Some picture" height="307"></div>
+                        <div class="col-md-3"><img data-th-src="${(livro.urlFoto == null OR livro.urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive" alt="Some picture" height="307"></div>
                         <div class="col-md-9">
 
 
@@ -118,13 +118,13 @@
 	                          <span>
 	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
 	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
-	                                 <button class="btn btn-outline-success"  data-th-disabled="${livro.unidadeLivros[0].emprestado}">Emprestimo</button>
+	                                 <button class="btn"  data-th-disabled="${livro.unidadeLivros[0].emprestado}" th:classappend="${livro.unidadeLivros[0].emprestado}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">Emprestimo</button>
 	                             </form>
 	                          </span>
 	                          <span>
 	                             <form data-th-action="@{/reservas/efetuarReserva}" method="POST" class="d-inline-block">
 	                                 <input type="hidden" name="livroId" data-th-value="${livro.id}" />
-	                                 <button class="btn btn-outline-success" data-th-disabled="${livro.habilita}" >Reserva</button>
+	                                 <button class="btn" data-th-disabled="${livro.habilita}" th:classappend="${livro.habilita}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'" >Reserva</button>
 	                             </form>
 	                         </span>
                           

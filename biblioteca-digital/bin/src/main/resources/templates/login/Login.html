@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Digital Library Solution - Login</title>
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/bootstrap.min.css" data-th-href="@{/assets/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/fontawesome-all.min.css" data-th-href="@{/assets/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}">
+        <link rel="stylesheet" type="text/css" href="../../static/assets/css/login.css" data-th-href="@{/assets/css/login.css}">
+        <!--TODO  adicionar favicon
+        <link rel="icon" href="./favicon.ico">-->
+    </head>
+    <body class="text-center">
+        <form class="form-signin">
+            <img class="mb-4" data-th-src="@{/assets/svg/book.svg}" src="../../static/assets/svg/book.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Digital Library Solution</h1>
+            <!-- /TODO Adicionar mensagens personalizadas de erros -->
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
+
+            <label for="inputPassword" class="sr-only">Senha</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required="" oninvalid="this.setCustomValidity('Insira uma senha válida')" oninput="setCustomValidity('')">
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Lembrar-me
+                </label>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+
+            <div class="login-register">
+                <a href="../register/Register.html">Registrar</a>
+            </div>
+
+        </form>
+        <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
+        <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
+        <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+    </body>
+</html>
