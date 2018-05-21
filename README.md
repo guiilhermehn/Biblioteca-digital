@@ -38,7 +38,7 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Bloqueio da página do usuário (botões),caso ele não devolva o livro no prazo determinado (até que ele devolva o livro)
   -  Geração de relatórios de livros por meio de filtro por categorias (acesso para o usuário)
   -  Amostra de livros em destaque
-  -  Lista de livros desejados pelo usuario (WishList)
+  -  Lista de livros desejados pelo usuario (Wish List :heart:)
   -  Mostrar livros mais procurados no mês
   -  Mostrar o Top 10 dos usuarios do aplicativo (os que mais lêem)
   -  Tela para o admin ver os livros sugeridos pelo usuário (admin)
