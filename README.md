@@ -28,7 +28,7 @@ The [Wiki](https://github.com/guiilhermehn/Biblioteca-digital/wiki) contains all
 #### Utilizando o Git (*GitHub*) em equipe
 Optamos por utilizar o GitHub como ferramenta para gerenciamento de versão num repositório **privado**.
 
-Se o projeto continuar nele, sugerimos que planejem os processos de utilização dessa ferramenta utilizando a [sugestão do Github](https://guides.github.com/introduction/flow/) e deixar a Master somente para versões disponíveis para uso do usuário final (*restrita*), uma branch de Homologação (*restrita*), e uma branch para cada dev (*se estiverem em pair-programing, uma para os dois*).
+**Se** o projeto continuar nele, sugerimos que planejem os processos de utilização dessa ferramenta utilizando a [sugestão do Github](https://guides.github.com/introduction/flow/) e deixar a Master somente para versões disponíveis para uso do usuário final (*restrita*), uma branch de Homologação (*restrita*), e uma branch para cada dev (*se estiverem em pair-programing, uma para os dois*).
 
 Também indicamos a utilizar a aba [Issues](../../issues) para tracking de bugs (*se necessário*) e a aba [Projects](../../projects) (ou o [Trello](http://trello.com/)) para gerenciar o projeto
 
