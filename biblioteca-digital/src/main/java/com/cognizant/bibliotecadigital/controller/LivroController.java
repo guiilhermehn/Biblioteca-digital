@@ -174,7 +174,3 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 94aed2707a77cdc78f32cb2db9e1a047973623a7
