@@ -4,37 +4,50 @@ Este release notes tem como objetivo apresentar a versão [1.0.0](https://semver
 a.Data de liberação:
 No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0.0
 
-b.Funcionalidades implementadas:
+b.Funcionalidades implementadas
   -  Cadastro manual de usuário
   -  Validação de login
-  -  Validação de usuário (admim).
+  -  Validação de usuário (admin)
   -  Consulta de livros
   -  Cadastro manual de livros
   -  Cadastro de livros com uso da [API do Google](https://developers.google.com/books/)
   -  Prazo máximo de duração do empréstimo (07 dias)
   -  Empréstimo de livros (máximo um livro por usuário)
   -  Reserva de livros (máximo uma reserva por usuário)
-  -  Notificação efetuamento de empréstimo de livros (via email)
+  -  Notificação de efetuamento de empréstimo de livros (via email)
   -  Notificão de alerta para a devolução de livros (via email à partir do 5º dia do prazo do empréstimo)
-  -  Notificação de aviso (caso o livro esteja disponível)
+  -  Notificação de disponibilidade do livro
+  -  Notificação de disponibilidade de reserva
   -  Devolução de livros
-  -  Relatar avarias do livro (admin).
-  -
+  -  Relatar avarias do livro (admin)
   
 c.Funcionalidades não implementadas
-  -  Uso do login da Cognizant(SSO).
-  -  Sugestão de livros caso ele não exista no sistema.
-  -  Renovar empréstimo do livro.
-  -  Usuário admim pode gerenciar outros usuários.
-  -  Bloqueio da página do usuário (botões),caso ele não devolva o livro no prazo determinado (até que ele devolva o livro).
-  -  Geração de relatórios de livros por meio de filtro por categorias (acesso para o usuário).
-  -  Amostra de livros em destaque.
-  -  Lista de livros desejados pelo usuario (WishList).
-  -  Mostrar livros mais procurados no mês.
-  -  Mostrar o top ten dos usuarios do aplicativo (os que mais lêem).
-  -  Tela para o admim ver os livros sugeridos pelo usuário. 
-  -  Usuário poderá pegar mais livros emprestados de uma unica vez.
-  -  Mais reservas por unidade de livro.
+  -  Uso do login da Cognizant(SSO)
+  -  Sugestão de livros caso ele não exista no sistema
+  -  Renovar empréstimo do livro
+  -  Usuário admim pode gerenciar outros usuários
+  -  Bloqueio da página do usuário (botões),caso ele não devolva o livro no prazo determinado (até que ele devolva o livro)
+  -  Geração de relatórios de livros por meio de filtro por categorias (acesso para o usuário)
+  -  Amostra de livros em destaque
+  -  Lista de livros desejados pelo usuario (WishList)
+  -  Mostrar livros mais procurados no mês
+  -  Mostrar o top ten dos usuarios do aplicativo (os que mais lêem)
+  -  Tela para o admin ver os livros sugeridos pelo usuário
+  -  Usuário poderá pegar mais livros emprestados de uma única vez
+  -  Mais reservas poderão ser feitas por unidade de livro
+  -  recomendações de livros entre usuários
+  -  Sugestão de leitura 
+  -  Tela para o admin com lista de livros sugeridos pelos usuários
+  -  Empréstimo de curto prazo
+  -  Tela com lista de emprestimos para poder ser editada pelo usuário
+  -  Notificação de prazo de reserva do usuário para o admin
+  -  Exportar informações de reserva para a agenda do usuário
+  -  Pop-up com as avarias do livro
+  -  Perfil do usuário no menu
+  -  Botão de esqueci minha senha
+  -  Página do perfil do usuário
+  -  
+  
   
   
 
