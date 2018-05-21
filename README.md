@@ -64,7 +64,7 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   - [Spring](https://spring.io/);
   - [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html);
   - [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/);
-  - and [Markdown](https://guides.github.com/features/mastering-markdown/).
+  - and [Markdown](https://guides.github.com/features/mastering-markdown/):octocat:.
   
   \* *Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*.
   
@@ -100,7 +100,7 @@ Consulte-a no repositório base
 ### Consulta API Google Books
 A consulta através do ISBN do livro é realizada no Front-End utilizando JavaScript
 Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
-**Lembre-se**: O erro relatado sobre um ISBN para mais de um livro. Caso haja mais de um, o primeiro relacionado é será preenchido
+**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado é será preenchido
 
 ## Contribuições
 ### 1º  Graduation Program:

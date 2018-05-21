@@ -1,3 +1,216 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'	name='viewport' />
+	<!-- CSS Files -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">	
+	<link href="./assets/css/material-kit.css" data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+	<!-- CSS Customizacao :) -->
+	<link href="./assets/css/custom.css" data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+	
+	<title>Digital Library Solution</title>
+</head>
+<body class="product-page sidebar-collapse">
+	<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+		<div class="container">
+			<div class="navbar-translate">
+				<a class="navbar-brand" href="index.html" data-th-href="@{/}">Digital Library Solution </a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"	aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span> 
+					<span class="navbar-toggler-icon"></span> 
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav ml-auto">
+					<li class="active nav-item">
+						<a href="#" data-th-href="@{/}"	class="nav-link"> <i class="material-icons">explore</i> Inicio
+							<div class="ripple-container"></div>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#pablo" class="nav-link"> <i class="material-icons">account_circle</i> Perfil
+							<div class="ripple-container"></div>
+						</a>
+					</li>
+					<li class="dropdown nav-item">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"> <i class="material-icons">apps</i>Minhas ações
+							<div class="ripple-container"></div>
+						</a>
+						<div class="dropdown-menu dropdown-with-icons">
+							<a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
+								<i class="material-icons">layers</i>Meus Empréstimo
+							</a>
+							<a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item"> 
+								<i class="material-icons">content_paste</i>Minhas Reservas
+							</a>
+							<a href="emprestimo.html" data-th-href="@{/livros}" class="dropdown-item" th:if="${isAdmin}">
+								<i class="material-icons">book</i> Livros
+     				        </a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a href="login.html" data-th-href="@{/logout}" class="nav-link"> <i class="material-icons">settings</i> Sair 
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!--  INICIO- LIVROS DEVOLVIDOS -->
+	
+	<div class="page-header header-filter clear-filter backgroud-gradient"></div>
+	<!-- <div class="main main-raised">
+		<div class="container">
+			<div class="section">
+				<div class="row">
+					<div class="container-fluid">
+						<h2>Devoluções</h2>
+						<div class="accordion"	id="accordion">
+							<div id="accordion" role="tablist" data-th-each="emprestimo, stat : ${emprestimos}">
+								<div class="card card-collapse">
+									<h5 class="mb-0">
+										<a class="card-header" data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+											<div class="row py-2 mx-0 border-bottom">
+												<div class="col-12 col-lg-4">
+													<strong>Título:</strong> 
+													<span data-th-text="${emprestimo.unidadeLivro.livro.titulo}">Título</span>
+												</div>
+												<div class="col-12 col-md-6 col-lg-4">
+													<strong>Autor:</strong> 
+													<span data-th-text="${emprestimo.unidadeLivro.livro.autor}">Autor</span>
+												</div>
+											</div>
+										</a>
+									</h5>
+									<div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
+										<div class="row pt-2 px-3">
+											<div class="d-none d-lg-block col-lg-4 col-xl-3">
+												<img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="${emprestimo.unidadeLivro.livro.urlFoto}">
+											</div>
+											<dl class="col">
+												<dt>Data de Retirada:</dt>
+												<dd data-th-text="${emprestimo.dataRetirada}">DD/MMM/YYYY</dd>
+												
+												<dt>Prazo de Devolução:</dt>
+												<dd data-th-text="${emprestimo.prazoDevolucao}">DD/MMM/YYYY</dd>
+												
+												<dt>Data de Devolução:</dt>
+												<dd data-th-text="${emprestimo.dataDevolucao}">DD/MMM/YYYY</dd>
+											</dl>
+										</div>
+										<div class="text-right mx-3 mb-3">
+											<form th:action="@{/emprestimos/confirmaDevolucao}"	method="POST">
+												<input type="hidden" th:value="${emprestimo.id}" name="id">
+												<button class="btn btn-outline-danger mb-1"	data-th-disabled="${emprestimo.habilita}">Confirma Devolucão</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	FIM- LIVROS DEVOLVIDOS
+	 -->
+	<!--  INICIO - PADRAO CORRETO -->
+	  <div class="main main-raised">
+      <div class="container">
+        <div class="section">
+          <div class="row">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="text-center">#</th>
+                          <th>Livro</th>
+                          <th>Usuário</th>
+                          <th>Data da Devolução</th>
+                          <th>Ações</th>
+                          <tr>
+                          </thead>
+                          <tbody data-th-each="emprestimo, stat : ${emprestimos}">
+                            <tr th:attr="data-target='#collapse'+${stat.index}">
+                              <td data-th-text="${emprestimo.id}" class="text-center">1</td>
+                              <td data-th-text="${emprestimo.unidadeLivro.livro.titulo}">Develop</td>
+                              <td data-th-text="${emprestimo.usuario.nome}">Fulana de Tal</td>
+                              <td data-th-text="${emprestimo.dataDevolucao}">10/05/2018</td>
+                              <td class="td-actions">
+                              <form class="inline-block" th:action="@{/emprestimos/confirmaDevolucao}" method="POST">
+                                 <input type="hidden" th:value="${emprestimo.id}" name="id">
+                                 <button type="button" rel="tooltip" class="btn btn-success btn-link btn-just-icon btn-sm" data-th-disabled="${emprestimo.habilita}">
+                                 <i class="material-icons">check</i>
+                                </button>
+                                </form>
+            				</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--  FIM - PADRAO CORRETO -->
+	
+	<!-- TODO ignorado por hora. devemos modificar o fluxo para comportar o uso deste modal? -->
+	<!-- small modal -->
+	<div class="modal fade" id="smallAlertModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-small" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<i class="material-icons">clear</i>
+					</button>
+				</div>
+				<div class="modal-body text-center">
+					<h5>Você receberar um e-mail confirmando sua devolução!</h5>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Sair</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer class="footer" data-background-color="black">
+		<div class="container">
+			<div class="copyright float-right">	©
+				<script> document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+			</div>
+		</div>
+	</footer>
+	
+	<!--   Core JS Files   -->
+	<script src="./assets/js/core/jquery.min.js" data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+	<script src="./assets/js/core/popper.min.js" data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+	<script src="./assets/js/core/bootstrap-material-design.min.js"	data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="./assets/js/plugins/bootstrap-selectpicker.js"	data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+	<script src="./assets/js/plugins/moment.min.js"	data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+	<script src="./assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+	<script src="./assets/js/plugins/bootstrap-datetimepicker.js" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="./assets/js/plugins/nouislider.min.js"	data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+	<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+	<script src="./assets/js/material-kit.min.js"data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+=======
 <!doctype html>
 <html lang="en">
 <head>
@@ -93,5 +306,6 @@
 <script src="../../static/assets/js/jquery.min.js" data-th-src="@{/assets/js/jquery.min.js}"></script>
 <script src="../../static/assets/js/popper.js" data-th-src="@{/assets/js/popper.js}"></script>
 <script src="../../static/assets/js/bootstrap.min.js" data-th-src="@{/assets/js/bootstrap.min.js}"></script>
+>>>>>>> master
 </body>
 </html>
