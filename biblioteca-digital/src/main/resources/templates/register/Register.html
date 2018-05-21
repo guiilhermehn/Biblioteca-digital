@@ -65,8 +65,8 @@
                     <i class="material-icons">settings</i><abbr class="required" title="obrigatório">*</abbr>
                   </span>
                 </div>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Área" required="true" value="@cognizant.com" data-th-field="*{email}">
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
+                <input type="text" id="inputArea" class="form-control" placeholder="Área" required="true" data-th-field="*{area}">
+                <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger help-block" >Incorrect date</span>
               </div>
             </span>
               <span class="bmd-form-group"><div class="input-group">
