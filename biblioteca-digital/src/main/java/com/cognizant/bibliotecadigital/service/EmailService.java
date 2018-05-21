@@ -9,7 +9,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -53,17 +52,19 @@ public class EmailService {
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 				StandardCharsets.UTF_8.name());
 
+
+
 		Context context = new Context();
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
 		
 
-		Usuario adm = usuarioService.emailAdm().get();
-
 		String reply = mail.getReplyTo() == "" ? "" : mail.getReplyTo();
+
+		
 		
 		helper.setTo(mail.getTo());
-		helper.setReplyTo(adm.getEmail());
+		helper.setReplyTo(reply);
 		helper.setText(html, true);
 		helper.setReplyTo(reply);
 		helper.setSubject(mail.getSubject());
@@ -74,17 +75,16 @@ public class EmailService {
 
 	public Mail enviarEmail(Usuario usuario,UnidadeLivro unidade, String assunto) {
 		Mail mail = new Mail();
+		Usuario adm = usuarioService.emailAdm().get();
 		
-
 		Livro livro = unidade.getLivro();
 		
-		Usuario adm = usuarioService.emailAdm().get();
-
 		mail.setFrom("no-reply@bibliotecacognizant.com");
-		
 		mail.setTo(usuario.getEmail()); 
 
+
 		mail.setReplyTo(adm.getEmail());
+
 
 		mail.setSubject(assunto);
 
@@ -92,11 +92,14 @@ public class EmailService {
 		
 		model.put("name", usuario.getNome());
 		model.put("livro", unidade.getLivro().getTitulo().toString());
+		
 		model.put("location", "Brasil");
-		if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
-			model.put("ADM", "Revisado por: " + adm.getNome());
-		} else {
-			model.put("ADM", "");
+
+		if(livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+		model.put("ADM", "Revisado por: " +adm.getUsername());
+		}else {
+			model.put("ADM","");
+
 		}
 		mail.setModel(model);
 
@@ -106,10 +109,11 @@ public class EmailService {
 	public Mail lembreteDevolucao(Usuario usuario, String livro, String data) {
 		Mail mail = new Mail();
 		Usuario adm = usuarioService.emailAdm().get();
-		
+
 		mail.setFrom("noreply.digitallibrary@gmail.com");
 		mail.setTo(usuario.getEmail());
 		mail.setReplyTo(adm.getEmail());
+
 		mail.setSubject("Lembrete de Devolução: " + livro);
 		
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -119,6 +123,29 @@ public class EmailService {
 		model.put("prazo", data);
 		mail.setModel(model);
 		
+		return mail;
+	}
+	public Mail enviarEmailWishList(Usuario usuario, UnidadeLivro unidadeLivro, String assunto) {
+		Mail mail = new Mail();
+		Usuario adm = usuarioService.emailAdm().get();
+		
+		mail.setFrom("no-reply@bibliotecacognizant.com");
+		mail.setTo(usuario.getEmail()); 
+		mail.setReplyTo("");
+		mail.setSubject(assunto);
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		model.put("name", usuario.getNome());
+		model.put("livro", unidadeLivro.getLivro().getTitulo().toString());
+		model.put("location", "Brasil");
+		if(unidadeLivro.getLivro().getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+		model.put("ADM", "Revisado por: " +adm.getUsername());
+		}else {
+			model.put("ADM","");
+		}
+		mail.setModel(model);
+
 		return mail;
 	}
 }

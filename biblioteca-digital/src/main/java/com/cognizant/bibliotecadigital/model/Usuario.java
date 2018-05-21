@@ -33,6 +33,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class Usuario implements Serializable, UserDetails {
 
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

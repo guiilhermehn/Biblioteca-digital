@@ -77,6 +77,9 @@ public class Livro implements Serializable {
 
 	@Transient
 	private boolean habilita;
+	
+	@Transient
+	private List<Long> idsListaDesejos = new ArrayList<>();
 
 	
 
@@ -329,6 +332,16 @@ public class Livro implements Serializable {
 
 	public void setStatusLivro(StatusLivro statusLivro) {
 		this.statusLivro = statusLivro;
+	}
+	
+	
+
+	public List<Long> getIdsListaDesejos() {
+		return idsListaDesejos;
+	}
+
+	public void setIdsListaDesejos(List<Long> idsListaDesejos) {
+		this.idsListaDesejos = idsListaDesejos;
 	}
 
 	@Override

@@ -2,11 +2,12 @@ package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -36,8 +37,6 @@ import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class ReservaController {
