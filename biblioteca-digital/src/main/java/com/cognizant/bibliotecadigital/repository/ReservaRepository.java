@@ -11,14 +11,14 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 	@Query(value = "SELECT count(*) FROM reserva WHERE livro_id = ? AND (status = 'EM_ESPERA' OR status = 'AGUARDANDO') and usuario_id = ?", nativeQuery = true)
 	long countReservasByUnidadeLivroId(Long livroId, Long usuarioId);
 
-	@Query(value="select ul.id from reserva r join unidade_livro ul where r.id = ? ",nativeQuery = true)
+	@Query(value="select ul.id from reserva r join unidade_livro ul on r.livro_id = ul.livro_id where r.id = ?  ",nativeQuery = true)
 	Long findUnidadeIdByReservaId(Long reservaId);
 	
 	@Query(value="select r.id from emprestimo e \r\n" + 
-			" join unidade_livro ul \r\n" + 
-			" join livro l \r\n" + 
-			" join reserva r \r\n" + 
-			" where e.unidade_livro_id = ?\r\n" + 
+			" join unidade_livro ul on e.unidade_livro_id = ul.id\r\n" + 
+			" join livro l on ul.livro_id = l.id\r\n" + 
+			" join reserva r on r.livro_id = l.id\r\n" + 
+			" where e.unidade_livro_id = ? \r\n" + 
 			" and data_reserva in( select min(data_reserva) from reserva  where e.unidade_livro_id = e.unidade_livro_id);",nativeQuery= true)
 	Long findReservaIdByEmprestimoId(Long id);
 
