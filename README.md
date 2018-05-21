@@ -6,7 +6,7 @@ Aplicação Web para Gerenciamento de Biblioteca
 
 
 
-Este release notes tem como objetivo apresentar a versão [1.0.0](https://semver.org) do projeto de gerenciamento de uma biblioteca com suas funcionalidades atuais e futuras.
+> Este release notes tem como objetivo apresentar a versão [1.0.0](https://semver.org) do projeto de gerenciamento de uma biblioteca com suas funcionalidades atuais e futuras.
 
 ![Logo da Cognizant](https://www.owasp.org/images/5/57/Cognizant.png)
 
