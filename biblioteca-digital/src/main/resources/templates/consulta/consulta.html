@@ -105,7 +105,7 @@
                                 <div class="row">
                                   <div class="col-xs-6 mx-auto">
                                    <a  data-th-href="@{consulta/{id}(id=${livro.id})} " class="thumbnail">
-                                      <img class="img-150 " data-th-src="${livro.urlFoto}" />
+                                      <img class="img-150 " data-th-src="${(livro.urlFoto == null OR livro.urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" />
                                     </a>
                                   </div>
                                 </div>

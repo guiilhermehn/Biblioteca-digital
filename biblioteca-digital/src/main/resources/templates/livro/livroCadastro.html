@@ -160,7 +160,7 @@
             </div>
             
             <p>PREVIEW:</p>
-            <img data-th-src="${(urlFoto != null) ? urlFoto : '/assets/img/bookCoverNotFound.jpg'  }" class="img-responsive" data-th-id="bookImage"
+            <img data-th-src="${(urlFoto == null OR urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive" data-th-id="bookImage"
             alt="Capa do livro" height="307">
           </div>
         </div>
