@@ -33,8 +33,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class Usuario implements Serializable, UserDetails {
 
-	private static final long serialVersionUID = 902783495L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -52,6 +50,7 @@ public class Usuario implements Serializable, UserDetails {
 	private String nome;
 
 	@Column(name = "email",unique = true)
+	@Size(max=255)
 	@Email
 	@NotNull
 	@NotEmpty
@@ -78,15 +77,16 @@ public class Usuario implements Serializable, UserDetails {
 	@Transient
 	private Boolean verificaRole = false;
 
+	// Relacionamento Muitos para Muitos entre Usuario e Papel
 	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
-	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id",unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "usuario_id", unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
 	public Set<Papel> papeis;
 
-	// Joins com emprestimo e reserva
-
+	// Relacionamento Um para Muitos entre Usuario e Emprestimo
 	@OneToMany(mappedBy = "usuario", targetEntity = Emprestimo.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Emprestimo> emprestimos;
 
+	// Relacionamento Um para Muitos entre Usuario e Reserva
 	@OneToMany(mappedBy = "usuario", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 

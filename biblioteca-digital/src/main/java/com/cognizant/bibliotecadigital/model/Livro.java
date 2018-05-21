@@ -36,7 +36,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13", unique = true)
+	@Column(name = "isbn13")
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -78,17 +78,18 @@ public class Livro implements Serializable {
 	@Transient
 	private boolean habilita;
 
-	
-
+	// Relacionamento Muitos para Muitos entre Livro e CategoriaLivros (NÃO IMPLEMENTADO)
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "categoriaLivro_id") })
 	Set<CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 
+	// Relacionamento Um para Muitos entre Livro e Reserva
 	@Transient
 	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
+	// Relacionamento Um para Muitos entre Livro e UnidadeLivro
 	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
@@ -100,7 +101,6 @@ public class Livro implements Serializable {
 	}
 
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
-
 
 	public Livro(Long id, String isbn13, String titulo, String anoPublicacao,
 			String edicao, String sinopse, String foto, String autor,
@@ -121,9 +121,6 @@ public class Livro implements Serializable {
 		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
-	
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -142,7 +139,6 @@ public class Livro implements Serializable {
 		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -215,7 +211,6 @@ public class Livro implements Serializable {
 			return false;
 		return true;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -305,11 +300,9 @@ public class Livro implements Serializable {
 		this.autor = autor;
 	}
 	
-
 	public String getUrlFoto() {
 		return urlFoto;
 	}
-
 
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
@@ -336,5 +329,4 @@ public class Livro implements Serializable {
 		return "Livro [id=" + id + ", isbn13=" + isbn13 + ", titulo=" + titulo + ", anoPublicacao=" + anoPublicacao
 				+ ", edicao=" + edicao + ", sinopse=" + sinopse + ", foto=" + foto + "]";
 	}
-
 }

@@ -37,7 +37,7 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class EmprestimoController {
-
+	//Serviços chamados
 	@Autowired
 	private EmprestimoService emprestimoService;
 	@Autowired
@@ -51,6 +51,9 @@ public class EmprestimoController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	/* ******************************************
+	 * Faz o mapeamento da tela de empréstimos 
+	 ********************************************/
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/emprestimos/emprestimo");
@@ -66,6 +69,11 @@ public class EmprestimoController {
 		return mv;
 	}
 
+	/* *****************************************************************************************************
+	 * Efetua o empréstimo do livro
+	 * Faz as atualizações no banco de dados, como a adição da data da retirada e prazo para entrega do livro
+	 * E envia um e-mail para o usuário, confirmando a retirada do livro
+	 *******************************************************************************************************/
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -74,7 +82,7 @@ public class EmprestimoController {
 
 		GregorianCalendar agora = new GregorianCalendar();
 
-		String template = "email";
+		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 7);
@@ -92,7 +100,7 @@ public class EmprestimoController {
 
 		unidadeService.save(unidade);
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
 		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
 		emprestimoService.save(emprestimo);
@@ -104,6 +112,11 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+	/* ************************************************************************************
+	 * Efetua a devolução do livro, após empréstimo
+	 * O livro fica no status "EM_ANALISE", aguardando a confirmação de um usuário Admin
+	 * para confirmar se o livro foi realmente entregue
+	 ***************************************************************************************/
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -114,7 +127,7 @@ public class EmprestimoController {
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.EM_ANALISE);
 		livroService.save(livro);
-
+		emprestimo.setEmprestimoStatus(Status.EM_ANALISE);
 		emprestimoService.save(emprestimo);
 
 		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
@@ -132,12 +145,20 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+	/* ****************************************************************
+	 * Faz o mapeamento da página de livros devolvidos
+	 * Essa é uma página que apenas o usuário Admin tem acesso
+	 * Todos os livros devolvidos por usuários, não confirmados
+	 * são listados nessa página, para que o usuário Admin possa fazer
+	 * a confirmação
+	 ******************************************************************/
 	@GetMapping("/emprestimos/livrosDevolvidos")
 	public ModelAndView findAllDevolucoes() throws MessagingException, IOException {
 		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
 
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
 		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+			
 		if (!emprestimos.isEmpty()) {
 			for (Emprestimo emprestimo : emprestimos) {
 				Livro livro = emprestimo.getUnidadeLivro().getLivro();
@@ -148,17 +169,23 @@ public class EmprestimoController {
 					} else {
 						emprestimo.setHabilita(true);
 					}
+					emprestimoService.save(emprestimo);
 					devolucoesEmAnalise.add(emprestimo);
 
 				}
-
 			}
 		}
 		mv.addObject("emprestimos", devolucoesEmAnalise);
-
 		return mv;
 	}
 
+	/* **************************************************************************************
+	 * O usuário Admin faz a confirmação da entrega do livro
+	 * O usuário que fez  entrega receberá um e-mail, sobre a confirmação da entrega do livro
+	 * O status do livro será atualizado para "SEM_EMPRESTIMO"
+	 * E caso já houvesse uma reserva para esse livro,
+	 * o status da reserva será atualizado para "AGUARDANDO"
+	 ****************************************************************************************/
 	@PostMapping("/emprestimos/confirmaDevolucao")
 	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -181,7 +208,6 @@ public class EmprestimoController {
 			reserva.setStatus(Status.AGUARDANDO);
 
 			reservaService.save(reserva);
-
 		}
 
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
@@ -191,6 +217,12 @@ public class EmprestimoController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+    
+	/* *********************************************************************************************
+	 * E-mail de notificação de prazo de entrega do livro
+	 * Antes do prazo, o usuário receberá um e-mail de lembrete sobre o término do seu empréstimo
+	 * Após o prazo, o usuário receberá um e-mail de atraso de entrega
+	 ************************************************************************************************/
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
 		String livro = "", dataDev = "";
@@ -221,6 +253,8 @@ public class EmprestimoController {
 		}
 	}
 
+	
+   // Formatação da data
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";
 		dataDev = data.toString();

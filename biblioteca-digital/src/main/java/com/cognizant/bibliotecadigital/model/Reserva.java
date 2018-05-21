@@ -33,6 +33,7 @@ public class Reserva implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+	// Relacionamento Muitos para Um entre Reserva e Usuario
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
@@ -51,6 +52,7 @@ public class Reserva implements Serializable {
 	@Column(name = "data_modifica_status")
 	private Date dataModificaStatus;
 
+	// Relacionamento Muitos para Um entre Reserva e Livro
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
@@ -204,6 +206,7 @@ public class Reserva implements Serializable {
 				+ ", livro=" + livro + "]";
 	}
 
+	// Retorna True se a reserva do livro estiver "EM_ESPERA" e o empréstimo não estiver concluido
 	public boolean isValidaStatusEmEspera(Reserva reserva, Emprestimo emprestimo) {
 		if (reserva.getStatus().equals(Status.EM_ESPERA) && emprestimo.getDataDevolucao() != null) {
 			return true;

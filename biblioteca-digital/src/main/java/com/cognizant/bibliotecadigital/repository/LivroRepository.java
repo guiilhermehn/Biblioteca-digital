@@ -11,6 +11,7 @@ import com.cognizant.bibliotecadigital.model.Livro;
 @Repository
 public interface LivroRepository extends CrudRepository<Livro, Long> {
 
+	// Query para a barra de pesquisa de livros, faz a busca por Titulo, Autor ou Descrição(sinopse)
 	Iterable<Livro> findByTituloContainingOrSinopseContainingOrAutorContaining(String titulo, String sinopse, String autor);
 	
 	Optional<Livro> findById(long id);
@@ -22,6 +23,7 @@ public interface LivroRepository extends CrudRepository<Livro, Long> {
 	
 	Livro findByIsbn13(String isbn13);
 	
+	// Faz a contagem de empréstimos do usuário
 	@Query(value=" select count(*) from livro l  \r\n" + 
 			" join unidade_livro ul\r\n" + 
 			" on ul.livro_id = l.id \r\n" + 

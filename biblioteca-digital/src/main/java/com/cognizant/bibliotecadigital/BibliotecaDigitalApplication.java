@@ -14,13 +14,12 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import com.cognizant.bibliotecadigital.model.Papel;
 import com.cognizant.bibliotecadigital.repository.PapelRepository;
 
-
-
-
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
-public class BibliotecaDigitalApplication extends AsyncConfigurerSupport  {
+
+public class BibliotecaDigitalApplication extends AsyncConfigurerSupport {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);

@@ -36,10 +36,12 @@ import com.cognizant.bibliotecadigital.service.LivroService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class ReservaController {
-
+	//Serviços chamados
 	@Autowired
 	private ReservaService reservaService;
 
@@ -58,21 +60,31 @@ public class ReservaController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	/* *************************************************************
+	 * Faz o mapeamento da página de reservas,
+	 * Caso o usuário tenha alguma reserva,
+	 * é feita a listagem de todas as reservas dele
+	 * Se ele tiver uma reserva, mas também tiver um empréstimo,
+	 * ele só poderá retirar o livro reservado, se finalizar o empréstimo,
+	 * caso contrário, a reserva ficará "EM_ESPERA" até o prazo da
+	 * reserva acabar, ou ele devolver o livro emprestado
+	 * Caso a reserva esteja com o status "AGUARDANDO,
+	 * ele não poderá fazer o empréstimo do livro
+	  ************************************************************* */
 	@GetMapping("/reservas")
 	public ModelAndView findAll() throws ParseException {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		List<Reserva> reservasPorUsuario = new ArrayList<>();
+		Set<Reserva> reservasPorUsuario = new HashSet();
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
-
+		//Faz a listagem de reservas, caso o usuário tenha alguma
 		if (!reservas.isEmpty()) {
-
 			for (Reserva reserva : reservas) {
 
 				List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService
@@ -108,13 +120,17 @@ public class ReservaController {
 		return mv;
 	}
 
+	// Faz a formatação da data
 	private String formataData(Date disponibilidade) {
 		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
 
 		return dataFormatada;
-
 	}
-
+	/* ***************************************************
+	 * Exclusão de reservas feitas
+	 * Habilita, na View, o botão de excluir uma reserva,
+	 * caso a reserva NÃO esteja no estado "FINALIZADO"
+	 *************************************************** */
 	@PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
 
@@ -132,6 +148,12 @@ public class ReservaController {
 		return mv;
 	}
 
+	/* ************************************************
+	 * Efetuamento de reserva
+	 * Ao efetuar uma reserva, atualiza o BD,
+	 * linkando ao usuário que fez a reserva, adiciona a data e
+	 * muda o status da reserva para "EM_ESPERA"
+	 ************************************************* */
 	@PostMapping("/reservas/efetuarReserva")
 	public ModelAndView save(@RequestParam("livroId") Long livroId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -156,6 +178,11 @@ public class ReservaController {
 		return new ModelAndView("redirect:/reservas");
 	}
 
+	/* *************************************************************
+	 * Fazer empréstimo quando o livro reservado estiver disponível
+	 * Faz todo o processo normal do empréstimo
+	 * Atualiza o status da reserva para "FINALIZADO"
+	 * ************************************************************ */
 	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
 	public ModelAndView emprestimoAposReserva(@RequestParam("reservaId") Long reservaId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
@@ -178,7 +205,7 @@ public class ReservaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
@@ -198,6 +225,11 @@ public class ReservaController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
+	/* *****************************************************************************
+	 * Faz o cálculo da data prevista para a disponibilidade do livro reservado
+	 * (prevista, pois pode acontecer do usuário que está com o livro entregá-lo antes,
+	 * ou atrasar a entrega)
+	 * ******************************************************************************/
 	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
 		if (emprestimo == null) {
