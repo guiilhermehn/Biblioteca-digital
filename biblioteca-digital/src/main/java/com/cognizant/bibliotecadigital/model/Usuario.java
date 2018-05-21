@@ -33,7 +33,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class Usuario implements Serializable, UserDetails {
 
-	private static final long serialVersionUID = 902783495L;
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +52,8 @@ public class Usuario implements Serializable, UserDetails {
 	@NotEmpty
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
+	@Size(max=255)
 	@Email
 	@NotNull
 	@NotEmpty
@@ -79,7 +81,7 @@ public class Usuario implements Serializable, UserDetails {
 	private Boolean verificaRole = false;
 
 	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
-	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id") }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "usuario_id", unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
 	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva

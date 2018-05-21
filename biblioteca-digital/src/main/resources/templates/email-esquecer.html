@@ -1,43 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
 <head>
-    <title>Sending Email with Thymeleaf HTML Template Example</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Digital Library Solution</title>
+  <style>
+  body,
+  html,
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
-
-    <!-- use the font -->
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            font-size: 48px;
-        }
-    </style>
+  .body {
+    background: #00BFFF;  /* fallback for old browsers */
+  }
+  .text{
+    font-size: 35px;
+  }
+  .text-conteudo p{
+    font-size: 15px;
+    height: 5px;
+  }
+  .text-conteudo h3{
+    font-size: 20px;
+    height: 5px;
+  }
+  .linha {
+    border-top: 8px solid #4dff4d;
+  }
+  .tabela table{
+    padding-left: 100px;
+  }
+  </style>
 </head>
-<body style="margin: 0; padding: 0;">
-
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-    <tr>
-        <td align="center" bgcolor="#EEE" style="padding: 40px 0 30px 0;">
-            <img src="cid:logo.png" width="300" height="150" alt="http://cognizant.com" style="display: block;" />
-        </td>
+<body style="font-family:'Arial';">
+  <table style="margin-top:50px; margin-right:50px; margin-left:50px;">
+    <tr style="text-align:center;">
+      <td >
+        <center>
+          <table align="center">
+            <td>
+              <table>
+                <th>
+                  <table>
+                    <th>
+                      <h1 class="text" style="font-family:'Arial'; color: white ">Digital Library Solution</h1>
+                    </th>
+                  </table>
+                </th>
+              </table>
+            </td>
+          </table>
+          <table class="linha">
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <th>
+                      <center>
+                        <table  border="0" cellpadding="0" cellspacing="0" width="550" style="border-collapse: collapse;">
+                          <td class="text-conteudo"bgcolor="white" style="padding: 30px 30px 30px 30px;">
+                            <h3 style="font-family:'Arial';">Lembrete</h3>
+                            <p >_______________________________________________</p><br>
+                            <p style="font-family:'Arial'" th:text="${'Olá ' + name}">Olá Joao</p>
+                            <p style="font-family:'Arial'" th:text="${'Você ainda não devolveu o livro ' + livro + ' !'}"></p>
+                            <p style="font-family:'Arial'" th:text="${'Seu prazo encerrou no dia ' + prazo}"></p>
+                            <p style="font-family:'Arial'" >Obrigado</p>
+                            <br>
+                            <p style="font-family:'Arial'" th:text="${location}"></p>
+                          </td>
+                        </tr>
+                      </table>
+                    </center>
+                  </th>
+                </tr>
+              </table>
+            </th>
+          </tr>
+        </table>
+      </td>
     </tr>
-    <tr>
-        <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-            <p th:text="${'Olá ' + name}"></p>
-            <p th:text="${'Você ainda não devolveu o livro ' + livro}"></p>
-            <p th:text="${'O seu prazo venceu no dia ' + prazo}"></p>
-            <p>Obrigado</p>
-        </td>
-    </tr>
-    <tr>
-        <td bgcolor="#EEE" style="padding: 30px 30px 30px 30px;">
-            <p th:text="${location}"></p>
-        </td>
-    </tr>
+  </table>
+</center>
+</td>
+</tr>
 </table>
-
 </body>
 </html>

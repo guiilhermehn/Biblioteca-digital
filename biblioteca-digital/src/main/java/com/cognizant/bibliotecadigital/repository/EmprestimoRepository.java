@@ -10,7 +10,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 
 @Repository
 public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
-	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ?", nativeQuery = true)
+	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ? && e.data_devolucao is null", nativeQuery = true)
 	long countEmprestimosByUsuarioId(Long unidadeLivroId);
 	
 	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ?1 AND data_devolucao IS NULL", nativeQuery = true)
@@ -30,4 +30,9 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 			" join emprestimo e on ul.id = e.unidade_livro_id\r\n" + 
 			" where  e.usuario_id = ? and e.data_devolucao is null", nativeQuery = true)
 	long countEmprestimoPorUsuarioId(Long id);
+	
+	@Query(value="select e.*  from emprestimo e \r\n" + 
+			"join unidade_livro ul on e.unidade_livro_id =ul.id\r\n" + 
+			"join reserva r on r.livro_id = ul.livro_id where e.data_devolucao is not null and r.status = 'EM_ANALISE'",nativeQuery=true)
+	Iterable<Emprestimo> findEmprestimosDevolvidos();
 }

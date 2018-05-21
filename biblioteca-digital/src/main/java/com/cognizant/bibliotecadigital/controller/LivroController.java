@@ -1,23 +1,18 @@
 package com.cognizant.bibliotecadigital.controller;
 
-import java.io.Console;
-
 import javax.validation.Valid;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cognizant.bibliotecadigital.model.Livro;
@@ -34,14 +29,6 @@ public class LivroController {
 	private LivroService livroService;
 	@Autowired
 	private UnidadeLivroService unidadeLivroService;
-
-	/*
-	 * @GetMapping("/livros") public ModelAndView findAll() { ModelAndView mv =
-	 * new ModelAndView("/livro/livroPesquisa"); mv.addObject("livros",
-	 * livroService.findAll());
-	 * 
-	 * return mv; }
-	 */
 
 	@GetMapping("/livros")
 	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
@@ -80,13 +67,12 @@ public class LivroController {
 			logger.info("Validation errors while submitting form!");
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 			return mv;
-
 		}
+        
 		try {
-
+			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 			Livro salvo = livroService.save(livro);
 			unidadeLivroService.save(new UnidadeLivro(0L, null, livroService.findById(salvo.getId()).get()));
-			livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 
 			redAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
 			logger.info("Success submitting form!");
@@ -106,8 +92,6 @@ public class LivroController {
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
-		// livroService.findByIsbn13(livro.getIsbn13());
-
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
@@ -124,9 +108,6 @@ public class LivroController {
 	}
 
 	@PostMapping("/livro/unidade/edit")
-	/*
-	 * name="id" name="livroId" name="avarias"
-	 */
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId,
 			@RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());

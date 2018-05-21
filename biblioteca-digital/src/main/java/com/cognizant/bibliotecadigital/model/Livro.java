@@ -2,7 +2,6 @@ package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,13 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.transaction.Transactional;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Range;
 
 @Transactional
 @Entity
@@ -41,7 +36,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13", unique = true)
+	@Column(name = "isbn13")
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -82,6 +77,9 @@ public class Livro implements Serializable {
 
 	@Transient
 	private boolean habilita;
+	
+	@Transient
+	private List<Long> idsListaDesejos = new ArrayList<>();
 
 	
 
@@ -334,6 +332,16 @@ public class Livro implements Serializable {
 
 	public void setStatusLivro(StatusLivro statusLivro) {
 		this.statusLivro = statusLivro;
+	}
+	
+	
+
+	public List<Long> getIdsListaDesejos() {
+		return idsListaDesejos;
+	}
+
+	public void setIdsListaDesejos(List<Long> idsListaDesejos) {
+		this.idsListaDesejos = idsListaDesejos;
 	}
 
 	@Override

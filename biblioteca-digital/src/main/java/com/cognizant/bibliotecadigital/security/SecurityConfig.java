@@ -1,10 +1,5 @@
 package com.cognizant.bibliotecadigital.security;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +10,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.cognizant.bibliotecadigital.model.Papel;
-import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Configuration
@@ -56,10 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//auth.authenticationProvider(authenticationProvider());
 		auth.jdbcAuthentication()
 			.usersByUsernameQuery("select email, senha, true from usuario where email=?")
-			.authoritiesByUsernameQuery("select u.email, p.nome from usuario u\r\n" + 
-					"join usuario_papel up on u.id = up.usuario_id\r\n" + 
-					"join papel p on p.id = up.papel_id\r\n"
-					+ "where u.email=?")
+			.authoritiesByUsernameQuery("select u.email, p.nome from usuario u " + 
+					"join usuario_papel up on u.id = up.usuario_id " + 
+					"join papel p on p.id = up.papel_id " + 
+                    "where u.email=?")
 			.dataSource(dataSource)
 			.passwordEncoder(passwordEncoder());
 	}
@@ -68,9 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
-				.antMatchers("/**").authenticated()
+
+				.antMatchers("/").authenticated()
 				.antMatchers("/livros").hasRole("ADMIN")
 				.antMatchers("/gerenciar").hasRole("ADMIN")
+				.antMatchers("/emprestimos/livrosDevolvidos").hasRole("ADMIN")
+
 				.and()
 					.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("senha")
 						.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/").permitAll()						
@@ -78,10 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.and()
-					.exceptionHandling().accessDeniedPage("/consulta");
+					.exceptionHandling().accessDeniedPage("/erroAutorizacao");
 	}
-	
-	
-
-
 }
