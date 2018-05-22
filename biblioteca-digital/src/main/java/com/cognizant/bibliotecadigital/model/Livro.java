@@ -1,4 +1,5 @@
 
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -362,3 +363,4 @@ public class Livro implements Serializable {
 	}
 
 }
+

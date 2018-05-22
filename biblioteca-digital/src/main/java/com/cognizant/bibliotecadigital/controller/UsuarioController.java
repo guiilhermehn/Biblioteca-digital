@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.controller;
 
 import javax.validation.Valid;
@@ -26,6 +27,13 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private PapelService papelService;
+	
+	
+	@GetMapping("/")
+	public ModelAndView index() {
+		return new ModelAndView("login/index");
+		
+	}
 
 	/* ***************************************************************
 	 * Faz o mapeamento do login,  faz a validação do e-mail e senha

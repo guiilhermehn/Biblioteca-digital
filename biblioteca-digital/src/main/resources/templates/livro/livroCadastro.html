@@ -33,6 +33,7 @@
               <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
             </a>
           </li>
+
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">apps</i> Minhas ações
@@ -73,7 +74,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"> ISBN </span>
                 </div>
-                <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Insira o ISBN de 10 ou 13 caracteres...">
+                <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Inserir o ISBN para iniciar o cadastro...">
                 <div class="input-group-append">
                   <button class="btn btn-primary btn-link" id="btnIsbn13" type="button">
                     <i class="material-icons"> search</i>
@@ -92,7 +93,7 @@
               
               <div class="input-group ">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"> Título: </span>
+                  <span class="input-group-text"> Titulo: </span>
                 </div>
                 <input type="text" name="" class="form-control" data-th-field="*{titulo}">
               </div>
@@ -112,7 +113,7 @@
               
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"> Ano de Publicação: </span>
+                  <span class="input-group-text"> Ano Publicação: </span>
                 </div>
                 <input type="text" name="" class="form-control" data-th-field="*{anoPublicacao}">
               </div>
@@ -197,5 +198,4 @@
 <script src="../../static/assets/js/robo.js" data-th-src="@{/assets/js/robo.js}"></script>
 </body>
 </html>
-
 
