@@ -19,7 +19,9 @@
     <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
       <div class="container">
         <div class="navbar-translate">
-          <a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
+
+          <a class="navbar-brand" href="index.html" data-th-href="@{/consulta}" >Digital Library Solution </a>
+
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
@@ -105,7 +107,7 @@
                             </form>
                             <form class="d-inline-block" th:action="@{/reservas/deletarReserva}" method="POST">
                             <input type="hidden" th:value="${reserva.id}" name="id">
-                              <button  th:action="@{/reservas/deletarReserva}" class="btn btn-outline-danger" data-th-disabled="${reserva.habilitaApagarReserva}" data-toggle="modal" data-target="#smallAlertModal">Apagar Reserva</button>
+                              <button  th:action="@{/reservas/deletarReserva}" class="btn btn-outline-danger" data-th-disabled="${reserva.habilitaApagarReserva}" data-toggle="modal" data-target="#smallAlertModal">Cancelar Reserva</button>
                             </form>
                             </div>
                           </div>

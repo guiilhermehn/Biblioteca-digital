@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="index.html" data-th-href="@{/}" > Digital Library Solution </a>
+        <a class="navbar-brand" href="index.html" data-th-href="@{/consulta}" > Digital Library Solution </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
@@ -32,7 +33,6 @@
               <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
             </a>
           </li>
-
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">apps</i> Minhas ações
@@ -73,7 +73,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"> ISBN </span>
                 </div>
-                <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Inserir o ISBN para iniciar o cadastro...">
+                <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Insira o ISBN de 10 ou 13 caracteres...">
                 <div class="input-group-append">
                   <button class="btn btn-primary btn-link" id="btnIsbn13" type="button">
                     <i class="material-icons"> search</i>
@@ -92,7 +92,7 @@
               
               <div class="input-group ">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"> Titulo: </span>
+                  <span class="input-group-text"> Título: </span>
                 </div>
                 <input type="text" name="" class="form-control" data-th-field="*{titulo}">
               </div>
@@ -112,7 +112,7 @@
               
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"> Ano Publicação: </span>
+                  <span class="input-group-text"> Ano de Publicação: </span>
                 </div>
                 <input type="text" name="" class="form-control" data-th-field="*{anoPublicacao}">
               </div>
@@ -197,3 +197,5 @@
 <script src="../../static/assets/js/robo.js" data-th-src="@{/assets/js/robo.js}"></script>
 </body>
 </html>
+
+
