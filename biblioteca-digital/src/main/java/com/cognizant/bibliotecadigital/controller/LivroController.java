@@ -156,6 +156,7 @@ public class LivroController {
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId,
 			@RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
+		livroService.save(unidade.getLivro());
 		unidadeLivroService.save(unidade);
 
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());

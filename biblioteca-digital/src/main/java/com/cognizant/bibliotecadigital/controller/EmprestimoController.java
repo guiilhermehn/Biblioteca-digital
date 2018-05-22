@@ -211,8 +211,7 @@ public class EmprestimoController {
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/em"
-				+ "prestimos");
+		return new ModelAndView("redirect:/emprestimos/confirmaDevolucao");
 	}
 
 
