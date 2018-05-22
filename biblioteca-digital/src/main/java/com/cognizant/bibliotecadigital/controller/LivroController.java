@@ -155,7 +155,7 @@ public class LivroController {
 	 *******************************************/
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
-
+  livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
