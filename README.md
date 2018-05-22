@@ -11,7 +11,7 @@ Aplicação Web para Gerenciamento de Biblioteca
 ![Logo da Cognizant](https://www.owasp.org/images/5/57/Cognizant.png)
 
 ## a.Data de liberação:
-No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0.0
+No dia 22 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0.0
 
 ## b.Funcionalidades implementadas
   -  Cadastro manual de usuário
@@ -75,7 +75,10 @@ No dia 21 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
  Limitamos a quantidade de empréstimos por livro para o máximo de 01 empréstimo e máximo de 01 reserva
    
 ### Mais de um livro por ISBN 
- Não há uma regularização sobre o ISBN ser único mundialmente. Na API do Google, houve casos em que encontramos +27 livros para um mesmo ISBN.    
+ Não há uma regularização sobre o ISBN ser único mundialmente. Na API do Google, houve casos em que encontramos +27 livros para um mesmo ISBN.
+ 
+### Outros problemas
+ Aqui temos um compilado realizado dos últimos bugs que encontramos [#52](../../issues/52)
  
 ## Como começar 
 #### Utilizando o Git (*GitHub*) em equipe
@@ -102,7 +105,7 @@ A consulta através do ISBN do livro é realizada no Front-End utilizando JavaSc
 Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 **Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado é será preenchido
 
-## Contribuições [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
+## Contribuições [![All Contributors](https://img.shields.io/badge/contribui%C3%A7%C3%B5es-10-orange.svg)](#contribuições-)
 ### 1º  Graduation Program:
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 | [<img src="https://avatars2.githubusercontent.com/u/36986045?s=400&v=4" width="110px;"/><br /><sub>Alexandre</sub>](https://github.com/alexandrenunes-cs)<br /> | [<img src="https://avatars0.githubusercontent.com/u/17655232?s=400&v=4" width="110px;"/><br /><sub>Bruno</sub>](https://github.com/brunojsan)<br /> | [<img src="https://avatars3.githubusercontent.com/u/22897211?s=460&v=4" width="110px;"/><br /><sub>Diego</sub>](https://github.com/DiegoMatsuki)<br /> | [<img src="https://avatars3.githubusercontent.com/u/38724994?s=460&v=4" width="110px;"/><br /><sub>Francisco</sub>](https://github.com/franrock)<br /> :octocat:| [<img src="https://avatars1.githubusercontent.com/u/17627827?s=460&v=4" width="110px;"/><br /><sub>Iury</sub>](https://github.com/Sizzin)<br /> |
