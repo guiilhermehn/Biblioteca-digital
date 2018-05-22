@@ -15,7 +15,7 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 	long countEmprestimosByUsuarioId(Long unidadeLivroId);
 	
 	//Faz a busca de livros com empréstimos em andamento
-	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ?1 AND data_devolucao IS NULL", nativeQuery = true)
+	@Query(value = "SELECT * FROM emprestimo WHERE unidade_livro_id = ? AND data_devolucao IS NULL", nativeQuery = true)
 	Optional<Emprestimo> findEmprestimosByUnidadeLivroId(Long unidadeLivroId);
 	
 	Iterable<Emprestimo> findAllByUsuarioId(Long usuarioId);
@@ -40,4 +40,5 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 			"join unidade_livro ul on e.unidade_livro_id =ul.id\r\n" + 
 			"join reserva r on r.livro_id = ul.livro_id where e.data_devolucao is not null and r.status = 'EM_ANALISE'",nativeQuery=true)
 	Iterable<Emprestimo> findEmprestimosDevolvidos();
+
 }

@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -29,7 +30,6 @@ public class UnidadeLivro implements Serializable {
 	@Column(name = "avarias")
 	private String avarias;
 
-	// Relacionamento Muitos para Um entre UnidadeLivro e Livro
 	@ManyToOne
 	@JoinColumn(name = "livro_id")
 	private Livro livro;
@@ -40,6 +40,8 @@ public class UnidadeLivro implements Serializable {
 	@Transient
 	private boolean reservado;
 	
+	
+
 	// Construtor
 	public UnidadeLivro() {
 		this.id = 0L;
@@ -50,6 +52,8 @@ public class UnidadeLivro implements Serializable {
 		this.avarias = avarias;
 		this.livro = livro;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -133,3 +137,4 @@ public class UnidadeLivro implements Serializable {
 	}
 
 }
+

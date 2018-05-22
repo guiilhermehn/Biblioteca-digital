@@ -24,7 +24,6 @@ public class UsuarioController {
 	//Serviços chamados
 	@Autowired
 	private UsuarioService usuarioService;
-
 	@Autowired
 	private PapelService papelService;
 
@@ -35,11 +34,10 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
-
-
+		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
-		}
+		} 
         login.addObject("usuario", new Usuario());
 
 		return login;
@@ -53,7 +51,6 @@ public class UsuarioController {
 		return mv;
 	}
 
-
 	/* ********************************************************
 	 * Faz o mapeamento para a página de cadastro de usuários
 	 ******************************************************** */
@@ -63,8 +60,7 @@ public class UsuarioController {
 		modelAndView.addObject("usuario", new Usuario());
 		return modelAndView;
 	}
-
-
+	
 	/* ***********************************************
 	 * Faz o cadastro do usuário no banco de dados,
 	 * criptografa a senha e designa o papel do usuário,
@@ -76,7 +72,7 @@ public class UsuarioController {
 		if (bindingRes.hasErrors()) {
 			return register();
 		}
-		
+
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
 		usuarioService.save(usuario);
@@ -84,7 +80,7 @@ public class UsuarioController {
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
 	}
-
+	
 	/* **********************************************************************
 	 * Faz o mapeamento do perfil do usuário (NÃO IMPLEMENTADO AINDA)
 	 ********************************************************************** */
@@ -95,15 +91,15 @@ public class UsuarioController {
 
 		return mv;
 	}
-
+	
 	 /* *********************************
 	  * Faz o mapeamanto da tela de erro 
 	  ********************************* */
 	@GetMapping("/erroAutorizacao")
 	public ModelAndView exibirErro() {
 		ModelAndView mv = new ModelAndView("/login/erro401");
-
+		
 		return mv;
-	}
+	} 
 
 }

@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +17,7 @@ import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
@@ -31,6 +33,8 @@ public class PesquisaController {
 	private EmprestimoService emprestadoService;
 	@Autowired
 	private ReservaService reservaService;
+	@Autowired
+	private PapelService papelService;
 
     // TODO rever rotas? Usar "" para index.html?
 	/* ********************************************************************************
@@ -48,7 +52,17 @@ public class PesquisaController {
 		} else {
 			mav.addObject("livros", livroService.search(query));
 		}
-
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mav.addObject("isAdmin", isAdmin);
+		
 		return mav;
 	}
 
@@ -94,6 +108,9 @@ public class PesquisaController {
 		}
 
 		mav.addObject("livro", livro);
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mav.addObject("isAdmin", isAdmin);
 
 		return mav;
 	}

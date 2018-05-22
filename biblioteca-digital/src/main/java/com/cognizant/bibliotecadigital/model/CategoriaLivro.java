@@ -12,9 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-/* ******************************
- * AINDA NÃO IMPLEMENTADO
- ********************************/
+
 @Entity
 @Table(name = "categoria_livro")
 public class CategoriaLivro implements Serializable {

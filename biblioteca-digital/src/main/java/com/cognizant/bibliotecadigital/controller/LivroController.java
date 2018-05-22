@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.controller;
 
 import javax.validation.Valid;
@@ -5,6 +6,9 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +22,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.StatusLivro;
 import com.cognizant.bibliotecadigital.model.UnidadeLivro;
+import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
+import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class LivroController {
@@ -29,10 +36,14 @@ public class LivroController {
 	@Autowired
 	private LivroService livroService;
 	@Autowired
+	private PapelService papelService;
+	@Autowired
 	private UnidadeLivroService unidadeLivroService;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	/* ********************************************************************************
-	 * (ADMIN-ONLY)
+	 * (ADMIN-ONLY PAGE)
 	 * Faz o mapeamento da barra de pesquisa de livros (por título, autor ou descrição)
 	 * Se a pesquisa não conter valor algum, serão trazidos todos os livros cadastrados
 	 * Caso tenha valor, será feita uma query no banco de dados, buscando algum livro
@@ -47,6 +58,17 @@ public class LivroController {
 		} else {
 			mav.addObject("livros", livroService.search(query));
 		}
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mav.addObject("isAdmin", isAdmin);
+
 		return mav;
 	}
 
@@ -58,6 +80,16 @@ public class LivroController {
 	public ModelAndView edit(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("/livro/livroEditar");
 		mv.addObject("livro", livroService.findById(id).get());
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		return mv;
 	}
@@ -69,6 +101,16 @@ public class LivroController {
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
 
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
+		
 		mv.addObject("livro", new Livro());
 		return mv;
 	}
@@ -106,7 +148,6 @@ public class LivroController {
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
-
 	}
 
 	/* *****************************************

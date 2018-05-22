@@ -31,6 +31,7 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
@@ -50,6 +51,9 @@ public class EmprestimoController {
 	private LivroService livroService;
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PapelService papelService;
 
 	/* ******************************************
 	 * Faz o mapeamento da tela de empréstimos 
@@ -64,6 +68,9 @@ public class EmprestimoController {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		mv.addObject("emprestimos", emprestimoService.findAllByUsuarioId(usuario.getId()));
 		return mv;
@@ -102,7 +109,7 @@ public class EmprestimoController {
 
 		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
+		String assunto = "Emprestimo do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
 		emprestimoService.save(emprestimo);
 
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
@@ -111,7 +118,7 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
-
+	
 	/* ************************************************************************************
 	 * Efetua a devolução do livro, após empréstimo
 	 * O livro fica no status "EM_ANALISE", aguardando a confirmação de um usuário Admin
@@ -129,16 +136,6 @@ public class EmprestimoController {
 		livroService.save(livro);
 		emprestimo.setEmprestimoStatus(Status.EM_ANALISE);
 		emprestimoService.save(emprestimo);
-
-		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
-		if (idReserva != null) {
-			Reserva reserva = reservaService.findById(idReserva).get();
-
-			reserva.setStatus(Status.EM_ANALISE);
-
-			reservaService.save(reserva);
-
-		}
 
 		// TODO Fazer Span Para Notificar Que a Devolucao Está sob Analise
 
@@ -163,19 +160,21 @@ public class EmprestimoController {
 			for (Emprestimo emprestimo : emprestimos) {
 				Livro livro = emprestimo.getUnidadeLivro().getLivro();
 				if (emprestimo.getDataDevolucao() != null) {
-					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
+					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
+							&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
 						emprestimo.setHabilita(false);
+						emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 
 					} else {
 						emprestimo.setHabilita(true);
 					}
 					emprestimoService.save(emprestimo);
 					devolucoesEmAnalise.add(emprestimo);
-
 				}
 			}
 		}
 		mv.addObject("emprestimos", devolucoesEmAnalise);
+
 		return mv;
 	}
 
@@ -193,7 +192,7 @@ public class EmprestimoController {
 
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
+		String assunto = "Devolucao do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
 
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
@@ -208,16 +207,21 @@ public class EmprestimoController {
 			reserva.setStatus(Status.AGUARDANDO);
 
 			reservaService.save(reserva);
-		}
+			String assuntoReservaDisponivel = "Reserva Disponivel!";
+			String templateReservaDisponivel = "email-disponibilidade-reserva";
+			Mail email = emailService.enviarEmail(reserva.getUsuario(), emprestimo.getUnidadeLivro(), assuntoReservaDisponivel);
 
+			emailService.sendSimpleMessage(email, templateReservaDisponivel);
+
+		}
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/emprestimos");
+		return new ModelAndView("redirect:/em"
+				+ "prestimos");
 	}
 
-    
 	/* *********************************************************************************************
 	 * E-mail de notificação de prazo de entrega do livro
 	 * Antes do prazo, o usuário receberá um e-mail de lembrete sobre o término do seu empréstimo
@@ -254,7 +258,7 @@ public class EmprestimoController {
 	}
 
 	
-   // Formatação da data
+	   // Formatação da data
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";
 		dataDev = data.toString();

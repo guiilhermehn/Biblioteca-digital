@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -24,6 +25,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+
 @Transactional
 @Entity
 @Table(name = "livro")
@@ -36,7 +39,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13")
+	@Column(name = "isbn13", unique = true)
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -77,19 +80,39 @@ public class Livro implements Serializable {
 
 	@Transient
 	private boolean habilita;
+	
+	/* O codigo abaixo é o relacionamento ManyToMany entre o livro e o autor. 
+	 * Não foi implementada, por um motivo de decisão técnica, por esse motivo optou-se por inserir 
+	 * uma String com os nomes dos autores como um campo unico do livro.	 
+	 */
+//	@ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                CascadeType.PERSIST,
+//                CascadeType.MERGE
+//            })
+//    @JoinTable(name = "book_authors",
+//            joinColumns = { @JoinColumn(name = "book_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "author_id") })
+//    private Set<Author> authors = new HashSet<>();
+//	public Set<Author> getAuthors() {
+//		return authors;
+//	}
+//
+//
+//	public void setAuthors(Set<Author> tags) {
+//		this.authors = tags;
+//	}
+	
 
-	// Relacionamento Muitos para Muitos entre Livro e CategoriaLivros (NÃO IMPLEMENTADO)
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "livro_categoriaLivro", joinColumns = { @JoinColumn(name = "livro_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "categoriaLivro_id") })
 	Set<CategoriaLivro> categoriaLivros = new HashSet<CategoriaLivro>();
 
-	// Relacionamento Um para Muitos entre Livro e Reserva
 	@Transient
 	@OneToMany(mappedBy = "livro", targetEntity = Reserva.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reserva> reservas;
 
-	// Relacionamento Um para Muitos entre Livro e UnidadeLivro
 	@OneToMany(mappedBy = "livro", targetEntity = UnidadeLivro.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<UnidadeLivro> unidadeLivros;
 
@@ -101,6 +124,7 @@ public class Livro implements Serializable {
 	}
 
 	// Joins com autor,categoriaLivro,reserva e unidadeLivro
+
 
 	public Livro(Long id, String isbn13, String titulo, String anoPublicacao,
 			String edicao, String sinopse, String foto, String autor,
@@ -121,6 +145,9 @@ public class Livro implements Serializable {
 		this.statusLivro = StatusLivro.SEM_EMPRESTIMO;
 	}
 
+	
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,6 +166,7 @@ public class Livro implements Serializable {
 		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -211,6 +239,7 @@ public class Livro implements Serializable {
 			return false;
 		return true;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -300,9 +329,11 @@ public class Livro implements Serializable {
 		this.autor = autor;
 	}
 	
+
 	public String getUrlFoto() {
 		return urlFoto;
 	}
+
 
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
@@ -329,4 +360,5 @@ public class Livro implements Serializable {
 		return "Livro [id=" + id + ", isbn13=" + isbn13 + ", titulo=" + titulo + ", anoPublicacao=" + anoPublicacao
 				+ ", edicao=" + edicao + ", sinopse=" + sinopse + ", foto=" + foto + "]";
 	}
+
 }

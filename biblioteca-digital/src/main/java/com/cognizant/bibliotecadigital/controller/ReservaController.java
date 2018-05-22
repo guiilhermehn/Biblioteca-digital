@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
@@ -33,32 +34,28 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class ReservaController {
 	//Serviços chamados
 	@Autowired
 	private ReservaService reservaService;
-
 	@Autowired
 	private LivroService livroService;
-
 	@Autowired
 	private UnidadeLivroService unidadeService;
-
 	@Autowired
 	private EmprestimoService emprestimoService;
-
 	@Autowired
 	private EmailService emailService;
-
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private PapelService papelService;
 
 	/* *************************************************************
 	 * Faz o mapeamento da página de reservas,
@@ -76,14 +73,14 @@ public class ReservaController {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
 
 		List<Reserva> reservas = (List<Reserva>) reservaService.findAll();
-		Set<Reserva> reservasPorUsuario = new HashSet();
+		List<Reserva> reservasPorUsuario = new ArrayList<>();
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
-		//Faz a listagem de reservas, caso o usuário tenha alguma
+
 		if (!reservas.isEmpty()) {
 			for (Reserva reserva : reservas) {
 
@@ -93,6 +90,7 @@ public class ReservaController {
 					for (Emprestimo emprestimo : emprestimos) {
 						if (reserva.getStatus().equals(Status.FINALIZADO)) {
 							reserva.setHabilita(true);
+							reserva.setHabilitaApagarReserva(true);
 							continue;
 						}
 						Date disponibilidade = calculaDisponibilidade(emprestimo);
@@ -100,6 +98,7 @@ public class ReservaController {
 							reserva.setStatus(Status.EM_ESPERA);
 							reserva.setDataPrevisao(formataData(disponibilidade));
 							reserva.setHabilita(true);
+
 						} else {
 							reserva.setStatus(Status.AGUARDANDO);
 							reserva.setHabilita(false);
@@ -110,12 +109,13 @@ public class ReservaController {
 					}
 					reservaService.save(reserva);
 				}
-
 			}
-
 		}
 
 		mv.addObject("reservas", reservasPorUsuario);
+
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		return mv;
 	}
@@ -126,6 +126,7 @@ public class ReservaController {
 
 		return dataFormatada;
 	}
+
 	/* ***************************************************
 	 * Exclusão de reservas feitas
 	 * Habilita, na View, o botão de excluir uma reserva,
@@ -133,14 +134,6 @@ public class ReservaController {
 	 *************************************************** */
 	@PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
-
-		Reserva reserva = reservaService.findById(id).get();
-
-		if (reservaService.isEmprestadoOuDevolvido(id)) {
-			reserva.setHabilitaApagarReserva(false);
-		} else {
-			reserva.setHabilitaApagarReserva(true);
-		}
 
 		reservaService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/reservas");
@@ -205,7 +198,8 @@ public class ReservaController {
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,
+				Status.ATIVO);
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
@@ -243,7 +237,5 @@ public class ReservaController {
 		data.setTime(emprestimo.getDataDevolucao());
 
 		return data.getTime();
-
 	}
-
 }

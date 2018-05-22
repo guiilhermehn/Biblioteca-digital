@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.repository;
 
 import java.util.Optional;
@@ -23,6 +24,4 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 			"join usuario_papel up on u.id = up.usuario_id\r\n" + 
 			"join papel p on p.id = up.papel_id where p.nome = 'ROLE_ADMIN'",nativeQuery = true)
 	Optional<Usuario> emailAdm();
-	
-	
 }

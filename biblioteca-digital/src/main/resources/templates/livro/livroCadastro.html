@@ -1,184 +1,212 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <title>Digital Library Solution</title>
-
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- CSS Files -->
-    <link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
-  </head>
-  <body class="product-page  sidebar-collapse">
-    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-      <div class="container">
-        <div class="navbar-translate">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <title>Digital Library Solution</title>
+  
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+</head>
+<body class="product-page  sidebar-collapse">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+      <div class="navbar-translate">
         <a class="navbar-brand" href="index.html" data-th-href="@{/}" > Digital Library Solution </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
         </button>
-        </div>
-        <div class="collapse navbar-collapse">
+      </div>
+      <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
+          <li class="active nav-item">
+            <a href="#pablo" data-th-href="@{/}" class="nav-link">
+              <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+            </a>
+          </li>
           <li class="nav-item">
-          <a href="login.html"  data-th-href="@{/logout}" class="nav-link">
-            <i class="material-icons">settings</i> Sair
-          </a>
+            <a href="#pablo" class="nav-link">
+              <i class="material-icons">account_circle</i> Perfil <div class="ripple-container"></div>
+            </a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+              <i class="material-icons">apps</i> Minhas ações
+              <div class="ripple-container"></div>
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
+                <i class="material-icons">layers</i> Meus Empréstimos
+              </a>
+              <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
+                <i class="material-icons">content_paste</i> Minhas Reservas
+              </a>
+              <a href="emprestimo.html" data-th-href="@{/livros}" class="dropdown-item" th:if="${isAdmin}">
+                <i class="material-icons">book</i> Livros
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="login.html"  data-th-href="@{/logout}" class="nav-link">
+              <i class="material-icons">settings</i> Sair
+            </a>
           </li>
         </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="page-header header-filter clear-filter backgroud-gradient"> </div>
-
-    <div class="main main-raised">
-      <div class="container">
-        <form data-th-action="@{/livros/create}" method="POST" data-th-object="${livro}" data-th-id="form_new_livro">
-          <div class="section">
-            <h3 class="text-center">Cadastrar Livro</h3>
-            <div class="row">
-              <div class="col-md-8">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"> ISBN </span>
-                      </div>
-                      <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Inserir o ISBN para iniciar o cadastro...">
-                      <div class="input-group-append">
-                        <button class="btn btn-primary btn-link" id="btnIsbn13" type="button">
-                          <i class="material-icons"> search</i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('isbn13')}">
-                      <span class="label label-danger" data-th-if="${#fields.hasErrors('isbn13')}"data-th-errors="*{isbn13}"></span>
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-id="div_warning" style="display: none">
-                      <span class="label label-danger" data-th-id="warning_isbn"></span>
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
-                      <input type="hidden" data-th-text="${ErrorKey}">
-                    </div>
-
-                    <div class="input-group ">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"> Titulo: </span>
-                      </div>
-                      <input type="text" name="" class="form-control" data-th-field="*{titulo}">
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('titulo')}">
-                      <span class="label label-danger" data-th-if="${#fields.hasErrors('titulo')}" data-th-errors="*{titulo}"></span>
-                    </div>
-
-                    <div class="input-group ">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"> Autor: </span>
-                      </div>
-                      <input type="text" name="" class="form-control" data-th-field="*{autor}">
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('autor')}">
-                      <span class="label label-danger" data-th-if="${#fields.hasErrors('autor')}"data-th-errors="*{autor}"></span>
-                    </div>
-
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"> Ano Publicação: </span>
-                      </div>
-                      <input type="text" name="" class="form-control" data-th-field="*{anoPublicacao}">
-                    </div>
-                    <div class="alert alert-danger" role="alert"data-th-if="${#fields.hasErrors('anoPublicacao')}">
-                      <span class="label label-danger"data-th-if="${#fields.hasErrors('anoPublicacao')}" data-th-errors="*{anoPublicacao}"></span>
-                    </div>
-
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"> Edição: </span>
-                      </div>
-                      <input type="text" name="" class="form-control" data-th-field="*{edicao}">
-                    </div>
-                    <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('edicao')}">
-                      <span class="label label-danger" data-th-if="${#fields.hasErrors('edicao')}" data-th-errors="*{edicao}"></span>
-                    </div>
-                    
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"> Descrição: </span>
-                    </div>
-                    <textarea class="form-control" id="sinopse"
-                      data-th-field="*{sinopse}" rows="4" cols="50"></textarea>
-                  </div>
-                  <div class="alert alert-danger" role="alert"
-                    data-th-if="${#fields.hasErrors('sinopse')}">
-                    <span class="label label-danger"
-                      data-th-if="${#fields.hasErrors('sinopse')}"
-                      data-th-errors="*{sinopse}"></span>
-                  </div>
-                    
-                    
-                  </div>
-
-              <div class="col-md-4">
-                  <div class="form-group ">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"> Url Foto: </span>
-                    </div>
-                   <input type="text" class="form-control" data-th-field="*{urlFoto}">
-                  </div>
-              
-                <p>PREVIEW:</p>
-                <img data-th-src="*{urlFoto}" class="img-responsive" data-th-id="bookImage"
-                  alt="Capa do livro" height="307">
-              </div>
-
-
-                </div>
-
-
-
-
-
-
-            <div class="row">
-              <div class="col-xs-6 mr-auto ml-auto">
-                <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Cadastrar</button>
-                <button class="btn btn-outline-danger btn-link" type="button" id="cancelar">Cancelar</button>
-              </div>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
-
-		<footer class="footer" data-background-color="black">
-      <div class="container">
-        <div class="copyright float-right">
-        © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+  </nav>
+  
+  <div class="page-header header-filter clear-filter backgroud-gradient"> </div>
+  
+  <div class="main main-raised">
+    <div class="container">
+      <form data-th-action="@{/livros/create}" method="POST" data-th-object="${livro}" data-th-id="form_new_livro">
+        <div class="section">
+          <h3 class="text-center">Cadastrar Livro</h3>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> ISBN </span>
+                </div>
+                <input type="text" name="" class="form-control" id="isbn13" data-th-field="*{isbn13}" placeholder="Inserir o ISBN para iniciar o cadastro...">
+                <div class="input-group-append">
+                  <button class="btn btn-primary btn-link" id="btnIsbn13" type="button">
+                    <i class="material-icons"> search</i>
+                  </button>
+                </div>
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('isbn13')}">
+                <span class="label label-danger" data-th-if="${#fields.hasErrors('isbn13')}"data-th-errors="*{isbn13}"></span>
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-id="div_warning" style="display: none">
+                <span class="label label-danger" data-th-id="warning_isbn"></span>
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
+                <input type="hidden" data-th-text="${ErrorKey}">
+              </div>
+              
+              <div data-role="ratingbar" id="ratingBar" data-steps="3" style="font-size: 10px">
+				  <ul>
+				    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+				    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+				    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+				    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+				    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+				  </ul>
+			</div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Titulo: </span>
+                </div>
+                <input type="text" name="" class="form-control" data-th-field="*{titulo}">
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('titulo')}">
+                <span class="label label-danger" data-th-if="${#fields.hasErrors('titulo')}" data-th-errors="*{titulo}"></span>
+              </div>
+              
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Autor: </span>
+                </div>
+                <input type="text" name="" class="form-control" data-th-field="*{autor}">
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('autor')}">
+                <span class="label label-danger" data-th-if="${#fields.hasErrors('autor')}"data-th-errors="*{autor}"></span>
+              </div>
+              
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Ano Publicação: </span>
+                </div>
+                <input type="text" name="" class="form-control" data-th-field="*{anoPublicacao}">
+              </div>
+              <div class="alert alert-danger" role="alert"data-th-if="${#fields.hasErrors('anoPublicacao')}">
+                <span class="label label-danger"data-th-if="${#fields.hasErrors('anoPublicacao')}" data-th-errors="*{anoPublicacao}"></span>
+              </div>
+              
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Edição: </span>
+                </div>
+                <input type="text" name="" class="form-control" data-th-field="*{edicao}">
+              </div>
+              <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('edicao')}">
+                <span class="label label-danger" data-th-if="${#fields.hasErrors('edicao')}" data-th-errors="*{edicao}"></span>
+              </div>
+              
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Descrição: </span>
+                </div>
+                <textarea class="form-control" id="sinopse"
+                data-th-field="*{sinopse}" rows="4" cols="50"></textarea>
+              </div>
+              <div class="alert alert-danger" role="alert"
+              data-th-if="${#fields.hasErrors('sinopse')}">
+              <span class="label label-danger"
+              data-th-if="${#fields.hasErrors('sinopse')}"
+              data-th-errors="*{sinopse}"></span>
+            </div>
+            
+            
+          </div>
+          
+          <div class="col-md-4">
+            <div class="form-group ">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> Url Foto: </span>
+              </div>
+              <input type="text" class="form-control" data-th-field="*{urlFoto}">
+            </div>
+            
+            <p>PREVIEW:</p>
+            <img data-th-src="${(urlFoto == null OR urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive" data-th-id="bookImage"
+            alt="Capa do livro" height="307">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 mr-auto ml-auto">
+            <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Cadastrar</button>
+            <button class="btn btn-outline-danger btn-link" onclick="window.history.back()" type="button">Cancelar</button>
+          </div>
         </div>
       </div>
-    </footer>
-    
-    <!--   Core JS Files   -->
-    <script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
-    <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-    <script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
-    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-    <script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
-    <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-    <script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
-    <script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
-    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-    <script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
-    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-    <script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
-    <script src="../../static/assets/js/robo.js" data-th-src="@{/assets/js/robo.js}"></script>
-  </body>
+    </form>
+  </div>
+</div>
+
+<footer class="footer" data-background-color="black">
+  <div class="container">
+    <div class="copyright float-right">
+      © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+    </div>
+  </div>
+</footer>
+
+<!--   Core JS Files   -->
+<script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+<script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+<script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+<script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+<script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+<script src="../../static/assets/js/robo.js" data-th-src="@{/assets/js/robo.js}"></script>
+</body>
 </html>
