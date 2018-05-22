@@ -16,7 +16,7 @@
 <body>
 	<header
 	class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom box-shadow navbar-static-top">
-	<a class="navbar-brand text-white" data-th-href="@{/consulta}">Digital Library
+	<a class="navbar-brand text-white" href="#">Digital Library
 		Solution</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -25,21 +25,18 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active"><a class="nav-link " data-th-href="@{/emprestimos}">
+			<li class="nav-item active"><a class="nav-link " href="#">
 				<i class="fas fa-book fa-lg"></i> Empréstimo
 			</a></li>
-			<li class="nav-item">
-                        <a class="nav-link" href="#"> <i class="far fa-calendar-check fa-lg"></i> Reservas</a>
-                    </li> 
-			 <li class="nav-item">
-                        <a class="nav-link" data-th-href="@{/livros}"> <i class="far fa-calendar-check fa-lg"></i> Livros</a>
-                    </li>
+			<li class="nav-item"><a class="nav-link" href="#"> <i
+				class="far fa-calendar-check fa-lg"></i> Reservas
+			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <i
 				class="fas fa-user-circle fa-lg"></i> Perfil
 			</a></li>
-			<li class="nav-item">
-                        <a class="nav-link" data-th-href="@{/logout}"> <i class="fas fa-sign-out-alt fa-lg"></i> Sair </a>
-                    </li>
+			<li class="nav-item"><a class="nav-link" href="#"> <i
+				class="fas fa-sign-out-alt fa-lg"></i> Sair
+			</a></li>
 		</ul>
 	</div>
 </header>
@@ -51,7 +48,8 @@
 				<div class="card-header">
 					<h4>Livros</h4>
 					<div class="d-flex justify-content-end">
-						<a data-th-href="@{/autores/novoAutor}" class="btn btn-outline-info">Cadastrar Autor</a>
+						<a data-th-href="@{/livros/new}" class="btn btn-outline-info">Cadastrar
+							Livro</a>
 						</div>
 						<div class="col-md-12">
 							<div class="input-group pt-md-5">
@@ -72,22 +70,30 @@
 							<table class="table table-striped">
 								<thead>
 									<tr class="bg-success text-white">
+										<th scope="col">Livro</th>
 										<th scope="col">Autor</th>
+										<th scope="col">Publicação</th>
 										<th scope="col">Ações</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr data-th-each="autor : ${autores}">
-										<td data-th-text="${autor.nome}">Culinaria</td>
-										<td><a href="#"
-											data-th-href="@{/autores/edit/{id}(id=${autor.id})}"
+									<tr data-th-each="livro : ${livros}">
+										<td data-th-text="${livro.titulo}">Culinaria</td>
+										<td><span data-th-each="autor: ${livro.autores}">
+											<span data-th-text="${autor.nome}"></span>
+										</span></td>
+										<td data-th-text="${livro.anoPublicacao}">2018</td>
+										<td>
+										
+										<a href="#"
+											data-th-href="@{/livros/edit/{id}(id=${livro.id})}"
 											class="btn btn-outline-warning"> <i class="far fa-edit"></i>
 										</a>
-										<form class="d-inline-block" data-th-action="@{/autores/deletarAutor}" method="POST">
+										<form class="d-inline-block" data-th-action="@{/livros/deletarLivro}" method="POST">
 											<button type="submit" class="btn btn-outline-danger">
 												<i class="far fa-trash-alt"></i>
 											</button>
-											<input type="hidden" th:value="${reserva.id}" name="id">
+											<input type="hidden" data-th-value="${livro.id}" name="id">
 										</form>
 										
 										</td>

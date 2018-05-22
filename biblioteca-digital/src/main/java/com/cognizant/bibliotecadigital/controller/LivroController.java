@@ -1,4 +1,3 @@
-
 package com.cognizant.bibliotecadigital.controller;
 
 import javax.validation.Valid;
@@ -42,7 +41,7 @@ public class LivroController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	/* ********************************************************************************
+  /* ********************************************************************************
 	 * (ADMIN-ONLY PAGE)
 	 * Faz o mapeamento da barra de pesquisa de livros (por título, autor ou descrição)
 	 * Se a pesquisa não conter valor algum, serão trazidos todos os livros cadastrados
@@ -71,7 +70,7 @@ public class LivroController {
 
 		return mav;
 	}
-
+  
 	/* **************************************************
 	 * Faz o mapeamento da página de edição do livro
 	 * A página é populada à partir do ID do livro
@@ -94,7 +93,7 @@ public class LivroController {
 		return mv;
 	}
 
-	/* **************************************************
+  /* **************************************************
 	 * Faz o mapeamento da página de cadastro de livros
 	 ****************************************************/
 	@GetMapping("/livros/new")
@@ -115,7 +114,7 @@ public class LivroController {
 		return mv;
 	}
 
-	/* ***************************************************************
+  /* ***************************************************************
 	 * Faz o cadastro do livro no banco de dados
 	 * São feitas validações antes dos dados serem inseridos no BD
 	 * caso haja erro no formulário, o usuário terá que corrigí-las
@@ -150,7 +149,7 @@ public class LivroController {
 		}
 	}
 
-	/* *****************************************
+  /* *****************************************
 	 * Faz o mapeamento para a edição do livro
 	 *******************************************/
 	@PostMapping("/livros/update")
@@ -163,7 +162,7 @@ public class LivroController {
 		return mv;
 	}
 
-	/* ******************************************
+  /* ******************************************
 	 * Faz o mapeamento para a exclusão do livro
 	 ********************************************/
 	@PostMapping("/livros/deletarLivro")
@@ -173,7 +172,7 @@ public class LivroController {
 		return redirect;
 	}
 
-	/* *****************************************************************
+  /* *****************************************************************
 	 * Faz o mapeamento para a inserção de relatório de avarias no livro
 	 *******************************************************************/
 	@PostMapping("/livro/unidade/edit")
@@ -185,7 +184,7 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 
-	/* *******************************************************
+  /* *******************************************************
 	 * Faz o mapeamento para a exclusão de unidades do livro
 	 *********************************************************/
 	@PostMapping("/livros/unidade/deletar")
@@ -195,7 +194,7 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + livroId);
 	}
 
-	/* *****************************************************
+  /* *****************************************************
 	 * Faz o mapeamento para a adição de unidades do livro
 	 *******************************************************/
 	@PostMapping("/livros/unidade/create")

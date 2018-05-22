@@ -212,14 +212,12 @@ public class EmprestimoController {
 			Mail email = emailService.enviarEmail(reserva.getUsuario(), emprestimo.getUnidadeLivro(), assuntoReservaDisponivel);
 
 			emailService.sendSimpleMessage(email, templateReservaDisponivel);
-
 		}
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/em"
-				+ "prestimos");
+		return new ModelAndView("redirect:/emprestimos/confirmaDevolucao");
 	}
 
 	/* *********************************************************************************************
@@ -257,8 +255,7 @@ public class EmprestimoController {
 		}
 	}
 
-	
-	   // Formatação da data
+	// Formatação da data
 	public String formatarData(Date data) {
 		String dataDev = "", mes = "", dia = "";
 		dataDev = data.toString();

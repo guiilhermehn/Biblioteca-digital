@@ -34,7 +34,7 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
-		
+
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
 		} 
@@ -73,6 +73,7 @@ public class UsuarioController {
 			return register();
 		}
 
+
 		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
 		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
 		usuarioService.save(usuario);
@@ -101,5 +102,4 @@ public class UsuarioController {
 		
 		return mv;
 	} 
-
 }

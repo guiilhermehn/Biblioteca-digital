@@ -1,5 +1,7 @@
 package com.cognizant.bibliotecadigital.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cognizant.bibliotecadigital.model.Livro;
 import com.cognizant.bibliotecadigital.model.StatusLivro;
+import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
@@ -88,16 +91,18 @@ public class PesquisaController {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
-
-		livro.getUnidadeLivros().forEach(unidade -> {
-			if (reservaService.countReservaAguardandoPorUnidadeId(unidade.getId())
+		
+		List<UnidadeLivro>unidadesLivros = livro.getUnidadeLivros();
+		
+		for (UnidadeLivro unidadeLivro : unidadesLivros) {
+			if (reservaService.countReservaAguardandoPorUnidadeId(unidadeLivro.getId())
 					&& emprestadoService.isEmprestado(livro.getId())
 					&& !livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
-				unidade.setEmprestado(false);
+				unidadeLivro.setEmprestado(false);
 			} else {
-				unidade.setEmprestado(true);
+				unidadeLivro.setEmprestado(true);
 			}
-		});
+		}
 
 		if (livro.getStatusLivro().equals(StatusLivro.COM_EMPRESTIMO)
 				&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())

@@ -10,6 +10,7 @@ import com.cognizant.bibliotecadigital.model.Emprestimo;
 
 @Repository
 public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
+  
 	// Faz a contagem de livros com empréstimos em andamento
 	@Query(value = "SELECT count(*) FROM emprestimo e WHERE  e.unidade_livro_id = ? && e.data_devolucao is null", nativeQuery = true)
 	long countEmprestimosByUsuarioId(Long unidadeLivroId);
@@ -40,5 +41,4 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 			"join unidade_livro ul on e.unidade_livro_id =ul.id\r\n" + 
 			"join reserva r on r.livro_id = ul.livro_id where e.data_devolucao is not null and r.status = 'EM_ANALISE'",nativeQuery=true)
 	Iterable<Emprestimo> findEmprestimosDevolvidos();
-
 }
