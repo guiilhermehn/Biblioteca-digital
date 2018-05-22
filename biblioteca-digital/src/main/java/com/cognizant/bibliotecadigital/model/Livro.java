@@ -39,7 +39,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13", unique = true)
+	@Column(name = "isbn13")
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;

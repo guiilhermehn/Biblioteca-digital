@@ -45,7 +45,7 @@ public class PesquisaController {
 	 * Caso tenha valor, será feita uma query no banco de dados, buscando algum livro
 	 * que contenha o valor informado
 	 **********************************************************************************/
-	@GetMapping({ "", "/consulta" })
+	@GetMapping("/consulta" )
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("consulta/consulta");
 
@@ -95,7 +95,7 @@ public class PesquisaController {
 		
 		for (UnidadeLivro unidadeLivro : unidadesLivros) {
 			if (reservaService.countReservaAguardandoPorUnidadeId(unidadeLivro.getId())
-					&& emprestadoService.isEmprestado(livro.getId())
+					&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())
 					&& !livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
 				unidadeLivro.setEmprestado(false);
 			} else {
