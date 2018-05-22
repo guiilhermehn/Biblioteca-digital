@@ -21,25 +21,20 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 @Controller
 @RequestMapping
 public class UsuarioController {
-
+	//Serviços chamados
 	@Autowired
 	private UsuarioService usuarioService;
-
 	@Autowired
 	private PapelService papelService;
-	
-	@GetMapping("/")
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("index");
-		return mv;
-	}
-	
 
+	/* ***************************************************************
+	 * Faz o mapeamento do login,  faz a validação do e-mail e senha
+	 * Caso estejam errado, mostra mensagem de erro
+	 **************************************************************** */
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
-		
-		
+
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
 		} 
@@ -56,7 +51,9 @@ public class UsuarioController {
 		return mv;
 	}
 
-	
+	/* ********************************************************
+	 * Faz o mapeamento para a página de cadastro de usuários
+	 ******************************************************** */
 	@GetMapping("/register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView("register/Register");
@@ -64,7 +61,11 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	
+	/* ***********************************************
+	 * Faz o cadastro do usuário no banco de dados,
+	 * criptografa a senha e designa o papel do usuário,
+	 * se houver erros no formulário, retorna à pagina de cadastro
+	 ************************************************ */
 	@PostMapping("/register/create")
 	public ModelAndView create(@ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
 
@@ -80,7 +81,10 @@ public class UsuarioController {
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
 	}
-
+	
+	/* **********************************************************************
+	 * Faz o mapeamento do perfil do usuário (NÃO IMPLEMENTADO AINDA)
+	 ********************************************************************** */
 	@GetMapping("/usuarios/{id}")
 	public ModelAndView detail(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("/usuario/usuario");
@@ -89,7 +93,9 @@ public class UsuarioController {
 		return mv;
 	}
 	
-	 // Alteração que o Jackson pediu 
+	 /* *********************************
+	  * Faz o mapeamanto da tela de erro 
+	  ********************************* */
 	@GetMapping("/erroAutorizacao")
 	public ModelAndView exibirErro() {
 		ModelAndView mv = new ModelAndView("/login/erro401");

@@ -287,7 +287,6 @@ input[type=number]::-webkit-outer-spin-button {
 .disabled{
 	pointer-events: none;
 }
-
 .form-control, .is-focused .form-control {
     background-image: linear-gradient(to top, #11998e 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #6c757d 1px, rgba(210, 210, 210, 0) 1px);
 }

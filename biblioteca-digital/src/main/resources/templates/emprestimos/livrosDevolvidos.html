@@ -32,6 +32,7 @@
 							<div class="ripple-container"></div>
 						</a>
 					</li>
+
 					<li class="dropdown nav-item">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"> <i class="material-icons">apps</i>Minhas ações
 							<div class="ripple-container"></div>
@@ -61,6 +62,7 @@
 	
 	<div class="page-header header-filter clear-filter backgroud-gradient"></div>
 	
+
 	  <div class="main main-raised">
       <div class="container">
         <div class="section">
@@ -86,9 +88,9 @@
                               <td data-th-text="${emprestimo.usuario.nome}">Fulana de Tal</td>
                               <td data-th-text="${emprestimo.dataDevolucao}">10/05/2018</td>
                               <td class="td-actions">
-                              <form class="inline-block" th:action="@{/emprestimos/confirmaDevolucao}" method="POST">
-                                 <input type="hidden" th:value="${emprestimo.id}" name="id">
-                                 <button type="button" rel="tooltip" class="btn btn-just-icon btn-sm" data-th-disabled="${emprestimo.habilita}" th:classappend="${emprestimo.habilita}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">
+                              <form class="inline-block" data-th-action="@{/emprestimos/confirmaDevolucao}" method="POST">
+                                 <input type="hidden" data-th-value="${emprestimo.id}" name="id">
+                                 <button class="btn btn-just-icon btn-sm"  data-th-classappend="${emprestimo.habilita}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">
                                  <i class="material-icons">check</i>
                                 </button>
                                 </form>
@@ -129,9 +131,11 @@
 	
 	<footer class="footer" data-background-color="black">
 		<div class="container">
+
     <div class="copyright float-right">
       © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
     </div>
+
 		</div>
 	</footer>
 	
