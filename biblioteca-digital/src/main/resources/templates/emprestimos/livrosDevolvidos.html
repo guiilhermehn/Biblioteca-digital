@@ -18,7 +18,7 @@
 	<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
 		<div class="container">
 			<div class="navbar-translate">
-				<a class="navbar-brand" href="index.html" data-th-href="@{/}">Digital Library Solution </a>
+				<a class="navbar-brand" href="index.html" data-th-href="@{/consulta}">Digital Library Solution </a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"	aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span> 
 					<span class="navbar-toggler-icon"></span> 
@@ -38,7 +38,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-with-icons">
 							<a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-								<i class="material-icons">layers</i>Meus Empréstimo
+								<i class="material-icons">layers</i>Meus Empréstimos
 							</a>
 							<a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item"> 
 								<i class="material-icons">content_paste</i>Minhas Reservas
@@ -60,63 +60,7 @@
 	<!--  INICIO- LIVROS DEVOLVIDOS -->
 	
 	<div class="page-header header-filter clear-filter backgroud-gradient"></div>
-	<!-- <div class="main main-raised">
-		<div class="container">
-			<div class="section">
-				<div class="row">
-					<div class="container-fluid">
-						<h2>Devoluções</h2>
-						<div class="accordion"	id="accordion">
-							<div id="accordion" role="tablist" data-th-each="emprestimo, stat : ${emprestimos}">
-								<div class="card card-collapse">
-									<h5 class="mb-0">
-										<a class="card-header" data-toggle="collapse" th:attr="data-target='#collapse'+${stat.index}" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-											<div class="row py-2 mx-0 border-bottom">
-												<div class="col-12 col-lg-4">
-													<strong>Título:</strong> 
-													<span data-th-text="${emprestimo.unidadeLivro.livro.titulo}">Título</span>
-												</div>
-												<div class="col-12 col-md-6 col-lg-4">
-													<strong>Autor:</strong> 
-													<span data-th-text="${emprestimo.unidadeLivro.livro.autor}">Autor</span>
-												</div>
-											</div>
-										</a>
-									</h5>
-									<div th:id="'collapse'+${stat.index}" id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
-										<div class="row pt-2 px-3">
-											<div class="d-none d-lg-block col-lg-4 col-xl-3">
-												<img class="img-fluid" src="../../static/assets/img/livro.jpg" data-th-src="${emprestimo.unidadeLivro.livro.urlFoto}">
-											</div>
-											<dl class="col">
-												<dt>Data de Retirada:</dt>
-												<dd data-th-text="${emprestimo.dataRetirada}">DD/MMM/YYYY</dd>
-												
-												<dt>Prazo de Devolução:</dt>
-												<dd data-th-text="${emprestimo.prazoDevolucao}">DD/MMM/YYYY</dd>
-												
-												<dt>Data de Devolução:</dt>
-												<dd data-th-text="${emprestimo.dataDevolucao}">DD/MMM/YYYY</dd>
-											</dl>
-										</div>
-										<div class="text-right mx-3 mb-3">
-											<form th:action="@{/emprestimos/confirmaDevolucao}"	method="POST">
-												<input type="hidden" th:value="${emprestimo.id}" name="id">
-												<button class="btn btn-outline-danger mb-1"	data-th-disabled="${emprestimo.habilita}">Confirma Devolucão</button>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
-	FIM- LIVROS DEVOLVIDOS
-	 -->
-	<!--  INICIO - PADRAO CORRETO -->
+	
 	  <div class="main main-raised">
       <div class="container">
         <div class="section">
@@ -132,7 +76,7 @@
                           <th>Livro</th>
                           <th>Usuário</th>
                           <th>Data da Devolução</th>
-                          <th>Ações</th>
+                          <th>Confirmar</th>
                           <tr>
                           </thead>
                           <tbody data-th-each="emprestimo, stat : ${emprestimos}">
@@ -174,7 +118,7 @@
 					</button>
 				</div>
 				<div class="modal-body text-center">
-					<h5>Você receberar um e-mail confirmando sua devolução!</h5>
+					<h5>Você receberá um e-mail confirmando sua devolução!</h5>
 				</div>
 				<div class="modal-footer justify-content-center">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Sair</button>

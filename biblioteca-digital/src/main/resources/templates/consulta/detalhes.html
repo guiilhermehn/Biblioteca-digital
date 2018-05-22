@@ -21,7 +21,7 @@
     <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
       <div class="container">
         <div class="navbar-translate">
-          <a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
+          <a class="navbar-brand" href="index.html" data-th-href="@{/consulta}" >Digital Library Solution </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
               </a>
               <div class="dropdown-menu dropdown-with-icons">
                 <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-                  <i class="material-icons">layers</i> Meus Emprestimos
+                  <i class="material-icons">layers</i> Meus Empréstimos
                 </a>
                 <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
                   <i class="material-icons">content_paste</i> Minhas Reservas
@@ -113,7 +113,7 @@
 	                          <span>
 	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
 	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
-	                                 <button class="btn"  data-th-disabled="${livro.unidadeLivros[0].emprestado}" th:classappend="${livro.unidadeLivros[0].emprestado}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">Emprestimo</button>
+	                                 <button class="btn"  data-th-disabled="${livro.unidadeLivros[0].emprestado}" th:classappend="${livro.unidadeLivros[0].emprestado}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">Empréstimo</button>
 	                             </form>
 	                          </span>
 	                          <span>

@@ -60,14 +60,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
 
-				.antMatchers("/").authenticated()
+				//.antMatchers("/").authenticated()
 				.antMatchers("/livros").hasRole("ADMIN")
-				.antMatchers("/gerenciar").hasRole("ADMIN")
+				.antMatchers("/consulta").hasRole("ADMIN")
 				.antMatchers("/emprestimos/livrosDevolvidos").hasRole("ADMIN")
 
 				.and()
 					.formLogin().loginPage("/login").usernameParameter("email").passwordParameter("senha")
-						.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/").permitAll()						
+						.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/consulta").permitAll()						
 				.and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")

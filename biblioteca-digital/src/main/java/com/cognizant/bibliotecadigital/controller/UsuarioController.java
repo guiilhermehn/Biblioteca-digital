@@ -27,6 +27,13 @@ public class UsuarioController {
 
 	@Autowired
 	private PapelService papelService;
+	
+	@GetMapping("/")
+	public ModelAndView index() {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
+	
 
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
