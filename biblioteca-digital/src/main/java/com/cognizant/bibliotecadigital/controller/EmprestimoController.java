@@ -174,6 +174,15 @@ public class EmprestimoController {
 			}
 		}
 		mv.addObject("emprestimos", devolucoesEmAnalise);
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+				
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin); 
 
 		return mv;
 	}
@@ -217,7 +226,7 @@ public class EmprestimoController {
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/emprestimos/confirmaDevolucao");
+		return new ModelAndView("redirect:/emprestimos/livrosDevolvidos");
 	}
 
 	/* *********************************************************************************************

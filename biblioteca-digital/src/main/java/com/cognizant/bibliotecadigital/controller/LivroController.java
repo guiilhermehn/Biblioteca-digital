@@ -1,5 +1,6 @@
 package com.cognizant.bibliotecadigital.controller;
 
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -154,7 +155,7 @@ public class LivroController {
 	 *******************************************/
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
-
+  livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
@@ -203,3 +204,4 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 }
+
