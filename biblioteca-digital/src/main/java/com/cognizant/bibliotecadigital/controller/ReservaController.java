@@ -41,28 +41,33 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class ReservaController {
-
+	//Serviços chamados
 	@Autowired
 	private ReservaService reservaService;
-
 	@Autowired
 	private LivroService livroService;
-
 	@Autowired
 	private UnidadeLivroService unidadeService;
-
 	@Autowired
 	private EmprestimoService emprestimoService;
-
 	@Autowired
 	private EmailService emailService;
-
 	@Autowired
 	private UsuarioService usuarioService;
-
 	@Autowired
 	private PapelService papelService;
 
+	/* *************************************************************
+	 * Faz o mapeamento da página de reservas,
+	 * Caso o usuário tenha alguma reserva,
+	 * é feita a listagem de todas as reservas dele
+	 * Se ele tiver uma reserva, mas também tiver um empréstimo,
+	 * ele só poderá retirar o livro reservado, se finalizar o empréstimo,
+	 * caso contrário, a reserva ficará "EM_ESPERA" até o prazo da
+	 * reserva acabar, ou ele devolver o livro emprestado
+	 * Caso a reserva esteja com o status "AGUARDANDO,
+	 * ele não poderá fazer o empréstimo do livro
+	  ************************************************************* */
 	@GetMapping("/reservas")
 	public ModelAndView findAll() throws ParseException {
 		ModelAndView mv = new ModelAndView("/reserva/reserva");
@@ -104,9 +109,7 @@ public class ReservaController {
 					}
 					reservaService.save(reserva);
 				}
-
 			}
-
 		}
 
 		mv.addObject("reservas", reservasPorUsuario);
@@ -117,17 +120,20 @@ public class ReservaController {
 		return mv;
 	}
 
-	// TODO Mover para classe utilitária
+	// Faz a formatação da data
 	private String formataData(Date disponibilidade) {
 		String dataFormatada = DateFormatUtils.format(disponibilidade, "yyyy-MM-dd");
 
 		return dataFormatada;
 	}
 
+	/* ***************************************************
+	 * Exclusão de reservas feitas
+	 * Habilita, na View, o botão de excluir uma reserva,
+	 * caso a reserva NÃO esteja no estado "FINALIZADO"
+	 *************************************************** */
 	@PostMapping("/reservas/deletarReserva")
 	public ModelAndView deletar(@RequestParam("id") Long id) {
-
-		
 
 		reservaService.deleteById(id);
 		ModelAndView mv = new ModelAndView("redirect:/reservas");
@@ -135,6 +141,12 @@ public class ReservaController {
 		return mv;
 	}
 
+	/* ************************************************
+	 * Efetuamento de reserva
+	 * Ao efetuar uma reserva, atualiza o BD,
+	 * linkando ao usuário que fez a reserva, adiciona a data e
+	 * muda o status da reserva para "EM_ESPERA"
+	 ************************************************* */
 	@PostMapping("/reservas/efetuarReserva")
 	public ModelAndView save(@RequestParam("livroId") Long livroId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
@@ -159,6 +171,11 @@ public class ReservaController {
 		return new ModelAndView("redirect:/reservas");
 	}
 
+	/* *************************************************************
+	 * Fazer empréstimo quando o livro reservado estiver disponível
+	 * Faz todo o processo normal do empréstimo
+	 * Atualiza o status da reserva para "FINALIZADO"
+	 * ************************************************************ */
 	@PostMapping("/emprestimos/efetuarEmprestimoAposReserva")
 	public ModelAndView emprestimoAposReserva(@RequestParam("reservaId") Long reservaId,
 			RedirectAttributes redirectAttributes) throws MessagingException, IOException {
@@ -202,7 +219,11 @@ public class ReservaController {
 		return new ModelAndView("redirect:/emprestimos");
 	}
 
-	// TODO Mover para classe utilitária
+	/* *****************************************************************************
+	 * Faz o cálculo da data prevista para a disponibilidade do livro reservado
+	 * (prevista, pois pode acontecer do usuário que está com o livro entregá-lo antes,
+	 * ou atrasar a entrega)
+	 * ******************************************************************************/
 	private Date calculaDisponibilidade(Emprestimo emprestimo) {
 
 		if (emprestimo == null) {
@@ -216,7 +237,5 @@ public class ReservaController {
 		data.setTime(emprestimo.getDataDevolucao());
 
 		return data.getTime();
-
 	}
-
 }
