@@ -109,23 +109,6 @@ public class PesquisaController {
 		return mav;
 	}
 
-	@PostMapping("/listaDesejos")
-	public ModelAndView wishList(@RequestParam("id") Long id) {
-
-		Livro livro = livroService.findById(id).get();
-		
-		
-		Usuario usuario = null;
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			String email = auth.getName();
-			usuario = usuarioService.findByEmail(email).orElse(null);
-		}
-		
-		livroService.save(livro);
-
-		return new ModelAndView("");
-
-	}
+	
 
 }

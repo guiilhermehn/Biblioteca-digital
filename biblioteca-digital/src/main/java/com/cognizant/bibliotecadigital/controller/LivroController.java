@@ -138,6 +138,7 @@ public class LivroController {
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
+		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
@@ -157,6 +158,7 @@ public class LivroController {
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId,
 			@RequestParam("avarias") String avarias) {
 		UnidadeLivro unidade = new UnidadeLivro(id, avarias, livroService.findById(livroId).get());
+		
 		unidadeLivroService.save(unidade);
 
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());

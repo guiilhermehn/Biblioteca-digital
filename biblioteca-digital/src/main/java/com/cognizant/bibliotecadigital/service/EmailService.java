@@ -53,12 +53,16 @@ public class EmailService {
 		context.setVariables(mail.getModel());
 		String html = templateEngine.process(template, context);
 
-		String reply = mail.getReplyTo() == "" ? "" : mail.getReplyTo();
+		
 
 		helper.setTo(mail.getTo());
-		helper.setReplyTo(reply);
+		if(!mail.getReplyTo().equals("")) {
+			helper.setReplyTo(mail.getReplyTo());
+		}else {
+			helper.setReplyTo("");
+		}
 		helper.setText(html, true);
-		helper.setReplyTo(reply);
+		
 		helper.setSubject(mail.getSubject());
 		helper.setFrom(mail.getFrom());
 
