@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UsuarioService usuarioService; 
 
+	/* *************************************************
+	 * Faz a criptografia da senha para o padrão "bcrypt"
+	 ***************************************************/
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return bcryptPasswordEncoder();
@@ -34,6 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
+	/* *************************************************************
+	 * Faz a autenticação do usuário direto com o banco
+	 * Ele faz a criptografia da senha digitada no formulário de login
+	 * e valida com o banco
+	 ***************************************************************/
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
@@ -42,6 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return auth;
 	}
 	
+	/* ****************************************************************************************
+	 * Faz a autenticação do usuário
+	 * para saber qual o seu papel (usuário comum ou admin)
+	 * (os métodos DaoAuthentication e configure(AuthenticationManagerBuilder)
+	 *  são complementares para o Spring Security)
+	 ******************************************************************************************/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		//auth.authenticationProvider(authenticationProvider());
@@ -55,14 +69,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.passwordEncoder(passwordEncoder());
 	}
 	
+	/* *******************************************************************
+	 * Trata das sessões de login do sistema
+	 * Faz as restrições das páginas baseado no papel (ROLE) do usuário
+	 * restringindo usuários comuns (ROLE_USUARIO) de acessar páginas
+	 * exclusivas de usuários admin (ROLE_ADMIN)
+	 * E permite fazer o login com o e-mail
+	 * Define a página de acesso negado (ERRO 401)
+	 *********************************************************************/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
-
 				.antMatchers("/").authenticated()
-				.antMatchers("/livros").hasRole("ADMIN")
-				.antMatchers("/gerenciar").hasRole("ADMIN")
+				.antMatchers("/livros", "/livros/**").hasRole("ADMIN")
 				.antMatchers("/emprestimos/livrosDevolvidos").hasRole("ADMIN")
 
 				.and()

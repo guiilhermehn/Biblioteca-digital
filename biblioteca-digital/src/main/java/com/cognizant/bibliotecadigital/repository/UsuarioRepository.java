@@ -13,16 +13,15 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	Optional<Usuario> findByEmail(String email);
 	
+	// Faz a busca dos IDs dos usuários com papel "ROLE_ADMIN"
 	@Query(value="select u.id  from usuario u\r\n" + 
 			"join usuario_papel up on u.id = up.usuario_id\r\n" + 
 			"join papel p on p.id = up.papel_id where p.nome = 'ROLE_ADMIN'", nativeQuery = true)
 	Long findIdUsuarioByRole();
 	
+	// Faz a busca dos usuários com papel "ROLE ADMIN"
 	@Query(value= "select * from usuario u\r\n" + 
 			"join usuario_papel up on u.id = up.usuario_id\r\n" + 
 			"join papel p on p.id = up.papel_id where p.nome = 'ROLE_ADMIN'",nativeQuery = true)
 	Optional<Usuario> emailAdm();
-	
-	
 }
-
