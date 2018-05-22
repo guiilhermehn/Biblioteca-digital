@@ -1,5 +1,3 @@
-
-
 package com.cognizant.bibliotecadigital.controller;
 
 import javax.validation.Valid;
@@ -33,19 +31,23 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 public class LivroController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LivroController.class);
-	
+	//Serviços chamados
 	@Autowired
 	private LivroService livroService;
-	
 	@Autowired
 	private PapelService papelService;
-	
 	@Autowired
 	private UnidadeLivroService unidadeLivroService;
-	
 	@Autowired
 	private UsuarioService usuarioService;
 
+  /* ********************************************************************************
+	 * (ADMIN-ONLY PAGE)
+	 * Faz o mapeamento da barra de pesquisa de livros (por título, autor ou descrição)
+	 * Se a pesquisa não conter valor algum, serão trazidos todos os livros cadastrados
+	 * Caso tenha valor, será feita uma query no banco de dados, buscando algum livro
+	 * que contenha o valor informado
+	 **********************************************************************************/
 	@GetMapping("/livros")
 	public ModelAndView findAll(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("/livro/livroPesquisa");
@@ -68,7 +70,11 @@ public class LivroController {
 
 		return mav;
 	}
-
+  
+	/* **************************************************
+	 * Faz o mapeamento da página de edição do livro
+	 * A página é populada à partir do ID do livro
+	 ****************************************************/
 	@GetMapping("/livros/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("/livro/livroEditar");
@@ -87,6 +93,9 @@ public class LivroController {
 		return mv;
 	}
 
+  /* **************************************************
+	 * Faz o mapeamento da página de cadastro de livros
+	 ****************************************************/
 	@GetMapping("/livros/new")
 	public ModelAndView create() {
 		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
@@ -105,6 +114,12 @@ public class LivroController {
 		return mv;
 	}
 
+  /* ***************************************************************
+	 * Faz o cadastro do livro no banco de dados
+	 * São feitas validações antes dos dados serem inseridos no BD
+	 * caso haja erro no formulário, o usuário terá que corrigí-las
+	 * (a maior parte das validações são feitas na View e no Model)
+	 *****************************************************************/
 	@PostMapping("/livros/create")
 	public ModelAndView save(@Valid @ModelAttribute("livro") Livro livro, BindingResult bindingRes,
 			RedirectAttributes redAttributes) {
@@ -132,9 +147,11 @@ public class LivroController {
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
-
 	}
 
+  /* *****************************************
+	 * Faz o mapeamento para a edição do livro
+	 *******************************************/
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
 
@@ -143,9 +160,11 @@ public class LivroController {
 		ModelAndView mv = new ModelAndView("redirect:/livros");
 
 		return mv;
-
 	}
 
+  /* ******************************************
+	 * Faz o mapeamento para a exclusão do livro
+	 ********************************************/
 	@PostMapping("/livros/deletarLivro")
 	public ModelAndView deletar(@RequestParam("id") long id) {
 		livroService.deleteById(id);
@@ -153,6 +172,9 @@ public class LivroController {
 		return redirect;
 	}
 
+  /* *****************************************************************
+	 * Faz o mapeamento para a inserção de relatório de avarias no livro
+	 *******************************************************************/
 	@PostMapping("/livro/unidade/edit")
 	public ModelAndView mudarAvarias(@RequestParam("id") long id, @RequestParam("livroId") long livroId,
 			@RequestParam("avarias") String avarias) {
@@ -162,6 +184,9 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 
+  /* *******************************************************
+	 * Faz o mapeamento para a exclusão de unidades do livro
+	 *********************************************************/
 	@PostMapping("/livros/unidade/deletar")
 	public ModelAndView deletarUnidade(@RequestParam("unidadeId") long unidadeId,
 			@RequestParam("livroId") long livroId) {
@@ -169,10 +194,12 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + livroId);
 	}
 
+  /* *****************************************************
+	 * Faz o mapeamento para a adição de unidades do livro
+	 *******************************************************/
 	@PostMapping("/livros/unidade/create")
 	public ModelAndView adicionarUnidade(@ModelAttribute UnidadeLivro unidade) {
 		unidadeLivroService.save(unidade);
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 }
-

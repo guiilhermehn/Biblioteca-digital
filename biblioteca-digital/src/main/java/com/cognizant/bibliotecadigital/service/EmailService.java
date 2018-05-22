@@ -26,16 +26,13 @@ import com.cognizant.bibliotecadigital.repository.EmailRepository;
 
 @Service
 public class EmailService {
-
+	// Serviços chamados
 	@Autowired
 	private JavaMailSender emailSender;
-
 	@Autowired
 	private SpringTemplateEngine templateEngine;
-
 	@Autowired
 	private EmailRepository emailRepository;
-
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -43,6 +40,9 @@ public class EmailService {
 		return emailRepository.prazoDevolucao();
 	}
 
+	/* ***************************************************************************************
+	 * Faz o envio do e-mail específico para o usuário, e envia uma cópia para o usuário Admin
+	 *****************************************************************************************/
 	@Async
 	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException {
 		MimeMessage message = emailSender.createMimeMessage();
@@ -65,6 +65,10 @@ public class EmailService {
 		emailSender.send(message);
 	}
 
+	/* ****************************************************************
+	 * Constrói uma estrutura de e-mail  ao pegar um livro emprestado
+	 * com os dados do empréstimo
+	 ******************************************************************/
 	public Mail enviarEmail(Usuario usuario, UnidadeLivro unidade, String assunto) {
 		Mail mail = new Mail();
 		Usuario adm = usuarioService.emailAdm().get();
@@ -92,13 +96,16 @@ public class EmailService {
 			model.put("ADM", "Revisado por: " + adm.getNome());
 		} else {
 			model.put("ADM", "");
-
 		}
 		mail.setModel(model);
 
 		return mail;
 	}
 
+	/* ***************************************************************
+	 * Constrói uma estrutura de e-mail para o avisar o usuário
+	 * que seu empréstimo está próximo do fim ou já passou do prazo
+	 *****************************************************************/
 	public Mail lembreteDevolucao(Usuario usuario, String livro, String data) {
 		Mail mail = new Mail();
 		Usuario adm = usuarioService.emailAdm().get();
@@ -118,6 +125,4 @@ public class EmailService {
 
 		return mail;
 	}
-
-	
 }

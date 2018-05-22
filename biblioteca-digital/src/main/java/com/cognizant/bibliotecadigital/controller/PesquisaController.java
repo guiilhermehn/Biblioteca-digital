@@ -27,22 +27,25 @@ import com.cognizant.bibliotecadigital.service.UsuarioService;
 @Controller
 @RequestMapping
 public class PesquisaController {
-
+	//Serviços chamados
 	@Autowired
 	private LivroService livroService;
-
 	@Autowired
 	private UsuarioService usuarioService;
-
 	@Autowired
 	private EmprestimoService emprestadoService;
 	@Autowired
 	private ReservaService reservaService;
-	
 	@Autowired
 	private PapelService papelService;
 
     // TODO rever rotas? Usar "" para index.html?
+	/* ********************************************************************************
+	 * Faz o mapeamento da barra de pesquisa de livros (por título, autor ou descrição)
+	 * Se a pesquisa não conter valor algum, serão trazidos todos os livros cadastrados
+	 * Caso tenha valor, será feita uma query no banco de dados, buscando algum livro
+	 * que contenha o valor informado
+	 **********************************************************************************/
 	@GetMapping({ "", "/consulta" })
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("consulta/consulta");
@@ -66,6 +69,16 @@ public class PesquisaController {
 		return mav;
 	}
 
+	/* ********************************************************
+	 * Faz o mapeamento da página de detalhes do livro
+	 * A página é populada à partir do ID do livro
+	 * Se o livro não estiver emprestado, o botão de empréstimo
+	 * é habilitado, e o de reserva fica desabilitado
+	 * Se o livro estiver emprestado, mas não tiver reserva,
+	 * o botão de reseva é habilitado
+	 * Se o livro estiver emprestado e reservado, nenhum botão
+	 * é habilitado
+	 ***********************************************************/
 	@GetMapping("/consulta/{id}")
 	public ModelAndView detail(@PathVariable("id") Long id) {
 		ModelAndView mav = new ModelAndView("consulta/detalhes");
@@ -91,8 +104,6 @@ public class PesquisaController {
 			}
 		}
 
-		
-
 		if (livro.getStatusLivro().equals(StatusLivro.COM_EMPRESTIMO)
 				&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())
 				&& reservaService.countReservasPorIdLivro(id, usuario.getId())) {
@@ -108,24 +119,4 @@ public class PesquisaController {
 
 		return mav;
 	}
-
-	@PostMapping("/listaDesejos")
-	public ModelAndView wishList(@RequestParam("id") Long id) {
-
-		Livro livro = livroService.findById(id).get();
-		
-		
-		Usuario usuario = null;
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			String email = auth.getName();
-			usuario = usuarioService.findByEmail(email).orElse(null);
-		}
-		
-		livroService.save(livro);
-
-		return new ModelAndView("");
-
-	}
-
 }

@@ -56,7 +56,7 @@ function bookSearch(){
 		    	  console.log(data)
 		      }
 	      }else{
-	    	  	//Caso não haja livro ou haja mais de um cadastrado com o mesmo ISBN, apresentará a mensagem abaixo
+	    	  	//Caso não haja livro, apresentará a mensagem abaixo
 		    	document.getElementById('warning_isbn').innerText = "ISBN não encontrado!";
 		  	  	document.getElementById('div_warning').style.display = 'block';
 	      }
