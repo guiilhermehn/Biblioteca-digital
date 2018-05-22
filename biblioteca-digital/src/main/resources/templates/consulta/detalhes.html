@@ -44,7 +44,7 @@
               </a>
               <div class="dropdown-menu dropdown-with-icons">
                 <a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-                  <i class="material-icons">layers</i> Meus Emprestimos
+                  <i class="material-icons">layers</i> Meus Empréstimos
                 </a>
                 <a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item">
                   <i class="material-icons">content_paste</i> Minhas Reservas
@@ -114,7 +114,7 @@
 	                          <span>
 	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
 	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
-	                                 <button class="btn"  data-th-disabled="${livro.unidadeLivros[0].emprestado}" th:classappend="${livro.unidadeLivros[0].emprestado}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">Emprestimo</button>
+	                                 <button class="btn"  data-th-disabled="${livro.unidadeLivros[0].emprestado}" th:classappend="${livro.unidadeLivros[0].emprestado}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'">Empréstimo</button>
 	                             </form>
 	                          </span>
 	                          <span>

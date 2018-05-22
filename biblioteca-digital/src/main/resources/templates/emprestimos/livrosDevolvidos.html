@@ -39,7 +39,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-with-icons">
 							<a href="emprestimo.html" data-th-href="@{/emprestimos}" class="dropdown-item">
-								<i class="material-icons">layers</i>Meus Empréstimo
+								<i class="material-icons">layers</i>Meus Empréstimos
 							</a>
 							<a href="reserva.html" data-th-href="@{/reservas}" class="dropdown-item"> 
 								<i class="material-icons">content_paste</i>Minhas Reservas
@@ -62,8 +62,7 @@
 	
 	<div class="page-header header-filter clear-filter backgroud-gradient"></div>
 	
-	 
-	<!--  INICIO - PADRAO CORRETO -->
+
 	  <div class="main main-raised">
       <div class="container">
         <div class="section">
@@ -79,7 +78,7 @@
                           <th>Livro</th>
                           <th>Usuário</th>
                           <th>Data da Devolução</th>
-                          <th>Ações</th>
+                          <th>Confirmar</th>
                           <tr>
                           </thead>
                           <tbody data-th-each="emprestimo, stat : ${emprestimos}">
@@ -121,7 +120,7 @@
 					</button>
 				</div>
 				<div class="modal-body text-center">
-					<h5>Você receberar um e-mail confirmando sua devolução!</h5>
+					<h5>Você receberá um e-mail confirmando sua devolução!</h5>
 				</div>
 				<div class="modal-footer justify-content-center">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Sair</button>

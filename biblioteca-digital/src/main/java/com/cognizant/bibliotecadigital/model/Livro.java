@@ -1,4 +1,5 @@
 
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class Livro implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "isbn13")
+	@Column(name = "isbn13", unique = true)
 	@Size(max=13, message="ISBN inválido!")
 	@Pattern(regexp="[0-9]*", message="Digite apenas números!")
 	private String isbn13;
@@ -362,3 +363,4 @@ public class Livro implements Serializable {
 	}
 
 }
+

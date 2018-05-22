@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.controller;
 
 
@@ -144,6 +145,7 @@ public class LivroController {
 		} catch (Exception e) {
 			System.out.println("Error= " + e);
 			ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+			mv.addObject("ErrorKey", "ISBN já cadastrado!");
 			mv.addObject("key_warning_cond", "true");
 			return mv;
 		}
@@ -203,4 +205,5 @@ public class LivroController {
 		return new ModelAndView("redirect:/livros/edit/" + unidade.getLivro().getId());
 	}
 }
+
 
