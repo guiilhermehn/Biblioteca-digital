@@ -1,13 +1,11 @@
 package com.cognizant.bibliotecadigital.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 
 import javax.mail.MessagingException;
 
@@ -33,13 +31,14 @@ import com.cognizant.bibliotecadigital.model.Usuario;
 import com.cognizant.bibliotecadigital.service.EmailService;
 import com.cognizant.bibliotecadigital.service.EmprestimoService;
 import com.cognizant.bibliotecadigital.service.LivroService;
+import com.cognizant.bibliotecadigital.service.PapelService;
 import com.cognizant.bibliotecadigital.service.ReservaService;
 import com.cognizant.bibliotecadigital.service.UnidadeLivroService;
 import com.cognizant.bibliotecadigital.service.UsuarioService;
 
 @Controller
 public class EmprestimoController {
-
+	//Serviços chamados
 	@Autowired
 	private EmprestimoService emprestimoService;
 	@Autowired
@@ -52,7 +51,13 @@ public class EmprestimoController {
 	private LivroService livroService;
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PapelService papelService;
 
+	/* ******************************************
+	 * Faz o mapeamento da tela de empréstimos 
+	 ********************************************/
 	@GetMapping("/emprestimos")
 	public ModelAndView findAll() {
 		ModelAndView mv = new ModelAndView("/emprestimos/emprestimo");
@@ -63,18 +68,22 @@ public class EmprestimoController {
 			String email = auth.getName();
 			usuario = usuarioService.findByEmail(email).orElse(null);
 		}
+		
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin);
 
 		mv.addObject("emprestimos", emprestimoService.findAllByUsuarioId(usuario.getId()));
 		return mv;
 	}
 
-
-
+	/* *****************************************************************************************************
+	 * Efetua o empréstimo do livro
+	 * Faz as atualizações no banco de dados, como a adição da data da retirada e prazo para entrega do livro
+	 * E envia um e-mail para o usuário, confirmando a retirada do livro
+	 *******************************************************************************************************/
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		
-		
 
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
 
@@ -83,7 +92,7 @@ public class EmprestimoController {
 		String template = "email-emprestimo";
 
 		GregorianCalendar prazo = new GregorianCalendar();
-		prazo.add(Calendar.DAY_OF_MONTH, 2);
+		prazo.add(Calendar.DAY_OF_MONTH, 7);
 
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -94,9 +103,13 @@ public class EmprestimoController {
 
 		unidade.getLivro().setStatusLivro(StatusLivro.COM_EMPRESTIMO);
 
-		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario);
+		unidade.setLivro(unidade.getLivro());
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi emprestado com sucesso !";
+		unidadeService.save(unidade);
+
+		Emprestimo emprestimo = new Emprestimo(0L, agora.getTime(), null, prazo.getTime(), unidade, usuario,Status.ATIVO);
+
+		String assunto = "Emprestimo do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
 		emprestimoService.save(emprestimo);
 
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
@@ -105,19 +118,91 @@ public class EmprestimoController {
 
 		return new ModelAndView("redirect:/emprestimos");
 	}
-
+	
+	/* ************************************************************************************
+	 * Efetua a devolução do livro, após empréstimo
+	 * O livro fica no status "EM_ANALISE", aguardando a confirmação de um usuário Admin
+	 * para confirmar se o livro foi realmente entregue
+	 ***************************************************************************************/
 	@PostMapping("/emprestimos/efetuarDevolucao")
 	public ModelAndView deletar(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-		String template = "email-devolucao";
-
-		// TODO validar se usuário é o locatário
 
 		Emprestimo emprestimo = emprestimoService.findById(id).get();
 
-		String assunto = "O " + emprestimo.getUnidadeLivro().getLivro().getTitulo() + " foi devolvido com sucesso !";
-
 		emprestimo.setDataDevolucao(new Date());
+		Livro livro = emprestimo.getUnidadeLivro().getLivro();
+		livro.setStatusLivro(StatusLivro.EM_ANALISE);
+		livroService.save(livro);
+		emprestimo.setEmprestimoStatus(Status.EM_ANALISE);
+		emprestimoService.save(emprestimo);
+
+		// TODO Fazer Span Para Notificar Que a Devolucao Está sob Analise
+
+		return new ModelAndView("redirect:/emprestimos");
+	}
+
+	/* ****************************************************************
+	 * Faz o mapeamento da página de livros devolvidos
+	 * Essa é uma página que apenas o usuário Admin tem acesso
+	 * Todos os livros devolvidos por usuários, não confirmados
+	 * são listados nessa página, para que o usuário Admin possa fazer
+	 * a confirmação
+	 ******************************************************************/
+	@GetMapping("/emprestimos/livrosDevolvidos")
+	public ModelAndView findAllDevolucoes() throws MessagingException, IOException {
+		ModelAndView mv = new ModelAndView("emprestimos/livrosDevolvidos");
+
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAll();
+		List<Emprestimo> devolucoesEmAnalise = new ArrayList<>();
+			
+		if (!emprestimos.isEmpty()) {
+			for (Emprestimo emprestimo : emprestimos) {
+				Livro livro = emprestimo.getUnidadeLivro().getLivro();
+				if (emprestimo.getDataDevolucao() != null) {
+					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
+							&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
+						emprestimo.setHabilita(false);
+						emprestimo.setEmprestimoStatus(Status.FINALIZADO);
+
+					} else {
+						emprestimo.setHabilita(true);
+					}
+					emprestimoService.save(emprestimo);
+					devolucoesEmAnalise.add(emprestimo);
+				}
+			}
+		}
+		mv.addObject("emprestimos", devolucoesEmAnalise);
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+				
+		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
+		mv.addObject("isAdmin", isAdmin); 
+
+		return mv;
+	}
+
+	/* **************************************************************************************
+	 * O usuário Admin faz a confirmação da entrega do livro
+	 * O usuário que fez  entrega receberá um e-mail, sobre a confirmação da entrega do livro
+	 * O status do livro será atualizado para "SEM_EMPRESTIMO"
+	 * E caso já houvesse uma reserva para esse livro,
+	 * o status da reserva será atualizado para "AGUARDANDO"
+	 ****************************************************************************************/
+	@PostMapping("/emprestimos/confirmaDevolucao")
+	public ModelAndView confirmaDevolucao(@RequestParam("id") Long id, RedirectAttributes redirectAttributes)
+			throws MessagingException, IOException {
+		String template = "email-devolucao";
+
+		Emprestimo emprestimo = emprestimoService.findById(id).get();
+
+		String assunto = "Devolucao do livro: " + emprestimo.getUnidadeLivro().getLivro().getTitulo();
+
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
@@ -131,53 +216,62 @@ public class EmprestimoController {
 			reserva.setStatus(Status.AGUARDANDO);
 
 			reservaService.save(reserva);
+			String assuntoReservaDisponivel = "Reserva Disponivel!";
+			String templateReservaDisponivel = "email-disponibilidade-reserva";
+			Mail email = emailService.enviarEmail(reserva.getUsuario(), emprestimo.getUnidadeLivro(), assuntoReservaDisponivel);
 
+			emailService.sendSimpleMessage(email, templateReservaDisponivel);
 		}
-
 		Mail email = emailService.enviarEmail(emprestimo.getUsuario(), emprestimo.getUnidadeLivro(), assunto);
 
 		emailService.sendSimpleMessage(email, template);
 
-		return new ModelAndView("redirect:/emprestimos");
+		return new ModelAndView("redirect:/emprestimos/livrosDevolvidos");
 	}
-	
+
+	/* *********************************************************************************************
+	 * E-mail de notificação de prazo de entrega do livro
+	 * Antes do prazo, o usuário receberá um e-mail de lembrete sobre o término do seu empréstimo
+	 * Após o prazo, o usuário receberá um e-mail de atraso de entrega
+	 ************************************************************************************************/
 	public void prazoDevolucaoEmail() {
 		List<Emprestimo> emprestimos = (List<Emprestimo>) emailService.prazoDevolucao();
-		String nome = "", email = "", livro = "", dataDev = "", dia = "", mes = "";
+		String livro = "", dataDev = "";
 		Date dataAtual = new Date();
 		Long id;
-		String template = "email-lembrete";
-		for(int i = 0;i<emprestimos.size();i++) {
+		String template = "";
+		for (int i = 0; i < emprestimos.size(); i++) {
 			try {
-				nome = emprestimos.get(i).getUsuario().getNome().toString();
-				email = emprestimos.get(i).getUsuario().getEmail().toString();
+				Usuario usuario = emprestimos.get(i).getUsuario();
 				Date data = emprestimos.get(i).getPrazoDevolucao();
-				
-				dataDev = data.toString();
-				mes = dataDev.substring(5, 7);
-				dia = dataDev.substring(8, 10);
-				dataDev = dia + "/" + mes;
-				
+
+				dataDev = formatarData(data);
+
 				id = emprestimos.get(i).getUnidadeLivro().getId();
 				UnidadeLivro unidade = unidadeService.findById(id).get();
 				livro = unidade.getLivro().getTitulo().toString();
-				
-				if(dataAtual.before(data)) {
+
+				if (dataAtual.before(data)) {
 					template = "email-lembrete";
-				}
-				else if(dataAtual.after(data)) {
+				} else if (dataAtual.after(data)) {
 					template = "email-esquecer";
 				}
-				Mail mail = emailService.lembreteDevolucao(email, nome, livro, dataDev);
+				Mail mail = emailService.lembreteDevolucao(usuario, livro, dataDev);
 				emailService.sendSimpleMessage(mail, template);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
-	public String formatarData(Date date) {
-		SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
-		return formatar.format(date);
+
+	// Formatação da data
+	public String formatarData(Date data) {
+		String dataDev = "", mes = "", dia = "";
+		dataDev = data.toString();
+		mes = dataDev.substring(5, 7);
+		dia = dataDev.substring(8, 10);
+		dataDev = dia + "/" + mes;
+
+		return dataDev;
 	}
 }

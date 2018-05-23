@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -33,7 +34,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Transactional
 public class Usuario implements Serializable, UserDetails {
 
-	private static final long serialVersionUID = 902783495L;
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,13 +53,14 @@ public class Usuario implements Serializable, UserDetails {
 	@NotEmpty
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email",unique = true)
+	@Size(max=255)
 	@Email
 	@NotNull
 	@NotEmpty
 	private String email;
 
-	@Column(name = "grade", nullable = false)
+/*	@Column(name = "grade", nullable = false)
 	@NotNull
 	private String grade;
 
@@ -65,7 +68,10 @@ public class Usuario implements Serializable, UserDetails {
 	private String horizontal;
 
 	@Column(name = "vertical")
-	private String vertical;
+	private String vertical; */
+	
+	@Column(name = "area")
+	private String area;
 
 	@Column(name = "senha")
 	@NotNull
@@ -79,7 +85,7 @@ public class Usuario implements Serializable, UserDetails {
 	private Boolean verificaRole = false;
 
 	@ManyToMany(cascade= {CascadeType.ALL}, fetch = FetchType.EAGER)
-	  @JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name ="usuario_id") }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
+	@JoinTable(name = "usuario_papel", joinColumns = { @JoinColumn(name = "usuario_id", unique=true) }, inverseJoinColumns = {@JoinColumn(name = "papel_id") }) 
 	public Set<Papel> papeis;
 
 	// Joins com emprestimo e reserva
@@ -92,12 +98,12 @@ public class Usuario implements Serializable, UserDetails {
 
 	// Construtor
 
-	public Usuario(@NotNull String nome, @NotNull String email, @NotNull String grade, @NotNull String senha,
+	public Usuario(@NotNull String nome, @NotNull String email, String area, @NotNull String senha,
 			Set<Papel> papeis) {
 		super();
 		this.nome = nome;
 		this.email = email;
-		this.grade = grade;
+		this.area = area;
 		this.senha = senha;
 		this.papeis = papeis;
 	}
@@ -123,15 +129,13 @@ public class Usuario implements Serializable, UserDetails {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((emprestimos == null) ? 0 : emprestimos.hashCode());
-		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
-		result = prime * result + ((horizontal == null) ? 0 : horizontal.hashCode());
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idCgz == null) ? 0 : idCgz.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((papeis == null) ? 0 : papeis.hashCode());
 		result = prime * result + ((reservas == null) ? 0 : reservas.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + ((vertical == null) ? 0 : vertical.hashCode());
 		return result;
 	}
 
@@ -154,15 +158,10 @@ public class Usuario implements Serializable, UserDetails {
 				return false;
 		} else if (!emprestimos.equals(other.emprestimos))
 			return false;
-		if (grade == null) {
-			if (other.grade != null)
+		if (area == null) {
+			if (other.area != null)
 				return false;
-		} else if (!grade.equals(other.grade))
-			return false;
-		if (horizontal == null) {
-			if (other.horizontal != null)
-				return false;
-		} else if (!horizontal.equals(other.horizontal))
+		} else if (!area.equals(other.area))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -193,11 +192,6 @@ public class Usuario implements Serializable, UserDetails {
 			if (other.senha != null)
 				return false;
 		} else if (!senha.equals(other.senha))
-			return false;
-		if (vertical == null) {
-			if (other.vertical != null)
-				return false;
-		} else if (!vertical.equals(other.vertical))
 			return false;
 		return true;
 	}
@@ -234,29 +228,14 @@ public class Usuario implements Serializable, UserDetails {
 		this.email = email;
 	}
 
-	public String getGrade() {
-		return grade;
+	public String getArea() {
+		return area;
 	}
 
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setArea(String area) {
+		this.area = area;
 	}
 
-	public String getHorizontal() {
-		return horizontal;
-	}
-
-	public void setHorizontal(String horizontal) {
-		this.horizontal = horizontal;
-	}
-
-	public String getVertical() {
-		return vertical;
-	}
-
-	public void setVertical(String vertical) {
-		this.vertical = vertical;
-	}
 
 	public String getSenha() {
 		return senha;
@@ -300,8 +279,8 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", grade=" + grade
-				+ ", horizontal=" + horizontal + ", vertical=" + vertical + ", senha=" + senha + ", papeis=" + papeis
+		return "Usuario [id=" + id + ", idCgz=" + idCgz + ", nome=" + nome + ", email=" + email + ", area=" + area
+				+ ", senha=" + senha + ", papeis=" + papeis
 				+ ", emprestimos=" + emprestimos + ", reservas=" + reservas + "]";
 	}
 
@@ -348,3 +327,4 @@ public class Usuario implements Serializable, UserDetails {
 	}
 
 }
+

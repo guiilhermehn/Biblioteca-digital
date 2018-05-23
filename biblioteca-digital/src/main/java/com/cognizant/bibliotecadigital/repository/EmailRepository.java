@@ -5,10 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cognizant.bibliotecadigital.model.Emprestimo;
-import com.cognizant.bibliotecadigital.model.UnidadeLivro;
 
 @Repository
 public interface EmailRepository extends CrudRepository<Emprestimo, Long> {
+	// Faz a busca para saber quem está com empréstimo não concluido, próximo do prazo da entrega
 	@Query(value = "SELECT e.*, u.*, l.*, ul.* FROM emprestimo e\r\n" + 
 			"join usuario u\n" + 
 			"on u.id = e.usuario_id\n" + 

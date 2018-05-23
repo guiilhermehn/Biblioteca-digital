@@ -1,3 +1,4 @@
+
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -15,12 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 @Entity
+@Transactional
 @Table(name = "emprestimo")
 public class Emprestimo implements Serializable {
 
@@ -42,7 +46,6 @@ public class Emprestimo implements Serializable {
 	@Column(name = "data_devolucao")
 	private Date dataDevolucao;
 
-
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	@Column(name = "prazo_devolucao")
@@ -57,19 +60,33 @@ public class Emprestimo implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
+	@Transient
+	private boolean habilita;
+
+
+	
+	@Column(name="emprestimos_status")
+	private Status emprestimoStatus;
+
+
+	
+
 	// construtor
 	public Emprestimo() {
 
 	}
 
 	public Emprestimo(Long id, @NotNull Date dataRetirada, @Nullable Date dataDevolucao, @NotNull Date prazoDevolucao,
-			UnidadeLivro unidadeLivro, Usuario usuario) {
+
+			UnidadeLivro unidadeLivro, Usuario usuario, Status emprestimoStatus) {
+
 		this.id = id;
 		this.dataRetirada = dataRetirada;
 		this.dataDevolucao = dataDevolucao;
 		this.prazoDevolucao = prazoDevolucao;
 		this.unidadeLivro = unidadeLivro;
 		this.usuario = usuario;
+		this.emprestimoStatus = emprestimoStatus;
 	}
 
 	@Override
@@ -146,8 +163,15 @@ public class Emprestimo implements Serializable {
 	public void setPrazoDevolucao(Date prazoDevolucao) {
 		this.prazoDevolucao = prazoDevolucao;
 	}
+
 	
-	
+	public Status getEmprestimoStatus() {
+		return emprestimoStatus;
+	}
+
+	public void setEmprestimoStatus(Status emprestimoStatus) {
+		this.emprestimoStatus = emprestimoStatus;
+	}
 
 	public UnidadeLivro getUnidadeLivro() {
 		return unidadeLivro;
@@ -164,7 +188,15 @@ public class Emprestimo implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	public boolean isHabilita() {
+		return habilita;
+	}
+
+	public void setHabilita(boolean habilita) {
+		this.habilita = habilita;
+	}
+
 
 	@Override
 	public String toString() {
