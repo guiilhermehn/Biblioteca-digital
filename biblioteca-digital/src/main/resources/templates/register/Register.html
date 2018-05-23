@@ -71,16 +71,23 @@
                 <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger help-block" >Incorrect date</span>
               </div>
             </span>
-              <span class="bmd-form-group"><div class="input-group">
+            
+              <span class="bmd-form-group">
+              <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="material-icons">mail</i><abbr class="required" title="obrigatório">*</abbr>
                   </span>
                 </div>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email..." required="true" value="@cognizant.com" data-th-field="*{email}">
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger help-block" >Incorrect date</span>
+                <input type="email" class="form-control" placeholder="Email..." required="true" value="@cognizant.com" data-th-field="*{email}">
+                </div>
+             </span>
+             
+             <!--  VERIFICAR FORMA DE NAO APARECER A DIV E SIM SOBREESCREVER O CAMPO -->
+              <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
+                <input type="hidden" data-th-text="${ErrorKey}">
               </div>
-            </span>
+            
             <span class="bmd-form-group"><div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">

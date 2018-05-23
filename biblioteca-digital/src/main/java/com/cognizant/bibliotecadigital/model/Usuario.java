@@ -1,4 +1,3 @@
-
 package com.cognizant.bibliotecadigital.model;
 
 import java.io.Serializable;
@@ -49,32 +48,19 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Column(name = "nome")
 	@Size(min = 4, max = 80)
-	@NotNull
 	@NotEmpty
 	private String nome;
 
 	@Column(name = "email",unique = true)
-	@Size(max=255)
+	@Size(max = 200, message="Email já Cadastrado!")
 	@Email
-	@NotNull
 	@NotEmpty
 	private String email;
 
-/*	@Column(name = "grade", nullable = false)
-	@NotNull
-	private String grade;
-
-	@Column(name = "horizontal")
-	private String horizontal;
-
-	@Column(name = "vertical")
-	private String vertical; */
-	
 	@Column(name = "area")
 	private String area;
 
 	@Column(name = "senha")
-	@NotNull
 	@NotEmpty
 	private String senha;
 
@@ -327,4 +313,3 @@ public class Usuario implements Serializable, UserDetails {
 	}
 
 }
-
