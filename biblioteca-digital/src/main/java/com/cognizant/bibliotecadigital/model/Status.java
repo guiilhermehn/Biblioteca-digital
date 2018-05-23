@@ -8,7 +8,7 @@ public enum Status {
 	@Override
 	public String toString() {
 		if (this == EM_ESPERA ) {
-			return "Em espera";
+			return "Em Espera";
 		}
 		if (this == AGUARDANDO ) {
 			return "Aguardando";
@@ -17,7 +17,7 @@ public enum Status {
 			return "Finalizado";
 		}	
 		if (this == EM_ANALISE ) {
-			return "Em análise";
+			return "Em Análise";
 		}
 		if (this == ATIVO ) {
 			return "Ativo";
