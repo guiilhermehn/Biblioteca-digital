@@ -58,8 +58,6 @@ public class EmailService {
 		helper.setTo(mail.getTo());
 		if(!mail.getReplyTo().equals("")) {
 			helper.setReplyTo(mail.getReplyTo());
-		}else {
-			helper.setReplyTo("");
 		}
 		helper.setText(html, true);
 		
