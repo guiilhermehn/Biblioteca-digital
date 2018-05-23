@@ -157,12 +157,20 @@ public class LivroController {
 	@PostMapping("/livros/update")
 	public ModelAndView update(@ModelAttribute Livro livro) {
   livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
+	try {
 		livroService.save(livro);
 
 		ModelAndView mv = new ModelAndView("redirect:/livros");
 
 		return mv;
+	} catch (Exception e) {
+		System.out.println("Error= " + e);
+		ModelAndView mv = new ModelAndView("/livro/livroCadastro");
+		mv.addObject("ErrorKey", "Insira apenas números!");
+		mv.addObject("key_warning_cond", "true");
+		return mv;
 	}
+}
 
   /* ******************************************
 	 * Faz o mapeamento para a exclusão do livro
