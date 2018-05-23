@@ -27,10 +27,7 @@
 		color-on-scroll="100" id="sectionsNav">
 		<div class="container">
 			<div class="navbar-translate">
-
-				<a class="navbar-brand" dat-th-href="@{/}"> Digital Library
-
-					Solution </a>
+					<a class="navbar-brand" href="index.html" data-th-href="@{/}" >Digital Library Solution </a>
 			</div>
 		</div>
 	</nav>
@@ -43,7 +40,7 @@
 				<div class="col-md-5 col-sm-6 ml-auto mr-auto" id="acessodiv">
 					<div class="card card-signup">
 						<form class="form" method="post" data-th-action="@{/login}">
-							<h4 class="card-title text-center">Acesso a livraria</h4>
+							<h4 class="card-title text-center">Acesso à Biblioteca</h4>
 							<div class="card-body">
 								<div class="alert alert-danger" data-th-if="${msgErro} != null"
 									data-th-text="${msgErro}"></div>

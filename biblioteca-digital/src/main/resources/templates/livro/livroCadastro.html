@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <title>Digital Library Solution</title>
-  
+
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -30,7 +30,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="active nav-item">
             <a href="#pablo" data-th-href="@{/consulta}" class="nav-link">
-              <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+              <i class="material-icons">explore</i> Início <div class="ripple-container"></div>
             </a>
           </li>
 
@@ -60,9 +60,9 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="page-header header-filter clear-filter backgroud-gradient"> </div>
-  
+
   <div class="main main-raised">
     <div class="container">
       <form data-th-action="@{/livros/create}" method="POST" data-th-object="${livro}" data-th-id="form_new_livro">
@@ -90,7 +90,7 @@
               <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
                 <input type="hidden" data-th-text="${ErrorKey}">
               </div>
-              
+
               <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Titulo: </span>
@@ -100,7 +100,7 @@
               <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('titulo')}">
                 <span class="label label-danger" data-th-if="${#fields.hasErrors('titulo')}" data-th-errors="*{titulo}"></span>
               </div>
-              
+
               <div class="input-group ">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Autor: </span>
@@ -110,7 +110,7 @@
               <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('autor')}">
                 <span class="label label-danger" data-th-if="${#fields.hasErrors('autor')}"data-th-errors="*{autor}"></span>
               </div>
-              
+
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Ano Publicação: </span>
@@ -120,7 +120,7 @@
               <div class="alert alert-danger" role="alert"data-th-if="${#fields.hasErrors('anoPublicacao')}">
                 <span class="label label-danger"data-th-if="${#fields.hasErrors('anoPublicacao')}" data-th-errors="*{anoPublicacao}"></span>
               </div>
-              
+
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Edição: </span>
@@ -130,7 +130,7 @@
               <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('edicao')}">
                 <span class="label label-danger" data-th-if="${#fields.hasErrors('edicao')}" data-th-errors="*{edicao}"></span>
               </div>
-              
+
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Descrição: </span>
@@ -144,10 +144,10 @@
               data-th-if="${#fields.hasErrors('sinopse')}"
               data-th-errors="*{sinopse}"></span>
             </div>
-            
-            
+
+
           </div>
-          
+
           <div class="col-md-4">
             <div class="form-group ">
               <div class="input-group-prepend">
@@ -155,7 +155,7 @@
               </div>
               <input type="text" class="form-control" data-th-field="*{urlFoto}">
             </div>
-            
+
             <p>PREVIEW:</p>
             <img data-th-src="${(urlFoto == null OR urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive" data-th-id="bookImage"
             alt="Capa do livro" height="307">
@@ -198,4 +198,3 @@
 <script src="../../static/assets/js/robo.js" data-th-src="@{/assets/js/robo.js}"></script>
 </body>
 </html>
-
