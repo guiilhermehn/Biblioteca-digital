@@ -75,19 +75,29 @@ public class UsuarioController {
 	 * se houver erros no formulário, retorna à pagina de cadastro
 	 ************************************************ */
 	@PostMapping("/register/create")
-	public ModelAndView create(@ModelAttribute @Valid Usuario usuario, BindingResult bindingRes) {
+	public ModelAndView create(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingRes) {
 
 		if (bindingRes.hasErrors()) {
-			return register();
+			ModelAndView mv = new ModelAndView("register/Register");
+			return mv;
 		}
 
+		try {
+			usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
+			usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
+			usuarioService.save(usuario);
 
-		usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));
-		usuario.getPapeis().add(papelService.findByNome("ROLE_USUARIO").get());
-		usuarioService.save(usuario);
-
-		ModelAndView mv = new ModelAndView("redirect:/login");
-		return mv;
+			ModelAndView mv = new ModelAndView("redirect:/login");
+			return mv;
+			
+		} catch (Exception e) {
+			ModelAndView mv = new ModelAndView("/register/Register");
+			mv.addObject("ErrorKey", "Email já cadastrado!");
+			mv.addObject("key_warning_cond", "true");
+			return mv;
+		}
+		
+		
 	}
 	
 	/* **********************************************************************
