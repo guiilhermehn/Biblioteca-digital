@@ -153,7 +153,7 @@ public class ReservaController {
 		
 		Livro livro = livroService.findById(livroId).get();
 		
-		if(!reservaService.countReservaPorLivro(livroId)) {
+		if(!reservaService.countReservaAguardandoPorUnidadeId(livroId)) {
 			return new ModelAndView("redirect:/consulta/" +livro.getId());
 		}
 
