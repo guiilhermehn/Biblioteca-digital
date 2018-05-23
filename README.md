@@ -86,7 +86,7 @@ Optamos por utilizar o GitHub como ferramenta para gerenciamento de versão num 
 
 **Se** o projeto continuar nele, sugerimos que planejem os processos de utilização dessa ferramenta utilizando a [sugestão do Github](https://guides.github.com/introduction/flow/) e deixar a Master somente para versões disponíveis para uso do usuário final (*restrita*), uma branch de Homologação (*restrita*), e uma branch para cada dev (*se estiverem em pair-programing, uma para os dois*).
 
-Também indicamos a utilizar a aba [Issues](../../issues) para tracking de bugs (*se necessário*) e a aba [Projects](../../projects) (ou o [Trello](http://trello.com/)) para gerenciar o projeto
+Também indicamos a utilizar a aba [Issues](../../issues) para tracking de bugs (*se necessário*) e a aba [Projects](../../projects) (ou, como nós, o [Trello](https://trello.com/b/grmnHOxO/digital-library-solution-cognizant)) para gerenciar o projeto.
 
 #### Comecem clonando o repositório com o GitHub Desktop
 Importem o projeto para o Eclipse e deixem o Maven cuidar das dependências (*Spring, Hibernate, ThymeLeaf*)
@@ -94,16 +94,21 @@ Criem um banco com o nome de "biblioteca_db", o Hibernate se encarregará de cri
 
 #### Thymeleaf como motor de templates construídos com Bootstrap
 Todas as páginas são geradas utilizando templates "*tageados*" com Thymeleaf.
-Os templates ficam em [resources/templates](https://github.com/guiilhermehn/Biblioteca-digital/tree/master/biblioteca-digital/src/main/resources)
+Os templates ficam em [resources/templates](https://github.com/guiilhermehn/Biblioteca-digital/tree/master/biblioteca-digital/src/main/resources).
 
 ### :star: UI Kit Design :star:
 Foi montada a ***UI Kit Design*** para guiar a identidade visual da aplicação.
 Consulte-a no repositório base
 
+### Documentação e Fluxograma
+Documentamos grande parte do software e criamos o fluxograma para auxiliar no entendimento
+Encorajamos a utilização da documentação de forma colaborativa e sempre pensando em quem lerá ela.
+Corrijam, ampliem, melhorem :)
+
 ### Consulta API Google Books
 A consulta através do ISBN do livro é realizada no Front-End utilizando JavaScript
 Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
-**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado é será preenchido
+**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado será preenchido
 
 ## Contribuições [![All Contributors](https://img.shields.io/badge/contribui%C3%A7%C3%B5es-10-orange.svg)](#contribuições-)
 ### 1º  Graduation Program:
@@ -117,10 +122,20 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+---
+
 ### 2º Graduation Program:
 
    [###Preencher###](https://www.linkedin.com/feed/update/activity:6402529056654401536/)
+   
+---   
+
 
 ## Versionamento
 Nós recomendamos utilizar o [SemVer](http://semver.org/) para versionamento.
 Para verificar as versões disponíveis da Biblioteca Digital, veja as [tags no repositório](../../releases).
+
+## README.MD > README.PDF
+Utilizamos o site [MarkDown to PDF](http://www.markdowntopdf.com/) para converter o documento no formato .MD para .PDF, entretanto por se tratar de um repositório privado, alguns links podem quebrar :cry:. Para isso, realizamos algums correções pontuais no .PDF em [Small PDF](https://smallpdf.com)
+
+Indicamos o uso do README.MD dentro do repositório como documento primário
