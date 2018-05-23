@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <title>Digital Library Solution</title>
-  
+
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -31,7 +31,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="active nav-item">
             <a href="#pablo" data-th-href="@{/consulta}" class="nav-link">
-              <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+              <i class="material-icons">explore</i> Início <div class="ripple-container"></div>
             </a>
           </li>
 
@@ -61,31 +61,31 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="page-header header-filter clear-filter backgroud-gradient">
   </div>
   <div class="main main-raised">
     <div class="container">
       <form data-th-action="@{/livros/update}" method="post"
       data-th-object="${livro}">
-      
+
       <div class="section">
         <h3 class="text-center">Editar Livro</h3>
         <div class="row">
           <div class="container">
-            
+
             <div class="row">
               <div class="col-md-8">
                 <form data-th-action="@{/livros/update}" method="post" data-th-object="${livro}">
-                  
+
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> ISBN: </span>
                     </div>
-                    <input type="hidden" data-th-field="*{id}" /> 
+                    <input type="hidden" data-th-field="*{id}" />
                     <input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Insira o ISBN de 10 ou 13 caracteres...">
                   </div>
-                  
+
                   <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('isbn13')}">
 		                <span class="label label-danger" data-th-if="${#fields.hasErrors('isbn13')}"data-th-errors="*{isbn13}"></span>
 		              </div>
@@ -95,7 +95,7 @@
 		              <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
 		                <input type="hidden" data-th-text="${ErrorKey}">
 		             </div>
-                  
+
                   <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> Título: </span>
@@ -103,7 +103,7 @@
                     <input type="text" data-th-field="*{titulo}"
                     class="form-control">
                   </div>
-                  
+
                   <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> Autor: </span>
@@ -111,14 +111,14 @@
                     <input type="text" data-th-field="*{autor}"
                     class="form-control">
                   </div>
-                  
+
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> Ano de Publicação: </span>
                     </div>
                     <input type="number" data-th-field="*{anoPublicacao}"
                     class="form-control">
-                    
+
                     <div class="input-group col-md-6">
                       <div class="input-group-prepend">
                         <span class="input-group-text"> Edição: </span>
@@ -127,7 +127,7 @@
                       class="form-control">
                     </div>
                   </div>
-                  
+
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> Descrição: </span>
@@ -135,17 +135,17 @@
                     <textarea class="form-control" data-th-field="*{sinopse}"
                     rows="5"></textarea>
                   </div>
-                  
+
                   <div class="form-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Url Foto : </span>
                       <input type="text"
                       class="form-control" data-th-field="*{urlFoto}">
                     </div>
-                    
+
                   </div>
-                  
-                  
+
+
                 </form>
               </div>
               <div class="col-md-4">
@@ -153,10 +153,10 @@
                 <img data-th-src="${(livro.urlFoto == null OR livro.urlFoto == '') ? '/assets/img/bookCoverNotFound.jpg' : livro.urlFoto  }" class="img-responsive"
                 data-th-id="bookImage" alt="Capa do livro" height="307">
               </div>
-              
-              
+
+
             </div>
-            
+
             <div class="row">
               <div class="col-md-12">
                 <div id="accordion" role="tablist">
@@ -168,7 +168,7 @@
                         </a>
                       </h5>
                     </div>
-                    
+
                     <div id="collapseOne" class="collapse show" role="tabpanel"
                     aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
@@ -177,7 +177,7 @@
                       <button type="button" rel="tooltip" class="btn btn-outline-success btn-link" data-original-title="" title="">Adicionar Nova unidade</button>
                     </div>
                     <!- - fim novas unidades -->
-                    
+
                     <div class="table-responsive">
                       <table class="table">
                         <thead>
@@ -210,8 +210,8 @@
                   </div>
                 </div>
               </div>
-            </div>            
-          </div>          
+            </div>
+          </div>
           <div class="row">
             <div class="col-xs-6 mr-auto ml-auto">
               <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>
@@ -236,18 +236,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
+
       <form action="/livro/unidade/edit"
       data-th-action="@{/livro/unidade/edit}" method="POST">
       <div class="modal-body">
-        <input type="hidden" name="id" id="unidade_id" /> 
+        <input type="hidden" name="id" id="unidade_id" />
         <input type="hidden" name="livroId" id="unidade_livro_id" data-th-value="${livro.id}" />
         <div class="form-group">
           <label for="avarias" class="col-form-label">Avarias:</label>
           <textarea class="form-control" name="avarias" id="unidade_avarias"></textarea>
         </div>
       </div>
-      
+
       <div class="modal-footer">
         <div class="row">
           <div class="col-xs-6 mr-auto ml-auto">
@@ -257,7 +257,7 @@
         </div>
       </div>
     </form>
-    
+
   </div>
 </div>
 </div>
