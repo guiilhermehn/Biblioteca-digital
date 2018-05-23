@@ -46,7 +46,7 @@ public class PesquisaController {
 	 * Caso tenha valor, será feita uma query no banco de dados, buscando algum livro
 	 * que contenha o valor informado
 	 **********************************************************************************/
-	@GetMapping({ "", "/consulta" })
+	@GetMapping({ "login", "/consulta" })
 	public ModelAndView index(@RequestParam(value = "q", required = false, defaultValue = "") String query) {
 		ModelAndView mav = new ModelAndView("consulta/consulta");
 
