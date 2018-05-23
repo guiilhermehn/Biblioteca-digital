@@ -20,7 +20,7 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="index.html" data-th-href="@{/}" > Digital Library Solution </a>
+        <a class="navbar-brand" href="index.html" data-th-href="@{/consulta}" > Digital Library Solution </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,7 @@
               <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
             </a>
           </li>
+
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">apps</i> Minhas ações
@@ -82,17 +83,12 @@
                       <span class="input-group-text"> ISBN: </span>
                     </div>
                     <input type="hidden" data-th-field="*{id}" /> 
-                    <input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Inserir o ISBN para iniciar o cadastro...">
-                    <!--                       <div class="input-group-append"> -->
-                    <!-- 										<button class="btn btn-primary btn-link" type="submit"> -->
-                    <!-- 											<i class="material-icons"> search</i> -->
-                    <!-- 										</button> -->
-                    <!-- 									</div> -->
+                    <input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Insira o ISBN de 10 ou 13 caracteres...">
                   </div>
                   
                   <div class="input-group ">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> Titulo: </span>
+                      <span class="input-group-text"> Título: </span>
                     </div>
                     <input type="text" data-th-field="*{titulo}"
                     class="form-control">
@@ -108,7 +104,7 @@
                   
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"> Ano Publicação: </span>
+                      <span class="input-group-text"> Ano de Publicação: </span>
                     </div>
                     <input type="number" data-th-field="*{anoPublicacao}"
                     class="form-control">
@@ -132,7 +128,7 @@
                   
                   <div class="form-group ">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">Url Foto: </span>
+                      <span class="input-group-text">Url Foto : </span>
                       <input type="text"
                       class="form-control" data-th-field="*{urlFoto}">
                     </div>
@@ -158,7 +154,7 @@
                     <div class="card-header" role="tab" id="headingOne">
                       <h5 class="mb-0">
                         <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Cadastro Unidades <i class="material-icons">keyboard_arrow_down</i>
+                          Cadastro de Unidades <i class="material-icons">keyboard_arrow_down</i>
                         </a>
                       </h5>
                     </div>
@@ -204,10 +200,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            
-          </div>
-          
+            </div>            
+          </div>          
           <div class="row">
             <div class="col-xs-6 mr-auto ml-auto">
               <button class="btn btn-outline-success btn-link" type="submit" id="cadastrar">Salvar</button>

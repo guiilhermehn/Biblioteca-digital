@@ -19,7 +19,7 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" data-th-href="@{/}">
           Digital Library Solution </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login.html">
+            <a class="nav-link" data-th-href="@{/login}">
                Login
             </a>
           </li>
@@ -93,28 +93,25 @@
 </div>
 
 <footer class="footer" data-background-color="black">
-    <div class="container">
-      <div class="copyright float-right">
-        ©
-        <script>
-          document.write(new Date().getFullYear())
-        </script>
+      <div class="container">
+        <div class="copyright float-right">
+          © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
   <!--   Core JS Files   -->
-  <script data-th-src="{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
-  <script data-th-src="{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-  <script data-th-src="{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
-  <script data-th-src="{/assets/js/plugins/moment.min.js}"></script>
-  <script data-th-src="{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+  <script data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+  <script data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script data-th-src="{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script data-th-src="{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-  <script data-th-src="{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+  <script data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
 
 </body>
 </html>
