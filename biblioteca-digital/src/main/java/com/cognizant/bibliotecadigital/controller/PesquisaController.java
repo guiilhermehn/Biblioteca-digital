@@ -104,7 +104,7 @@ public class PesquisaController {
 			}
 		}
 
-		if (livro.getStatusLivro().equals(StatusLivro.COM_EMPRESTIMO)
+		if (!livro.getStatusLivro().equals(StatusLivro.SEM_EMPRESTIMO)
 				&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())
 				&& reservaService.countReservasPorIdLivro(id, usuario.getId())) {
 			livro.setHabilita(false);
