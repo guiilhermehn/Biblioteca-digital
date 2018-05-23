@@ -108,7 +108,7 @@ Corrijam, ampliem, melhorem :)
 ### Consulta API Google Books
 A consulta através do ISBN do livro é realizada no Front-End utilizando JavaScript
 Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
-**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado é será preenchido
+**Lembre-se**: [O erro relatado sobre um ISBN para mais de um livro](../../#mais-de-um-livro-por-isbn). Caso haja mais de um, o primeiro relacionado será preenchido
 
 ## Contribuições [![All Contributors](https://img.shields.io/badge/contribui%C3%A7%C3%B5es-10-orange.svg)](#contribuições-)
 ### 1º  Graduation Program:
@@ -131,6 +131,6 @@ Nós recomendamos utilizar o [SemVer](http://semver.org/) para versionamento.
 Para verificar as versões disponíveis da Biblioteca Digital, veja as [tags no repositório](../../releases).
 
 ## README.MD > README.PDF
-Utilizamos o site [MarkDown to PDF](http://www.markdowntopdf.com/) para converter o documento no formato .MD para .PDF, entretanto por se tratar de um repositório privado, alguns links podem quebrar :cry:. 
+Utilizamos o site [MarkDown to PDF](http://www.markdowntopdf.com/) para converter o documento no formato .MD para .PDF, entretanto por se tratar de um repositório privado, alguns links podem quebrar :cry:. Para isso, realizamos algums correções pontuais no pdf em [Small PDF](https://smallpdf.com)
 
 Indicamos o uso do README.MD dentro do repositório como documento primário
