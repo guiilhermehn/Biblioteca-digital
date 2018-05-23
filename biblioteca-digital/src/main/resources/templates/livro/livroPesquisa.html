@@ -33,10 +33,6 @@
               <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
             </a>
           </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">apps</i> Minhas ações
@@ -113,7 +109,7 @@
                         </thead>
                         <tbody>
                           <tr data-th-each="livro : ${livros}">
-                            <td class="text-center">1</td>
+                            <td class="text-center" data-th-text="${livro.id}">1</td>
                             <td data-th-text="${livro.titulo}">Develop</td>
                             <td data-th-text="${livro.autor}">/td>
                               <td data-th-text="${livro.anoPublicacao}">2013</td>
