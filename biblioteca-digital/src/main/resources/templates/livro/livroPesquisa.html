@@ -100,7 +100,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th class="text-center">Cód. Livro</th>
+                        <th class="text-center">#</th>
                         <th>Livro</th>
                         <th>Autor</th>
                         <th>Publicação</th>
@@ -114,6 +114,7 @@
                             <td data-th-text="${livro.autor}">/td>
                               <td data-th-text="${livro.anoPublicacao}">2013</td>
                               <td class="td-actions">
+                               <div class="row">
                                 <a href="editarLivro.html" data-th-href="@{/livros/edit/{id}(id=${livro.id})}" class="btn btn-success btn-link btn-just-icon btn-sm">
                                   <i class="material-icons">edit</i>
                                 </a>
@@ -122,11 +123,11 @@
                                     <i class="material-icons">close</i>
                                   </button>
                                 </form>
+                               </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                        
                       </div>
                     </div>
                   </div>
