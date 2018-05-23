@@ -84,8 +84,12 @@ public class EmprestimoController {
 	@PostMapping("/emprestimos/efetuarEmprestimo")
 	public ModelAndView save(@RequestParam("unidadeId") Long unidadeId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-
+		
 		UnidadeLivro unidade = unidadeService.findById(unidadeId).get();
+		
+		if(unidade.getLivro().getStatusLivro().equals(StatusLivro.COM_EMPRESTIMO)){
+			return new ModelAndView("redirect:/consulta/" + unidade.getLivro().getId());
+		}
 
 		GregorianCalendar agora = new GregorianCalendar();
 

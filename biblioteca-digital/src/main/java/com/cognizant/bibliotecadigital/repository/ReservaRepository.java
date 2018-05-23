@@ -41,4 +41,7 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 	// Faz a contagem de reservas com status "AGUARDANDO"
 	@Query(value=" select COUNT(*) from reserva where livro_id = ? and status = 'AGUARDANDO'",nativeQuery = true)
 	long countReservaAguardandoPorUnidadeId(Long id);
+
+	@Query(value=" select COUNT(*) from reserva where livro_id = ? ",nativeQuery = true)
+	long countReservaPorLivro(Long livroId);
 }

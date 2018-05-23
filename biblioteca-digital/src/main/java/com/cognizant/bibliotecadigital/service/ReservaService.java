@@ -66,5 +66,10 @@ public class ReservaService {
 		return reservaRepository.countReservaAguardandoPorUnidadeId(id) == 0L;
 	}
 
+	public boolean countReservaPorLivro(Long livroId) {
+		
+		return reservaRepository.countReservaPorLivro(livroId) == 0L;
+	}
+
 }
 
