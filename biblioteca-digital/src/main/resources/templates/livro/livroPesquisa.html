@@ -33,10 +33,6 @@
               <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
             </a>
           </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
           <li class="dropdown nav-item">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">apps</i> Minhas ações
@@ -104,7 +100,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th class="text-center">Cod. Unid</th>
+                        <th class="text-center">#</th>
                         <th>Livro</th>
                         <th>Autor</th>
                         <th>Publicação</th>
@@ -113,11 +109,12 @@
                         </thead>
                         <tbody>
                           <tr data-th-each="livro : ${livros}">
-                            <td class="text-center">1</td>
+                            <td class="text-center" data-th-text="${livro.id}">1</td>
                             <td data-th-text="${livro.titulo}">Develop</td>
                             <td data-th-text="${livro.autor}">/td>
                               <td data-th-text="${livro.anoPublicacao}">2013</td>
                               <td class="td-actions">
+                               <div class="row">
                                 <a href="editarLivro.html" data-th-href="@{/livros/edit/{id}(id=${livro.id})}" class="btn btn-success btn-link btn-just-icon btn-sm">
                                   <i class="material-icons">edit</i>
                                 </a>
@@ -126,11 +123,11 @@
                                     <i class="material-icons">close</i>
                                   </button>
                                 </form>
+                               </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                        
                       </div>
                     </div>
                   </div>
