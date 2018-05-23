@@ -77,15 +77,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 *********************************************************************/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
+
+		http.csrf().disable()
+				.authorizeRequests().antMatchers("/assets/**", "/register/**").permitAll()
 
 				.antMatchers("/livros", "/livros/**").hasRole("ADMIN")
 
 				.antMatchers("/emprestimos/livrosDevolvidos").hasRole("ADMIN")
 
+
 				.and().formLogin().loginPage("/login").usernameParameter("email").passwordParameter("senha")
 				.failureUrl("/login?error=erroLogin").defaultSuccessUrl("/consulta").permitAll().and().logout()
 				.logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				.and().exceptionHandling().accessDeniedPage("/erroAutorizacao");
+
 	}
 }
