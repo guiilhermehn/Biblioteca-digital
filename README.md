@@ -122,15 +122,20 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+---
+
 ### 2º Graduation Program:
 
    [###Preencher###](https://www.linkedin.com/feed/update/activity:6402529056654401536/)
+   
+---   
+
 
 ## Versionamento
 Nós recomendamos utilizar o [SemVer](http://semver.org/) para versionamento.
 Para verificar as versões disponíveis da Biblioteca Digital, veja as [tags no repositório](../../releases).
 
 ## README.MD > README.PDF
-Utilizamos o site [MarkDown to PDF](http://www.markdowntopdf.com/) para converter o documento no formato .MD para .PDF, entretanto por se tratar de um repositório privado, alguns links podem quebrar :cry:. Para isso, realizamos algums correções pontuais no pdf em [Small PDF](https://smallpdf.com)
+Utilizamos o site [MarkDown to PDF](http://www.markdowntopdf.com/) para converter o documento no formato .MD para .PDF, entretanto por se tratar de um repositório privado, alguns links podem quebrar :cry:. Para isso, realizamos algums correções pontuais no .PDF em [Small PDF](https://smallpdf.com)
 
 Indicamos o uso do README.MD dentro do repositório como documento primário
