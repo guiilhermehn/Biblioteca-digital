@@ -86,6 +86,16 @@
                     <input type="text" data-th-field="*{isbn13}" class="form-control" placeholder="Insira o ISBN de 10 ou 13 caracteres...">
                   </div>
                   
+                  <div class="alert alert-danger" role="alert" data-th-if="${#fields.hasErrors('isbn13')}">
+		                <span class="label label-danger" data-th-if="${#fields.hasErrors('isbn13')}"data-th-errors="*{isbn13}"></span>
+		              </div>
+		              <div class="alert alert-danger" role="alert" data-th-id="div_warning" style="display: none">
+		                <span class="label label-danger" data-th-id="warning_isbn"></span>
+		              </div>
+		              <div class="alert alert-danger" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
+		                <input type="hidden" data-th-text="${ErrorKey}">
+		             </div>
+                  
                   <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"> Título: </span>
