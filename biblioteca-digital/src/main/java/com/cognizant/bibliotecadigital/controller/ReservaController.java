@@ -150,8 +150,12 @@ public class ReservaController {
 	@PostMapping("/reservas/efetuarReserva")
 	public ModelAndView save(@RequestParam("livroId") Long livroId, RedirectAttributes redirectAttributes)
 			throws MessagingException, IOException {
-
+		
 		Livro livro = livroService.findById(livroId).get();
+		
+		if(!reservaService.countReservaPorLivro(livroId)) {
+			return new ModelAndView("redirect:/consulta/" +livro.getId());
+		}
 
 		GregorianCalendar dataReserva = new GregorianCalendar();
 
