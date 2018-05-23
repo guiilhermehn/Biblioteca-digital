@@ -96,6 +96,7 @@ public class PesquisaController {
 		for (UnidadeLivro unidadeLivro : unidadesLivros) {
 			if (reservaService.countReservaAguardandoPorUnidadeId(unidadeLivro.getId())
 					&& emprestadoService.countEmprestimoPorUsuarioId(usuario.getId())
+					&& emprestadoService.isEmprestado(unidadeLivro.getId())
 					&& !livro.getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
 				unidadeLivro.setEmprestado(false);
 			} else {

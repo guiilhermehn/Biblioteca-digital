@@ -94,7 +94,7 @@ public class ReservaController {
 							continue;
 						}
 						Date disponibilidade = calculaDisponibilidade(emprestimo);
-						if (emprestimo.getDataDevolucao() == null) {
+						if (emprestimo.getDataDevolucao() == null || reserva.getLivro().getStatusLivro().equals(StatusLivro.EM_ANALISE)) {
 							reserva.setStatus(Status.EM_ESPERA);
 							reserva.setDataPrevisao(formataData(disponibilidade));
 							reserva.setHabilita(true);
