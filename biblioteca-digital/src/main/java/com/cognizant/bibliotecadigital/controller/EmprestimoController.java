@@ -167,7 +167,7 @@ public class EmprestimoController {
 					if (livro.getStatusLivro().equals(StatusLivro.EM_ANALISE) 
 							&& emprestimo.getEmprestimoStatus().equals(Status.EM_ANALISE) ) {
 						emprestimo.setHabilita(false);
-						emprestimo.setEmprestimoStatus(Status.FINALIZADO);
+						
 
 					} else {
 						emprestimo.setHabilita(true);
@@ -210,7 +210,7 @@ public class EmprestimoController {
 		Livro livro = emprestimo.getUnidadeLivro().getLivro();
 		livro.setStatusLivro(StatusLivro.SEM_EMPRESTIMO);
 		livroService.save(livro);
-
+		emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 		emprestimoService.save(emprestimo);
 
 		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
