@@ -1,7 +1,7 @@
 # Biblioteca Digital
 Aplicação Web para Gerenciamento de Biblioteca
 
-| [<img src="index-printscreen.png" width="330px;"/><br /><sub>Index</sub>](index-printscreen.png)<br /> |  [<img src="home-books-printscreen.png" width="330px;"/><br /><sub>Home</sub>](home-books-printscreen.png)<br /> | [<img src="books-new-printscreen.png" width="330px;"/><br /><sub>Cadastro</sub>](books-new-printscreen.png)<br /> | 
+| [<img src="index-printscreen.png" width="330px;"/><br /><sub>Index</sub>](index-printscreen.png)<br /> |  [<img src="home-books-printscreen.png" width="330px;"/><br /><sub>Home</sub>](home-books-printscreen.png)<br /> | [<img src="books-new-printscreen.png" width="330px;"/><br /><sub>Cadastro</sub>](books-new-printscreen.png)<br /> |
 | :---: | :---: | :---: |
 
 
@@ -29,7 +29,7 @@ No dia 22 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Notificação de disponibilidade de reserva
   -  Devolução de livros
   -  Relatar avarias do livro (*admin*)
-  
+
 ## c.Funcionalidades não implementadas
   -  Uso do login da Cognizant (SSO)
   -  Sugestão de livros caso ele não exista no sistema
@@ -45,7 +45,7 @@ No dia 22 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Usuário poderá pegar mais livros emprestados de uma única vez (empréstimo curto prazo)
   -  Mais reservas poderão ser feitas por unidade de livro
   -  Recomendações de livros entre usuários
-  -  Sugestão de leitura 
+  -  Sugestão de leitura
   -  Tela para o admin com lista de livros sugeridos pelos usuários (admin)
   -  Empréstimo de curto prazo
   -  Tela com lista de emprestimos para poder ser editada pelo usuário
@@ -65,22 +65,22 @@ No dia 22 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   - [Thymeleaf 3.0.9](https://www.thymeleaf.org/download.html);
   - [Bootstrap 4.1.0](https://getbootstrap.com/docs/4.1/getting-started/introduction/);
   - and [Markdown](https://guides.github.com/features/mastering-markdown/):octocat:.
-  
+
   \* *Open a Software Request in [OneIT](https://onecognizant.cognizant.com)*.
-  
-  
+
+
 ## Problemas Conhecidos
 ### Lógica Empréstimo/Reserva/Wishlist
  Problema na lógica da integração das regras de negócio quando se há mais de um empréstimo por livro e por usuário.
  Limitamos a quantidade de empréstimos por livro para o máximo de 01 empréstimo e máximo de 01 reserva
-   
-### Mais de um livro por ISBN 
+
+### Mais de um livro por ISBN
  Não há uma regularização sobre o ISBN ser único mundialmente. Na API do Google, houve casos em que encontramos +27 livros para um mesmo ISBN.
- 
+
 ### Outros problemas
- Aqui temos um compilado realizado dos últimos bugs que encontramos [#52](../../issues/52)
- 
-## Como começar 
+ Aqui temos um histórico dos últimos bugs que encontramos --> [Issues](../../issues?utf8=✓&q=)
+
+## Como começar
 #### Utilizando o Git (*GitHub*) em equipe
 Optamos por utilizar o GitHub como ferramenta para gerenciamento de versão num repositório **privado**.
 
@@ -116,8 +116,8 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 | [<img src="https://avatars2.githubusercontent.com/u/36986045?s=400&v=4" width="110px;"/><br /><sub>Alexandre</sub>](https://github.com/alexandrenunes-cs)<br /> | [<img src="https://avatars0.githubusercontent.com/u/17655232?s=400&v=4" width="110px;"/><br /><sub>Bruno</sub>](https://github.com/brunojsan)<br /> | [<img src="https://avatars3.githubusercontent.com/u/22897211?s=460&v=4" width="110px;"/><br /><sub>Diego</sub>](https://github.com/DiegoMatsuki)<br /> | [<img src="https://avatars3.githubusercontent.com/u/38724994?s=460&v=4" width="110px;"/><br /><sub>Francisco</sub>](https://github.com/franrock)<br /> :octocat:| [<img src="https://avatars1.githubusercontent.com/u/17627827?s=460&v=4" width="110px;"/><br /><sub>Iury</sub>](https://github.com/Sizzin)<br /> |
  | :---: | :---: | :---: | :---: | :---: |
  | [<img src="https://avatars2.githubusercontent.com/u/26582544?s=460&v=4" width="110px;"/><br /><sub>Guilherme</sub>](https://github.com/guiilhermehn)<br /> | [<img src="https://avatars3.githubusercontent.com/u/13643850?s=460&v=4" width="110px;"/><br /><sub>Jackson</sub>](https://github.com/jacksonsfranca)<br /> | [<img src="https://avatars0.githubusercontent.com/u/22268900?s=460&v=4" width="110px;"/><br /><sub>Luís Ângelo</sub>](https://github.com/luisangelorjr)<br /> :octocat:| [<img src="https://avatars0.githubusercontent.com/u/38658934?s=460&v=4" width="110px;"/><br /><sub>Philipe</sub>](https://github.com/philipe-silva)<br /> | [<img src="https://avatars2.githubusercontent.com/u/38658746?s=460&v=4" width="110px;"/><br /><sub>Raquel</sub>](https://github.com/psousaraquel)<br /> |
- 
-#### Scrum Master 
+
+#### Scrum Master
 | [<img src="ScrumMaster-Marcio.jpeg" width="110px;"/><br /><sub>Márcio - Scrum Master</sub>](ScrumMaster-Marcio.jpeg)<br /> |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
@@ -127,7 +127,7 @@ Após inserir um ISBN, os detalhes do livro serão preenchidos automaticamente
 ### 2º Graduation Program:
 
    [###Preencher###](https://www.linkedin.com/feed/update/activity:6402529056654401536/)
-   
+
 ---   
 
 

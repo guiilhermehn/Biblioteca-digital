@@ -149,7 +149,7 @@ public class UsuarioController {
 	  ********************************* */
 	@GetMapping("/erroAutorizacao")
 	public ModelAndView exibirErro() {
-		ModelAndView mv = new ModelAndView("/login/erro401");
+		ModelAndView mv = new ModelAndView("/error/401");
 		
 		return mv;
 	} 
