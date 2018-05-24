@@ -1,33 +1,73 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <title>Digital Library Solution</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="./assets/css/material-kit.css" data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
+  <link href="../../static/assets/css/material-kit.css" data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="./assets/css/custom.css" data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
+  <link href="../../static/assets/css/custom.css" data-th-href="@{/assets/css/custom.css}" rel="stylesheet" />
 </head>
-<body>
-  <h1>Abre-te, Sésamo / Ali Baba / Mil e Uma Noites</h1>
-  <h2>401</h2>
-  <h3>Requer Autorização</h3>
+<body class="product-page sidebar-collapse">
 
+            <div class="page-header header-filter clear-filter backgroud-gradient">
+            </div>
+            <div class="main main-raised">
+              <div class="container-fluid">
+                <div class="section text-center">
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 pt-1 pt-md-5">
+                      <h1 class="title">Erro 401<br>
+                        <small>Acesso Negado</small></h1>
+                      <hr>
+                      <br>
 
-  <!--   Core JS Files   -->
-	<script src="./assets/js/core/jquery.min.js" data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
-	<script src="./assets/js/core/popper.min.js" data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
-	<script src="./assets/js/core/bootstrap-material-design.min.js"	data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
-	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-	<script src="./assets/js/plugins/bootstrap-selectpicker.js"	data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
-	<script src="./assets/js/plugins/moment.min.js"	data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
-	<script src="./assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
-	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-	<script src="./assets/js/plugins/bootstrap-datetimepicker.js" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
-	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script src="./assets/js/plugins/nouislider.min.js"	data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
-	<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-	<script src="./assets/js/material-kit.min.js"data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+                      <p>/* Seu usuário não é um administrador para acessar esse recurso</p><br>
 
-</body>
+                      <div style="font-family: 'VT323', monospace;"><b>sudo su</b>: you have no power here!<br></div><br>
+                        <p>Geralmente alguém só cai aqui """acessando sem querer"""<br>
+                        Sugerimos que procure um livro sobre hackers na biblioteca<br>
+                        Acessando a <a href="" data-th-href="@{/consulta}">Página Principal</a>
+                        <b> ou</b> realizando o <a href="" data-th-href="@{/login}">login</a> */</small>.
+                      </div>
+                        <br>
+                        <hr>
+
+                  </div>
+                </div>
+                </div>
+              </div>
+              <footer class="footer" data-background-color="black">
+                <div class="container">
+                  <div class="copyright float-right">
+                    ©
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script>
+                  </div>
+                </div>
+              </footer>
+
+              <!--   Core JS Files   -->
+              <script src="../../static/assets/js/core/jquery.min.js" data-th-src="@{/assets/js/core/jquery.min.js}" type="text/javascript"></script>
+              <script src="../../static/assets/js/core/popper.min.js" data-th-src="@{/assets/js/core/popper.min.js}" type="text/javascript"></script>
+              <script src="../../static/assets/js/core/bootstrap-material-design.min.js"	data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}" type="text/javascript"></script>
+              <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+              <script src="../../static/assets/js/plugins/bootstrap-selectpicker.js"	data-th-src="@{/assets/js/plugins/bootstrap-selectpicker.js}"></script>
+              <script src="../../static/assets/js/plugins/moment.min.js"	data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+              <script src="../../static/assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+              <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+              <script src="../../static/assets/js/plugins/bootstrap-datetimepicker.js" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+              <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+              <script src="../../static/assets/js/plugins/nouislider.min.js"	data-th-src="@{/assets/js/plugins/nouislider.min.js}" type="text/javascript"></script>
+              <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+              <script src="../../static/assets/js/material-kit.min.js"data-th-src="@{/assets/js/material-kit.min.js}" type="text/javascript"></script>
+
+            </body>
 </html>
