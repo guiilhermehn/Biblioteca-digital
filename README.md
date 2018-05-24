@@ -54,7 +54,9 @@ No dia 22 de Maio de 2018 foi entregue a Biblioteca Digital Solution versão 1.0
   -  Pop-up com as avarias do livro (página de detalhes do livro)
   -  Perfil do usuário no menu
   -  Funcionalidade do botão de esqueci minha senha
-  -  Página do perfil do usuário  
+  -  Página do perfil do usuário
+  -  ID ao invés do e-mail & excluir um campo do formulário (Ex.: enviar e-mail com 695042@cognizant.com)
+  -  Favicon (...!)
 
 ## **Tools used**:
   - [Eclipse EE 4.4.0/4.7.3a](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)\*;
