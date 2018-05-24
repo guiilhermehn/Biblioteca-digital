@@ -41,7 +41,7 @@ public class ReservaService {
 		return reservaRepository.findUnidadeIdByReservaId(reservaId);
 	}
 
-	public Long findReservaIdByEmprestimo(Long id) {
+	public Optional<Reserva> findReservaIdByEmprestimo(Long id) {
 
 		return reservaRepository.findReservaIdByEmprestimoId(id);
 	}
