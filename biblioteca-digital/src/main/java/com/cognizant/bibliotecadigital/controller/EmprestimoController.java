@@ -100,6 +100,8 @@ public class EmprestimoController {
 
 		GregorianCalendar prazo = new GregorianCalendar();
 		prazo.add(Calendar.DAY_OF_MONTH, 7);
+		
+		
 
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -217,9 +219,9 @@ public class EmprestimoController {
 		emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 		emprestimoService.save(emprestimo);
 
-		Long idReserva = reservaService.findReservaIdByEmprestimo(id);
-		if (idReserva != null) {
-			Reserva reserva = reservaService.findById(idReserva).get();
+		Reserva reserva = reservaService.findReservaIdByEmprestimo(livro.getId()).get();
+		if (reserva != null) {
+			
 
 			reserva.setStatus(Status.AGUARDANDO);
 
