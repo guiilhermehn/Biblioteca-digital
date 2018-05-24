@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -111,7 +112,7 @@ public class ReservaController {
 				}
 			}
 		}
-
+		Collections.reverse(reservasPorUsuario);
 		mv.addObject("reservas", reservasPorUsuario);
 
 		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
