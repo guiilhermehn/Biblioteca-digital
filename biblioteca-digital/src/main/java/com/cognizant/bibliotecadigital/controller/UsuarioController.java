@@ -3,6 +3,9 @@ package com.cognizant.bibliotecadigital.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,28 @@ public class UsuarioController {
 	
 	@GetMapping("/")
 	public ModelAndView index() {
-		return new ModelAndView("login/index");
+		boolean isUser;
+		
+		ModelAndView mv = new ModelAndView("login/index");
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		if(usuario != null) {
+			isUser = true;
+		}
+		else {
+			isUser = false;
+		}
+		
+		mv.addObject("isUser", isUser); 
+		
+		//return new ModelAndView("login/index");
+		return mv;
 		
 	}
 
@@ -41,7 +65,18 @@ public class UsuarioController {
 	@GetMapping("/login")
 	public ModelAndView login(@RequestParam(name = "error", required = false, defaultValue = "") String erro) {
 		ModelAndView login = new ModelAndView("login/Login");
-
+		
+		Usuario usuario = null;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			String email = auth.getName();
+			usuario = usuarioService.findByEmail(email).orElse(null);
+		}
+		
+		if(usuario != null) {
+			return new ModelAndView("redirect:/consulta");
+		}
+		
 		if (erro.equals("erroLogin")) {
 			login.addObject("msgErro", "Email ou Senha incorreta");
 		} 
@@ -77,6 +112,7 @@ public class UsuarioController {
 	public ModelAndView create(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingRes) {
 
 		if (bindingRes.hasErrors()) {
+
 			ModelAndView mv = new ModelAndView("register/Register");
 			return mv;
 		}
@@ -94,6 +130,7 @@ public class UsuarioController {
 			mv.addObject("ErrorKey", "Email já cadastrado!");
 			mv.addObject("key_warning_cond", "true");
 			return mv;
+
 		}
 		
 		
@@ -105,10 +142,11 @@ public class UsuarioController {
 	@GetMapping("/usuarios/{id}")
 	public ModelAndView detail(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("/usuario/usuario");
-		mv.addObject("usuario", usuarioService.findById(id));
+		return mv.addObject("usuario", usuarioService.findById(id));
 
-		return mv;
-	}
+		}
+	
+
 	
 	 /* *********************************
 	  * Faz o mapeamanto da tela de erro 
