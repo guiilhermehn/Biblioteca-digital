@@ -3,6 +3,7 @@ package com.cognizant.bibliotecadigital.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -71,8 +72,10 @@ public class EmprestimoController {
 		
 		boolean isAdmin = usuario.getPapeis().contains(papelService.findByNome("ROLE_ADMIN").get());
 		mv.addObject("isAdmin", isAdmin);
+		List<Emprestimo> emprestimos = (List<Emprestimo>) emprestimoService.findAllByUsuarioId(usuario.getId());
+		Collections.reverse(emprestimos);
 
-		mv.addObject("emprestimos", emprestimoService.findAllByUsuarioId(usuario.getId()));
+		mv.addObject("emprestimos",emprestimos );
 		return mv;
 	}
 
@@ -177,6 +180,7 @@ public class EmprestimoController {
 				}
 			}
 		}
+		Collections.reverse(devolucoesEmAnalise);
 		mv.addObject("emprestimos", devolucoesEmAnalise);
 		Usuario usuario = null;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

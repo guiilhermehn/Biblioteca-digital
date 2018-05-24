@@ -61,10 +61,13 @@
                             <h3 style="font-family:'Arial';">Lembrete</h3>
                             <p >_______________________________________________</p><br>
                             <p style="font-family:'Arial'" th:text="${'Olá ' + name}">Olá Joao</p>
-                            <p style="font-family:'Arial'" th:text="${'A devolução do livro ' + livro + ' foi validada pelo administrador ' + ADM}"></p>
+                            <p style="font-family:'Arial'" th:text="${'A devolução do livro ' + livro + ' foi validada pelo administrador:'}"></p>
+                            <b style="font-family:'Arial'" th:text="${ADM}"></b>
+                            
+                            
                             <!-- <p style="font-family:'Arial'" th:text="${'Você receberá um email confirmando a devolução do livro: ' + livro}"></p> -->
 
-                            <p style="font-family:'Arial'" >Obrigado</p>
+                            <p style="font-family:'Arial'" >Obrigado!</p>
                             <br>
                             <p style="font-family:'Arial'" th:text="${'©Cognizant ' + location}"></p>
                           </td>

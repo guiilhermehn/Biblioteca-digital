@@ -95,7 +95,7 @@ public class EmailService {
 		model.put("location", "Brasil");
 
 		if (livro.getStatusLivro().equals(StatusLivro.SEM_EMPRESTIMO)) {
-			model.put("ADM", "Revisado por: " + adm.getNome());
+			model.put("ADM",  adm.getNome());
 		} else {
 			model.put("ADM", "");
 		}
