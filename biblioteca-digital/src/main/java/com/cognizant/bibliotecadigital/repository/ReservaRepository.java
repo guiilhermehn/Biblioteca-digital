@@ -1,8 +1,6 @@
 
 package com.cognizant.bibliotecadigital.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -20,9 +18,9 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 	Long findUnidadeIdByReservaId(Long reservaId);
 	
 	// Busca a reserva mais antiga do livro
-	@Query(value="select * from reserva where data_reserva in( select min(data_reserva) "
+	@Query(value="select id from reserva where data_reserva in( select min(data_reserva) "
 			+ "from reserva r where r.livro_id = ?) and status = 'EM_ESPERA'",nativeQuery= true)
-	Optional<Reserva> findReservaIdByEmprestimoId(Long id);
+	Long findReservaIdByEmprestimoId(Long id);
 
 	// Faz a contagem de reservas com status "FINALIZADO"
 	@Query(value="SELECT count(*) FROM reserva WHERE livro_id = ? AND status = 'FINALIZADO'",nativeQuery = true)

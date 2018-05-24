@@ -219,9 +219,9 @@ public class EmprestimoController {
 		emprestimo.setEmprestimoStatus(Status.FINALIZADO);
 		emprestimoService.save(emprestimo);
 
-		Reserva reserva = reservaService.findReservaIdByEmprestimo(livro.getId()).get();
-		if (reserva != null) {
-			
+		Long idReserva = reservaService.findReservaIdByEmprestimo(livro.getId());
+		if (idReserva != null) {
+			Reserva reserva = reservaService.findById(idReserva).get();
 
 			reserva.setStatus(Status.AGUARDANDO);
 
