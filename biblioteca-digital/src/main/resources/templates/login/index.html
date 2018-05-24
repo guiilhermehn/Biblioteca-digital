@@ -18,8 +18,10 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" data-th-href="@{/}">
-          Digital Library Solution </a>
+        <a class="navbar-brand" data-th-href="@{/consulta}" th:if="${isUser}">
+          Digital Library Solution</a>
+        <a class="navbar-brand" data-th-href="@{/}" th:if="${!isUser}">
+          Digital Library Solution</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
@@ -27,13 +29,25 @@
         </button>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto"  th:if="${!isUser}">
           <li class="nav-item">
             <a class="nav-link" data-th-href="@{/login}">
                Login
             </a>
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto" th:if="${isUser}">
+            <li class="active nav-item">
+              <a href="#pablo" data-th-href="@{/consulta}" class="nav-link">
+                <i class="material-icons">explore</i> Voltar à Biblioteca <div class="ripple-container"></div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="login.html" data-th-href="@{/logout}"  class="nav-link">
+                <i class="material-icons">settings</i> Sair
+              </a>
+            </li>
+          </ul>
       </div>
     </div>
   </nav>
