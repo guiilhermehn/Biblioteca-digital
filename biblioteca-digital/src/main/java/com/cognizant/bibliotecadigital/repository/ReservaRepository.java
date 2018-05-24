@@ -1,4 +1,3 @@
-
 package com.cognizant.bibliotecadigital.repository;
 
 import org.springframework.data.jpa.repository.Query;
@@ -39,6 +38,10 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 	long countReservasPorIdLivro(Long id,Long usuarioId);
 
 	// Faz a contagem de reservas com status "AGUARDANDO"
-	@Query(value=" select COUNT(*) from reserva where livro_id = ? and status = 'AGUARDANDO'",nativeQuery = true)
+	@Query(value=" select COUNT(*) from reserva where livro_id = ? and status = 'AGUARDANDO' OR status = 'EM_ESPERA'",nativeQuery = true)
 	long countReservaAguardandoPorUnidadeId(Long id);
+
+	@Query(value=" select COUNT(*) from reserva where livro_id = ? and status ",nativeQuery = true)
+	long countReservaPorLivro(Long livroId);
+>>>>>>> master
 }

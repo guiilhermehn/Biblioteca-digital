@@ -33,7 +33,7 @@ public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
 			" join unidade_livro ul\r\n" + 
 			" on ul.livro_id = l.id \r\n" + 
 			" join emprestimo e on ul.id = e.unidade_livro_id\r\n" + 
-			" where  e.usuario_id = ? and e.data_devolucao is null", nativeQuery = true)
+			" where  e.usuario_id = ? and e.data_devolucao is null OR l.status_livro = 2", nativeQuery = true)
 	long countEmprestimoPorUsuarioId(Long id);
 	
 	// Faz a busca de todos os livros devolvidos, que ainda não foram confirmados

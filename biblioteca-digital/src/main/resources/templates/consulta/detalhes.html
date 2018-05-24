@@ -32,8 +32,8 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             <li class="active nav-item">
-              <a href="#pablo" data-th-href="@{/consulta}" class="nav-link">
-                <i class="material-icons">explore</i> Inicio <div class="ripple-container"></div>
+              <a href="#" data-th-href="@{/consulta}" class="nav-link">
+                <i class="material-icons">explore</i> Início <div class="ripple-container"></div>
               </a>
             </li>
 
@@ -110,7 +110,7 @@
                           </div>
 
                           <div class="col-md-12" style="margin-top:35px;">
-                          
+
 	                          <span>
 	                             <form data-th-action="@{/emprestimos/efetuarEmprestimo}" method="POST" class="d-inline-block">
 	                                 <input type="hidden" name="unidadeId" data-th-value="${livro.unidadeLivros[0].id}" />
@@ -123,8 +123,8 @@
 	                                 <button class="btn" data-th-disabled="${livro.habilita}" th:classappend="${livro.habilita}  ? 'btn-outline-secondary disabled'  : 'btn-outline-success'" >Reserva</button>
 	                             </form>
 	                         </span>
-                          
-                          <!-- 
+
+                          <!--
                             <a href="emprestimo.html" class="btn btn-outline-success">Emprestimo</a>
                             <a href="reserva.html" class="btn btn-outline-success">Reserva</a>
                              -->
