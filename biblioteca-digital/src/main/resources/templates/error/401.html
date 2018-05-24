@@ -1,7 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <title>Digital Library Solution</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../../static/assets/css/material-kit.css" data-th-href="@{/assets/css/material-kit.css}" rel="stylesheet" />
@@ -18,20 +24,21 @@
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-12 pt-1 pt-md-5">
                       <h1 class="title">Erro 401<br>
-                        <small>Requer Autorização</small></h1>
+                        <small>Acesso Negado</small></h1>
                       <hr>
                       <br>
-                      <p>Olha...</p>
+
+                      <p>/* Seu usuário não é um administrador para acessar esse recurso</p><br>
+
+                      <div style="font-family: 'VT323', monospace;"><b>sudo su</b>: you have no power here!<br></div><br>
+                        <p>Geralmente alguém só cai aqui """acessando sem querer"""<br>
+                        Sugerimos que procure um livro sobre hackers na biblioteca<br>
+                        Acessando a <a href="" data-th-href="@{/consulta}">Página Principal</a>
+                        <b> ou</b> realizando o <a href="" data-th-href="@{/login}">login</a> */</small>.
+                      </div>
                         <br>
-                        <h3>Sugerimos que retorne o quanto antes para a página
-                        <a href="" data-th-href="@{/consulta}">Principal
-                          <button class="btn btn-rose btn-fab btn-link">
-                            <i class="material-icons">favorite</i>
-                          </button>
-                          </a>
-                        </h3>
-                        <h3><small><b>Ou</b> realize <a href="" data-th-href="@{/login}">Login</a></small>.
-                    </div>
+                        <hr>
+
                   </div>
                 </div>
                 </div>
