@@ -43,5 +43,4 @@ public interface ReservaRepository extends CrudRepository<Reserva, Long> {
 
 	@Query(value=" select COUNT(*) from reserva where livro_id = ? and status ",nativeQuery = true)
 	long countReservaPorLivro(Long livroId);
->>>>>>> master
 }
