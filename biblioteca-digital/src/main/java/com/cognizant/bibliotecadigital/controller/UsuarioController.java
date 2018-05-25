@@ -54,7 +54,7 @@ public class UsuarioController {
 		
 		mv.addObject("isUser", isUser); 
 		
-		//return new ModelAndView("login/index");
+		
 		return mv;
 		
 	}

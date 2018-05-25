@@ -22,6 +22,10 @@ import com.cognizant.bibliotecadigital.repository.PapelRepository;
 @EnableAsync
 public class BibliotecaDigitalApplication extends SpringBootServletInitializer implements AsyncConfigurer  {
 	
+	
+	/* ****************************************************
+	 * Necessario para o spring rodar em Servidores como JBOSS,WILDFLY
+	 ******************************************************/
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(BibliotecaDigitalApplication.class);
@@ -30,6 +34,11 @@ public class BibliotecaDigitalApplication extends SpringBootServletInitializer i
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotecaDigitalApplication.class, args);
 	}
+	
+
+	/* ****************************************************
+	 * Envio de email Assincrono
+	 ******************************************************/
 
 	@Override
 	public Executor getAsyncExecutor() {
@@ -41,6 +50,10 @@ public class BibliotecaDigitalApplication extends SpringBootServletInitializer i
 		executor.initialize();
 		return executor;
 	}
+	
+	/* ****************************************************
+	 * Criacao de Papeis para usuarios
+	 ******************************************************/
 
 	@Bean
 	public CommandLineRunner mock(PapelRepository papelRepository) {

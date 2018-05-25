@@ -39,8 +39,6 @@ public class LivroService {
 		return livroRepository.findByTituloContainingOrSinopseContainingOrAutorContaining(query, query, query);
 	}
 
-	public boolean findIdUsuarioComEmprestimo(Long idUsuario) {
-		return livroRepository.findIdUsuarioComEmprestimo(idUsuario) > 0L;
-	}
+	
 	
 }

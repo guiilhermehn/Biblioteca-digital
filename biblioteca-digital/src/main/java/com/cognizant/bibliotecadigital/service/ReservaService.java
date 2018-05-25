@@ -32,10 +32,6 @@ public class ReservaService {
 		return id;
 	}
 
-	public boolean isReservado(Long livroId, Long usuarioId) {
-		return reservaRepository.countReservasByUnidadeLivroId(livroId, usuarioId) > 0L;
-	}
-
 	public Long findUnidadeIdByReservaId(Long reservaId) {
 
 		return reservaRepository.findUnidadeIdByReservaId(reservaId);
@@ -44,16 +40,6 @@ public class ReservaService {
 	public Long findReservaIdByEmprestimo(Long id) {
 
 		return reservaRepository.findReservaIdByEmprestimoId(id);
-	}
-
-	public boolean isEmprestadoOuDevolvido(Long id) {
-
-		return reservaRepository.countEmprestadoOuDevolvido(id) > 0L;
-	}
-
-	public Iterable<Reserva> findAllByUsuarioId(Long id) {
-
-		return reservaRepository.findAllByUsuarioId(id);
 	}
 
 	public boolean countReservasPorIdLivro(Long id, Long usuarioId) {
@@ -66,10 +52,4 @@ public class ReservaService {
 		return reservaRepository.countReservaAguardandoPorUnidadeId(id) == 0L;
 	}
 
-	public boolean countReservaPorLivro(Long livroId) {
-		
-		return reservaRepository.countReservaPorLivro(livroId) == 0L;
-	}
-
 }
-
