@@ -116,6 +116,12 @@ public class UsuarioController {
 			ModelAndView mv = new ModelAndView("register/Register");
 			return mv;
 		}
+		if(!usuario.getSenha().equals(usuario.getConfirmaSenha())) {
+			ModelAndView mv = new ModelAndView("/register/Register");
+			mv.addObject("ErrorPassword", "Senhas não conferem");
+			mv.addObject("password_warning_cond", "true");
+			return mv;
+		}
 
 		try {
 			usuario.setSenha(SecurityConfig.bcryptPasswordEncoder().encode(usuario.getSenha()));

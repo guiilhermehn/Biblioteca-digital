@@ -2,146 +2,200 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <title>Digital Library Solution</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+	name='viewport' />
+<title>Digital Library Solution</title>
 
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- CSS Files -->
-  <link type="text/css" href="../../static/assets/css/material-kit.css" rel="stylesheet" data-th-href="@{/assets/css/material-kit.css}" />
-  <!-- CSS customizado do projeto-->
-  <link type="text/css" href="../../static/assets/css/custom.css" rel="stylesheet" data-th-href="@{/assets/css/custom.css}" />
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- CSS Files -->
+<link type="text/css" href="../../static/assets/css/material-kit.css"
+	rel="stylesheet" data-th-href="@{/assets/css/material-kit.css}" />
+<!-- CSS customizado do projeto-->
+<link type="text/css" href="../../static/assets/css/custom.css"
+	rel="stylesheet" data-th-href="@{/assets/css/custom.css}" />
 </head>
 <body class="login-page">
-  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-    <div class="container">
-      <div class="navbar-translate">
-        <a class="navbar-brand" data-th-href="@{/login}">
-          Voltar para <b>Login</b> </a>
-        </div>
-      </div>
-    </nav>
-    <!-- INÍCIO - Form para realizar cadastro do usuario do usuario -->
-    <div class="page-header header-filter clear-filter backgroud-gradient">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-5 col-sm-6 ml-auto mr-auto" >
-            <div class="card card-signup">
-              <form class="form" th:action="@{/register/create}" data-th-object="${usuario}" method="post">
-                <h4 class="card-title text-center">Realizar cadastro</h4>
-                <div class="card-body">
-                  <!-- /TODO Adicionar mensagens personalizadas de erros-->
-                  <div class="alert alert-danger" data-th-if="${msgErro} != null" data-th-text="${msgErro}"></div>
-                  <span class="bmd-form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">face</i><abbr class="required" title="Obrigatório">*</abbr>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control" placeholder="Nome..." data-th-field="*{nome}" required="true" >
-                      <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger help-block" >Incorrect date</span>
-                    </div>
-                  </span>
-                  <span class="bmd-form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">settings</i><abbr class="required" title="Obrigatório">*</abbr>
-                        </span>
-                      </div>
-                      <input type="number" id="inputID" class="form-control" placeholder="ID Cognizant..." required="true" onkeydown="javascript: return event.keyCode == 69 ? false : true"
-                      data-th-field="*{idCgz}">
-                      <span th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}" class="text-danger help-block" >Incorrect date</span>
-                    </div>
-                  </span>
-                  <span class="bmd-form-group"><div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">settings</i><abbr class="required" title="Obrigatório">*</abbr>
-                      </span>
-                    </div>
-                    <input type="text" id="inputArea" class="form-control" placeholder="Área..." required="true" data-th-field="*{area}">
-                    <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger help-block" >Incorrect date</span>
-                  </div>
-                </span>
-                <span class="bmd-form-group">
-                  <div class="input-group">
-                    <div class="container invalid-feedback" role="alert" data-th-id="key_warning"  data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
-                      <input type="hidden" data-th-text="${ErrorKey}">
-                    </div>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">mail</i><abbr class="required" title="Obrigatório">*</abbr>
-                      </span>
-                    </div>
-                    <input type="email" name="emailCad"  class="form-control" placeholder="Email..." required="true" value="@cognizant.com" data-th-field="*{email}"/>
-                  </div>
-                </span>
-                <!--  VERIFICAR FORMA DE NAO APARECER A DIV E SIM SOBREESCREVER O CAMPO -->
-                <span class="bmd-form-group"><div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">lock_outline</i><abbr class="required" title="Obrigatório">*</abbr>
-                    </span>
-                  </div>
-                  <input type="password" id="createInputPassword" class="form-control" placeholder="Senha..." required="true" oninvalid="this.setCustomValidity('Insira uma senha válida')"
-                  oninput="setCustomValidity('')" data-th-field="*{senha}">
-                  <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger help-block" >Incorrect date</span>
-                </div>
-              </span>
-              <span class="bmd-form-group"><div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i><abbr class="required" title="Obrigatório">*</abbr>
-                  </span>
-                </div>
-                <input type="password" id="confirmInputPassword" class="form-control" placeholder="Confirmar Senha..." required="true"
-                oninvalid="this.setCustomValidity('Insira uma senha válida')"
-                oninput="setCustomValidity('')"
-                data-th-field="*{confirmaSenha}" >
-                <span th:if="${#fields.hasErrors('confirmaSenha')}" th:errors="*{confirmaSenha}" class="text-danger help-block" >Incorrect date</span>
+	<nav
+		class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg"
+		color-on-scroll="100" id="sectionsNav">
+		<div class="container">
+			<div class="navbar-translate">
+				<a class="navbar-brand" data-th-href="@{/login}"> Voltar para <b>Login</b>
+				</a>
+			</div>
+		</div>
+	</nav>
+	<!-- INÍCIO - Form para realizar cadastro do usuario do usuario -->
+	<div class="page-header header-filter clear-filter backgroud-gradient">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 col-sm-6 ml-auto mr-auto">
+					<div class="card card-signup">
+						<form class="form" th:action="@{/register/create}"
+							data-th-object="${usuario}" method="post">
+							<h4 class="card-title text-center">Realizar cadastro</h4>
+							<div class="card-body">
+								<!-- /TODO Adicionar mensagens personalizadas de erros-->
+								<div class="alert alert-danger" data-th-if="${msgErro} != null"
+									data-th-text="${msgErro}"></div>
+								<span class="bmd-form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">face</i><abbr class="required"
+												title="Obrigatório">*</abbr>
+											</span>
+										</div>
+										<input type="text" class="form-control" placeholder="Nome..."
+											data-th-field="*{nome}" required="true"> <span
+											th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+											class="text-danger help-block">Incorrect date</span>
+									</div>
+								</span> <span class="bmd-form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">settings</i><abbr class="required"
+												title="Obrigatório">*</abbr>
+											</span>
+										</div>
+										<input type="number" id="inputID" class="form-control"
+											placeholder="ID Cognizant..." required="true"
+											onkeydown="javascript: return event.keyCode == 69 ? false : true"
+											data-th-field="*{idCgz}"> <span
+											th:if="${#fields.hasErrors('idCgz')}" th:errors="*{idCgz}"
+											class="text-danger help-block">Incorrect date</span>
+									</div>
+								</span> <span class="bmd-form-group"><div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">settings</i><abbr class="required"
+												title="Obrigatório">*</abbr>
+											</span>
+										</div>
+										<input type="text" id="inputArea" class="form-control"
+											placeholder="Área..." required="true" data-th-field="*{area}">
+										<span th:if="${#fields.hasErrors('area')}" th:errors="*{area}"
+											class="text-danger help-block">Incorrect date</span>
+									</div> </span> <span class="bmd-form-group">
+									<div class="input-group">
 
-              </div>
-            </span>
-          </div>
-          <div class="footer text-center" style="padding-top: 30px; padding-bottom:30px;">
-            <button href="login.html" class="btn btn-outline-primary" type="submit">Cadastre-se <div class="ripple-container"></div></button>
-          </div>
-          <div class="container" style="padding-top:30px;">
-          </div>
-        </form>
-      </div>
-    </div>
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">mail</i><abbr class="required"
+												title="Obrigatório">*</abbr>
+											</span>
+										</div>
+										<input type="email" name="emailCad" class="form-control"
+											placeholder="Email..." required="true" value="@cognizant.com"
+											data-th-field="*{email}" />
+										<div class="container text-center invalid-feedback"
+											role="alert" data-th-id="key_warning"
+											data-th-style="${key_warning_cond} ? 'display:block' : 'display:none'">
+											<b><input type="hidden" data-th-text="${ErrorKey}"></b>
+										</div>
+									</div>
+								</span>
+								<!--  VERIFICAR FORMA DE NAO APARECER A DIV E SIM SOBREESCREVER O CAMPO -->
+								<span class="bmd-form-group"><div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">lock_outline</i><abbr
+												class="required" title="Obrigatório">*</abbr>
+											</span>
+										</div>
+										<input type="password" id="createInputPassword"
+											class="form-control" placeholder="Senha..." required="true"
+											oninvalid="this.setCustomValidity('Insira uma senha válida')"
+											oninput="setCustomValidity('')" data-th-field="*{senha}">
+										<span th:if="${#fields.hasErrors('senha')}"
+											th:errors="*{senha}" class="text-danger help-block">Incorrect
+											date</span>
+									</div> </span> <span class="bmd-form-group"><div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="material-icons">lock_outline</i><abbr
+												class="required" title="Obrigatório">*</abbr>
+											</span>
 
-    <!-- FIM - Form para Login do usuario -->
+										</div>
+										<input type="password" id="confirmInputPassword"
+											class="form-control" placeholder="Confirmar Senha..."
+											required="true"
+											oninvalid="this.setCustomValidity('Insira uma senha válida')"
+											oninput="setCustomValidity('')"
+											data-th-field="*{confirmaSenha}"> <span
+											th:if="${#fields.hasErrors('confirmaSenha')}"
+											th:errors="*{confirmaSenha}" class="text-danger help-block">Incorrect
+											date</span>
 
-  </div>
-</div>
-</div>
-<footer class="footer" data-background-color="black">
-  <div class="container">
-    <div class="copyright float-right">
-      © <script>document.write(new Date().getFullYear())</script> Cognizant Technology Solutions, all rights reserved
-    </div>
-  </div>
-</footer>
+									</div> </span>
+								<div class="container text-center invalid-feedback" role="alert"
+									data-th-id="key_warning"
+									data-th-style="${password_warning_cond} ? 'display:block' : 'display:none'">
+									<b><input type="hidden" data-th-text="${ErrorPassword}"></b>
+								</div>
+							</div>
+							<div class="footer text-center"
+								style="padding-top: 30px; padding-bottom: 30px;">
+								<button href="login.html" class="btn btn-outline-primary"
+									type="submit">
+									Cadastre-se
+									<div class="ripple-container"></div>
+								</button>
+							</div>
+							<div class="container" style="padding-top: 30px;"></div>
+						</form>
+					</div>
+				</div>
 
-<!--   Core JS Files   -->
-<script src="../../static/assets/js/core/jquery.min.js" type="text/javascript" data-th-src="@{/assets/js/core/jquery.min.js}" ></script>
-<script src="../../static/assets/js/core/popper.min.js" type="text/javascript" data-th-src="@{/assets/js/core/popper.min.js}"></script>
-<script src="../../static/assets/js/core/bootstrap-material-design.min.js" type="text/javascript" data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}"></script>
-<script src="../../static/assets/js/plugins/moment.min.js" data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
-<script src="../../static/assets/js/plugins/bootstrap-tagsinput.js" data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
-<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-<script src="../../static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript" data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../../static/assets/js/plugins/nouislider.min.js" type="text/javascript" data-th-src="@{/assets/js/plugins/nouislider.min.js}"></script>
-<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="../../static/assets/js/material-kit.min.js" type="text/javascript" data-th-src="@{/assets/js/material-kit.min.js}"></script>
+				<!-- FIM - Form para Login do usuario -->
+
+			</div>
+		</div>
+	</div>
+	<footer class="footer" data-background-color="black">
+		<div class="container">
+			<div class="copyright float-right">
+				©
+				<script>document.write(new Date().getFullYear())</script>
+				Cognizant Technology Solutions, all rights reserved
+			</div>
+		</div>
+	</footer>
+
+	<!--   Core JS Files   -->
+	<script src="../../static/assets/js/core/jquery.min.js"
+		type="text/javascript" data-th-src="@{/assets/js/core/jquery.min.js}"></script>
+	<script src="../../static/assets/js/core/popper.min.js"
+		type="text/javascript" data-th-src="@{/assets/js/core/popper.min.js}"></script>
+	<script
+		src="../../static/assets/js/core/bootstrap-material-design.min.js"
+		type="text/javascript"
+		data-th-src="@{/assets/js/core/bootstrap-material-design.min.js}"></script>
+	<script src="../../static/assets/js/plugins/moment.min.js"
+		data-th-src="@{/assets/js/plugins/moment.min.js}"></script>
+	<script src="../../static/assets/js/plugins/bootstrap-tagsinput.js"
+		data-th-src="@{/assets/js/plugins/bootstrap-tagsinput.js}"></script>
+	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+	<script
+		src="../../static/assets/js/plugins/bootstrap-datetimepicker.js"
+		type="text/javascript"
+		data-th-src="@{/assets/js/plugins/bootstrap-datetimepicker.js}"></script>
+	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="../../static/assets/js/plugins/nouislider.min.js"
+		type="text/javascript"
+		data-th-src="@{/assets/js/plugins/nouislider.min.js}"></script>
+	<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+	<script src="../../static/assets/js/material-kit.min.js"
+		type="text/javascript" data-th-src="@{/assets/js/material-kit.min.js}"></script>
 
 </body>
 </html>
