@@ -30,8 +30,6 @@ public class UsuarioService implements UserDetailsService {
 		return usuarioRepository.findById(id);
 	}
 
-	
-
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -39,19 +37,13 @@ public class UsuarioService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não Encontrado"));
 	}
 
-	public Long findIdUsuarioByRole() {
-		return usuarioRepository.findIdUsuarioByRole();
-	}
-	
 	public Optional<Usuario> findByEmail(String email) {
 		return usuarioRepository.findByEmail(email);
 	}
 
 	public Optional<Usuario> emailAdm() {
-		
+
 		return usuarioRepository.emailAdm();
 	}
-	
 
 }
-

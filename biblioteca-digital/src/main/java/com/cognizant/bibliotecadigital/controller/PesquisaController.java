@@ -38,7 +38,7 @@ public class PesquisaController {
 	@Autowired
 	private PapelService papelService;
 
-    // TODO rever rotas? Usar "" para index.html?
+    
 	/* ********************************************************************************
 	 * Faz o mapeamento da barra de pesquisa de livros (por título, autor ou descrição)
 	 * Se a pesquisa não conter valor algum, serão trazidos todos os livros cadastrados

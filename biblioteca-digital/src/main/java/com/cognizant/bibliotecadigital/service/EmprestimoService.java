@@ -37,11 +37,7 @@ public class EmprestimoService {
 		return emprestimoRepository.countEmprestimosByUsuarioId(unidadeLivroId) == 0L;
 	}
 	
-	public Optional<Emprestimo> findByUnidadeLivroId(Long unidadeId) {
-
-		
-		return emprestimoRepository.findEmprestimosByUnidadeLivroId(unidadeId);
-	}
+	
 	
 	public Iterable<Emprestimo> emprestimoPorReservaId(Long reservaId){
 		return emprestimoRepository.findEmprestimoByReservaId(reservaId);
@@ -57,9 +53,6 @@ public class EmprestimoService {
 		
 	}
 
-	public Iterable<Emprestimo> findAllDevolvidos() {
-		
-		return emprestimoRepository.findEmprestimosDevolvidos();
-	}
+	
 }
 
